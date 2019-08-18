@@ -1,0 +1,23 @@
+﻿  Debug.cpp
+  FileControl.cpp
+  Input.cpp
+  MAADengine.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Physics.cpp
+  Time.cpp
+C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\include\GLFW\glfw3.h(104): message :  see previous definition of 'APIENTRY'
+C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\Code\Time.cpp(11,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
+C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\Code\Time.cpp(32,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+MAADengine.obj : error LNK2001: unresolved external symbol glfwSwapBuffers
+MAADengine.obj : error LNK2001: unresolved external symbol SDL_Init
+MAADengine.obj : error LNK2001: unresolved external symbol glfwTerminate
+MAADengine.obj : error LNK2001: unresolved external symbol SDL_Quit
+MAADengine.obj : error LNK2001: unresolved external symbol glfwPollEvents
+MAADengine.obj : error LNK2001: unresolved external symbol glfwInit
+MAADengine.obj : error LNK2001: unresolved external symbol glfwCreateWindow
+MAADengine.obj : error LNK2001: unresolved external symbol glfwMakeContextCurrent
+MAADengine.obj : error LNK2001: unresolved external symbol glfwWindowShouldClose
+Time.obj : error LNK2001: unresolved external symbol SDL_GetPerformanceCounter
+Time.obj : error LNK2001: unresolved external symbol SDL_GetPerformanceFrequency
+MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol main
+C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\x64\FinalBuild\MAADengine.exe : fatal error LNK1120: 12 unresolved externals
