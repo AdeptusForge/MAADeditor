@@ -39,7 +39,7 @@
     <ClCompile Include="Code\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioControl.cpp">
+    <ClCompile Include="Code\AudioControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="Code\Render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AudioControl.h">
+    <ClInclude Include="Code\AudioControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
