@@ -4,6 +4,8 @@
 #include "Debug.h"
 #include "AudioControl.h"
 #include "Assets.h"
+#include "SDL.h"
+
 
 using namespace std;
 
@@ -11,9 +13,6 @@ unsigned int mainVolume;
 unsigned int sfxVolume;
 unsigned int voiceVolume;
 unsigned int musicVolume;
-
-
-
 
 int SpecialSoundModifier(string sound) 
 {
@@ -55,5 +54,4 @@ float SoundVolume(SoundType SNDtype, string sound/*include sound distance/direct
 
 void PlaySoundClip(SoundType SNDtype, string sound) 
 {
-
 }

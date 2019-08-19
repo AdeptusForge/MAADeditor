@@ -2,6 +2,8 @@
 
 #include "AudioControl.h"
 #include <string>
+#include "Windows.h"
+#include "SDL.h"
 
 enum SoundType
 {

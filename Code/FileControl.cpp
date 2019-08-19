@@ -69,8 +69,8 @@ string FetchPath(FileType fileType, string fileName, bool saving)
 		case AudioFile:
 		{
 			path += "Sounds/";
-			/*if (!saving)
-				fileName += ".png";*/
+			if (!saving)
+				fileName += ".wav";
 
 			break;
 		}
@@ -132,4 +132,14 @@ unsigned char* LoadImageFile(FileType fileType, string fileName)
 
 	unsigned char* data = stbi_load(loadstr, &width, &height, &nrChannels, 0);
 	return data;
+}
+
+void LoadAudioFile(FileType fileType, string fileName)
+{
+	SDL_AudioSpec wavSpec;
+	Uint8* wavStart;
+	Uint32 wavLength;
+	const char* loadstr = FetchPath(AudioFile, fileName, false).c_str();
+
+	SDL_LoadWAV(loadstr, &wavSpec, &wavStart, &wavLength);
 }
