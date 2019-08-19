@@ -7,6 +7,7 @@
 #include "FileControl.h"
 #include "Time.h"
 #include "Physics.h"
+#include "AudioControl.h"
 
 using namespace std;
 

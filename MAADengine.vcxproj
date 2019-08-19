@@ -294,6 +294,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioControl.cpp" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\FileControl.cpp" />
     <ClCompile Include="Code\Input.cpp" />
@@ -304,6 +305,7 @@
     <ClCompile Include="Code\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioControl.h" />
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\FileControl.h" />
