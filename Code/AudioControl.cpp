@@ -6,7 +6,6 @@
 #include "Assets.h"
 #include "SDL.h"
 
-
 using namespace std;
 
 unsigned int mainVolume;

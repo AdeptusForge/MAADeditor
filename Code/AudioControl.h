@@ -5,6 +5,8 @@
 #include "Windows.h"
 #include "SDL.h"
 
+using namespace std;
+
 enum SoundType
 {
 	SFX_SND,
