@@ -6,7 +6,7 @@
 #include <fstream>
 #include "SDL.h"
 #include <GLFW/glfw3.h>
-
+#include "SDL_mixer.h"
 
 
 

@@ -5,6 +5,7 @@
 #include "AudioControl.h"
 #include "Assets.h"
 #include "SDL.h"
+#include "SDL_mixer.h"
 
 
 using namespace std;
