@@ -2,6 +2,7 @@
 #include "framework.h"
 #include <fstream>
 #include <string>
+#include "SDL_mixer.h"
 
 const enum FileType 
 {

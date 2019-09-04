@@ -136,10 +136,5 @@ unsigned char* LoadImageFile(FileType fileType, string fileName)
 
 void LoadAudioFile(FileType fileType, string fileName)
 {
-	SDL_AudioSpec wavSpec;
-	Uint8* wavStart;
-	Uint32 wavLength;
 	const char* loadstr = FetchPath(AudioFile, fileName, false).c_str();
-
-	SDL_LoadWAV(loadstr, &wavSpec, &wavStart, &wavLength);
 }
