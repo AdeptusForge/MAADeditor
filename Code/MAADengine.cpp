@@ -33,11 +33,6 @@ void InitializeTheMAADness()
 		cerr << "SDL failed to initialize\n";
 	cout << "SDL initialized successfully.\n";
 
-
-	if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT, 2, 2048) <0)
-		cerr << "AudioMixer failed to initialize: " << Mix_GetError() << endl;
-	cout << "AudioMixer initialized successfully.\n";
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -56,12 +51,13 @@ void InitializeTheMAADness()
 	//Startup functions
 	TimeStartup();
 	FileControlStartup();
+	AudioControlStartup();
 
 	WriteDebug("MAADness Initialized");
 }
 int EndTheMAADness() 
 {
-	Mix_Quit();
+	AudioControlQuit();
 	SDL_Quit();
 	glfwTerminate();
 	return -1;

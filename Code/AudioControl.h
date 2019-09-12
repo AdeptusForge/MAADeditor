@@ -18,4 +18,9 @@ enum SoundType
 
 };
 
+void AudioControlStartup();
+
+void AudioControlQuit();
+
+
 void PlaySoundClip(SoundType SDNtype, string sound);
