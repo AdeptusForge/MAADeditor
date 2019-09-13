@@ -3,6 +3,7 @@
 #include "SDL_timer.h"
 #include "Physics.h"
 #include "Render.h"
+#include "Input.h"
 
 using namespace std;
 
@@ -55,7 +56,7 @@ void UpdateTime()
 		priorTick = currTick;
 		
 		PhysicsUpdate();
-
+		ProcessInputs();
 
 			if (!lastFrameRender) 
 			{

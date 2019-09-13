@@ -8,6 +8,7 @@
 #include "Time.h"
 #include "Physics.h"
 #include "AudioControl.h"
+#include "Input.h"
 
 using namespace std;
 
@@ -52,6 +53,7 @@ void InitializeTheMAADness()
 	TimeStartup();
 	FileControlStartup();
 	AudioControlStartup();
+	InputControlStartup;
 
 	WriteDebug("MAADness Initialized");
 }
@@ -79,10 +81,8 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
+		CollectInputs(window);
 		UpdateTime();
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		/* Render here */
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

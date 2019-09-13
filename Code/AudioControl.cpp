@@ -51,16 +51,15 @@ float SoundVolume(SoundType SNDtype, string sound/*include sound distance/direct
 	return volumePercentage;
 }
 
-
 void PlaySoundClip(SoundType SNDtype, string sound) 
 {
-}
 
+}
 void AudioControlStartup()
 {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-		WriteDebug("Audio Control failed to initialize.");
-	WriteDebug("Audio Control initialized successfully.");
+		WriteDebug("Audio Control Startup -- Failed");
+	WriteDebug("Audio Control Startup -- Successful");
 }
 void AudioControlQuit() 
 {
