@@ -24,6 +24,7 @@ public:
 	Point2 mousePos;
 
 	//NEEDS CONSTRUCTORS
+	InputFrame() {};
 };
 
 //Essentially designed to handle specific inputs in sequenced input frames (think QCF and DP motions)
@@ -32,12 +33,12 @@ class CommandInputMacro
 private:
 public:
 
-
+	CommandInputMacro(){};
 };
 
 void InputControlStartup();
 
-void CollectInputs(GLFWwindow* window);
+void CollectInputs(GLFWwindow*);
 
 InputFrame ProcessInputs();
 

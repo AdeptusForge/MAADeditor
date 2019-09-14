@@ -54,7 +54,7 @@ void UpdateTime()
 		priorTick = currTick;
 		
 		PhysicsUpdate();
-		//ProcessInputs();
+		ProcessInputs();
 
 			if (!lastFrameRender) 
 			{

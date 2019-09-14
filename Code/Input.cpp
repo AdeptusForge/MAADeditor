@@ -17,3 +17,12 @@ void InputControlStartup()
 	}
 }
 
+void CollectInputs(GLFWwindow* window)
+{
+
+}
+
+InputFrame ProcessInputs()
+{
+	return InputFrame();
+}

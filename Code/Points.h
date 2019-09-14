@@ -8,6 +8,7 @@ public:
 	float X;
 	float Y;
 	//Constructors
+	Point2() : X(0), Y(0) {};
 	Point2(float x, float y) : X(x), Y(y) {};
 
 	////Conversions

@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
-		//CollectInputs(window);
+		CollectInputs(window);
 		UpdateTime();
 
 		glfwSwapBuffers(window);
