@@ -4,10 +4,8 @@
 #include <iterator>
 #include <vector>
 
-using namespace std;
-
-vector<InputFrame> priorFrames;
-vector<InputFrame>::iterator ptr;
+std::vector<InputFrame> priorFrames;
+std::vector<InputFrame>::iterator ptr;
 
 
 void InputControlStartup() 

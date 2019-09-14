@@ -17,13 +17,12 @@ const enum FileType
 
 };
 
-using namespace std;
 
-void CreateNewFile(FileType fileType, string fileName);
-void OverwriteFile(FileType fileType, string fileName);
-unsigned char* LoadImageFile(FileType fileType, string fileName);
-void LoadAudioFile(FileType fileType, string fileName);
+void CreateNewFile(FileType fileType, std::string fileName);
+void OverwriteFile(FileType fileType, std::string fileName);
+unsigned char* LoadImageFile(FileType fileType, std::string fileName);
+void LoadAudioFile(FileType fileType, std::string fileName);
 
-bool VerifyFileOrFolder(string filePath);
-string FetchPath(FileType fileType, string fileName, bool saving);
+bool VerifyFileOrFolder(std::string filePath);
+std::string FetchPath(FileType fileType, std::string fileName, bool saving);
 void FileControlStartup();

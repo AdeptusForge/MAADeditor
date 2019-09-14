@@ -1,9 +1,7 @@
 #pragma once
 #include "framework.h"
 #include <fstream>
-#include <string>
+#include <String>
 
-using namespace std;
-
-void WriteDebug(string phrase);
+void WriteDebug(std::string phrase);
 

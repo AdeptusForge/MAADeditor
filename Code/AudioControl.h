@@ -7,8 +7,6 @@
 #include "SDL_mixer.h"
 
 
-using namespace std;
-
 enum SoundType
 {
 	SFX_SND,
@@ -20,5 +18,5 @@ enum SoundType
 
 void AudioControlStartup();
 void AudioControlQuit();
-void PlaySoundClip(SoundType SDNtype, string sound);
+void PlaySoundClip(SoundType SDNtype, std::string sound);
 

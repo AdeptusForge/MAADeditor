@@ -7,20 +7,18 @@
 #include "SDL.h"
 #include "SDL_mixer.h"
 
-using namespace std;
-
 unsigned int mainVolume;
 unsigned int sfxVolume;
 unsigned int voiceVolume;
 unsigned int musicVolume;
 
-int SpecialSoundModifier(string sound) 
+int SpecialSoundModifier(std::string sound) 
 {
 	
 	return 100;
 }
 
-float SoundVolume(SoundType SNDtype, string sound/*include sound distance/direction identifier here*/) 
+float SoundVolume(SoundType SNDtype, std::string sound/*include sound distance/direction identifier here*/) 
 {
 	float volumePercentage = 0;
 	switch (SNDtype)
@@ -47,11 +45,11 @@ float SoundVolume(SoundType SNDtype, string sound/*include sound distance/direct
 		}
 	}
 	volumePercentage *= (mainVolume/100);
-	WriteDebug("VolumeCheck: " + to_string(volumePercentage));
+	WriteDebug("VolumeCheck: " + std::to_string(volumePercentage));
 	return volumePercentage;
 }
 
-void PlaySoundClip(SoundType SNDtype, string sound) 
+void PlaySoundClip(SoundType SNDtype, std::string sound) 
 {
 
 }

@@ -26,11 +26,10 @@ std::string GetCurrentWorkingDir(void) {
 
 
 
-using namespace std;
 //The baseline file path that leads to all saved/loaded files
-const string assetPath = GetCurrentWorkingDir() + "/Assets/";
+const std::string assetPath = GetCurrentWorkingDir() + "/Assets/";
 
-bool VerifyFileOrFolder(string filePath) 
+bool VerifyFileOrFolder(std::string filePath) 
 {
 	if (filePath != assetPath)
 		filePath = assetPath + filePath;
@@ -50,9 +49,9 @@ void FileControlStartup()
 	WriteDebug("File Control Startup -- Successful");
 }
 
-string FetchPath(FileType fileType, string fileName, bool saving)
+std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 {
-	string path;
+	std::string path;
 	switch (fileType)
 	{
 		case None:
@@ -117,15 +116,15 @@ string FetchPath(FileType fileType, string fileName, bool saving)
 	return path;
 }
 
-void CreateNewFile(FileType fileType, string fileName) 
+void CreateNewFile(FileType fileType, std::string fileName)
 {
 	
 }
-void SaveOverFile(FileType fileType, string fileName)
+void SaveOverFile(FileType fileType, std::string fileName)
 {
 
 }
-unsigned char* LoadImageFile(FileType fileType, string fileName)
+unsigned char* LoadImageFile(FileType fileType, std::string fileName)
 {
 	int width = 800, height = 800, nrChannels;
 	const char* loadstr = FetchPath(ImageFile, fileName, false).c_str();
@@ -134,7 +133,7 @@ unsigned char* LoadImageFile(FileType fileType, string fileName)
 	return data;
 }
 
-void LoadAudioFile(FileType fileType, string fileName)
+void LoadAudioFile(FileType fileType, std::string fileName)
 {
 	const char* loadstr = FetchPath(AudioFile, fileName, false).c_str();
 }

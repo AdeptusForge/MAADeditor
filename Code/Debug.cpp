@@ -3,11 +3,9 @@
 #include "Time.h"
 #include <iostream>
 
-using namespace std;
 
-
-void WriteDebug(string phrase)
+void WriteDebug(std::string phrase)
 {
-	string frameCounter = "Frame: " + to_string(GetCurrentTick()) + " - ";
-	cout << frameCounter + phrase << endl;
+	std::string frameCounter = "Frame: " + std::to_string(GetCurrentTick()) + " - ";
+	std::cout << frameCounter + phrase << std::endl;
 }

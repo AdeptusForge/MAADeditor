@@ -15,8 +15,8 @@ class GameObject
 private:
 public:
 	PhysicsObject obj;
-	string name;
-	vector <GameComponent> components;
+	std::string name;
+	std::vector <GameComponent> components;
 
 	Point3 GetPosition() { return obj.pos.point; };
 

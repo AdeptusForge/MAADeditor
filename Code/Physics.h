@@ -6,8 +6,6 @@
 #include "Assets.h"
 #include "Points.h"
 
-using namespace std;
-
 void PhysicsUpdate();
 
 class Rotation

@@ -1,9 +1,7 @@
 #pragma once
 #include <GLFW/glfw3.h>
 #include "Points.h"
-
-using namespace std;
-
+#include <vector>
 
 
 //An individual slice of inputs during every 1/120th of a second. Collected after processing.
@@ -24,8 +22,9 @@ public:
 
 
 	Point2 mousePos;
-	
+
 	//NEEDS CONSTRUCTORS
+};
 
 //Essentially designed to handle specific inputs in sequenced input frames (think QCF and DP motions)
 class CommandInputMacro
@@ -37,8 +36,6 @@ public:
 };
 
 void InputControlStartup();
-
-
 
 void CollectInputs(GLFWwindow* window);
 

@@ -5,8 +5,6 @@
 #include "Render.h"
 #include "Input.h"
 
-using namespace std;
-
 //Shows number of ticks since last update, useful for running time-based functions.
 Uint64 deltaTime;
 Uint64 startup = SDL_GetPerformanceCounter();
@@ -56,7 +54,7 @@ void UpdateTime()
 		priorTick = currTick;
 		
 		PhysicsUpdate();
-		ProcessInputs();
+		//ProcessInputs();
 
 			if (!lastFrameRender) 
 			{

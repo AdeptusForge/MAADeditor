@@ -10,8 +10,6 @@
 #include "AudioControl.h"
 #include "Input.h"
 
-using namespace std;
-
 GLFWwindow* window;
 const unsigned int SCR_H = 800;
 const unsigned int SCR_W = 800;
@@ -26,13 +24,13 @@ void InitializeTheMAADness()
 {
 
 	if (!glfwInit())
-		cerr << "OpenGL failed to initialize\n";
-	cout << "OpenGL initialized successfully.\n";
+		std::cerr << "OpenGL failed to initialize\n";
+	std::cout << "OpenGL initialized successfully.\n";
 
 	/* Initialize the libraries */
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-		cerr << "SDL failed to initialize\n";
-	cout << "SDL initialized successfully.\n";
+		std::cerr << "SDL failed to initialize\n";
+	std::cout << "SDL initialized successfully.\n";
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -46,8 +44,8 @@ void InitializeTheMAADness()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		cerr << "GLAD failed to initialize\n";
-	cout << "GLAD initialized successfully.\n";
+		std::cerr << "GLAD failed to initialize\n";
+	std::cout << "GLAD initialized successfully.\n";
 
 	//Startup functions
 	TimeStartup();
@@ -81,7 +79,7 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
-		CollectInputs(window);
+		//CollectInputs(window);
 		UpdateTime();
 
 		glfwSwapBuffers(window);
