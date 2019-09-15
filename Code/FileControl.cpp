@@ -27,10 +27,11 @@ std::string GetCurrentWorkingDir(void) {
 
 
 //The baseline file path that leads to all saved/loaded files
-const std::string assetPath = GetCurrentWorkingDir() + "/Assets/";
+const std::string assetPath = GetCurrentWorkingDir();
 
 bool VerifyFileOrFolder(std::string filePath) 
 {
+	filePath = "/" + filePath;
 	if (filePath != assetPath)
 		filePath = assetPath + filePath;
 	DWORD ftyp = GetFileAttributesA(filePath.c_str());
@@ -52,6 +53,8 @@ void FileControlStartup()
 std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 {
 	std::string path;
+	path += "Assets/";
+
 	switch (fileType)
 	{
 		case None:
@@ -112,7 +115,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 	if (!saving)
 		path += fileName;
 	VerifyFileOrFolder(path);
-	
+
 	return path;
 }
 
@@ -133,7 +136,11 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName)
 	return data;
 }
 
-void LoadAudioFile(FileType fileType, std::string fileName)
+Mix_Chunk* LoadGameAudioFile(std::string fileName)
 {
 	const char* loadstr = FetchPath(AudioFile, fileName, false).c_str();
+	Mix_Chunk *sample = Mix_LoadWAV(loadstr);
+	if (sample == NULL) WriteDebug("Sound not found: " + std::string(loadstr));
+
+	return sample;
 }

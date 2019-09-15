@@ -4,6 +4,7 @@
 #include <iterator>
 #include <vector>
 #include "Debug.h"
+#include "AudioControl.h"
 
 std::vector<InputFrame> priorFrames;
 std::vector<InputFrame>::iterator ptr;
@@ -26,7 +27,7 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 	{
 		switch (key)
 		{
-			case (GLFW_KEY_ENTER): WriteDebug("Enter Key Pressed"); break;
+			case (GLFW_KEY_ENTER): WriteDebug("Sound Should Play"); PlaySoundClip(SFX_SND, "soundTestGOT"); break;
 			
 		}
 	}

@@ -21,7 +21,7 @@ const enum FileType
 void CreateNewFile(FileType fileType, std::string fileName);
 void OverwriteFile(FileType fileType, std::string fileName);
 unsigned char* LoadImageFile(FileType fileType, std::string fileName);
-void LoadAudioFile(FileType fileType, std::string fileName);
+Mix_Chunk* LoadGameAudioFile(std::string fileName);
 
 bool VerifyFileOrFolder(std::string filePath);
 std::string FetchPath(FileType fileType, std::string fileName, bool saving);

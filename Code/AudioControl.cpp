@@ -6,6 +6,7 @@
 #include "Assets.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
+#include "FileControl.h"
 
 unsigned int mainVolume;
 unsigned int sfxVolume;
@@ -51,11 +52,18 @@ float SoundVolume(SoundType SNDtype, std::string sound/*include sound distance/d
 
 void PlaySoundClip(SoundType SNDtype, std::string sound) 
 {
-
+	switch (SNDtype) 
+	{
+		case(SFX_SND):
+			Mix_PlayChannel(-1, LoadGameAudioFile(sound), 1);
+	}
 }
+
+
 void AudioControlStartup()
 {
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		WriteDebug("Audio Control Startup -- Failed");
 	WriteDebug("Audio Control Startup -- Successful");
 }
