@@ -36,11 +36,10 @@ public:
 	CommandInputMacro(){};
 };
 
-void InputControlStartup();
+void InputControlStartup(GLFWwindow* window);
 
-void CollectInputs(GLFWwindow*);
+void CollectInputs(GLFWwindow*, int, int, int, int);
 
-InputFrame ProcessInputs();
+void SaveInputs();
 
-
-
+void ChangeMappedInput();

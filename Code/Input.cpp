@@ -3,26 +3,37 @@
 #include "Points.h"
 #include <iterator>
 #include <vector>
+#include "Debug.h"
 
 std::vector<InputFrame> priorFrames;
 std::vector<InputFrame>::iterator ptr;
 
+InputFrame currFrame;
 
-void InputControlStartup() 
+
+void InputControlStartup(GLFWwindow* window)
 {
-	for (int i = 0; i < 20; i++) 
+	glfwSetKeyCallback(window, CollectInputs);
+	for (int i = 1; i < 20; i++) 
 	{
 		ptr = priorFrames.begin();
-		//ptr = priorFrames.insert(ptr, InputFrame());
+		ptr = priorFrames.insert(ptr, InputFrame());
 	}
 }
 
-void CollectInputs(GLFWwindow* window)
-{
-
+void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if (action == GLFW_PRESS) 
+	{
+		switch (key)
+		{
+			case (GLFW_KEY_ENTER): WriteDebug("Enter Key Pressed"); break;
+			
+		}
+	}
 }
 
-InputFrame ProcessInputs()
+
+void SaveInputs()
 {
-	return InputFrame();
+
 }

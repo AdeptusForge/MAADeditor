@@ -51,7 +51,7 @@ void InitializeTheMAADness()
 	TimeStartup();
 	FileControlStartup();
 	AudioControlStartup();
-	InputControlStartup;
+	InputControlStartup(window);
 
 	WriteDebug("MAADness Initialized");
 }
@@ -79,11 +79,11 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
-		CollectInputs(window);
 		UpdateTime();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		SaveInputs();
 	}
 
 	return EndTheMAADness();
