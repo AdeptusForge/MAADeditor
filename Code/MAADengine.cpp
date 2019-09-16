@@ -9,45 +9,16 @@
 #include "Physics.h"
 #include "AudioControl.h"
 #include "Input.h"
+#include "Render.h"
 
 GLFWwindow* window;
-const unsigned int SCR_H = 800;
-const unsigned int SCR_W = 800;
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, SCR_W, SCR_H);
-};
 
 
 void InitializeTheMAADness() 
 {
 
-	if (!glfwInit())
-		std::cerr << "OpenGL failed to initialize\n";
-	std::cout << "OpenGL initialized successfully.\n";
-
-	/* Initialize the libraries */
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-		std::cerr << "SDL failed to initialize\n";
-	std::cout << "SDL initialized successfully.\n";
-
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(SCR_W, SCR_H, "MAADengine", NULL, NULL);
-
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		std::cerr << "GLAD failed to initialize\n";
-	std::cout << "GLAD initialized successfully.\n";
-
 	//Startup functions
+	window = RenderStartup();
 	TimeStartup();
 	FileControlStartup();
 	AudioControlStartup();

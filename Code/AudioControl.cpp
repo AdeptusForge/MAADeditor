@@ -59,7 +59,6 @@ void PlaySoundClip(SoundType SNDtype, std::string sound)
 	}
 }
 
-
 void AudioControlStartup()
 {
 
@@ -67,6 +66,7 @@ void AudioControlStartup()
 		WriteDebug("Audio Control Startup -- Failed");
 	WriteDebug("Audio Control Startup -- Successful");
 }
+
 void AudioControlQuit() 
 {
 	Mix_Quit();

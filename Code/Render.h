@@ -7,3 +7,15 @@
 #include "FileControl.h"
 
 void RenderUpdate();
+
+GLFWwindow* RenderStartup();
+
+
+
+class RenderModel 
+{
+private:
+public: 
+
+
+};
