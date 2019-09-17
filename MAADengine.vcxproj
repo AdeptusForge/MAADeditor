@@ -317,6 +317,7 @@
     <ClInclude Include="Code\Render.h" />
     <ClInclude Include="Code\stb_image.h" />
     <ClInclude Include="Code\Time.h" />
+    <ClInclude Include="Shaders.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

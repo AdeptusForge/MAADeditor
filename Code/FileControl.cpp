@@ -5,9 +5,10 @@
 #include "FileControl.h"
 #include <fstream>
 #include "SDL.h"
+#include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 #include "SDL_mixer.h"
-
+#include "Shaders.h"
 
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
@@ -111,6 +112,21 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 				fileName += ".png";*/
 			break;
 		}
+
+		case VertexShaderFile:
+		{
+			path += "Shaders/";
+			if (!saving)
+				fileName += ".vshad";
+			break;
+		}
+		case FragmentShaderFile:
+		{
+			path += "Shaders/";
+			if (!saving)
+				fileName += ".fshad";
+			break;
+		}
 	}
 	if (!saving)
 		path += fileName;
@@ -143,4 +159,13 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	if (sample == NULL) WriteDebug("Sound not found: " + std::string(loadstr));
 
 	return sample;
+}
+
+//Loads shaders from a path;
+Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath)
+{
+	const GLchar* newVertexPath = FetchPath(VertexShaderFile, vertexPath, false).c_str();
+	const GLchar* newFragmentPath = FetchPath(FragmentShaderFile, fragmentPath, false).c_str();
+	Shader ourShader(newVertexPath, newFragmentPath);
+	return ourShader;
 }

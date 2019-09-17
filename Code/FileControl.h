@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "SDL_mixer.h"
+#include "Shaders.h"
 
 const enum FileType 
 {
@@ -14,6 +15,8 @@ const enum FileType
 	SaveFile,
 	PrefabFile,
 	LevelFile,
+	VertexShaderFile,
+	FragmentShaderFile,
 
 };
 
@@ -26,3 +29,5 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName);
 bool VerifyFileOrFolder(std::string filePath);
 std::string FetchPath(FileType fileType, std::string fileName, bool saving);
 void FileControlStartup();
+
+Shader LoadCustomShader(std::string, std::string);
