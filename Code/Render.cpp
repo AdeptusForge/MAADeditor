@@ -47,6 +47,10 @@ GLFWwindow* RenderStartup()
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
+
+
+	LoadCustomShader("PracticeVertexShader", "PracticeFragShader").use();
+
 	return window;
 }
 
@@ -107,7 +111,6 @@ void RenderUpdate()
 	glClear(GL_COLOR_BUFFER_BIT);
 	// draw our first triangle
 
-	LoadCustomShader("3.3.shader", "3.3.shader").use();
 	glBindVertexArray(VAO); 
 	// seeing as we only have a single VAO there's no need to bind it every time, 
 	// but we'll do so to keep things a bit more organized
