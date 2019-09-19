@@ -164,8 +164,11 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 //Loads shaders from a path;
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath)
 {
-	const GLchar* newVertexPath = FetchPath(VertexShaderFile, vertexPath, false).c_str();
-	const GLchar* newFragmentPath = FetchPath(FragmentShaderFile, fragmentPath, false).c_str();
+	vertexPath = FetchPath(VertexShaderFile, vertexPath, false);
+	fragmentPath = FetchPath(FragmentShaderFile, fragmentPath, false);
+
+	const GLchar* newVertexPath = vertexPath.c_str();
+	const GLchar* newFragmentPath = fragmentPath.c_str();
 	Shader ourShader(newVertexPath, newFragmentPath);
 	return ourShader;
 }

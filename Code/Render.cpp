@@ -48,7 +48,6 @@ GLFWwindow* RenderStartup()
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
 
-
 	LoadCustomShader("PracticeVertexShader", "PracticeFragShader").use();
 
 	return window;
