@@ -1,7 +1,7 @@
 #include <glad/glad.h> 
+#include <GLFW/glfw3.h>
 #include "Render.h"
 #include "SDL.h"
-#include <GLFW/glfw3.h>
 #include "Assets.h"
 #include "FileControl.h"
 #include <iostream>
@@ -53,7 +53,7 @@ GLFWwindow* RenderStartup()
 	return window;
 }
 
-void RenderUpdate() 
+void RenderUpdate(GLFWwindow* window)
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
@@ -116,4 +116,6 @@ void RenderUpdate()
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDrawElements(GL_TRIANGLES, (sizeof(triangleIndices) / sizeof(triangleIndices[0])) , GL_UNSIGNED_INT, 0);
 	// glBindVertexArray(0); // no need to unbind it every time 
+	glfwSwapBuffers(window);
+
 }

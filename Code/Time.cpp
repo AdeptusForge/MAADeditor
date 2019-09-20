@@ -18,7 +18,7 @@ int totalRenders=0;
 
 static bool cont = true;
 int loops = 0;
-int maxLoops = 2000000;
+int maxLoops = 2000000000;
 int i = 0;
 
 bool TimeWorkingProperly() 
@@ -42,7 +42,7 @@ void TimeStartup()
 
 };
 
-void UpdateTime()
+void UpdateTime(GLFWwindow* window)
 {
 	loops++;
 	currTick = SDL_GetPerformanceCounter();
@@ -58,7 +58,7 @@ void UpdateTime()
 
 			if (!lastFrameRender) 
 			{
-				RenderUpdate();
+				RenderUpdate(window);
 				lastFrameRender = true;
 			}
 			else

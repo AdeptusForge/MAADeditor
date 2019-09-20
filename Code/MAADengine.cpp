@@ -50,9 +50,8 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
-		UpdateTime();
+		UpdateTime(window);
 
-		glfwSwapBuffers(window);
 		glfwPollEvents();
 		SaveInputs();
 	}

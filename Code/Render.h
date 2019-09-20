@@ -9,7 +9,7 @@
 
 
 
-void RenderUpdate();
+void RenderUpdate(GLFWwindow*);
 
 GLFWwindow* RenderStartup();
 
