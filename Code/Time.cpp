@@ -18,13 +18,14 @@ int totalRenders=0;
 
 static bool cont = true;
 int loops = 0;
-int maxLoops = 2000000000;
+int maxLoops = 20000000;
 int i = 0;
 
 bool TimeWorkingProperly() 
 {
 	if (cont)
 		return true;
+	WriteDebug("Time Broke -- Over Loop Limit");
 	return false;
 }
 
