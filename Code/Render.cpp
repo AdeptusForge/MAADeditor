@@ -7,18 +7,18 @@
 #include <iostream>
 #include "Shaders.h"
 
-const unsigned int SCR_H = 800;
-const unsigned int SCR_W = 800;
+unsigned int SCR_H = 800;
+unsigned int SCR_W = 800;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, SCR_W, SCR_H);
 };
 
-void processInput(GLFWwindow* window) 
+void ResetScreenSize(GLFWwindow* window) 
 {
+	glfwSetWindowSize(window, 800, 800);
 }
-
 
 
 GLFWwindow* RenderStartup() 
@@ -48,7 +48,7 @@ GLFWwindow* RenderStartup()
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
 
-	LoadCustomShader("PracticeVertexShader", "PracticeFragShader").use();
+	LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator").use();
 
 	return window;
 }

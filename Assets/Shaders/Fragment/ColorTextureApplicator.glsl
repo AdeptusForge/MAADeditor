@@ -1,8 +1,8 @@
 #version 330 core
 
+in vec3 fragInColor;
 
 out vec4 fragOutColor;
-in vec3 fragInColor;
 
 
 void main()

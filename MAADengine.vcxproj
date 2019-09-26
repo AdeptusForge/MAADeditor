@@ -320,8 +320,12 @@
     <ClInclude Include="Shaders.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Fragment\PracticeFragShader.fshad" />
-    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.vshad" />
+    <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl" />
+    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl" />
+    <None Include="PixelShader.glsl">
+      <SubType>
+      </SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

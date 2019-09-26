@@ -117,14 +117,14 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		{
 			path += "Shaders/Vertex/";
 			if (!saving)
-				fileName += ".vshad";
+				fileName += ".glsl";
 			break;
 		}
 		case FragmentShaderFile:
 		{
 			path += "Shaders/Fragment/";
 			if (!saving)
-				fileName += ".fshad";
+				fileName += ".glsl";
 			break;
 		}
 	}

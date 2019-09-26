@@ -13,6 +13,8 @@ void RenderUpdate(GLFWwindow*);
 
 GLFWwindow* RenderStartup();
 
+void ResetScreenSize(GLFWwindow*);
+
 
 class RenderModel 
 {

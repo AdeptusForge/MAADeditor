@@ -94,10 +94,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.vshad">
+    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl">
       <Filter>Shaders\Vertex</Filter>
     </None>
-    <None Include="Assets\Shaders\Fragment\PracticeFragShader.fshad">
+    <None Include="PixelShader.glsl">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl">
       <Filter>Shaders\Fragment</Filter>
     </None>
   </ItemGroup>
