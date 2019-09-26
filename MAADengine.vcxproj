@@ -319,6 +319,10 @@
     <ClInclude Include="Code\Time.h" />
     <ClInclude Include="Shaders.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\PracticeFragShader.fshad" />
+    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.vshad" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

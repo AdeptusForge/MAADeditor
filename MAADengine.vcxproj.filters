@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{98bb6818-d7d2-4e5f-987b-17375258f665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Vertex">
+      <UniqueIdentifier>{9e7a28d4-e8a4-4f44-9323-c57d92d122cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Fragment">
+      <UniqueIdentifier>{6d535dff-f954-42c8-8545-10856b8b73e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Debug.cpp">
@@ -83,5 +92,13 @@
     <ClInclude Include="Shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\Vertex\PracticeVertexShader.vshad">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
+    <None Include="Assets\Shaders\Fragment\PracticeFragShader.fshad">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
   </ItemGroup>
 </Project>
