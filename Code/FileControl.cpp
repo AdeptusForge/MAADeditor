@@ -145,7 +145,7 @@ void SaveOverFile(FileType fileType, std::string fileName)
 }
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {
-	
+	stbi_set_flip_vertically_on_load(true);
 	const char* loadstr = FetchPath(ImageFile, fileName, false).c_str();
 
 	unsigned char* data = stbi_load(loadstr, &width, &height, &nrChannels, 0);

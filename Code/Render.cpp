@@ -1,6 +1,8 @@
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Render.h"
 #include "SDL.h"
 #include "Assets.h"
@@ -12,6 +14,10 @@ unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
 
 int shaderID;
+
+unsigned int texture1, texture2;
+
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -30,10 +36,10 @@ void LoadBindTexture(std::string textureName, unsigned int &textureID, int &widt
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	// set the texture wrapping/filtering options (on the currently bound texture object)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	texData = LoadImageFile(ImageFile, textureName, width, height, nrChannels);
 	if (texData) 
 	{
@@ -78,18 +84,15 @@ GLFWwindow* RenderStartup()
 	shaderID = ourShader.ID;
 	ourShader.use();
 
-	unsigned int texture1, texture2;
 	int width, height, nrChannels;
 
-	LoadBindTexture("wallTest", texture1, width, height, nrChannels);
+	LoadBindTexture("SpaceShip1", texture1, width, height, nrChannels);
 
 	return window;
 }
 
 void RenderUpdate(GLFWwindow* window)
 {
-
-
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
@@ -106,14 +109,19 @@ void RenderUpdate(GLFWwindow* window)
 		1, 2, 3  // second triangle
 	};
 
-
-
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s),
 	// and then configure vertex attributes(s).
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture1);
+	//glActiveTexture(GL_TEXTURE1);
+	//glBindTexture(GL_TEXTURE_2D, texture2);
+
+
+
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -137,6 +145,8 @@ void RenderUpdate(GLFWwindow* window)
 
 
 	glUniform1i(glGetUniformLocation(shaderID, "texture1"), 0);
+	//glUniform1i(glGetUniformLocation(shaderID, "texture2"), 0);
+
 
 	// note that this is allowed, the call to glVertexAttribPointer registered
 	// VBO as the vertex attribute's bound vertex buffer object so afterwards 
