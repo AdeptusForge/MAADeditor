@@ -143,9 +143,9 @@ void SaveOverFile(FileType fileType, std::string fileName)
 {
 
 }
-unsigned char* LoadImageFile(FileType fileType, std::string fileName)
+unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {
-	int width = 800, height = 800, nrChannels;
+	
 	const char* loadstr = FetchPath(ImageFile, fileName, false).c_str();
 
 	unsigned char* data = stbi_load(loadstr, &width, &height, &nrChannels, 0);

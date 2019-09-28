@@ -132,6 +132,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|Win32'">
     <IncludePath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <CustomBuildBeforeTargets>
+    </CustomBuildBeforeTargets>
+    <CustomBuildAfterTargets />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debugger|Win32'">
     <IncludePath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\include;$(IncludePath)</IncludePath>
@@ -220,6 +223,16 @@
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying Assets to FinalBuild</Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>echo D|XCOPY $(SolutionDir)Assets $(TargetDir)Assets\ /E /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debugger|Win32'">
     <ClCompile>
