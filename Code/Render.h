@@ -10,10 +10,8 @@
 #include "Debug.h"
 #include "FileControl.h"
 
-
-
+void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
-
 GLFWwindow* RenderStartup();
 
 void ResetScreenSize(GLFWwindow*);

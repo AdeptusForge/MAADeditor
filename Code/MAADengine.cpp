@@ -28,6 +28,7 @@ void InitializeTheMAADness()
 }
 int EndTheMAADness() 
 {
+	RenderShutdown();
 	AudioControlQuit();
 	SDL_Quit();
 	glfwTerminate();
