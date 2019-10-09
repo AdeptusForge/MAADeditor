@@ -33,7 +33,6 @@ void ResetScreenSize(GLFWwindow* window)
 void LoadBindTexture(std::string textureName, unsigned int &textureID, int &width, int &height, int &nrChannels)
 {
 	unsigned char* texData;
-
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	// set the texture wrapping/filtering options (on the currently bound texture object)
@@ -84,13 +83,11 @@ GLFWwindow* RenderStartup()
 
 	int width, height, nrChannels;
 
-	LoadBindTexture("wallTest", texture1, width, height, nrChannels);
-	LoadBindTexture("SpaceShip1", texture2, width, height, nrChannels);
+	LoadBindTexture("SpaceShip1", texture1, width, height, nrChannels);
+	LoadBindTexture("wallTest", texture2, width, height, nrChannels);
 
-
-
-	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
-	glUniform1i(glGetUniformLocation(ourShader.ID, "texture2"), 0);
+	ourShader.setInt("texture1", 0);
+	ourShader.setInt("texture2", 1);
 
 
 	return window;
