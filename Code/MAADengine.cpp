@@ -37,7 +37,6 @@ int EndTheMAADness()
 //Main while-loop exit conditions
 bool WorkingProperly() 
 {
-	if (!TimeWorkingProperly()) { WriteDebug("Shutdown -- Time Broke"); return false; }
 	if (glfwWindowShouldClose(window)) { WriteDebug("Shutdown -- Window Closed"); return false; }
 	else return true;
 }

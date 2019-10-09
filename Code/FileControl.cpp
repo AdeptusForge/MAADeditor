@@ -25,7 +25,7 @@ std::string GetCurrentWorkingDir(void) {
 	return current_working_dir;
 }
 
-
+unsigned char* imageData;
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -146,16 +146,18 @@ void SaveOverFile(FileType fileType, std::string fileName)
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {
 	stbi_set_flip_vertically_on_load(true);
-	const char* loadstr = FetchPath(ImageFile, fileName, false).c_str();
-
-	unsigned char* data = stbi_load(loadstr, &width, &height, &nrChannels, 0);
-	return data;
+	std::string loadstr = FetchPath(ImageFile, fileName, false);
+	imageData = stbi_load(loadstr.c_str(), &width, &height, &nrChannels, 0);
+	if(!imageData)
+		WriteDebug(stbi_failure_reason());
+	return imageData;
 }
 
 Mix_Chunk* LoadGameAudioFile(std::string fileName)
 {
-	const char* loadstr = FetchPath(AudioFile, fileName, false).c_str();
-	Mix_Chunk *sample = Mix_LoadWAV(loadstr);
+	std::string loadstr = FetchPath(AudioFile, fileName, false);
+
+	Mix_Chunk *sample = Mix_LoadWAV(loadstr.c_str());
 	if (sample == NULL) WriteDebug("Sound not found: " + std::string(loadstr));
 
 	return sample;
