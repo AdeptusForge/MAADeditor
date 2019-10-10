@@ -19,6 +19,8 @@ unsigned int texture1, texture2;
 unsigned int VBO, VAO, EBO;
 
 
+glm::mat4 trans = glm::mat4(1.0f);
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -80,7 +82,8 @@ GLFWwindow* RenderStartup()
 	Shader ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
 	shaderID = ourShader.ID;
 	ourShader.use();
-
+	
+	//Texture Load Test
 	int width, height, nrChannels;
 
 	LoadBindTexture("SpaceShip1", texture1, width, height, nrChannels);
@@ -88,6 +91,11 @@ GLFWwindow* RenderStartup()
 
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
+
+
+
+
+
 
 
 	return window;
@@ -104,6 +112,7 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
+
 
 	float vertices[] = {
 		// positions          // colors           // texture coords
@@ -140,6 +149,34 @@ void RenderUpdate(GLFWwindow* window)
 
 	
 	
+
+	//Transform Test
+	trans = glm::rotate(trans, glm::radians(5.0f), glm::vec3(0.0, 0.0, 1.0));
+
+	unsigned int transformLoc = glGetUniformLocation(shaderID, "transform");
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
+	//glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+	//glm::mat4 view = glm::mat4(1.0f);
+	//glm::mat4 projection = glm::mat4(1.0f);
+	//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	//projection = glm::perspective(glm::radians(45.0f), (float)SCR_W / (float)SCR_H, 0.1f, 100.0f);
+	//// retrieve the matrix uniform locations
+	//unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
+	//unsigned int viewLoc = glGetUniformLocation(shaderID, "view");
+	//unsigned int projectionLoc = glGetUniformLocation(shaderID, "projection");
+
+	//// pass them to the shaders (3 different ways)
+	//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+	//// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+	//glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
+
+
+
 	
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
