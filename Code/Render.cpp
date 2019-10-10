@@ -13,7 +13,7 @@
 unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
 
-int shaderID;
+Shader ourShader;
 
 unsigned int texture1, texture2;
 unsigned int VBO, VAO, EBO;
@@ -79,8 +79,7 @@ GLFWwindow* RenderStartup()
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
 
-	Shader ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
-	shaderID = ourShader.ID;
+	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
 	ourShader.use();
 	
 	//Texture Load Test
@@ -91,7 +90,6 @@ GLFWwindow* RenderStartup()
 
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
-
 
 
 
@@ -112,8 +110,6 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
-
-
 	float vertices[] = {
 		// positions          // colors           // texture coords
 		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
@@ -125,8 +121,6 @@ void RenderUpdate(GLFWwindow* window)
 	unsigned int indices[] = {  
 		0, 1, 3, // first triangle
 		1, 2, 3,  // second triangle
-
-
 	};
 
 	glActiveTexture(GL_TEXTURE0);
@@ -147,31 +141,35 @@ void RenderUpdate(GLFWwindow* window)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	
+
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 	
 
 	//Transform Test
-	trans = glm::rotate(trans, glm::radians(5.0f), glm::vec3(0.0, 0.0, 1.0));
+	//trans = glm::rotate(trans, glm::radians(5.0f), glm::vec3(0.0, 0.0, 1.0));
 
-	unsigned int transformLoc = glGetUniformLocation(shaderID, "transform");
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	//unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+	//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
-	//glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-	//glm::mat4 view = glm::mat4(1.0f);
-	//glm::mat4 projection = glm::mat4(1.0f);
-	//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	//projection = glm::perspective(glm::radians(45.0f), (float)SCR_W / (float)SCR_H, 0.1f, 100.0f);
-	//// retrieve the matrix uniform locations
-	//unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
-	//unsigned int viewLoc = glGetUniformLocation(shaderID, "view");
-	//unsigned int projectionLoc = glGetUniformLocation(shaderID, "projection");
+	glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+	glm::mat4 view = glm::mat4(1.0f);
+	glm::mat4 projection = glm::mat4(1.0f);
 
-	//// pass them to the shaders (3 different ways)
-	//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
-	//// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	//glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	projection = glm::perspective(glm::radians(45.0f), (float)SCR_W / (float)SCR_H, 0.1f, 100.0f);
+	// retrieve the matrix uniform locations
+	unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
+	unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
+	unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
+
+	// pass them to the shaders (3 different ways)
+	ourShader.setMat4("model", model);
+	ourShader.setMat4("view", view);
+	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+	ourShader.setMat4("projection", projection);
+
 
 
 
@@ -190,8 +188,6 @@ void RenderUpdate(GLFWwindow* window)
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 
 
 	glBindVertexArray(VAO); 

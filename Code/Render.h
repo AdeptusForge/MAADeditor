@@ -9,6 +9,8 @@
 #include "Assets.h"
 #include "Debug.h"
 #include "FileControl.h"
+#include "Shaders.h"
+
 
 void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
