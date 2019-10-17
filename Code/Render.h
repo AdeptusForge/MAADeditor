@@ -10,8 +10,11 @@
 #include "Debug.h"
 #include "FileControl.h"
 #include "Shaders.h"
+#include "Camera.h"
 
 
+
+Camera* FindCamera(unsigned int);
 void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
 GLFWwindow* RenderStartup();

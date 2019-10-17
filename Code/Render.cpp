@@ -20,6 +20,21 @@ Camera ourCamera;
 unsigned int texture1, texture2;
 unsigned int VBO, VAO, EBO;
 
+std::vector<Camera*> allCameras;
+std::vector<int>::iterator camIT;
+
+Camera* FindCamera(unsigned int camID) 
+{
+	Camera* found = nullptr;
+	for (int i = 0; i != allCameras.size(); i++) 
+	{
+		if (allCameras.at(i)->cameraID == camID)
+			found = allCameras.at(i);
+	}
+	return found;
+}
+
+
 
 glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 glm::mat4 view = glm::mat4(1.0f);
@@ -101,9 +116,11 @@ GLFWwindow* RenderStartup()
 		glm::vec3(0.0f, 0.0f, -1.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		45.0f, Perspective);
+	allCameras.insert(allCameras.end(), &ourCamera);
+
+
 
 	view = ourCamera.cameraView;
-
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 

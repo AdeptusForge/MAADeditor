@@ -15,7 +15,6 @@ enum CameraType
 };
 
 
-
 class Camera 
 {
 public:
@@ -32,10 +31,12 @@ public:
 	float lastX = 800.0f / 2.0;
 	float lastY = 600.0 / 2.0;
 	float cameraFov = 45.0f;
+	Camera() {};
 
 	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type)
 	{
 		cameraID = ID;
+
 
 		cameraPos = pos;
 		cameraFront = front;
@@ -59,6 +60,5 @@ public:
 	}
 
 
-	Camera() {};
 	private:
 };
