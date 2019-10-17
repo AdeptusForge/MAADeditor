@@ -110,6 +110,8 @@ GLFWwindow* RenderStartup()
 	ourShader.setInt("texture2", 1);
 	
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	ourCamera = Camera( 1,
 		glm::vec3(0.0f, 0.0f, 10.0f), 
@@ -247,6 +249,7 @@ void RenderUpdate(GLFWwindow* window)
 		ourShader.setMat4("model", model);
 
 		glDrawArrays(GL_TRIANGLES, 0, (sizeof(vertices) / sizeof(vertices[0])));
+		
 	}
 
 	//glDrawArrays(GL_TRIANGLES, 0, (sizeof(vertices) / sizeof(vertices[0])));

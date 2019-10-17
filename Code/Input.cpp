@@ -28,13 +28,17 @@ void InputControlStartup(GLFWwindow* window)
 void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (action == GLFW_PRESS) 
 	{
+		Camera* cam = FindCamera(1);
 		switch (key)
 		{
 			case (GLFW_KEY_ENTER): PlaySoundClip(SFX_SND, "soundTestGOT"); break;
 			case (GLFW_KEY_K): ResetScreenSize(window); break;
-			case (GLFW_KEY_7): Camera* cam = FindCamera(1); cam->MoveCamera();
-					
-				break;
+			case (GLFW_KEY_UP): cam->MoveCamera(glm::vec3(0.0f, 0.0f, -1.0f)); break;
+			case (GLFW_KEY_DOWN): cam->MoveCamera(glm::vec3(0.0f, 0.0f, 1.0f)); break;
+			case (GLFW_KEY_LEFT): cam->MoveCamera(glm::vec3(-1.0f, 0.0f, 0.0f)); break;
+			case (GLFW_KEY_RIGHT): cam->MoveCamera(glm::vec3(1.0f, 0.0f, 0.0f)); break;
+
+				
 		}
 	}
 }

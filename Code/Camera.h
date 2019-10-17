@@ -52,9 +52,11 @@ public:
 		cameraView = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	}
 
-	void MoveCamera()
+	void MoveCamera(glm::vec3 moveTo)
 	{
-		cameraPos.z += 1.0f;
+
+
+		cameraPos += moveTo;
 		UpdateCameraView();
 
 	}
