@@ -35,14 +35,15 @@ Camera* FindCamera(unsigned int camID)
 }
 
 
-
 glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 glm::mat4 view = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	glViewport(0, 0, SCR_W, SCR_H);
+	glViewport(0, 0, width, height);
+	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)width / (float)height), 0.1f, 100.0f);
+
 };
 
 void ResetScreenSize(GLFWwindow* window) 
@@ -121,7 +122,6 @@ GLFWwindow* RenderStartup()
 	allCameras.insert(allCameras.end(), &ourCamera);
 
 
-
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
@@ -141,12 +141,12 @@ void RenderShutdown()
 void RenderUpdate(GLFWwindow* window)
 {
 	float vertices[] = {
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 0.0f,
 		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
 		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
 		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 0.0f,
 
 		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
 		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
@@ -157,8 +157,8 @@ void RenderUpdate(GLFWwindow* window)
 
 		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
 		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
 		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 
@@ -169,19 +169,26 @@ void RenderUpdate(GLFWwindow* window)
 		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
 		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
 		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
 		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
 		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
 		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
 
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
 		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
 		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+
+	     0.5f,  0.1f,  0.5f,  0.0f, 1.0f,
+		 1.0f,  0.1f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.1f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.1f, -0.5f,  1.0f, 0.0f,
+		 1.0f,  0.1f, -0.5f,  0.0f, 0.0f,
+		 1.0f,  0.1f,  0.5f,  0.0f, 1.0f
 	};
 	// world space positions of our cubes
 	glm::vec3 cubePositions[] = {
@@ -227,8 +234,7 @@ void RenderUpdate(GLFWwindow* window)
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
 	ourShader.use();
-
-	
+		
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -237,8 +243,9 @@ void RenderUpdate(GLFWwindow* window)
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 	glBindVertexArray(VAO); 
+	
+
 	for (unsigned int i = 0; i < 10; i++)
 	{
 		// calculate the model matrix for each object and pass it to shader before drawing
@@ -249,13 +256,9 @@ void RenderUpdate(GLFWwindow* window)
 		ourShader.setMat4("model", model);
 
 		glDrawArrays(GL_TRIANGLES, 0, (sizeof(vertices) / sizeof(vertices[0])));
-		
 	}
 
-	//glDrawArrays(GL_TRIANGLES, 0, (sizeof(vertices) / sizeof(vertices[0])));
-	
-	
-	// glBindVertexArray(0); // no need to unbind it every time 
+
 	glfwSwapBuffers(window);
 
 }

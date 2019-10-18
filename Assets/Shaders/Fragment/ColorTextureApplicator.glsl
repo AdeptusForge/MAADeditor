@@ -17,5 +17,4 @@ void main()
 
 
 	fragOutColor = newTexture;
-    //fragOutColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord),0.5);
 }
