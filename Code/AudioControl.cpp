@@ -3,7 +3,6 @@
 #include "Windows.h"
 #include "Debug.h"
 #include "AudioControl.h"
-#include "Assets.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "FileControl.h"

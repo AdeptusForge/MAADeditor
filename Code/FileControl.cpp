@@ -1,6 +1,5 @@
 #include "framework.h"
 #include <fstream>
-#include "Assets.h"
 #include "Debug.h"
 #include "FileControl.h"
 #include <fstream>

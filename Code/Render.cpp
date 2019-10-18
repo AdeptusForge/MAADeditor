@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Shaders.h"
 #include "Camera.h"
+#include "Assets.h"
 
 unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
@@ -51,7 +52,7 @@ void ResetScreenSize(GLFWwindow* window)
 	glfwSetWindowSize(window, 800, 800);
 }
 
-void LoadBindTexture(std::string textureName, unsigned int &textureID, int &width, int &height, int &nrChannels)
+void LoadandBindTexture(std::string textureName, unsigned int& textureID, int& width, int& height, int& nrChannels)
 {
 	unsigned char* texData;
 	glGenTextures(1, &textureID);
@@ -62,7 +63,7 @@ void LoadBindTexture(std::string textureName, unsigned int &textureID, int &widt
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	texData = LoadImageFile(ImageFile, textureName, width, height, nrChannels);
-	if (texData) 
+	if (texData)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -104,8 +105,8 @@ GLFWwindow* RenderStartup()
 	//Texture Load Test
 	int width, height, nrChannels;
 
-	LoadBindTexture("SpaceShip1", texture1, width, height, nrChannels);
-	LoadBindTexture("wallTest", texture2, width, height, nrChannels);
+	LoadandBindTexture("SpaceShip1", texture1, width, height, nrChannels);
+	LoadandBindTexture("wallTest", texture2, width, height, nrChannels);
 
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
