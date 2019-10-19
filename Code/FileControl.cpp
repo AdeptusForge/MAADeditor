@@ -10,6 +10,7 @@
 #include "Shaders.h"
 
 
+
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -79,8 +80,8 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		case ModelFile:
 		{
 			path += "Models/";
-			/*if (!saving)
-				fileName += ".png";*/
+			if (!saving)
+				fileName += ".txt";
 			break;
 		}
 		case LevelFile:
@@ -142,6 +143,7 @@ void SaveOverFile(FileType fileType, std::string fileName)
 {
 
 }
+
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {
 	stbi_set_flip_vertically_on_load(true);
@@ -162,7 +164,40 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	return sample;
 }
 
-//Loads shaders from a path;
+ModelDataChunk* Load3DModel(std::string fileName)
+{
+	std::ifstream modelFile;
+	std::string loadstr = FetchPath(ModelFile, fileName, false);
+	modelFile.open(loadstr);
+	if (!modelFile.is_open())
+	{
+		exit(EXIT_FAILURE);
+	}
+
+	std::vector<std::string> texturePaths;
+	std::vector<Texture> textures;
+	//texturePaths =
+
+
+	std::vector<Vertex> vertices;
+	
+	std::vector<unsigned int> indices;
+	std::vector<Edge> edges;
+
+
+	
+	ModelDataChunk* newModel;
+	newModel->vertices = vertices;
+	newModel->indices = indices;
+	newModel->edges = edges;
+	newModel->textures = textures;
+
+
+	modelFile.close();
+	return newModel;
+
+}
+
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath)
 {
 	vertexPath = FetchPath(VertexShaderFile, vertexPath, false);

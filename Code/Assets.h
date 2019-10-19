@@ -15,24 +15,6 @@
 
 
 
-struct Vertex 
-{
-	glm::vec3 position;
-	glm::vec3 color;
-	glm::vec2 texCoords;
-};
-struct Edge
-{
-	glm::vec3 edgeStart;
-	glm::vec3 edgeEnd;
-	glm::vec3 color;
-};
-struct Texture 
-{
-	unsigned int ID;
-	std::string name;
-};
-
 class Model 
 {
 public:
@@ -42,12 +24,14 @@ public:
 	std::vector<Texture> textures;
 	unsigned int VAO;
 
-	Model(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Edge> edges, std::vector<Texture> textures)
+	Model(std::string modelName)
 	{
-		this->vertices = vertices;
-		this->indices = indices;
-		this->edges = edges;
-		this->textures = textures;
+		ModelDataChunk* newModel = Load3DModel(modelName);
+
+		this->vertices = newModel->vertices;
+		this->indices = newModel->indices;
+		this->edges = newModel->edges;
+		this->textures = newModel->textures;
 		
 		ModelSetup();
 	}
@@ -109,7 +93,7 @@ private:
 		// vertex positions
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-		// vertex normals
+		// vertex color
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 		// vertex texture coords
