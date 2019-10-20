@@ -10,6 +10,8 @@ uniform sampler2D texture3;
 uniform sampler2D texture4;
 uniform sampler2D texture5;
 uniform sampler2D texture6;
+uniform sampler2D texture7;
+
 
 out vec4 fragOutColor;
 

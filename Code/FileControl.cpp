@@ -10,7 +10,6 @@
 #include "Shaders.h"
 
 
-
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -25,7 +24,11 @@ std::string GetCurrentWorkingDir(void) {
 	return current_working_dir;
 }
 
+
+const unsigned int MAX_MODEL_TEXTURES = 8;
+
 unsigned char* imageData;
+ModelDataChunk* newModel;
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -171,12 +174,23 @@ ModelDataChunk* Load3DModel(std::string fileName)
 	modelFile.open(loadstr);
 	if (!modelFile.is_open())
 	{
-		exit(EXIT_FAILURE);
+		WriteDebug("Cannot Open File: " + fileName);
 	}
 
 	std::vector<std::string> texturePaths;
 	std::vector<Texture> textures;
-	//texturePaths =
+
+	for (int i = 0; i < MAX_MODEL_TEXTURES; i++) 
+	{
+		std::string str;
+
+		std::getline(modelFile, str);
+			if (str.size() > 0)
+			{
+				WriteDebug("Texture Found: "+ str);
+				texturePaths.push_back(str);
+			}
+	}
 
 
 	std::vector<Vertex> vertices;
@@ -185,8 +199,8 @@ ModelDataChunk* Load3DModel(std::string fileName)
 	std::vector<Edge> edges;
 
 
-	
-	ModelDataChunk* newModel;
+	WriteDebug("DebugCheck");
+
 	newModel->vertices = vertices;
 	newModel->indices = indices;
 	newModel->edges = edges;
