@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include "SDL_mixer.h"
 #include "Shaders.h"
+#include <sstream>
 
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
@@ -179,35 +180,76 @@ ModelDataChunk Load3DModel(std::string fileName)
 		WriteDebug("Cannot Open File: " + fileName);
 	}
 
-	//Load Textures
-	#pragma region
-
+	#pragma region Read File
 	std::vector<Texture> textures;
-	for (int i = 0; i < MAX_MODEL_TEXTURES; i++) 
-	{
-		std::string str;
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+	std::vector<Edge> edges;
 
-		std::getline(modelFile, str);
-			if (str.size() > 0)
+	for (std::string line; std::getline(modelFile, line);)
+	{
+
+		#pragma region Load Textures
+		std::istringstream in(line);
+		std::string type;
+		in >> type;
+		int i = 0;
+		if (type == "t")
+		{
+			if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
+			else 
 			{
-				textures.push_back(Texture(0, str));
-				WriteDebug("Texture Found: " + textures[i].name);
+				i++;
+				std::string str;
+				in >> str;
+				if (str.size() > 0)
+				{
+					textures.push_back(Texture(0, str));
+				}
 			}
+		}
+		#pragma endregion
+	
+		#pragma region Load Vertices
+
+		if (type == "v") 
+		{
+			float x, y, z,			//position
+				x2, y2, z2,			//color
+				x3, y3 ;			//texCoord
+			in >> x >> y >> z >>	
+				x2 >> y2 >> z2>>	
+				x3>> y3;			
+			vertices.push_back(Vertex(glm::vec3(x,y,z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
+		}
+		#pragma endregion
+
+		#pragma region Load Indices
+		if (type == "i") 
+		{
+			unsigned int ind;
+			in >> ind;
+			indices.push_back(ind);
+		}
+
+		#pragma endregion
+
+		#pragma region Load Edges
+		if (type == "e")
+		{
+			float x, y, z,			//start
+				x2, y2, z2,			//end
+				x3, y3, z3;			//color
+			in >> x >> y >> z >>	
+				x2 >> y2 >> z2 >>	
+				x3 >> y3 >> z3;		
+			edges.push_back(Edge(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec3(x3, y3, z3)));
+		}
+
+
+		#pragma endregion
 	}
 	#pragma endregion
-
-	//Vertices
-	#pragma region
-	std::vector<Vertex> vertices;
-	Vertex initVert = Vertex(glm::vec3 (1.0f, 1.0f, 1.0f), glm::vec3 (1.0f, 1.0f, 1.0f), glm::vec2 (1.0f, 1.0f));
-	vertices.push_back(initVert);
-	#pragma endregion
-
-	//Indices
-	std::vector<unsigned int> indices;
-	
-	//Edges
-	std::vector<Edge> edges;
 
 	newModel = ModelDataChunk(vertices, indices, edges, textures);
 

@@ -123,7 +123,6 @@ GLFWwindow* RenderStartup()
 	allCameras.insert(allCameras.end(), &ourCamera);
 
 	Model newMod = Model("ModelLoadTest");
-	WriteDebug("" + newMod.textures[0].name);
 
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
