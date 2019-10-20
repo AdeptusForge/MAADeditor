@@ -64,6 +64,8 @@ void CreateNewFile(FileType fileType, std::string fileName);
 void OverwriteFile(FileType fileType, std::string fileName);
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 Mix_Chunk* LoadGameAudioFile(std::string fileName);
+//If in the future there is any issue with model data check this function first. It is highly likely that the data did not get transferred properly and the bug was missed
+// due to it working at the time. 
 ModelDataChunk Load3DModel(std::string fileName);
 
 bool VerifyFileOrFolder(std::string filePath);
