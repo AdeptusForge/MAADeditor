@@ -11,6 +11,7 @@
 
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
+#pragma region
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -23,12 +24,13 @@ std::string GetCurrentWorkingDir(void) {
 	std::string current_working_dir(buff);
 	return current_working_dir;
 }
+#pragma endregion
 
 
 const unsigned int MAX_MODEL_TEXTURES = 8;
-
 unsigned char* imageData;
-ModelDataChunk* newModel;
+ModelDataChunk newModel;
+
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -167,7 +169,7 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	return sample;
 }
 
-ModelDataChunk* Load3DModel(std::string fileName)
+ModelDataChunk Load3DModel(std::string fileName)
 {
 	std::ifstream modelFile;
 	std::string loadstr = FetchPath(ModelFile, fileName, false);
@@ -177,9 +179,10 @@ ModelDataChunk* Load3DModel(std::string fileName)
 		WriteDebug("Cannot Open File: " + fileName);
 	}
 
-	std::vector<std::string> texturePaths;
-	std::vector<Texture> textures;
+	//Load Textures
+	#pragma region
 
+	std::vector<Texture> textures;
 	for (int i = 0; i < MAX_MODEL_TEXTURES; i++) 
 	{
 		std::string str;
@@ -187,24 +190,26 @@ ModelDataChunk* Load3DModel(std::string fileName)
 		std::getline(modelFile, str);
 			if (str.size() > 0)
 			{
-				WriteDebug("Texture Found: "+ str);
-				texturePaths.push_back(str);
+				textures.push_back(Texture(0, str));
+				WriteDebug("Texture Found: " + textures[i].name);
 			}
 	}
+	#pragma endregion
 
-
+	//Vertices
+	#pragma region
 	std::vector<Vertex> vertices;
-	
+	Vertex initVert = Vertex(glm::vec3 (1.0f, 1.0f, 1.0f), glm::vec3 (1.0f, 1.0f, 1.0f), glm::vec2 (1.0f, 1.0f));
+	vertices.push_back(initVert);
+	#pragma endregion
+
+	//Indices
 	std::vector<unsigned int> indices;
+	
+	//Edges
 	std::vector<Edge> edges;
 
-
-	WriteDebug("DebugCheck");
-
-	newModel->vertices = vertices;
-	newModel->indices = indices;
-	newModel->edges = edges;
-	newModel->textures = textures;
+	newModel = ModelDataChunk(vertices, indices, edges, textures);
 
 
 	modelFile.close();

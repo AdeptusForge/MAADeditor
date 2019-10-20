@@ -25,12 +25,12 @@ public:
 
 	Model(std::string modelName)
 	{
-		ModelDataChunk* newModel = Load3DModel(modelName);
+		ModelDataChunk newModel = Load3DModel(modelName);
 
-		this->vertices = newModel->vertices;
-		this->indices = newModel->indices;
-		this->edges = newModel->edges;
-		this->textures = newModel->textures;
+		this->vertices = newModel.vertices;
+		this->indices = newModel.indices;
+		this->edges = newModel.edges;
+		this->textures = newModel.textures;
 		
 		ModelSetup();
 	}
