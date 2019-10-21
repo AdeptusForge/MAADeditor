@@ -30,28 +30,30 @@ public:
 		this->indices = newModel.indices;
 		this->edges = newModel.edges;
 		this->textures = newModel.textures;
+	}
+	#pragma region Constructor Overload
+	Model(std::string modelName, Shader shader)
+	{
+		ModelDataChunk newModel = Load3DModel(modelName);
+
+		this->vertices = newModel.vertices;
+		this->indices = newModel.indices;
+		this->edges = newModel.edges;
+		this->textures = newModel.textures;
 		
-		ModelSetup();
+		ModelSetup(shader);
+	}
+	#pragma endregion
+
+	void IntroduceShader(Shader shader) 
+	{
+		ModelSetup(shader);
 	}
 
 
-	void Draw(Shader shader)
+	void Draw()
 	{
-		//Bind Textures
-		for (unsigned int i = 0; i < textures.size(); i++) 
-		{
-			glGenTextures(1, &textures[i].ID);
-			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			
-			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
-		}
-
 		//Draw
-		WriteDebug(std::to_string(vertices.size()));
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
@@ -62,8 +64,22 @@ private:
 
 	unsigned int VBO, EBO;
 
-	void ModelSetup() 
+	void ModelSetup(Shader shader) 
 	{
+		//Bind Textures
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			glGenTextures(1, &textures[i].ID);
+			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
+		}
+
+
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);

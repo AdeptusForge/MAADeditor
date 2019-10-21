@@ -118,7 +118,8 @@ GLFWwindow* RenderStartup()
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
-	Model newModel = Model("ModelLoadTest");
+
+	Model newModel = Model("ModelLoadTest", ourShader);
 	allModels.push_back(newModel);
 
 	return window;
@@ -167,7 +168,7 @@ void RenderUpdate(GLFWwindow* window)
 
 	for (int i = 0; i < allModels.size(); i++)
 	{
-		allModels[i].Draw(ourShader);
+		allModels[i].Draw();
 	}
 	ourShader.use();
 

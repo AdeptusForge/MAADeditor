@@ -210,7 +210,7 @@ ModelDataChunk Load3DModel(std::string fileName)
 		}
 		#pragma endregion
 	
-		#pragma region Load Vertices
+		#pragma region Load Vertices & Generate Indices
 
 		if (type == "v") 
 		{
@@ -220,22 +220,13 @@ ModelDataChunk Load3DModel(std::string fileName)
 			in >> x >> y >> z >>	
 				x2 >> y2 >> z2>>	
 				x3>> y3;			
-			WriteDebug(std::to_string(z));
 			vertices.push_back(Vertex(glm::vec3(x,y,z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
-		}
-		#pragma endregion
 
-		#pragma region Generate Indices
-
-		if (vertices.size() > 0) 
-		{
 			unsigned int ind = vertices.size() - 1;
 			indices.push_back(ind);
 		}
-		
-
 		#pragma endregion
-
+		
 		#pragma region Load Edges
 		if (type == "e")
 		{
