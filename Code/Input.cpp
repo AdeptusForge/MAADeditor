@@ -1,7 +1,6 @@
 #include <glad/glad.h> 
 #include "Input.h"
 #include <GLFW/glfw3.h>
-#include "Points.h"
 #include <iterator>
 #include <vector>
 #include "Debug.h"

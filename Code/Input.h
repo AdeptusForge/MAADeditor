@@ -1,8 +1,6 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "Points.h"
 #include <vector>
-
 
 //An individual slice of inputs during every 1/120th of a second. Collected after processing.
 class InputFrame
@@ -21,7 +19,7 @@ public:
 	bool NeutralHori = true;
 
 
-	Point2 mousePos;
+	//Point2 mousePos;
 
 	//NEEDS CONSTRUCTORS
 	InputFrame() {};

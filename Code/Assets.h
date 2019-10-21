@@ -4,7 +4,6 @@
 #include <string>
 #include <list> 
 #include <iterator> 
-#include "Points.h"
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -66,7 +65,8 @@ private:
 
 	void ModelSetup(Shader shader) 
 	{
-		//Bind Textures
+		//Load Textures
+		int width, height, nrChannels;
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
 			glGenTextures(1, &textures[i].ID);
@@ -76,10 +76,19 @@ private:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+			unsigned char* texData;
+			texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
+			if (texData)
+			{
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+				glGenerateMipmap(GL_TEXTURE_2D);
+			}
+			else
+			{
+				WriteDebug("Texture failed to load:" + textures[i].name);
+			}
 			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
 		}
-
-
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);
@@ -105,26 +114,9 @@ private:
 			&indices[0], GL_STATIC_DRAW);
 
 		glBindVertexArray(1);
-		//Load Textures
-		int width, height, nrChannels;
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			unsigned char* texData;
-			texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
-			if (texData)
-			{
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-				glGenerateMipmap(GL_TEXTURE_2D);
-			}
-			else
-			{
-				WriteDebug("Texture failed to load:" + textures[i].name);
-			}
-		}
+
 	}
 };
-
-
 
 //class SpriteSheet 
 //{

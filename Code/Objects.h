@@ -14,13 +14,13 @@ class GameObject
 {
 private:
 public:
-	PhysicsObject obj;
+	//PhysicsObject obj;
 	std::string name;
 	std::vector <GameComponent> components;
 
-	Point3 GetPosition() { return obj.pos.point; };
+	//Point3 GetPosition() { return obj.pos.point; };
 
-	Rotation GetRotation() { return obj.pos.rotation; };
+	//Rotation GetRotation() { return obj.pos.rotation; };
 };
 
 

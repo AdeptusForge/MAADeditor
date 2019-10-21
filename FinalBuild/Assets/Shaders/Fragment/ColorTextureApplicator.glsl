@@ -3,6 +3,7 @@
 //in vec4 fragInColor;
 in vec2 TexCoord;
 
+
 uniform sampler2D texture0;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
@@ -17,10 +18,10 @@ out vec4 fragOutColor;
 
 void main()
 {
-	vec4 newTexture = texture(texture1, TexCoord);
-	vec4 newTexture2 = texture(texture2, TexCoord);
+	vec4 newTexture = texture(texture0, TexCoord);
+	vec4 newTexture1 = texture(texture1, TexCoord);
 	if(newTexture.a < 0.1)
-        newTexture += newTexture2;
+        newTexture += newTexture1;
 
 
 	fragOutColor = newTexture;

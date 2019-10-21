@@ -326,7 +326,6 @@
     <ClInclude Include="Code\Input.h" />
     <ClInclude Include="Code\Objects.h" />
     <ClInclude Include="Code\Physics.h" />
-    <ClInclude Include="Code\Points.h" />
     <ClInclude Include="Code\Render.h" />
     <ClInclude Include="Code\stb_image.h" />
     <ClInclude Include="Code\Time.h" />
