@@ -18,11 +18,10 @@ unsigned int SCR_W = 800;
 Shader ourShader;
 Camera ourCamera;
 
-unsigned int texture1, texture2;
-unsigned int VBO, VAO, EBO;
-
 std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
+std::vector<Model> allModels;
+
 
 Camera* FindCamera(unsigned int camID) 
 {
@@ -102,12 +101,6 @@ GLFWwindow* RenderStartup()
 	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
 	ourShader.use();
 	
-	//Texture Load Test
-	int width, height, nrChannels;
-
-	LoadandBindTexture("SpaceShip1", texture1, width, height, nrChannels);
-	LoadandBindTexture("wallTest", texture2, width, height, nrChannels);
-
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
 	
@@ -122,76 +115,29 @@ GLFWwindow* RenderStartup()
 		45.0f, Perspective);
 	allCameras.insert(allCameras.end(), &ourCamera);
 
-	Model newMod = Model("ModelLoadTest");
-
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
+	Model newModel = Model("ModelLoadTest");
+	allModels.push_back(newModel);
 
 	return window;
 }
 
+
 void RenderShutdown()
 {
-	glDeleteVertexArrays(1, &VAO);
+	/*glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	glDeleteBuffers(1, &EBO);*/
 	WriteDebug("Render Shutdown Successful");
 }
 
 
 void RenderUpdate(GLFWwindow* window)
 {
-	float vertices[] = {
-		-0.8f, -0.8f, -0.8f,  0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.8f, -0.8f, -0.8f,  0.0f, 0.0f,
 
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
 
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
-		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.8f, -0.8f, -0.8f,  0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-
-	     0.5f,  0.1f,  0.5f,  0.0f, 1.0f,
-		 1.0f,  0.1f,  0.5f,  1.0f, 1.0f,
-		 0.5f,  0.1f, -0.5f,  1.0f, 0.0f,
-		 0.5f,  0.1f, -0.5f,  1.0f, 0.0f,
-		 1.0f,  0.1f, -0.5f,  0.0f, 0.0f,
-		 1.0f,  0.1f,  0.5f,  0.0f, 1.0f
-	};
 	// world space positions of our cubes
 	glm::vec3 cubePositions[] = {
 		glm::vec3(0.0f,  0.0f,  0.0f),
@@ -215,50 +161,32 @@ void RenderUpdate(GLFWwindow* window)
 	ourShader.setMat4("projection", projection);
 
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-
-	// binding
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture1);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-
+	for (int i = 0; i < allModels.size(); i++)
+	{
+		allModels[i].Draw(ourShader);
+	}
 	ourShader.use();
-		
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	// texture coord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(VAO); 
+	//glBindVertexArray(VAO); 
 	
 
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		// calculate the model matrix for each object and pass it to shader before drawing
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, cubePositions[i]);
-		float angle = 20.0f * i;
-		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
-		ourShader.setMat4("model", model);
+	//for (unsigned int i = 0; i < 10; i++)
+	//{
 
-		glDrawArrays(GL_TRIANGLES, 0, (sizeof(vertices) / sizeof(vertices[0])));
-	}
+
+	//	// calculate the model matrix for each object and pass it to shader before drawing
+	//	glm::mat4 model = glm::mat4(1.0f);
+	//	model = glm::translate(model, cubePositions[i]);
+	//	float angle = 20.0f * i;
+	//	model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
+	//	ourShader.setMat4("model", model);
+
+	//}
 
 
 	glfwSwapBuffers(window);

@@ -13,7 +13,6 @@
 #include "FileControl.h"
 
 
-
 class Model 
 {
 public:
@@ -36,33 +35,23 @@ public:
 	}
 
 
-	void Draw(Shader shader) 
+	void Draw(Shader shader)
 	{
 		//Bind Textures
-		int width, height, nrChannels;
 		for (unsigned int i = 0; i < textures.size(); i++) 
 		{
-			unsigned char* texData;
 			glGenTextures(1, &textures[i].ID);
 			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
-			// set the texture wrapping/filtering options (on the currently bound texture object)
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
-			if (texData)
-			{
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-				glGenerateMipmap(GL_TEXTURE_2D);
-			}
-			else
-			{
-				WriteDebug("Texture failed to load:" + textures[i].name);
-			}
+			
 			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
 		}
+
 		//Draw
+		WriteDebug(std::to_string(vertices.size()));
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
@@ -84,10 +73,6 @@ private:
 
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
-			&indices[0], GL_STATIC_DRAW);
-
 		// ATTRIBUTES
 		// vertex positions
 		glEnableVertexAttribArray(0);
@@ -99,7 +84,27 @@ private:
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
 
-		glBindVertexArray(0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
+			&indices[0], GL_STATIC_DRAW);
+
+		glBindVertexArray(1);
+		//Load Textures
+		int width, height, nrChannels;
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			unsigned char* texData;
+			texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
+			if (texData)
+			{
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+				glGenerateMipmap(GL_TEXTURE_2D);
+			}
+			else
+			{
+				WriteDebug("Texture failed to load:" + textures[i].name);
+			}
+		}
 	}
 };
 
