@@ -17,10 +17,6 @@ public:
 	//PhysicsObject obj;
 	std::string name;
 	std::vector <GameComponent> components;
-
-	//Point3 GetPosition() { return obj.pos.point; };
-
-	//Rotation GetRotation() { return obj.pos.rotation; };
 };
 
 

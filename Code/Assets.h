@@ -11,7 +11,6 @@
 #include "Shaders.h"
 #include "FileControl.h"
 
-
 class Model 
 {
 public:
@@ -21,6 +20,7 @@ public:
 	std::vector<Texture> textures;
 	unsigned int VAO;
 
+	#pragma region Constructor
 	Model(std::string modelName)
 	{
 		ModelDataChunk newModel = Load3DModel(modelName);
@@ -29,43 +29,39 @@ public:
 		this->indices = newModel.indices;
 		this->edges = newModel.edges;
 		this->textures = newModel.textures;
-	}
-	#pragma region Constructor Overload
-	Model(std::string modelName, Shader shader)
-	{
-		ModelDataChunk newModel = Load3DModel(modelName);
-
-		this->vertices = newModel.vertices;
-		this->indices = newModel.indices;
-		this->edges = newModel.edges;
-		this->textures = newModel.textures;
 		
-		ModelSetup(shader);
+		ModelSetup();
 	}
 	#pragma endregion
 
 	void IntroduceShader(Shader shader) 
 	{
-		ModelSetup(shader);
+		ModelSetup();
 	}
 
 
-	void Draw()
+	void Draw(Shader shader)
 	{
+		for (unsigned int i = 0; i < textures.size(); i++) 
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
+			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
+		}
 		//Draw
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
 
+		glBindVertexArray(0);
 		glActiveTexture(GL_TEXTURE0);
 	};
 private:
 
 	unsigned int VBO, EBO;
 
-	void ModelSetup(Shader shader) 
+	void ModelSetup() 
 	{
-		//Load Textures
+		#pragma region Load Textures
 		int width, height, nrChannels;
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
@@ -77,6 +73,7 @@ private:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 			unsigned char* texData;
+			//Create TextureLookup function to frontload textures.
 			texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
 			if (texData)
 			{
@@ -87,8 +84,10 @@ private:
 			{
 				WriteDebug("Texture failed to load:" + textures[i].name);
 			}
-			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
+
 		}
+		#pragma endregion
+
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);
@@ -114,7 +113,6 @@ private:
 			&indices[0], GL_STATIC_DRAW);
 
 		glBindVertexArray(1);
-
 	}
 };
 

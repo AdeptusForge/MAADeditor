@@ -4,129 +4,92 @@
 #include <iterator> 
 #include "framework.h"
 #include "Assets.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "Debug.h"
 
 void PhysicsUpdate();
 
-//class Rotation
-//{
-//public:
-//	float X;
-//	float Y;
-//	float Z;
-//	//Constructors
-//	Rotation(float x, float y, float z) : X(x), Y(y), Z(z) {};
-//	Rotation(Point3 point) : X(point.X), Y(point.Y), Z(point.Z) {};
-//private:
-//};
-//
-//class Velocity
-//{
-//public:
-//	float X;	//position change per frame
-//	float Y;	//position change per frame
-//	float Z;	//position change per frame
-//	//Constructors
-//	Velocity(float x, float y, float z) : X(x), Y(y), Z(z) {};
-//	Velocity(Point3 point) : X(point.X), Y(point.Y), Z(point.Z) {};
-//private:
-//};
-//
-//class Spin
-//{
-//public:
-//	float X;	//rotation change per frame
-//	float Y;	//rotation change per frame
-//	float Z;	//rotation change per frame
-//	//Constructors
-//	Spin(float x, float y, float z) : X(x), Y(y), Z(z) {};
-//	Spin(Point3 point) : X(point.X), Y(point.Y), Z(point.Z) {};
-//private:
-//};
-//
-//class Position
-//{
-//private:
-//
-//public:
-//	bool lockedXmov;
-//	bool lockedYmov;
-//	bool lockedZmov;
-//	bool lockedXspin;
-//	bool lockedYspin;
-//	bool lockedZspin;
-//
-//	Point3 point;
-//	Rotation rotation;
-//
-//	//Constructors
-//	Position(Point3 newPoint, Rotation newRotation) : point(newPoint), rotation(newRotation) 
-//	{
-//		lockedXmov = false, lockedYmov = false, lockedZmov = false, lockedXspin = false, lockedYspin = false, lockedZspin = false;
-//	};
-//	Position(Point3 newPoint, Rotation newRotation, bool xMov, bool yMov, bool zMov, bool xSpin, bool ySpin, bool zSpin) : point(newPoint), rotation(newRotation)
-//	{
-//		lockedXmov = xMov, lockedYmov = yMov, lockedZmov = zMov, lockedXspin = xSpin, lockedYspin = ySpin, lockedZspin = zSpin;
-//	};
-//
-//
-//	//Edit the position of a GameObject
-//	void EditPosition(Position newPos)
-//	{
-//		if (lockedXmov == false)
-//			point.X = newPos.point.X;
-//		if (lockedYmov == false)
-//			point.Y = newPos.point.Y;
-//		if (lockedZmov == false)
-//			point.Z = newPos.point.Z;
-//		if (lockedXspin == false)
-//			rotation.X = newPos.rotation.X;
-//		if (lockedYspin == false)
-//			rotation.Y = newPos.rotation.Y;
-//		if (lockedZspin == false)
-//			rotation.Z = newPos.rotation.Z;
-//	}
-//
-//	//Overload that doesn't require a Position
-//	void EditPosition(Point3 newPoint, Rotation newRot)
-//	{
-//		if (lockedXmov == false)
-//			point.X = newPoint.X;
-//		if (lockedYmov == false)
-//			point.Y = newPoint.Y;
-//		if (lockedZmov == false)
-//			point.Z = newPoint.Z;
-//		if (lockedXspin == false)
-//			rotation.X = newRot.X;
-//		if (lockedYspin == false)
-//			rotation.Y = newRot.Y;
-//		if (lockedZspin == false)
-//			rotation.Z = newRot.Z;
-//	}
-//
-//	//Overload that uses raw numbers
-//	void EditPosition(float x, float y, float z, float spinX, float spinY, float spinZ)
-//	{
-//		if (lockedXmov == false)
-//			point.X = x;
-//		if (lockedYmov == false)
-//			point.Y = y;
-//		if (lockedZmov == false)
-//			point.Z = z;
-//		if (lockedXspin == false)
-//			rotation.X = spinX;
-//		if (lockedYspin == false)
-//			rotation.Y = spinY;
-//		if (lockedZspin == false)
-//			rotation.Z = spinZ;
-//	}
-//};
-//
-//class PhysicsObject
-//{
-//public:
-//	Position pos;
-//	Velocity vel;
-//	Spin spin;
-//private:
-//};
 
+struct PhysicsLock
+{
+	bool lockedXmov = false;
+	bool lockedYmov = false;
+	bool lockedZmov = false;
+	bool lockedXspin = false;
+	bool lockedYspin = false;
+	bool lockedZspin = false;
+
+	PhysicsLock(bool lxM, bool lyM, bool lzM, bool lxS, bool lyS, bool lzS) :
+		lockedXmov(lxM), lockedYmov(lyM), lockedZmov(lzM), lockedXspin(lxS), lockedYspin(lyS), lockedZspin(lzS) {};
+	PhysicsLock() {};
+};
+
+void CreatePhysicsObject(glm::vec3, glm::vec3, PhysicsLock, glm::vec3, glm::vec3);
+
+struct PhysicsLocation 
+{
+	glm::vec3 position;
+	glm::vec3 rotation;
+	PhysicsLocation(glm::vec3 pos, glm::vec3 rot) : position(pos), rotation(rot) {};
+	PhysicsLocation() {};
+
+};
+
+class MAADPhysicsObject
+{
+public:
+	unsigned int ID = 0;
+	PhysicsLocation currLocation;
+	PhysicsLock lock;
+	glm::vec3 velocity; //change in position per frame (not accounting physics interactions)
+	glm::vec3 spin; //change in position per frame (not accounting physics interactions)
+
+	PhysicsLocation EditPosition(glm::vec3 newPos, glm::vec3 newRot)
+	{
+		
+		if (lock.lockedXmov == false)
+			currLocation.position.x = newPos.x;
+		if (lock.lockedYmov == false)
+			currLocation.position.y = newPos.y;
+		if (lock.lockedZmov == false)
+			currLocation.position.z = newPos.z;
+		if (lock.lockedXspin == false)
+			currLocation.rotation.x = newRot.x;
+		if (lock.lockedYspin == false)
+			currLocation.rotation.y = newRot.y;
+		if (lock.lockedZspin == false)
+			currLocation.rotation.z = newRot.z;
+	}
+	//Overload
+	PhysicsLocation EditPosition(PhysicsLocation loc)
+	{
+		if (lock.lockedXmov == false)
+			currLocation.position.x = loc.position.x;
+		if (lock.lockedYmov == false)
+			currLocation.position.y = loc.position.y;
+		if (lock.lockedZmov == false)
+			currLocation.position.z = loc.position.z;
+		if (lock.lockedXspin == false)
+			currLocation.rotation.x = loc.rotation.x;
+		if (lock.lockedYspin == false)
+			currLocation.rotation.y = loc.rotation.y;
+		if (lock.lockedZspin == false)
+			currLocation.rotation.z = loc.rotation.z;
+	}
+
+	MAADPhysicsObject(PhysicsLocation loc, PhysicsLock locker, glm::vec3 vel, glm::vec3 spin) : currLocation(loc), lock(locker), velocity(vel), spin(spin)
+	{
+	};
+	MAADPhysicsObject() {};
+	
+	void UpdateObject() 
+	{
+		PhysicsLocation newLoc = PhysicsLocation(currLocation.position + velocity, currLocation.rotation + spin);
+		WriteDebug(std::to_string(newLoc.position.x));
+		currLocation = newLoc;
+	}
+
+private:
+};

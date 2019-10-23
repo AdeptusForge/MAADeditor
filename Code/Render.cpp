@@ -11,6 +11,7 @@
 #include "Shaders.h"
 #include "Camera.h"
 #include "Assets.h"
+#include "Physics.h"
 
 unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
@@ -120,7 +121,7 @@ GLFWwindow* RenderStartup()
 
 	for (int i = 0; i < 10; i++)
 	{
-		Model newModel = Model("ModelLoadTest", ourShader);
+		Model newModel = Model("ModelLoadTest");
 		allModels.push_back(newModel);
 	}
 	
@@ -152,17 +153,11 @@ void RenderUpdate(GLFWwindow* window)
 		glm::vec3(1.5f,  0.2f, -1.5f),
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
-
-
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);
-
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	ourShader.setMat4("projection", projection);
-
-
-
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -173,24 +168,9 @@ void RenderUpdate(GLFWwindow* window)
 		float angle = 20.0f * i;
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
-		allModels[i].Draw();
+		allModels[i].Draw(ourShader);
 	}
 	ourShader.use();
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindVertexArray(VAO); 
-	
-
-	//for (unsigned int i = 0; i < 10; i++)
-	//{
-
-
-	//	// calculate the model matrix for each object and pass it to shader before drawing
-
-
-	//}
-
-
 	glfwSwapBuffers(window);
-
 }

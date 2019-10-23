@@ -21,8 +21,6 @@ const enum FileType
 
 };
 
-
-
 //model bits
 struct Vertex
 {
