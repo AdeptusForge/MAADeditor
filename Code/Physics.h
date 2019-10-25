@@ -11,6 +11,8 @@
 
 void PhysicsUpdate();
 
+const unsigned int MAX_DECIMAL_PRECISION = 10000;
+
 
 struct PhysicsLock
 {
@@ -30,9 +32,19 @@ void CreatePhysicsObject(glm::vec3, glm::vec3, PhysicsLock, glm::vec3, glm::vec3
 
 struct PhysicsLocation 
 {
-	glm::vec3 position;
-	glm::vec3 rotation;
-	PhysicsLocation(glm::vec3 pos, glm::vec3 rot) : position(pos), rotation(rot) {};
+public:
+	glm::ivec3 position;
+	glm::ivec3 rotation;
+	PhysicsLocation(glm::ivec3 pos, glm::ivec3 rot) : position(pos), rotation(rot) {};
+	PhysicsLocation(glm::vec3 pos, glm::vec3 rot) 
+	{
+		position = glm::vec3((float)pos.x * MAX_DECIMAL_PRECISION,
+			(float)pos.y *MAX_DECIMAL_PRECISION,
+			(float)pos.z * MAX_DECIMAL_PRECISION);
+		rotation = glm::vec3((float)rot.x * MAX_DECIMAL_PRECISION,
+			(float)rot.y * MAX_DECIMAL_PRECISION,
+			(float)rot.z * MAX_DECIMAL_PRECISION);
+	}
 	PhysicsLocation() {};
 
 };
@@ -43,8 +55,7 @@ public:
 	unsigned int ID = 0;
 	PhysicsLocation currLocation;
 	PhysicsLock lock;
-	glm::vec3 velocity; //change in position per frame (not accounting physics interactions)
-	glm::vec3 spin; //change in position per frame (not accounting physics interactions)
+
 
 	PhysicsLocation EditPosition(glm::vec3 newPos, glm::vec3 newRot)
 	{
@@ -79,17 +90,24 @@ public:
 			currLocation.rotation.z = loc.rotation.z;
 	}
 
-	MAADPhysicsObject(PhysicsLocation loc, PhysicsLock locker, glm::vec3 vel, glm::vec3 spin) : currLocation(loc), lock(locker), velocity(vel), spin(spin)
+	MAADPhysicsObject(PhysicsLocation loc, PhysicsLock locker, glm::vec3 vel, glm::vec3 spin) : currLocation(loc), lock(locker)
 	{
+		intVelocity = glm::vec3((float)vel.x * MAX_DECIMAL_PRECISION,
+			(float)vel.y * MAX_DECIMAL_PRECISION,
+			(float)vel.z * MAX_DECIMAL_PRECISION);
+		intSpin = glm::vec3((float)spin.x * MAX_DECIMAL_PRECISION,
+			(float)spin.y * MAX_DECIMAL_PRECISION,
+			(float)spin.z * MAX_DECIMAL_PRECISION);
 	};
 	MAADPhysicsObject() {};
 	
 	void UpdateObject() 
 	{
-		PhysicsLocation newLoc = PhysicsLocation(currLocation.position + velocity, currLocation.rotation + spin);
-		WriteDebug(std::to_string(newLoc.position.x));
+		PhysicsLocation newLoc = PhysicsLocation(glm::ivec3(currLocation.position + intVelocity), glm::ivec3(currLocation.rotation + intSpin));
 		currLocation = newLoc;
 	}
 
 private:
+	glm::ivec3 intVelocity; //change in position per frame (not accounting physics interactions)
+	glm::ivec3 intSpin; //change in position per frame (not accounting physics interactions)
 };

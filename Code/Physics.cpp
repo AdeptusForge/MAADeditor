@@ -18,4 +18,3 @@ void PhysicsUpdate()
 		allPhysObjects[i].UpdateObject();
 	}
 }
-
