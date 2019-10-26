@@ -8,11 +8,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Debug.h"
+#include <Math.h>
 
 void PhysicsUpdate();
 
 const unsigned int MAX_DECIMAL_PRECISION = 10000;
 
+glm::ivec3 ConvertFloatVector(glm::vec3);
 
 struct PhysicsLock
 {
@@ -38,15 +40,27 @@ public:
 	PhysicsLocation(glm::ivec3 pos, glm::ivec3 rot) : position(pos), rotation(rot) {};
 	PhysicsLocation(glm::vec3 pos, glm::vec3 rot) 
 	{
-		position = glm::vec3((float)pos.x * MAX_DECIMAL_PRECISION,
-			(float)pos.y *MAX_DECIMAL_PRECISION,
-			(float)pos.z * MAX_DECIMAL_PRECISION);
-		rotation = glm::vec3((float)rot.x * MAX_DECIMAL_PRECISION,
-			(float)rot.y * MAX_DECIMAL_PRECISION,
-			(float)rot.z * MAX_DECIMAL_PRECISION);
+		position = ConvertFloatVector(pos);
+		rotation = ConvertFloatVector(rot);
 	}
 	PhysicsLocation() {};
 
+	glm::vec3 GetWorldPosition() 
+	{
+		glm::vec3 worldPosition;
+		worldPosition.x = position.x / MAX_DECIMAL_PRECISION;
+		worldPosition.y = position.y / MAX_DECIMAL_PRECISION;
+		worldPosition.z = position.z / MAX_DECIMAL_PRECISION;
+		return  worldPosition;
+	}
+	glm::vec3 GetWorldRotation()
+	{
+		glm::vec3 worldRotation;
+		worldRotation.x = (float)rotation.x / MAX_DECIMAL_PRECISION;
+		worldRotation.y = (float)rotation.y / MAX_DECIMAL_PRECISION;
+		worldRotation.z = (float)rotation.z / MAX_DECIMAL_PRECISION;
+		return  worldRotation;
+	}
 };
 
 class MAADPhysicsObject
@@ -92,18 +106,15 @@ public:
 
 	MAADPhysicsObject(PhysicsLocation loc, PhysicsLock locker, glm::vec3 vel, glm::vec3 spin) : currLocation(loc), lock(locker)
 	{
-		intVelocity = glm::vec3((float)vel.x * MAX_DECIMAL_PRECISION,
-			(float)vel.y * MAX_DECIMAL_PRECISION,
-			(float)vel.z * MAX_DECIMAL_PRECISION);
-		intSpin = glm::vec3((float)spin.x * MAX_DECIMAL_PRECISION,
-			(float)spin.y * MAX_DECIMAL_PRECISION,
-			(float)spin.z * MAX_DECIMAL_PRECISION);
+		intVelocity = ConvertFloatVector(vel);
+		intSpin = ConvertFloatVector(spin);
 	};
 	MAADPhysicsObject() {};
 	
 	void UpdateObject() 
 	{
-		PhysicsLocation newLoc = PhysicsLocation(glm::ivec3(currLocation.position + intVelocity), glm::ivec3(currLocation.rotation + intSpin));
+
+		PhysicsLocation newLoc = PhysicsLocation(currLocation.position + intVelocity, currLocation.rotation + intSpin);
 		currLocation = newLoc;
 	}
 

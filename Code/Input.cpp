@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Physics.h"
 
+
 std::vector<InputFrame> priorFrames;
 std::vector<InputFrame>::iterator ptr;
 
@@ -38,8 +39,9 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			case (GLFW_KEY_LEFT): cam->MoveCamera(glm::vec3(-1.0f, 0.0f, 0.0f)); break;
 			case (GLFW_KEY_RIGHT): cam->MoveCamera(glm::vec3(1.0f, 0.0f, 0.0f)); break;
 			case (GLFW_KEY_U): CreatePhysicsObject(glm::vec3(1.0, 1.0, 1.0), glm::vec3(0.0, 0.0, 0.0),
-				PhysicsLock(), glm::vec3(0.01, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0));
+				PhysicsLock(), glm::vec3(0.01, 0.2, 0.3), glm::vec3(0.4, 0.5, 0.6));
 				
+
 		}
 	}
 }

@@ -20,6 +20,9 @@ private:
 public:
 	MAADPhysicsObject obj;
 
+
+	//MODEL MOVE TEST ONLY
+	Model objModel;
 	std::string name;
 	std::vector <GameComponent> components;
 };
