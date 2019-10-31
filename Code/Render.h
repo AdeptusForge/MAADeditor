@@ -11,6 +11,7 @@
 #include "FileControl.h"
 #include "Shaders.h"
 #include "Camera.h"
+#include "physics.h"
 
 
 
@@ -22,10 +23,11 @@ GLFWwindow* RenderStartup();
 void ResetScreenSize(GLFWwindow*);
 
 
-class RenderModel 
+struct RenderObject 
 {
-private:
 public: 
+	PhysicsTransform objLoc;
+	Model objModel;
 
-
+	RenderObject(PhysicsTransform pL, Model mod) : objLoc(pL), objModel(mod) {};
 };

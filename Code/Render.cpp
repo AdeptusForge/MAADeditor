@@ -21,7 +21,7 @@ Camera ourCamera;
 
 std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
-std::vector<Model> allModels;
+std::vector<RenderObject> allModels;
 
 
 Camera* FindCamera(unsigned int camID) 
@@ -119,10 +119,24 @@ GLFWwindow* RenderStartup()
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
+	// world space positions of our objects
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
 	for (int i = 0; i < 10; i++)
 	{
 		Model newModel = Model("ModelLoadTest");
-		allModels.push_back(newModel);
+
+		allModels.push_back(RenderObject(PhysicsTransform(cubePositions[i], glm::vec3(0)),newModel));
 	}
 	
 	return window;
@@ -140,19 +154,7 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
-	// world space positions of our objects
-	glm::vec3 cubePositions[] = {
-		glm::vec3(0.0f,  0.0f,  0.0f),
-		glm::vec3(2.0f,  5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f,  3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f,  2.0f, -2.5f),
-		glm::vec3(1.5f,  0.2f, -1.5f),
-		glm::vec3(-1.3f,  1.0f, -1.5f)
-	};
+
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);
@@ -164,11 +166,11 @@ void RenderUpdate(GLFWwindow* window)
 	for (int i = 0; i < allModels.size(); i++)
 	{
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, cubePositions[i]);
+		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
 		float angle = 20.0f * i;
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
-		allModels[i].Draw(ourShader);
+		allModels[i].objModel.Draw(ourShader);
 	}
 	ourShader.use();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

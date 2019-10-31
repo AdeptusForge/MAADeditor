@@ -17,10 +17,10 @@ glm::ivec3 ConvertFloatVector(glm::vec3 floatVec)
 }
 
 
-void CreatePhysicsObject(glm::vec3 position, glm::vec3 rotation, PhysicsLock lock, glm::vec3 velocity, glm::vec3 spin) 
-{
-	allPhysObjects.push_back(MAADPhysicsObject(PhysicsLocation(position, rotation), lock, velocity, spin));
-}
+//void CreatePhysicsObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 velocity, glm::vec3 spin) 
+//{
+//	allPhysObjects.push_back(MAADPhysicsObject(PhysicsTransform(position, rotation), lock, velocity, spin));
+//}
 
 void PhysicsUpdate() 
 {
