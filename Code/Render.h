@@ -13,15 +13,12 @@
 #include "Camera.h"
 #include "physics.h"
 
-
-
 Camera* FindCamera(unsigned int);
 void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
 GLFWwindow* RenderStartup();
 
 void ResetScreenSize(GLFWwindow*);
-
 
 struct RenderObject 
 {

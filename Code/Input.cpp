@@ -38,8 +38,6 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			case (GLFW_KEY_DOWN): cam->MoveCamera(glm::vec3(0.0f, 0.0f, 1.0f)); break;
 			case (GLFW_KEY_LEFT): cam->MoveCamera(glm::vec3(-1.0f, 0.0f, 0.0f)); break;
 			case (GLFW_KEY_RIGHT): cam->MoveCamera(glm::vec3(1.0f, 0.0f, 0.0f)); break;
-				
-
 		}
 	}
 }

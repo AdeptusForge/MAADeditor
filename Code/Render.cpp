@@ -52,29 +52,6 @@ void ResetScreenSize(GLFWwindow* window)
 	glfwSetWindowSize(window, 800, 800);
 }
 
-void LoadandBindTexture(std::string textureName, unsigned int& textureID, int& width, int& height, int& nrChannels)
-{
-	unsigned char* texData;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	// set the texture wrapping/filtering options (on the currently bound texture object)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	texData = LoadImageFile(ImageFile, textureName, width, height, nrChannels);
-	if (texData)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		WriteDebug("Texture failed to load:" + textureName);
-	}
-
-}
-
 GLFWwindow* RenderStartup() 
 {
 	GLFWwindow* window;
@@ -154,7 +131,6 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
-
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);

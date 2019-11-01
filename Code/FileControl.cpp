@@ -44,10 +44,10 @@ bool VerifyFileOrFolder(std::string filePath)
 	DWORD ftyp = GetFileAttributesA(filePath.c_str());
 	if (ftyp != INVALID_FILE_ATTRIBUTES) 
 	{
-		WriteDebug("File found: " + filePath);
+		//WriteDebug("File found: " + filePath);
 		return true;
 	}
-	WriteDebug("File not found: " + filePath);
+	//WriteDebug("File not found: " + filePath);
 	return false;
 }
 

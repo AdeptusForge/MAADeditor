@@ -34,18 +34,12 @@ public:
 	}
 	#pragma endregion
 
-	void IntroduceShader(Shader shader) 
-	{
-		ModelSetup();
-	}
-
-
 	void Draw(Shader shader)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++) 
 		{
 			glActiveTexture(GL_TEXTURE0 + i);
-			glUniform1i(glGetUniformLocation(shader.ID, "texture" + i), i);
+			shader.setInt("texture" + std::to_string(i),i);
 			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
 		}
 		//Draw
@@ -84,7 +78,6 @@ private:
 			{
 				WriteDebug("Texture failed to load:" + textures[i].name);
 			}
-
 		}
 		#pragma endregion
 
