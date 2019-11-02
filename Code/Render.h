@@ -12,6 +12,7 @@
 #include "Shaders.h"
 #include "Camera.h"
 #include "physics.h"
+#include "Components.h"
 
 Camera* FindCamera(unsigned int);
 void RenderShutdown();

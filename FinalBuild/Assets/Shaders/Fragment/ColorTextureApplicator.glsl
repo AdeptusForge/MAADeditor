@@ -17,11 +17,22 @@ out vec4 fragOutColor;
 
 void main()
 {
+
+	//Top-Down
 	vec4 newTexture = texture(texture0, TexCoord);
 	vec4 newTexture1 = texture(texture1, TexCoord);
 	if(newTexture.a < 0.1)
         newTexture += newTexture1;
 
 
-	fragOutColor = newTexture;
+
+	//Bottom-Up
+	vec4 finalTexture = texture(texture0, TexCoord);
+	vec4 addedTexture = texture(texture1, TexCoord);
+	if(addedTexture.a > 0.1)
+		finalTexture = addedTexture;
+
+	//newTexture for Top-Down
+	//finalTexture for Bottom-Up
+	fragOutColor = finalTexture;
 }

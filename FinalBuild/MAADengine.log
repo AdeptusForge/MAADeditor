@@ -1,12 +1,57 @@
-﻿  Render.cpp
+﻿  Input.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+  MAADengine.cpp
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+  Physics.cpp
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Objects.h(21,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(14,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(15,24): warning C4244:         ]
+  Render.cpp
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(27,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+  Time.cpp
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Render.cpp(142,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Time.cpp(12,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Time.cpp(21,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
   Generating code
-  1 of 1031 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 1031 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADengine\MAADengine\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADengine\MAADengine\Assets\Models\ModelLoadTest.txt

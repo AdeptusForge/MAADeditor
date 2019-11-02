@@ -5,24 +5,27 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "assets.h"
-
-class GameComponent
-{
-public:
-	virtual void ComponentFunction() = 0;
-private:
-
-};
+#include "Components.h"
 
 class GameObject
 {
 private:
 	PhysicsTransform transform;
-public:
-	//MODEL MOVE TEST ONLY
-	Model objModel;
 
+	void Initialize() 
+	{
+		UpdateComponentData();
+	}
+	void UpdateComponentData()
+	{
+		for (int i = 0; i < components.size(); i++) 
+		{
+			components[i].objectData = ComponentDataChunk(&transform);
+		}
+	}
+public:
 	std::string name;
+	int ID;
 	std::vector <GameComponent> components;
 };
 

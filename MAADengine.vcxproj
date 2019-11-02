@@ -320,6 +320,7 @@
   <ItemGroup>
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\AudioControl.h" />
+    <ClInclude Include="Code\Components.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\FileControl.h" />
     <ClInclude Include="Code\framework.h" />

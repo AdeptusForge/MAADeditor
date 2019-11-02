@@ -2,7 +2,6 @@
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 #include <string>
-#include <list> 
 #include <iterator> 
 #include <vector>
 #include <glm/glm.hpp>
@@ -11,7 +10,7 @@
 #include "Shaders.h"
 #include "FileControl.h"
 
-class Model 
+class Model
 {
 public:
 	std::vector<Vertex> vertices;
@@ -75,9 +74,7 @@ private:
 				glGenerateMipmap(GL_TEXTURE_2D);
 			}
 			else
-			{
 				WriteDebug("Texture failed to load:" + textures[i].name);
-			}
 		}
 		#pragma endregion
 

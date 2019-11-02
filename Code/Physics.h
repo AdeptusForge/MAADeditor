@@ -16,8 +16,6 @@ const unsigned int MAX_DECIMAL_PRECISION = 10000;
 
 glm::ivec3 ConvertFloatVector(glm::vec3);
 
-//void CreatePhysicsObject(glm::vec3, glm::vec3, glm::vec3, glm::vec3);
-
 struct PhysicsTransform 
 {
 public:
