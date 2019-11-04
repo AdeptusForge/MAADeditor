@@ -10,23 +10,13 @@
 class GameObject
 {
 private:
-	PhysicsTransform transform;
 
-	void Initialize() 
-	{
-		UpdateComponentData();
-	}
-	void UpdateComponentData()
-	{
-		for (int i = 0; i < components.size(); i++) 
-		{
-			components[i].objectData = ComponentDataChunk(&transform);
-		}
-	}
+
 public:
+	PhysicsTransform transform;
 	std::string name;
 	int ID;
-	std::vector <GameComponent> components;
+	std::vector<ViewModel> models;
 };
 
 

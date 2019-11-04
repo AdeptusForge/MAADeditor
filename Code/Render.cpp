@@ -23,6 +23,18 @@ std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
 
+void GameToRenderConversion(GameObject obj)
+{
+	for (int i = 0; i < obj.models.size(); i++)
+	{
+		PhysicsTransform renderTrans = obj.models[i].modelOffset + obj.transform;
+		Model renderModel = obj.models[i].viewModel;
+
+
+		allModels.push_back(RenderObject(renderTrans, renderModel));
+	}
+}
+
 
 Camera* FindCamera(unsigned int camID) 
 {
@@ -34,7 +46,6 @@ Camera* FindCamera(unsigned int camID)
 	}
 	return found;
 }
-
 
 glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 glm::mat4 view = glm::mat4(1.0f);

@@ -8,7 +8,6 @@ C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message : 
   Physics.cpp
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Objects.h(21,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         with
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(13,24): warning C4244:         [
@@ -41,8 +40,9 @@ C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Physics.cpp(27,20): warning C4
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Render.cpp(28,20): warning C4018:  '<': signed/unsigned mismatch
   Time.cpp
-C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Render.cpp(142,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Render.cpp(153,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADengine\MAADengine\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADengine\MAADengine\Code\Shaders.h(101,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data

@@ -7,48 +7,24 @@
 #include "assets.h"
 #include "Physics.h"
 
-struct ComponentDataChunk 
-{
-	PhysicsTransform *objectTransform;
-
-	ComponentDataChunk(PhysicsTransform* objTransform) : objectTransform(objTransform) {};
-};
-
-
-class GameComponent
+class ViewModel 
 {
 public:
-	ComponentDataChunk objectData;
-	virtual void ComponentFunction() = 0;
-private:
-};
-
-class StandardPhysicsComponent : public GameComponent 
-{
-	
-};
-
-class ViewModelComponent : public GameComponent 
-{
 	PhysicsTransform modelOffset;
 	Model viewModel;
-	void ComponentFunction() 
-	{
-
-	}
 };
 
-class Collider2DComponent : public GameComponent
+class Collider2D 
 {
 
 };
 
-class Collider3DComponent : public GameComponent
+class Collider3D
 {
 
 };
 
-class AIControllerComponent : public GameComponent
+class AIController
 {
 
 };

@@ -51,6 +51,15 @@ public:
 		worldRotation.z = (float)rotation.z / MAX_DECIMAL_PRECISION;
 		return  worldRotation;
 	}
+
+
+	//Original Physics Lock conserved. NOT modified.
+	PhysicsTransform operator + (PhysicsTransform const& obj) {
+		PhysicsTransform res;
+		res.position = position + obj.position;
+		res.rotation = rotation + obj.rotation;
+		return res;
+	}
 };
 
 class MAADPhysicsObject

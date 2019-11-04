@@ -13,6 +13,7 @@
 #include "Camera.h"
 #include "physics.h"
 #include "Components.h"
+#include "Objects.h"
 
 Camera* FindCamera(unsigned int);
 void RenderShutdown();
@@ -21,6 +22,8 @@ GLFWwindow* RenderStartup();
 
 void ResetScreenSize(GLFWwindow*);
 
+
+
 struct RenderObject 
 {
 public: 
@@ -28,4 +31,8 @@ public:
 	Model objModel;
 
 	RenderObject(PhysicsTransform pL, Model mod) : objLoc(pL), objModel(mod) {};
+
 };
+
+void GameToRenderConversion(GameObject);
+
