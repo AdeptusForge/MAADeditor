@@ -1,0 +1,26 @@
+﻿AudioControl.obj : error LNK2019: unresolved external symbol Mix_Quit referenced in function "void __cdecl AudioControlQuit(void)" (?AudioControlQuit@@YAXXZ)
+AudioControl.obj : error LNK2019: unresolved external symbol Mix_OpenAudio referenced in function "void __cdecl AudioControlStartup(void)" (?AudioControlStartup@@YAXXZ)
+AudioControl.obj : error LNK2019: unresolved external symbol Mix_PlayChannelTimed referenced in function "void __cdecl PlaySoundClip(enum SoundType,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?PlaySoundClip@@YAXW4SoundType@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+FileControl.obj : error LNK2019: unresolved external symbol SDL_RWFromFile referenced in function "struct Mix_Chunk * __cdecl LoadGameAudioFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadGameAudioFile@@YAPEAUMix_Chunk@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+FileControl.obj : error LNK2019: unresolved external symbol Mix_LoadWAV_RW referenced in function "struct Mix_Chunk * __cdecl LoadGameAudioFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadGameAudioFile@@YAPEAUMix_Chunk@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Input.obj : error LNK2019: unresolved external symbol glfwSetKeyCallback referenced in function "void __cdecl InputControlStartup(struct GLFWwindow *)" (?InputControlStartup@@YAXPEAUGLFWwindow@@@Z)
+MAADeditor.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function "int __cdecl EndTheMAADness(void)" (?EndTheMAADness@@YAHXZ)
+MAADeditor.obj : error LNK2019: unresolved external symbol glfwWindowShouldClose referenced in function "bool __cdecl WorkingProperly(void)" (?WorkingProperly@@YA_NXZ)
+MAADeditor.obj : error LNK2019: unresolved external symbol glfwPollEvents referenced in function SDL_main
+MAADeditor.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function "int __cdecl EndTheMAADness(void)" (?EndTheMAADness@@YAHXZ)
+Render.obj : error LNK2019: unresolved external symbol glfwInit referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol glfwWindowHint referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol glfwCreateWindow referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol glfwSetWindowSize referenced in function "void __cdecl ResetScreenSize(struct GLFWwindow *)" (?ResetScreenSize@@YAXPEAUGLFWwindow@@@Z)
+Render.obj : error LNK2019: unresolved external symbol glfwSetFramebufferSizeCallback referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol glfwMakeContextCurrent referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol glfwSwapBuffers referenced in function "void __cdecl RenderUpdate(struct GLFWwindow *)" (?RenderUpdate@@YAXPEAUGLFWwindow@@@Z)
+Render.obj : error LNK2019: unresolved external symbol glfwGetProcAddress referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Render.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "struct GLFWwindow * __cdecl RenderStartup(void)" (?RenderStartup@@YAPEAUGLFWwindow@@XZ)
+Time.obj : error LNK2019: unresolved external symbol SDL_GetPerformanceCounter referenced in function "void __cdecl `dynamic initializer for 'startup''(void)" (??__Estartup@@YAXXZ)
+Time.obj : error LNK2019: unresolved external symbol SDL_GetPerformanceFrequency referenced in function "void __cdecl `dynamic initializer for 'physicsFrameInTicks''(void)" (??__EphysicsFrameInTicks@@YAXXZ)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\lib-vc2019\glfw3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\lib-vc2019\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\lib-vc2019\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\x64\Debug\MAADengine.exe : fatal error LNK1120: 22 unresolved externals
