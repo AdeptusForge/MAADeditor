@@ -79,7 +79,7 @@ GLFWwindow* RenderStartup()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(SCR_W, SCR_H, "MAADengine", NULL, NULL);
+	window = glfwCreateWindow(SCR_W, SCR_H, "MAADeditor", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -89,9 +89,6 @@ GLFWwindow* RenderStartup()
 
 	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
 	ourShader.use();
-	
-	ourShader.setInt("texture1", 0);
-	ourShader.setInt("texture2", 1);
 	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -107,25 +104,9 @@ GLFWwindow* RenderStartup()
 	view = ourCamera.cameraView;
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
-	// world space positions of our objects
-	glm::vec3 cubePositions[] = {
-		glm::vec3(0.0f,  0.0f,  0.0f),
-		glm::vec3(2.0f,  5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f,  3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f,  2.0f, -2.5f),
-		glm::vec3(1.5f,  0.2f, -1.5f),
-		glm::vec3(-1.3f,  1.0f, -1.5f)
-	};
-	for (int i = 0; i < 10; i++)
-	{
-		Model newModel = Model("ModelLoadTest");
 
-		allModels.push_back(RenderObject(PhysicsTransform(cubePositions[i], glm::vec3(0)),newModel));
-	}
+	Model newModel = Model("ModelLoadTest");
+	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel));
 	
 	return window;
 }

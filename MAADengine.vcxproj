@@ -309,19 +309,24 @@
   <ItemGroup>
     <ClCompile Include="Code\AudioControl.cpp" />
     <ClCompile Include="Code\Debug.cpp" />
+    <ClCompile Include="Code\Editor.cpp" />
     <ClCompile Include="Code\FileControl.cpp" />
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\MAADeditor.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
     <ClCompile Include="Code\Render.cpp" />
     <ClCompile Include="Code\src\glad.c" />
-    <ClCompile Include="Code\Time.cpp" />
+    <ClCompile Include="Code\imGUI\imgui.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_demo.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_draw.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\AudioControl.h" />
     <ClInclude Include="Code\Components.h" />
     <ClInclude Include="Code\Debug.h" />
+    <ClInclude Include="Code\Editor.h" />
     <ClInclude Include="Code\FileControl.h" />
     <ClInclude Include="Code\framework.h" />
     <ClInclude Include="Code\Input.h" />
@@ -329,8 +334,14 @@
     <ClInclude Include="Code\Physics.h" />
     <ClInclude Include="Code\Render.h" />
     <ClInclude Include="Code\stb_image.h" />
-    <ClInclude Include="Code\Time.h" />
-    <ClInclude Include="Shaders.h" />
+    <ClInclude Include="Code\imGUI\imconfig.h" />
+    <ClInclude Include="Code\imGUI\imgui.h" />
+    <ClInclude Include="Code\imGUI\imgui_internal.h" />
+    <ClInclude Include="Code\imGUI\imstb_rectpack.h" />
+    <ClInclude Include="Code\imGUI\imstb_textedit.h" />
+    <ClInclude Include="Code\imGUI\imstb_truetype.h" />
+    <ClInclude Include="Menus.h" />
+    <ClInclude Include="Code\Shaders.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl" />

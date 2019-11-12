@@ -9,6 +9,7 @@
 #include "SDL_mixer.h"
 #include "Shaders.h"
 #include <sstream>
+#include <commdlg.h>
 
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
@@ -55,6 +56,7 @@ void FileControlStartup()
 {
 	VerifyFileOrFolder(assetPath);
 	WriteDebug("File Control Startup -- Successful");
+
 }
 
 std::string FetchPath(FileType fileType, std::string fileName, bool saving)
@@ -145,6 +147,7 @@ void CreateNewFile(FileType fileType, std::string fileName)
 {
 	
 }
+
 void SaveOverFile(FileType fileType, std::string fileName)
 {
 

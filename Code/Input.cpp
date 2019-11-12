@@ -15,10 +15,18 @@ std::vector<InputFrame>::iterator ptr;
 
 InputFrame currFrame;
 
+bool isSelecting;
+
+static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
+{
+
+}
 
 void InputControlStartup(GLFWwindow* window)
 {
 	glfwSetKeyCallback(window, CollectInputs);
+	if (glfwRawMouseMotionSupported())
+		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 	for (int i = 1; i < 20; i++) 
 	{
 		ptr = priorFrames.begin();

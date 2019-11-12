@@ -10,6 +10,10 @@
 #include "AudioControl.h"
 #include "Input.h"
 #include "Render.h"
+#include "Editor.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+
 
 GLFWwindow* window;
 
@@ -19,11 +23,9 @@ void InitializeTheMAADness()
 
 	//Startup functions
 	window = RenderStartup();
-	TimeStartup();
 	FileControlStartup();
-	AudioControlStartup();
 	InputControlStartup(window);
-
+	EditorStartup();
 	WriteDebug("MAADness Initialized");
 }
 int EndTheMAADness() 
@@ -44,13 +46,14 @@ bool WorkingProperly()
 
 int main(int argc, char **argv)
 {
+	
 	InitializeTheMAADness();
 	//Don't move this if statement; it needs to be here for some reason...
 	if (!window) return EndTheMAADness();
 
 	while (WorkingProperly())
 	{
-		UpdateTime(window);
+		RenderUpdate(window);
 
 		glfwPollEvents();
 		SaveInputs();
