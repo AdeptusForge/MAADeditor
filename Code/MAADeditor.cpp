@@ -11,9 +11,6 @@
 #include "Input.h"
 #include "Render.h"
 #include "Editor.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-
 
 GLFWwindow* window;
 
@@ -25,7 +22,7 @@ void InitializeTheMAADness()
 	window = RenderStartup();
 	FileControlStartup();
 	InputControlStartup(window);
-	EditorStartup();
+	EditorStartup(window);
 	WriteDebug("MAADness Initialized");
 }
 int EndTheMAADness() 
@@ -54,7 +51,7 @@ int main(int argc, char **argv)
 	while (WorkingProperly())
 	{
 		RenderUpdate(window);
-
+		EditorUpdate(window);
 		glfwPollEvents();
 		SaveInputs();
 	}

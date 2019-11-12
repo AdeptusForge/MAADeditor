@@ -191,7 +191,6 @@ ModelDataChunk Load3DModel(std::string fileName)
 
 	for (std::string line; std::getline(modelFile, line);)
 	{
-
 		#pragma region Load Textures
 		std::istringstream in(line);
 		std::string type;

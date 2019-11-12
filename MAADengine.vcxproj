@@ -311,6 +311,8 @@
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor.cpp" />
     <ClCompile Include="Code\FileControl.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\MAADeditor.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
@@ -329,6 +331,8 @@
     <ClInclude Include="Code\Editor.h" />
     <ClInclude Include="Code\FileControl.h" />
     <ClInclude Include="Code\framework.h" />
+    <ClInclude Include="Code\imGUI\imgui_impl_glfw.h" />
+    <ClInclude Include="Code\imGUI\imgui_impl_opengl3.h" />
     <ClInclude Include="Code\Input.h" />
     <ClInclude Include="Code\Objects.h" />
     <ClInclude Include="Code\Physics.h" />
@@ -341,7 +345,6 @@
     <ClInclude Include="Code\imGUI\imstb_textedit.h" />
     <ClInclude Include="Code\imGUI\imstb_truetype.h" />
     <ClInclude Include="Menus.h" />
-    <ClInclude Include="Code\Shaders.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl" />
