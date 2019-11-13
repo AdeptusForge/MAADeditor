@@ -27,6 +27,7 @@ void InitializeTheMAADness()
 }
 int EndTheMAADness() 
 {
+	EditorShutdown();
 	RenderShutdown();
 	AudioControlQuit();
 	SDL_Quit();
@@ -51,7 +52,6 @@ int main(int argc, char **argv)
 	while (WorkingProperly())
 	{
 		RenderUpdate(window);
-		EditorUpdate(window);
 		glfwPollEvents();
 		SaveInputs();
 	}

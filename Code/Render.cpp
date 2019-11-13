@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Assets.h"
 #include "Physics.h"
+#include "editor.h"
 
 unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
@@ -123,6 +124,7 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
+
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);
@@ -142,5 +144,7 @@ void RenderUpdate(GLFWwindow* window)
 	}
 	ourShader.use();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	EditorUpdate(window);
 	glfwSwapBuffers(window);
+
 }
