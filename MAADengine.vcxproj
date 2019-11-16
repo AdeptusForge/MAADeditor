@@ -313,6 +313,7 @@
     <ClCompile Include="Code\FileControl.cpp" />
     <ClCompile Include="Code\imGUI\imgui_impl_glfw.cpp" />
     <ClCompile Include="Code\imGUI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Code\imGUI\imgui_stdlib.cpp" />
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\MAADeditor.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
@@ -333,6 +334,7 @@
     <ClInclude Include="Code\framework.h" />
     <ClInclude Include="Code\imGUI\imgui_impl_glfw.h" />
     <ClInclude Include="Code\imGUI\imgui_impl_opengl3.h" />
+    <ClInclude Include="Code\imGUI\imgui_stdlib.h" />
     <ClInclude Include="Code\Input.h" />
     <ClInclude Include="Code\Objects.h" />
     <ClInclude Include="Code\Physics.h" />

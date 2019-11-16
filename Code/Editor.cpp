@@ -14,6 +14,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "imgui/imgui_stdlib.h"
 #include <stdio.h>
 #include "Debug.h"
 #include "Render.h"
@@ -144,12 +145,15 @@ void EditorUpdate(GLFWwindow* window)
 	if (show_creationWindow) 
 	{
 		ImGui::Begin("Creation Window");
+		static std::string fileName;
+
+
+		ImGui::InputText("FileName", &fileName);
 		if (ImGui::Button("Create File")) 
 		{
-			CreateNewFile(ModelFile, "TotallyTestFileName");
+			SaveActiveFile(ModelFile, fileName, "whatever");
 		}
 		
-		ImGui::Text("Test");
 
 		ImGui::End();
 	}

@@ -132,20 +132,17 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 	return path;
 }
 
-void CreateNewFile(FileType fileType, std::string fileName)
+
+void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 {
 	std::string filePath = FetchPath(fileType, fileName, true);
+	WriteDebug(filePath);
 	std::ofstream file;
-	file.open(fileName + ".txt");
-	file << "What is a skeleton's favorite snack?";
-
+	file.open(filePath + ".txt");
+	file << data;
 	file.close();
 }
 
-void SaveOverFile(FileType fileType, std::string fileName)
-{
-
-}
 
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {

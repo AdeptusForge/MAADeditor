@@ -58,8 +58,7 @@ struct ModelDataChunk
 
 
 
-void CreateNewFile(FileType fileType, std::string fileName);
-void OverwriteFile(FileType fileType, std::string fileName);
+void SaveActiveFile(FileType fileType, std::string fileName, std::string data);
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 Mix_Chunk* LoadGameAudioFile(std::string fileName);
 //If in the future there is any issue with model data check this function first. It is highly likely that the data did not get transferred properly and the bug was missed
