@@ -9,7 +9,6 @@
 //#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #endif
 
-
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 #include "imgui/imgui.h"
@@ -17,9 +16,11 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include "Debug.h"
+#include "Render.h"
 
-bool show_demo_window = true;
-bool show_another_window = false;
+bool show_save_window = false;
+bool show_new_window = false;
+bool show_creationWindow = false;
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 MouseMode currentMouseMode;
@@ -65,45 +66,88 @@ void EditorStartup(GLFWwindow* window)
 
 
 
+void ShowMenuBar() 
+{
+	ImGui::BeginMainMenuBar();
+
+
+	if (ImGui::BeginMenu("New")) 
+	{
+		if (ImGui::MenuItem("New 3D Model")) 
+		{
+		}
+		if (ImGui::MenuItem("New 2D Model")) 
+		{
+			ImGui::OpenPopup("CreationWindow");
+			show_creationWindow = true;
+		}
+		ImGui::EndMenu();
+	}
+	if (ImGui::BeginMenu("Open"))
+	{
+		
+	}
+	if (ImGui::BeginMenu("Save", "CTRL+S"))
+	{
+		if (ImGui::MenuItem("Save")) 
+		{
+		}
+		if (ImGui::MenuItem("Save As"))
+		{
+		}
+	}
+
+	if (ImGui::BeginMenu("Options"))
+	{
+		static bool enabled = true;
+		ImGui::MenuItem("Enabled", "", &enabled);
+		ImGui::BeginChild("child", ImVec2(0, 60), true);
+		for (int i = 0; i < 10; i++)
+			ImGui::Text("Scrolling Text %d", i);
+		ImGui::EndChild();
+		static float f = 0.5f;
+		static int n = 0;
+		static bool b = true;
+		ImGui::SliderFloat("Value", &f, 0.0f, 1.0f);
+		ImGui::InputFloat("Input", &f, 0.1f);
+		ImGui::Combo("Combo", &n, "Yes\0No\0Maybe\0\0");
+		ImGui::Checkbox("Check", &b);
+		ImGui::EndMenu();
+	}
+
+	ImGui::EndMainMenuBar();
+}
+
 void EditorUpdate(GLFWwindow* window)
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
+	ShowMenuBar();
 
-	if (show_demo_window)
-		ImGui::ShowDemoWindow(&show_demo_window);
+	//if (show_demo_window)
+	//	ImGui::ShowDemoWindow(&show_demo_window);
 
+	//{
+	//	static float f = 0.0f;
+	//	static int counter = 0;
+	//	ImGui::Begin("MAADeditor");                         // Create a window called "Hello, world!" and append into it.
+
+	//	ImGui::ColorEdit3("clear color", (float*)& clear_color); // Edit 3 floats representing a color
+
+	//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	//	ImGui::End();
+	//}
+
+	ImGui::SetNextWindowPos(ImVec2(1, 1), ImGuiCond_FirstUseEver);
+	if (show_creationWindow) 
 	{
-		static float f = 0.0f;
-		static int counter = 0;
-		ImGui::Begin("MAADeditor");                         // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Creation Window");
+		ImGui::Text("Test");
 
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		ImGui::Checkbox("Another Window", &show_another_window);
-
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		ImGui::ColorEdit3("clear color", (float*)& clear_color); // Edit 3 floats representing a color
-
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
-
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		ImGui::End();
 	}
-	if (show_another_window)
-	{
-		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from another window!");
-		if (ImGui::Button("Close Me"))
-			show_another_window = false;
-		ImGui::End();
-	}
-
 
 
 
