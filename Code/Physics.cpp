@@ -24,7 +24,7 @@ glm::ivec3 ConvertFloatVector(glm::vec3 floatVec)
 
 void PhysicsUpdate() 
 {
-	for (int i = 0; i < allPhysObjects.size(); i++) 
+	for (int i = 0; i < allPhysObjects.size(); i++)
 	{
 		allPhysObjects[i].UpdateObject();
 	}

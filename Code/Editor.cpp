@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include "Debug.h"
 #include "Render.h"
+#include "FileControl.h"
 
 bool show_save_window = false;
 bool show_new_window = false;
@@ -78,7 +79,6 @@ void ShowMenuBar()
 		}
 		if (ImGui::MenuItem("New 2D Model")) 
 		{
-			ImGui::OpenPopup("CreationWindow");
 			show_creationWindow = true;
 		}
 		ImGui::EndMenu();
@@ -144,6 +144,11 @@ void EditorUpdate(GLFWwindow* window)
 	if (show_creationWindow) 
 	{
 		ImGui::Begin("Creation Window");
+		if (ImGui::Button("Create File")) 
+		{
+			CreateNewFile(ModelFile, "TotallyTestFileName");
+		}
+		
 		ImGui::Text("Test");
 
 		ImGui::End();

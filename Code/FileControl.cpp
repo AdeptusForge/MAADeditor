@@ -2,7 +2,6 @@
 #include <fstream>
 #include "Debug.h"
 #include "FileControl.h"
-#include <fstream>
 #include "SDL.h"
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
@@ -10,7 +9,7 @@
 #include "Shaders.h"
 #include <sstream>
 #include <commdlg.h>
-
+#include <fstream>
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
 #pragma region
@@ -73,71 +72,61 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		case ImageFile:
 		{
 			path += "Textures/";
-			if (!saving)
-				fileName += ".png";
+			fileName += ".png";
 			break;
 		}
 		case AudioFile:
 		{
 			path += "Sounds/";
-			if (!saving)
-				fileName += ".wav";
+			fileName += ".wav";
 
 			break;
 		}
 		case ModelFile:
 		{
 			path += "Models/";
-			if (!saving)
-				fileName += ".txt";
+			fileName += ".txt";
 			break;
 		}
 		case LevelFile:
 		{
 			path += "Levels/";
-			/*if (!saving)
-				fileName += ".png";*/
+			fileName += ".png";
 			break;
 		}
 		case AnimFile:
 		{
 			path += "Animations/";
-			/*if (!saving)
-				fileName += ".png";*/
+			fileName += ".png";
 			break;
 		}
 		case PrefabFile:
 		{
 			path += "Prefabs/";
-			/*if (!saving)
-				fileName += ".png";*/
+			fileName += ".png";
 			break;
 		}
 		case SaveFile:
 		{
 			path += "Saves/";
-			/*if (!saving)
-				fileName += ".png";*/
+			fileName += ".png";
 			break;
 		}
 
 		case VertexShaderFile:
 		{
 			path += "Shaders/Vertex/";
-			if (!saving)
-				fileName += ".glsl";
+			fileName += ".glsl";
 			break;
 		}
 		case FragmentShaderFile:
 		{
 			path += "Shaders/Fragment/";
-			if (!saving)
-				fileName += ".glsl";
+			fileName += ".glsl";
 			break;
 		}
 	}
-	if (!saving)
-		path += fileName;
+	path += fileName;
 	VerifyFileOrFolder(path);
 
 	return path;
@@ -145,7 +134,12 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 
 void CreateNewFile(FileType fileType, std::string fileName)
 {
-	
+	std::string filePath = FetchPath(fileType, fileName, true);
+	std::ofstream file;
+	file.open(fileName + ".txt");
+	file << "What is a skeleton's favorite snack?";
+
+	file.close();
 }
 
 void SaveOverFile(FileType fileType, std::string fileName)
