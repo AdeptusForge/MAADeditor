@@ -13,6 +13,8 @@
 #include "Assets.h"
 #include "Physics.h"
 #include "editor.h"
+#include <algorithm>
+#include <iterator>
 
 unsigned int SCR_H = 800;
 unsigned int SCR_W = 800;
@@ -24,6 +26,19 @@ std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
 
+struct IDFinder {
+
+	IDFinder(unsigned int const& id) : ID(id) { }
+
+	bool operator () (const RenderObject el) const { return el.ID == ID; }
+
+private:
+	unsigned int ID;
+};
+
+
+
+
 void GameToRenderConversion(GameObject obj)
 {
 	for (int i = 0; i < obj.models.size(); i++)
@@ -32,7 +47,7 @@ void GameToRenderConversion(GameObject obj)
 		Model renderModel = obj.models[i].viewModel;
 
 
-		allModels.push_back(RenderObject(renderTrans, renderModel));
+		allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 	}
 }
 
@@ -58,6 +73,16 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)width / (float)height), 0.1f, 100.0f);
 
 };
+
+RenderObject* GetRenderObject(int ID) 
+{
+	std::vector<RenderObject>::iterator it = std::find_if(allModels.begin(), allModels.end(), IDFinder(ID));
+
+	RenderObject* p = &(*it);
+
+
+	return p;
+}
 
 void ResetScreenSize(GLFWwindow* window) 
 {
@@ -107,11 +132,10 @@ GLFWwindow* RenderStartup()
 
 
 	Model newModel = Model("ModelLoadTest");
-	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel));
+	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 	
 	return window;
 }
-
 
 void RenderShutdown()
 {
@@ -120,7 +144,6 @@ void RenderShutdown()
 	glDeleteBuffers(1, &EBO);*/
 	WriteDebug("Render Shutdown Successful");
 }
-
 
 void RenderUpdate(GLFWwindow* window)
 {

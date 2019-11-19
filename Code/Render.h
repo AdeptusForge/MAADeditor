@@ -27,12 +27,14 @@ void ResetScreenSize(GLFWwindow*);
 struct RenderObject 
 {
 public: 
+	unsigned int ID;
 	PhysicsTransform objLoc;
 	Model objModel;
 
-	RenderObject(PhysicsTransform pL, Model mod) : objLoc(pL), objModel(mod) {};
-
+	RenderObject(PhysicsTransform pL, Model mod, unsigned int ID) : objLoc(pL), objModel(mod), ID(ID) {};
+	RenderObject();
 };
 
 void GameToRenderConversion(GameObject);
 
+RenderObject* GetRenderObject(int ID);

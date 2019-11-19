@@ -23,7 +23,13 @@
 bool show_save_window = false;
 bool show_new_window = false;
 bool show_creationWindow = false;
-ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+bool show_selectionWindow = false;
+bool tex_edit = false;
+bool color_edit = false;
+Vertex clear_color = Vertex(glm::vec3(0.45f, 0.55f, 0.60f), glm::vec3(0), glm::vec2(0));
+
+RenderObject* currentModel;
+std::vector<Vertex*> selectedVerts;
 
 MouseMode currentMouseMode;
 void EditorStartup(GLFWwindow* window) 
@@ -66,36 +72,35 @@ void EditorStartup(GLFWwindow* window)
 	ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
-
-
 void ShowMenuBar() 
 {
 	ImGui::BeginMainMenuBar();
 
 
-	if (ImGui::BeginMenu("New")) 
+	if (ImGui::BeginMenu("File")) 
 	{
-		if (ImGui::MenuItem("New 3D Model")) 
+		if (ImGui::MenuItem("New")) 
 		{
-		}
-		if (ImGui::MenuItem("New 2D Model")) 
-		{
+			WriteDebug(std::to_string(show_creationWindow));
+
 			show_creationWindow = true;
 		}
+		if (ImGui::MenuItem("Open"))
+		{
+			currentModel = GetRenderObject(1);
+			show_selectionWindow = true;
+		}
+		if (ImGui::BeginMenu("Save", "CTRL+S"))
+		{
+			if (ImGui::MenuItem("Save"))
+			{
+			}
+			if (ImGui::MenuItem("Save As"))
+			{
+			}
+			ImGui::EndMenu();
+		}
 		ImGui::EndMenu();
-	}
-	if (ImGui::BeginMenu("Open"))
-	{
-		
-	}
-	if (ImGui::BeginMenu("Save", "CTRL+S"))
-	{
-		if (ImGui::MenuItem("Save")) 
-		{
-		}
-		if (ImGui::MenuItem("Save As"))
-		{
-		}
 	}
 
 	if (ImGui::BeginMenu("Options"))
@@ -119,6 +124,35 @@ void ShowMenuBar()
 	ImGui::EndMainMenuBar();
 }
 
+void DisplayVertexUI(int i, Vertex* vertex) 
+{
+
+	char aChar = i;
+	const char* vertName1 = "vPosition" + aChar;
+	const char* vertName2 = "vColor" + aChar;
+	const char* vertName3 = "vTexCoords" + aChar;
+
+	ImGui::InputFloat3(vertName1 , (float*)& vertex->position);
+	if(color_edit)
+		ImGui::ColorEdit3(vertName2, (float*)& vertex->color);
+	if (tex_edit)
+		ImGui::InputFloat2(vertName3, (float*)& vertex->texCoords);
+
+}
+
+void SelectionWindow() 
+{
+	ImGui::Begin("Selection Window");
+	ImGui::Checkbox("Edit Colors", &color_edit);
+	ImGui::Checkbox("Edit Texture Coordinates", &tex_edit);
+
+	for (int i = 0; i <  currentModel->objModel.vertices.size(); i++) 
+	{
+		DisplayVertexUI(i, &(currentModel->objModel.vertices[i]));
+	}
+	ImGui::End();
+}
+
 void EditorUpdate(GLFWwindow* window)
 {
 	ImGui_ImplOpenGL3_NewFrame();
@@ -126,20 +160,8 @@ void EditorUpdate(GLFWwindow* window)
 	ImGui::NewFrame();
 
 	ShowMenuBar();
-
-	//if (show_demo_window)
-	//	ImGui::ShowDemoWindow(&show_demo_window);
-
-	//{
-	//	static float f = 0.0f;
-	//	static int counter = 0;
-	//	ImGui::Begin("MAADeditor");                         // Create a window called "Hello, world!" and append into it.
-
-	//	ImGui::ColorEdit3("clear color", (float*)& clear_color); // Edit 3 floats representing a color
-
-	//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	//	ImGui::End();
-	//}
+	if (show_selectionWindow)
+		SelectionWindow();
 
 	ImGui::SetNextWindowPos(ImVec2(1, 1), ImGuiCond_FirstUseEver);
 	if (show_creationWindow) 
@@ -152,6 +174,7 @@ void EditorUpdate(GLFWwindow* window)
 		if (ImGui::Button("Create File")) 
 		{
 			SaveActiveFile(ModelFile, fileName, "whatever");
+			show_creationWindow = false;
 		}
 		
 
