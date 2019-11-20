@@ -31,8 +31,14 @@ public:
 		
 		ModelSetup();
 	}
+
 	#pragma endregion
 
+	void ModelRefresh()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+	}
 	void Draw(Shader shader)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++) 

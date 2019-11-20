@@ -36,9 +36,6 @@ private:
 	unsigned int ID;
 };
 
-
-
-
 void GameToRenderConversion(GameObject obj)
 {
 	for (int i = 0; i < obj.models.size(); i++)
@@ -76,12 +73,22 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 RenderObject* GetRenderObject(int ID) 
 {
-	std::vector<RenderObject>::iterator it = std::find_if(allModels.begin(), allModels.end(), IDFinder(ID));
+	if (!allModels.empty())
+	{
+		RenderObject* p;
+		std::vector<RenderObject>::iterator it = std::find_if(allModels.begin(), allModels.end(), IDFinder(ID));
+		if (!std::none_of(allModels.begin(), allModels.end(), IDFinder(ID)))
+			p = &(*it);
+		else
+		{
+			WriteDebug("No RenderObject with matching ID");
+			return nullptr;
+		}
+		return p;
 
-	RenderObject* p = &(*it);
-
-
-	return p;
+	}
+	WriteDebug("No AllModels");
+	return nullptr;
 }
 
 void ResetScreenSize(GLFWwindow* window) 
@@ -158,6 +165,7 @@ void RenderUpdate(GLFWwindow* window)
 
 	for (int i = 0; i < allModels.size(); i++)
 	{
+		allModels[i].objModel.ModelRefresh();
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
 		float angle = 20.0f * i;

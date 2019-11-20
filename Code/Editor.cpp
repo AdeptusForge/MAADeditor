@@ -126,18 +126,16 @@ void ShowMenuBar()
 
 void DisplayVertexUI(int i, Vertex* vertex) 
 {
-
 	char aChar = i;
 	const char* vertName1 = "vPosition" + aChar;
 	const char* vertName2 = "vColor" + aChar;
 	const char* vertName3 = "vTexCoords" + aChar;
 
-	ImGui::InputFloat3(vertName1 , (float*)& vertex->position);
+	ImGui::InputFloat3(vertName1, (float*)& vertex->position);
 	if(color_edit)
 		ImGui::ColorEdit3(vertName2, (float*)& vertex->color);
 	if (tex_edit)
 		ImGui::InputFloat2(vertName3, (float*)& vertex->texCoords);
-
 }
 
 void SelectionWindow() 
