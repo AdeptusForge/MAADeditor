@@ -10,13 +10,7 @@ void EditorStartup(GLFWwindow*);
 void EditorUpdate(GLFWwindow*);
 void EditorShutdown();
 
-enum MouseMode
-{
-	MenuMode,
-	CameraMode,
-	ModelEditMode,
-	ObjectEditMode
-};
+
 
 
 

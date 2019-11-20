@@ -31,7 +31,6 @@ Vertex clear_color = Vertex(glm::vec3(0.45f, 0.55f, 0.60f), glm::vec3(0), glm::v
 RenderObject* currentModel;
 std::vector<Vertex*> selectedVerts;
 
-MouseMode currentMouseMode;
 void EditorStartup(GLFWwindow* window) 
 {
 #if __APPLE__
@@ -49,10 +48,6 @@ void EditorStartup(GLFWwindow* window)
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
 #endif
-
-
-	currentMouseMode = MenuMode;
-
 
 #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
 	bool err = gl3wInit() != 0;
@@ -103,7 +98,7 @@ void ShowMenuBar()
 		ImGui::EndMenu();
 	}
 
-	if (ImGui::BeginMenu("Options"))
+	if (ImGui::BeginMenu("OptionsTest"))
 	{
 		static bool enabled = true;
 		ImGui::MenuItem("Enabled", "", &enabled);
@@ -125,17 +120,18 @@ void ShowMenuBar()
 }
 
 void DisplayVertexUI(int i, Vertex* vertex) 
-{
-	char aChar = i;
-	const char* vertName1 = "vPosition" + aChar;
-	const char* vertName2 = "vColor" + aChar;
-	const char* vertName3 = "vTexCoords" + aChar;
 
-	ImGui::InputFloat3(vertName1, (float*)& vertex->position);
+{
+	std::string vertName1 = "vPosition" + std::to_string(i);
+	std::string vertName2 = "vColor" + std::to_string(i);
+	std::string vertName3 = "vTextureCoords" + std::to_string(i);
+
+
+	ImGui::InputFloat3(vertName1.c_str(), (float*)& vertex->position);
 	if(color_edit)
-		ImGui::ColorEdit3(vertName2, (float*)& vertex->color);
+		ImGui::ColorEdit3(vertName2.c_str(), (float*)& vertex->color);
 	if (tex_edit)
-		ImGui::InputFloat2(vertName3, (float*)& vertex->texCoords);
+		ImGui::InputFloat2(vertName3.c_str(), (float*)& vertex->texCoords);
 }
 
 void SelectionWindow() 

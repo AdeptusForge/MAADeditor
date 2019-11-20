@@ -12,6 +12,7 @@
 
 std::vector<InputFrame> priorFrames;
 std::vector<InputFrame>::iterator ptr;
+MouseMode currMouseMode;
 
 InputFrame currFrame;
 

@@ -25,6 +25,14 @@ public:
 	InputFrame() {};
 };
 
+enum MouseMode
+{
+	MenuMode,
+	CameraMode,
+	ModelEditMode,
+	ObjectEditMode
+};
+
 //Essentially designed to handle specific inputs in sequenced input frames (think QCF and DP motions)
 class CommandInputMacro
 {

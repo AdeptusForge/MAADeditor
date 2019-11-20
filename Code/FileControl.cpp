@@ -204,7 +204,6 @@ ModelDataChunk Load3DModel(std::string fileName)
 		#pragma endregion
 	
 		#pragma region Load Vertices & Generate Indices
-
 		if (type == "v") 
 		{
 			float x, y, z,			//position
