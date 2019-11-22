@@ -48,7 +48,6 @@ void GameToRenderConversion(GameObject obj)
 	}
 }
 
-
 Camera* FindCamera(unsigned int camID) 
 {
 	Camera* found = nullptr;

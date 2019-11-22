@@ -7,19 +7,31 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <math.h>
+#define PI 3.14159265
+
 
 enum CameraType 
 {
 	Perspective,
 	Orthographic,
 };
-
+enum CameraMode 
+{
+	LockedOnView,
+	FreeView
+};
 
 class Camera 
 {
+private:
+	float rotateDistance = 10;
+	int currRotationAngle = 0;
+	float rotateSpeed = 3;
 public:
 	unsigned int cameraID;
 
+	CameraMode mode = FreeView;
 	CameraType cameraType;
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
@@ -44,23 +56,44 @@ public:
 		fov = cameraFov;
 		cameraType = type;
 
+		
 		UpdateCameraView();
 	};
 
 	void UpdateCameraView() 
 	{
-		cameraView = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		if(mode == FreeView)
+			cameraView = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	}
 
 	void MoveCamera(glm::vec3 moveTo)
 	{
-
-
 		cameraPos += moveTo;
+		UpdateCameraView();
+	}
+
+	// + is right, - is left
+	void RotateAroundOrigin(bool dir)
+	{
+
+		glm::vec3 newPos;
+		glm::vec3 newFront;
+
+		if (dir) currRotationAngle -= rotateSpeed;
+		else currRotationAngle += rotateSpeed;
+
+		newPos.x = rotateDistance * sin(currRotationAngle * PI / 180);
+		newPos.z = rotateDistance * cos(currRotationAngle * PI / 180);
+		newFront.x = -sin(currRotationAngle * PI / 180);
+		newFront.y = 0;
+		newFront.z = -cos(currRotationAngle * PI / 180);
+
+
+		cameraPos = newPos;
+		cameraFront = newFront;
 		UpdateCameraView();
 
 	}
 
 
-	private:
 };

@@ -28,7 +28,6 @@ public:
 enum MouseMode
 {
 	MenuMode,
-	CameraMode,
 	ModelEditMode,
 	ObjectEditMode
 };
