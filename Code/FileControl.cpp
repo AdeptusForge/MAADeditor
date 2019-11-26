@@ -179,7 +179,9 @@ ModelDataChunk Load3DModel(std::string fileName)
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
-
+	std::vector<std::pair <int, int>> faces;
+	int it = 0;
+	int amt = 0;
 	for (std::string line; std::getline(modelFile, line);)
 	{
 		#pragma region Load Textures
@@ -203,7 +205,33 @@ ModelDataChunk Load3DModel(std::string fileName)
 		}
 		#pragma endregion
 	
-		#pragma region Load Vertices & Generate Indices
+		#pragma region  Load Indices & Generate Faces
+
+
+		if (type == "f") 
+		{
+			if (amt > 0) 
+			{
+				faces.push_back(std::make_pair(it, amt));
+				it += amt;
+				amt = 0;
+			}
+		}
+
+		if (type == "i")
+		{
+
+			amt++;
+			int tri1, tri2, tri3;
+			in >> tri1 >> tri2 >> tri3;
+			indices.push_back(tri1);
+			indices.push_back(tri2);
+			indices.push_back(tri3);
+
+		}
+		#pragma endregion
+
+		#pragma region Load Vertices
 		if (type == "v") 
 		{
 			float x, y, z,			//position
@@ -214,11 +242,9 @@ ModelDataChunk Load3DModel(std::string fileName)
 				x3>> y3;			
 			vertices.push_back(Vertex(glm::vec3(x,y,z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
 
-			unsigned int ind = vertices.size() - 1;
-			indices.push_back(ind);
 		}
 		#pragma endregion
-		
+
 		#pragma region Load Edges
 		if (type == "e")
 		{
@@ -236,8 +262,8 @@ ModelDataChunk Load3DModel(std::string fileName)
 	}
 	#pragma endregion
 
-	newModel = ModelDataChunk(vertices, indices, edges, textures);
-
+	//WriteDebug(std::to_string(faces.size()));
+	newModel = ModelDataChunk(vertices, indices, edges, textures, faces);
 
 	modelFile.close();
 	return newModel;

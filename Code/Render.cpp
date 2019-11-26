@@ -95,6 +95,34 @@ void ResetScreenSize(GLFWwindow* window)
 	glfwSetWindowSize(window, 800, 800);
 }
 
+////void FetchVisibleVerts(RenderObject* obj)
+//{
+//	GLuint tbo;
+//	glGenBuffers(1, &tbo);
+//	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+//	glBufferData(GL_ARRAY_BUFFER, sizeof(obj->objModel.vertices) * 3, nullptr, GL_STATIC_READ);
+//
+//
+//	// Perform feedback transform
+//	glEnable(GL_RASTERIZER_DISCARD);
+//
+//	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
+//
+//	glBeginTransformFeedback(GL_POINTS);
+//		glDrawArrays(GL_POINTS, 0, 1);
+//	glEndTransformFeedback();
+//
+//	glDisable(GL_RASTERIZER_DISCARD);
+//
+//	glFlush();
+//
+//	glm::vec3 feedback[1];
+//	glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+//
+//	WriteDebug(std::to_string(feedback[0].x) + ", " + std::to_string(feedback[0].y));
+//}
+
+
 GLFWwindow* RenderStartup() 
 {
 	GLFWwindow* window;
@@ -137,7 +165,7 @@ GLFWwindow* RenderStartup()
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 
-	Model newModel = Model("ModelLoadTest");
+	Model newModel = Model("FaceLoadTest");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 	
 	return window;
@@ -162,6 +190,8 @@ void RenderUpdate(GLFWwindow* window)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	ourShader.use();
+
 	for (int i = 0; i < allModels.size(); i++)
 	{
 		allModels[i].objModel.ModelRefresh();
@@ -171,8 +201,8 @@ void RenderUpdate(GLFWwindow* window)
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
+		//allModels[i].objModel.FetchVisibleVerts();
 	}
-	ourShader.use();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	EditorUpdate(window);
 	glfwSwapBuffers(window);

@@ -49,9 +49,10 @@ struct ModelDataChunk
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
+	std::vector<std::pair<int, int>> faces;
 	ModelDataChunk(std::vector<Vertex>& verts, std::vector<unsigned int>& indices,
-		std::vector<Edge>& edges, std::vector<Texture>& textures): 
-	vertices(verts), indices(indices), edges(edges), textures(textures)
+		std::vector<Edge>& edges, std::vector<Texture>& textures, std::vector<std::pair<int,int>> faces): 
+	vertices(verts), indices(indices), edges(edges), textures(textures), faces(faces)
 	{};
 	ModelDataChunk() {};
 };

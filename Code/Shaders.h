@@ -75,6 +75,10 @@ public:
 		ID = glCreateProgram();
 		glAttachShader(ID, vertex);
 		glAttachShader(ID, fragment);
+		
+		const GLchar* feedbackVaryings[] = { "visVerts" };
+		glTransformFeedbackVaryings(ID, 1, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
+			   		 
 		glLinkProgram(ID);
 		checkCompileErrors(ID, "PROGRAM");
 

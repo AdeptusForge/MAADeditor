@@ -17,6 +17,7 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
+	std::vector<std::pair<int, int>> faces;
 	unsigned int VAO;
 
 	#pragma region Constructor
@@ -28,6 +29,7 @@ public:
 		this->indices = newModel.indices;
 		this->edges = newModel.edges;
 		this->textures = newModel.textures;
+		this->faces = newModel.faces;
 		
 		ModelSetup();
 	}
@@ -50,10 +52,39 @@ public:
 		//Draw
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-
 		glBindVertexArray(0);
 		glActiveTexture(GL_TEXTURE0);
 	};
+
+
+	void FetchVisibleVerts() 
+	{
+		GLuint tbo;
+		glGenBuffers(1, &tbo);
+		glBindBuffer(GL_ARRAY_BUFFER, tbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * 3, nullptr, GL_STATIC_READ);
+
+
+		// Perform feedback transform
+		glEnable(GL_RASTERIZER_DISCARD);
+
+		glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
+
+		glBeginTransformFeedback(GL_POINTS);
+		glDrawArrays(GL_POINTS, 0, 1);
+		glEndTransformFeedback();
+
+		glDisable(GL_RASTERIZER_DISCARD);
+
+		glFlush();
+
+		glm::vec3 feedback[1];
+		glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+
+		WriteDebug(std::to_string(feedback[0].x) + ", " + std::to_string(feedback[0].y));
+	}
+	
+
 private:
 
 	unsigned int VBO, EBO;
