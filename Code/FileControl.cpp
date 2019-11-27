@@ -125,6 +125,13 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 			fileName += ".glsl";
 			break;
 		}
+
+		case GeometryShaderFile:
+		{
+			path += "Shaders/Geometry/";
+			fileName += ".glsl";
+			break;
+		}
 	}
 	path += fileName;
 	VerifyFileOrFolder(path);
@@ -207,7 +214,6 @@ ModelDataChunk Load3DModel(std::string fileName)
 	
 		#pragma region  Load Indices & Generate Faces
 
-
 		if (type == "f") 
 		{
 			if (amt > 0) 
@@ -270,13 +276,16 @@ ModelDataChunk Load3DModel(std::string fileName)
 
 }
 
-Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath)
+Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::string geometryPath)
 {
 	vertexPath = FetchPath(VertexShaderFile, vertexPath, false);
 	fragmentPath = FetchPath(FragmentShaderFile, fragmentPath, false);
+	geometryPath = FetchPath(GeometryShaderFile, geometryPath, false);
 
 	const GLchar* newVertexPath = vertexPath.c_str();
 	const GLchar* newFragmentPath = fragmentPath.c_str();
-	Shader ourShader(newVertexPath, newFragmentPath);
+	const GLchar* newGeometryPath = geometryPath.c_str();
+
+	Shader ourShader(newVertexPath, newFragmentPath, newGeometryPath);
 	return ourShader;
 }

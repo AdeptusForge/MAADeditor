@@ -151,5 +151,6 @@
     <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl">
       <Filter>Shaders\Fragment</Filter>
     </None>
+    <None Include="Assets\Shaders\Geometry\PracticeGeometryShader.glsl" />
   </ItemGroup>
 </Project>

@@ -64,15 +64,19 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, tbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * 3, nullptr, GL_STATIC_READ);
 
+		GLuint query;
+		glGenQueries(1, &query);
 
 		// Perform feedback transform
 		glEnable(GL_RASTERIZER_DISCARD);
 
 		glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
 
+		glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
 		glBeginTransformFeedback(GL_POINTS);
 		glDrawArrays(GL_POINTS, 0, 1);
 		glEndTransformFeedback();
+		glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
 
 		glDisable(GL_RASTERIZER_DISCARD);
 
@@ -81,7 +85,12 @@ public:
 		glm::vec3 feedback[1];
 		glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
 
+		GLuint primitives;
+		glGetQueryObjectuiv(query, GL_QUERY_RESULT, &primitives);
+
+		WriteDebug(std::to_string(primitives));
 		WriteDebug(std::to_string(feedback[0].x) + ", " + std::to_string(feedback[0].y));
+
 	}
 	
 
@@ -135,66 +144,14 @@ private:
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
 
+
+		FetchVisibleVerts();
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
 			&indices[0], GL_STATIC_DRAW);
 
 		glBindVertexArray(1);
+
 	}
 };
-
-//class SpriteSheet 
-//{
-//private:
-//
-//public:
-//
-//	SDL_Surface spriteSheet;
-//	int frameCount;
-//
-//	//height x width
-//	Point2Int frameDimensions;
-//
-//	//Constructors
-//	SpriteSheet(SDL_Surface sheet, int count, Point2Int dim) : spriteSheet(sheet), frameCount(count), frameDimensions(dim) {};
-//
-//	vector<SDL_Surface> ReturnSprites() 
-//	{
-//		vector<SDL_Surface> sprites;
-//		//TODO: add in sprite sheet support.
-//	};
-//};
-//
-//class AnimFrame2D
-//{
-//private:
-//
-//public:
-//	SDL_Surface frame;
-//	int duration;
-//	//TODO: add possible animation tie-ins like scripts etc. & figure out method to remove duration
-//
-//	AnimFrame2D(SDL_Surface image, int dur = 1)
-//	{
-//		frame = image;
-//		duration = dur;
-//	}
-//};
-//
-//class Animation2D 
-//{
-//private:
-//
-//public:
-//	vector <AnimFrame2D> animData;
-//
-//	Animation2D(vector<SDL_Surface> imageSet) 
-//	{
-//		animData = vector <AnimFrame2D>();
-//
-//		for (int i=0; i < imageSet.size(); i++) 
-//		{
-//			animData.insert(animData.end(),AnimFrame2D(imageSet.at(i), 1));
-//		}
-//	};
-//};

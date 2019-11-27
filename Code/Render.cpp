@@ -147,7 +147,7 @@ GLFWwindow* RenderStartup()
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
 
-	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator");
+	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator", "PracticeGeometryShader");
 	ourShader.use();
 	
 	glEnable(GL_DEPTH_TEST);
@@ -182,6 +182,8 @@ void RenderShutdown()
 void RenderUpdate(GLFWwindow* window)
 {
 
+
+
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);
@@ -203,6 +205,7 @@ void RenderUpdate(GLFWwindow* window)
 		allModels[i].objModel.Draw(ourShader);
 		//allModels[i].objModel.FetchVisibleVerts();
 	}
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	EditorUpdate(window);
 	glfwSwapBuffers(window);

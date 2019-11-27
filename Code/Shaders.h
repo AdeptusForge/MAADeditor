@@ -22,31 +22,42 @@ public:
 
 	Shader() {}
 	// constructor reads and builds the shader
-	Shader(const GLchar* vertexPath, const GLchar* fragmentPath) 
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath, const GLchar* geometryPath)
 	{
 		std::string vertexCode;
 		std::string fragmentCode;
+		std::string geometryCode;
 		std::ifstream vShaderFile;
 		std::ifstream fShaderFile;
+		std::ifstream gShaderFile;
+
 
 		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 		try
 		{
 			// open files
 			vShaderFile.open(vertexPath);
 			fShaderFile.open(fragmentPath);
-			std::stringstream vShaderStream, fShaderStream;
+			gShaderFile.open(geometryPath);
+			std::stringstream vShaderStream, fShaderStream, gShaderStream;
 			// read file's buffer contents into streams
 			vShaderStream << vShaderFile.rdbuf();
 			fShaderStream << fShaderFile.rdbuf();
+			gShaderStream << gShaderFile.rdbuf();
+
 			// close file handlers
 			vShaderFile.close();
 			fShaderFile.close();
+			gShaderFile.close();
+
 			// convert stream into string
 			vertexCode = vShaderStream.str();
 			fragmentCode = fShaderStream.str();
+			geometryCode = gShaderStream.str();
+
 			//WriteDebug("Shader Read successfully");
 		}
 
@@ -56,9 +67,11 @@ public:
 		}
 		const char* vShaderCode = vertexCode.c_str();
 		const char* fShaderCode = fragmentCode.c_str();
+		const char* gShaderCode = geometryCode.c_str();
+
 
 		// 2. compile shaders
-		unsigned int vertex, fragment;
+		unsigned int vertex, fragment, geometry;
 		// vertex shader
 		vertex = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex, 1, &vShaderCode, NULL);
@@ -71,10 +84,17 @@ public:
 		glCompileShader(fragment);
 		checkCompileErrors(fragment, "FRAGMENT");
 
+		geometry = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geometry, 1, &gShaderCode, NULL);
+		glCompileShader(geometry);
+		checkCompileErrors(geometry, "GEOMETRY");
+
 		// shader Program
 		ID = glCreateProgram();
 		glAttachShader(ID, vertex);
 		glAttachShader(ID, fragment);
+		//glAttachShader(ID, geometry);
+
 		
 		const GLchar* feedbackVaryings[] = { "visVerts" };
 		glTransformFeedbackVaryings(ID, 1, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);

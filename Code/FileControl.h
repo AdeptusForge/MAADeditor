@@ -18,6 +18,7 @@ const enum FileType
 	LevelFile,
 	VertexShaderFile,
 	FragmentShaderFile,
+	GeometryShaderFile
 
 };
 
@@ -70,4 +71,4 @@ bool VerifyFileOrFolder(std::string filePath);
 std::string FetchPath(FileType fileType, std::string fileName, bool saving);
 void FileControlStartup();
 
-Shader LoadCustomShader(std::string, std::string);
+Shader LoadCustomShader(std::string, std::string, std::string);

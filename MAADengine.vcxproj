@@ -350,6 +350,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ColorTextureApplicator.glsl" />
+    <None Include="Assets\Shaders\Geometry\PracticeGeometryShader.glsl">
+      <SubType>
+      </SubType>
+    </None>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl" />
     <None Include="PixelShader.glsl">
       <SubType>
