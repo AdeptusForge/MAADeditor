@@ -84,19 +84,20 @@ public:
 		glCompileShader(fragment);
 		checkCompileErrors(fragment, "FRAGMENT");
 
+		// geometry Shader
 		geometry = glCreateShader(GL_GEOMETRY_SHADER);
 		glShaderSource(geometry, 1, &gShaderCode, NULL);
 		glCompileShader(geometry);
 		checkCompileErrors(geometry, "GEOMETRY");
 
+
 		// shader Program
 		ID = glCreateProgram();
 		glAttachShader(ID, vertex);
 		glAttachShader(ID, fragment);
-		//glAttachShader(ID, geometry);
+		glAttachShader(ID, geometry);
 
-		
-		const GLchar* feedbackVaryings[] = { "visVerts" };
+		const GLchar* feedbackVaryings[] = { "fVerts" };
 		glTransformFeedbackVaryings(ID, 1, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
 			   		 
 		glLinkProgram(ID);

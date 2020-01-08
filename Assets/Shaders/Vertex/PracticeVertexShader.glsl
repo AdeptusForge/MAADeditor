@@ -5,8 +5,9 @@ layout (location = 1) in vec3 color;
 layout (location = 2) in vec2 aTexCoord;
 
 //out vec4 fragInColor;
-out vec2 TexCoord;
-out vec3 visVerts;
+out vec2 gTexCoord;
+out vec3 gVerts;
+out vec3 gColor;
 
 uniform mat4 transform;
 
@@ -17,10 +18,10 @@ uniform mat4 projection;
 
 void main()
 {
-	visVerts = aPos;
+	gVerts = aPos;
     gl_Position =  projection * view * model * vec4(aPos, 1.0);
-	//fragInColor = vColor;
-	TexCoord = aTexCoord;
+	gColor = color;
+	gTexCoord = aTexCoord;
 
 
 }

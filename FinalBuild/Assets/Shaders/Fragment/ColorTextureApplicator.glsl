@@ -1,7 +1,8 @@
 #version 330 core
 
 //in vec4 fragInColor;
-in vec2 TexCoord;
+in vec2 fTexCoord;
+in vec3 gColor;
 
 uniform sampler2D texture0;
 uniform sampler2D texture1;
@@ -19,16 +20,14 @@ void main()
 {
 
 	//Top-Down
-	vec4 newTexture = texture(texture0, TexCoord);
-	vec4 newTexture1 = texture(texture1, TexCoord);
+	vec4 newTexture = texture(texture0, fTexCoord);
+	vec4 newTexture1 = texture(texture1, fTexCoord);
 	if(newTexture.a < 0.1)
         newTexture += newTexture1;
 
-
-
 	//Bottom-Up
-	vec4 finalTexture = texture(texture0, TexCoord);
-	vec4 addedTexture = texture(texture1, TexCoord);
+	vec4 finalTexture = texture(texture0, fTexCoord);
+	vec4 addedTexture = texture(texture1, fTexCoord);
 	if(addedTexture.a > 0.1)
 		finalTexture = addedTexture;
 

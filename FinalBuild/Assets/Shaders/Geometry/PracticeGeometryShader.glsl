@@ -1,22 +1,28 @@
 #version 330 core
 
-layout(points) in;
+layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
-in vec2[] texCoord;
-in vec3[] visVerts;
-out vec3 outValue;
-out vec2 TexCoord;
+in vec3[] gVerts;
+in vec3[] gColor;
+in vec2[] gTexCoord;
+
+out vec3 fVerts;
+out vec3 fColor;
+out vec2 fTexCoord;
 
 void main()
 {
-    for (int i = 0; i < 3; i++) {
-        outValue = visVerts[0];
+    for (int i = 0; i < 3; i++) 
+	{
+		gl_Position = gl_in[i].gl_Position;
+        fVerts = gVerts[i];
+		fTexCoord = gTexCoord[i];
+
         EmitVertex();
     }
 
     EndPrimitive();
-	TexCoord = texCoord[0];
 }
 
 
