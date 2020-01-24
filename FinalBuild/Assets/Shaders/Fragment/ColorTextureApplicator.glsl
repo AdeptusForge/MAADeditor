@@ -2,7 +2,7 @@
 
 //in vec4 fragInColor;
 in vec2 fTexCoord;
-in vec3 gColor;
+in vec3 fColor;
 
 uniform sampler2D texture0;
 uniform sampler2D texture1;

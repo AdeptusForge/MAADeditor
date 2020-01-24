@@ -67,30 +67,35 @@ public:
 		GLuint query;
 		glGenQueries(1, &query);
 
-		// Perform feedback transform
 		glEnable(GL_RASTERIZER_DISCARD);
 
 		glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
 
 		glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
-		glBeginTransformFeedback(GL_POINTS);
-		glDrawArrays(GL_POINTS, 0, 1);
-		glEndTransformFeedback();
+			glBeginTransformFeedback(GL_TRIANGLES);
+				glDrawArrays(GL_POINTS, 0, 8);
+			glEndTransformFeedback();
 		glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
 
 		glDisable(GL_RASTERIZER_DISCARD);
 
 		glFlush();
-
-		glm::vec3 feedback[1];
-		glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
-
+		
 		GLuint primitives;
 		glGetQueryObjectuiv(query, GL_QUERY_RESULT, &primitives);
 
-		WriteDebug(std::to_string(primitives));
-		WriteDebug(std::to_string(feedback[0].x) + ", " + std::to_string(feedback[0].y));
+		WriteDebug(std::to_string(primitives) + " Primitives");
 
+		glm::vec3 feedback[8];
+		glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+
+		size_t n = sizeof(feedback) / sizeof(feedback[0]);
+		for (int i = 0; i < n; i++) 
+		{
+			WriteDebug(std::to_string(feedback[i].x) + ", " + std::to_string(feedback[i].y));
+		}
+
+		glDeleteQueries(1, &query);
 	}
 	
 

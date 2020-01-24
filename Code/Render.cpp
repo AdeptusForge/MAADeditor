@@ -181,9 +181,6 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
-
-
-
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.cameraView);
@@ -203,7 +200,7 @@ void RenderUpdate(GLFWwindow* window)
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
-		//allModels[i].objModel.FetchVisibleVerts();
+		allModels[i].objModel.FetchVisibleVerts();
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

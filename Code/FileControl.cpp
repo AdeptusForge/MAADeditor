@@ -263,7 +263,6 @@ ModelDataChunk Load3DModel(std::string fileName)
 			edges.push_back(Edge(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec3(x3, y3, z3)));
 		}
 
-
 		#pragma endregion
 	}
 	#pragma endregion

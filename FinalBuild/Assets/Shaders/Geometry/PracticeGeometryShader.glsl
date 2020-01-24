@@ -7,7 +7,7 @@ in vec3[] gVerts;
 in vec3[] gColor;
 in vec2[] gTexCoord;
 
-out vec3 fVerts;
+out vec4 fVerts;
 out vec3 fColor;
 out vec2 fTexCoord;
 
@@ -16,12 +16,10 @@ void main()
     for (int i = 0; i < 3; i++) 
 	{
 		gl_Position = gl_in[i].gl_Position;
-        fVerts = gVerts[i];
+        fVerts = gl_in[i].gl_Position;
 		fTexCoord = gTexCoord[i];
-
         EmitVertex();
     }
-
     EndPrimitive();
 }
 
