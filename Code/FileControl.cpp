@@ -198,7 +198,7 @@ ModelDataChunk Load3DModel(std::string fileName)
 		int i = 0;
 		if (type == "t")
 		{
-			if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
+			if (i >= MAX_MODEL_TEXTURES) {WriteDebug("Too many textures in file" + fileName); break; }
 			else 
 			{
 				i++;

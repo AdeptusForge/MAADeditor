@@ -62,6 +62,8 @@ public:
 
 	void UpdateCameraView() 
 	{
+		//WriteDebug("Front: " + std::to_string(cameraFront.x) + ", " + std::to_string(cameraFront.y) + ", " + std::to_string(cameraFront.z));
+		//WriteDebug("Pos: " + std::to_string(cameraPos.x) + ", " + std::to_string(cameraPos.y) + ", " + std::to_string(cameraPos.z));
 		if(mode == FreeView)
 			cameraView = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	}
@@ -71,6 +73,23 @@ public:
 		cameraPos += moveTo;
 		UpdateCameraView();
 	}
+
+	void RotateCamera(bool dir)
+	{
+		glm::vec3 newFront;
+		if (dir) currRotationAngle -= rotateSpeed;
+		else currRotationAngle += rotateSpeed;
+		newFront.x = sin(currRotationAngle * PI / 180);
+		newFront.y = 0;
+		newFront.z = -cos(currRotationAngle * PI / 180);
+
+		
+
+
+		cameraFront = newFront;
+		UpdateCameraView();
+	}
+
 
 	// + is right, - is left
 	void RotateAroundOrigin(bool dir)
