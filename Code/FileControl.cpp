@@ -330,7 +330,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 						if (x == ' ' && word.size() > 0) 
 						{
 							std::istringstream buf(word);
-							WriteDebug(word + " : full word");
+							//WriteDebug(word + " : full word");
 							int v, vt, vn;
 							char c1;
 
@@ -353,7 +353,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 						if (length >= line.size()) 
 						{
 							std::istringstream buf(word);
-							WriteDebug(word + " : full word");
+							//WriteDebug(word + " : full word");
 							int v = 0, vt, vn;
 							char c1;
 
@@ -371,7 +371,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 							}
 							indices.push_back(v - 1);
 							vertLimit++;
-							WriteDebug("End of Line");
+							//WriteDebug("End of Line");
 						}
 					}
 					else { WriteDebug("Cannot Load3dModel -- Too Many Face Vertexes"); break; }
