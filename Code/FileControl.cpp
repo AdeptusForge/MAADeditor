@@ -132,6 +132,13 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 			fileName += ".glsl";
 			break;
 		}
+
+		case ObjFile:
+		{
+			path += "Models/";
+			fileName += ".obj";
+			break;
+		}
 	}
 	path += fileName;
 	VerifyFileOrFolder(path);
@@ -171,104 +178,221 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	return sample;
 }
 
-ModelDataChunk Load3DModel(std::string fileName)
+ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 {
 	std::ifstream modelFile;
-	std::string loadstr = FetchPath(ModelFile, fileName, false);
+	std::string loadstr = FetchPath(fileType, fileName, false);
 	modelFile.open(loadstr);
 	if (!modelFile.is_open())
 	{
 		WriteDebug("Cannot Open File: " + fileName);
 	}
+	else
+		WriteDebug("Loading File..." + fileName);
 
-	#pragma region Read File
 	std::vector<Texture> textures;
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<std::pair <int, int>> faces;
-	int it = 0;
-	int amt = 0;
-	for (std::string line; std::getline(modelFile, line);)
+
+	if (fileType == ModelFile)
 	{
-		#pragma region Load Textures
-		std::istringstream in(line);
-		std::string type;
-		in >> type;
-		int i = 0;
-		if (type == "t")
+#pragma region Read MAADFile
+
+		int it = 0;
+		int amt = 0;
+		for (std::string line; std::getline(modelFile, line);)
 		{
-			if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
-			else 
+#pragma region Load Textures
+			std::istringstream in(line);
+			std::string type;
+			in >> type;
+			int i = 0;
+			if (type == "t")
 			{
-				i++;
-				std::string str;
-				in >> str;
-				if (str.size() > 0)
+				if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
+				else
 				{
-					textures.push_back(Texture(0, str));
+					i++;
+					std::string str;
+					in >> str;
+					if (str.size() > 0)
+					{
+						textures.push_back(Texture(0, str));
+					}
 				}
 			}
-		}
-		#pragma endregion
-	
-		#pragma region  Load Indices & Generate Faces
+#pragma endregion
 
-		if (type == "f") 
-		{
-			if (amt > 0) 
+#pragma region  Load Indices & Generate Faces
+
+			if (type == "f")
 			{
-				faces.push_back(std::make_pair(it, amt));
-				it += amt;
-				amt = 0;
+				if (amt > 0)
+				{
+					faces.push_back(std::make_pair(it, amt));
+					it += amt;
+					amt = 0;
+				}
 			}
+
+			if (type == "i")
+			{
+				amt++;
+				int tri1, tri2, tri3;
+				in >> tri1 >> tri2 >> tri3;
+				indices.push_back(tri1);
+				indices.push_back(tri2);
+				indices.push_back(tri3);
+			}
+#pragma endregion
+
+#pragma region Load Vertices
+			if (type == "v")
+			{
+				float x, y, z,			//position
+					x2, y2, z2,			//color
+					x3, y3;			//texCoord
+				in >> x >> y >> z >>
+					x2 >> y2 >> z2 >>
+					x3 >> y3;
+				vertices.push_back(Vertex(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
+
+			}
+#pragma endregion
+
+#pragma region Load Edges
+			if (type == "e")
+			{
+				float x, y, z,			//start
+					x2, y2, z2,			//end
+					x3, y3, z3;			//color
+				in >> x >> y >> z >>
+					x2 >> y2 >> z2 >>
+					x3 >> y3 >> z3;
+				edges.push_back(Edge(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec3(x3, y3, z3)));
+			}
+
+#pragma endregion
 		}
-
-		if (type == "i")
-		{
-
-			amt++;
-			int tri1, tri2, tri3;
-			in >> tri1 >> tri2 >> tri3;
-			indices.push_back(tri1);
-			indices.push_back(tri2);
-			indices.push_back(tri3);
-
-		}
-		#pragma endregion
-
-		#pragma region Load Vertices
-		if (type == "v") 
-		{
-			float x, y, z,			//position
-				x2, y2, z2,			//color
-				x3, y3 ;			//texCoord
-			in >> x >> y >> z >>	
-				x2 >> y2 >> z2>>	
-				x3>> y3;			
-			vertices.push_back(Vertex(glm::vec3(x,y,z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
-
-		}
-		#pragma endregion
-
-		#pragma region Load Edges
-		if (type == "e")
-		{
-			float x, y, z,			//start
-				x2, y2, z2,			//end
-				x3, y3, z3;			//color
-			in >> x >> y >> z >>	
-				x2 >> y2 >> z2 >>	
-				x3 >> y3 >> z3;		
-			edges.push_back(Edge(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec3(x3, y3, z3)));
-		}
-
-		#pragma endregion
+#pragma endregion
 	}
-	#pragma endregion
+	else if (fileType == ObjFile)
+	{
+#pragma region Read ObjFile
+
+		std::vector<glm::vec3> vertCoords;
+		std::vector<glm::vec3> vertTexCoords;
+		std::vector<glm::vec3> vertNorms;
+
+
+		for (std::string line; std::getline(modelFile, line);)
+		{
+			std::istringstream in(line);
+
+			std::string type;
+			in >> type;
+#pragma region Vertex Loading
+			if (type == "v")
+			{
+				float x, y, z;
+				in >> x >> y >> z;
+				vertices.push_back(Vertex(glm::vec3(x,y,z),glm::vec3(0), glm::vec3(0)));
+			}
+			if (type == "vt")
+			{
+				float x, y, z;
+				in >> x >> y >> z;
+				vertTexCoords.push_back(glm::vec3(x, y, z));
+			}
+			if (type == "vn")
+			{
+				float x, y, z;
+				in >> x >> y >> z;
+				vertNorms.push_back(glm::vec3(x, y, z));
+			}
+#pragma endregion
+
+#pragma region Indice Loading & Vertex Assignment
+			if (type == "f") 
+			{
+				std::string word = "";
+				int vertLimit = 0;
+				int length = 0;
+				for (auto x : line)
+				{
+					length++;
+					if (vertLimit < 3)
+					{
+						if (x != 'f' && x != ' ')
+							word = word + x;
+						if (x == ' ' && word.size() > 0) 
+						{
+							std::istringstream buf(word);
+							WriteDebug(word + " : full word");
+							int v, vt, vn;
+							char c1;
+
+							if (buf >> v >> c1 >> vt && c1 == '/') /*   f #/# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							else if (buf >> v >> c1 >> vt >> c1 >> vn && c1 == '/') /*   f #/#/# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							else if (buf >> v >> c1 >> c1 >> vn && c1 == '/') /*   f #//# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							indices.push_back(v - 1);
+							vertLimit++;
+							word = "";
+						}
+						if (length >= line.size()) 
+						{
+							std::istringstream buf(word);
+							WriteDebug(word + " : full word");
+							int v = 0, vt, vn;
+							char c1;
+
+							if (buf >> v >> c1 >> vt && c1 == '/') /*   f #/# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							else if (buf >> v >> c1 >> vt >> c1 >> vn && c1 == '/') /*   f #/#/# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							else if (buf >> v >> c1 >> c1 >> vn && c1 == '/') /*   f #//# format  */
+							{
+								vertices[v - 1].texCoords = vertTexCoords[vt - 1];
+							}
+							indices.push_back(v - 1);
+							vertLimit++;
+							WriteDebug("End of Line");
+						}
+					}
+					else { WriteDebug("Cannot Load3dModel -- Too Many Face Vertexes"); break; }
+				}
+			}
+#pragma endregion
+		}
+#pragma endregion
+	}
+	else
+		WriteDebug("Cannot Load3DModel -- Incorrect FileType"); 
+	
 
 	//WriteDebug(std::to_string(faces.size()));
-	newModel = ModelDataChunk(vertices, indices, edges, textures, faces);
+	newModel = ModelDataChunk(vertices, indices, edges, textures/*, faces*/);
+
+	//for (int i=0; i < vertices.size(); i++)
+	//{
+	//	WriteDebug(std::to_string(i+1) + ": " + std::to_string(vertices[i].position.x) + ", " + std::to_string(vertices[i].position.y) + ", " + std::to_string(vertices[i].position.z));
+	//}
+	//WriteDebug("Vertexes: " + std::to_string(vertices.size()));
 
 	modelFile.close();
 	return newModel;

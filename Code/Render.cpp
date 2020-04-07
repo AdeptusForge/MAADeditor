@@ -165,9 +165,12 @@ GLFWwindow* RenderStartup()
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 
-	Model newModel = Model("FaceLoadTest");
+	Model newModel = Model("TestCube");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 	
+	//newModel = Model("ObjLoadTest");
+	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
+
 	return window;
 }
 
@@ -200,7 +203,7 @@ void RenderUpdate(GLFWwindow* window)
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
-		allModels[i].objModel.FetchVisibleVerts();
+		//allModels[i].objModel.FetchVisibleVerts();
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

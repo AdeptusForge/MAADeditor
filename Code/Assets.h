@@ -17,19 +17,19 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
-	std::vector<std::pair<int, int>> faces;
+	//std::vector<std::pair<int, int>> faces;
 	unsigned int VAO;
 
 	#pragma region Constructor
 	Model(std::string modelName)
 	{
-		ModelDataChunk newModel = Load3DModel(modelName);
+		ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
 
 		this->vertices = newModel.vertices;
 		this->indices = newModel.indices;
 		this->edges = newModel.edges;
 		this->textures = newModel.textures;
-		this->faces = newModel.faces;
+		//this->faces = newModel.faces;
 		
 		ModelSetup();
 	}
@@ -57,46 +57,46 @@ public:
 	};
 
 
-	void FetchVisibleVerts() 
-	{
-		GLuint tbo;
-		glGenBuffers(1, &tbo);
-		glBindBuffer(GL_ARRAY_BUFFER, tbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * 3, nullptr, GL_STATIC_READ);
+	//void FetchVisibleVerts() 
+	//{
+	//	GLuint tbo;
+	//	glGenBuffers(1, &tbo);
+	//	glBindBuffer(GL_ARRAY_BUFFER, tbo);
+	//	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * 3, nullptr, GL_STATIC_READ);
 
-		GLuint query;
-		glGenQueries(1, &query);
+	//	GLuint query;
+	//	glGenQueries(1, &query);
 
-		glEnable(GL_RASTERIZER_DISCARD);
+	//	glEnable(GL_RASTERIZER_DISCARD);
 
-		glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
+	//	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
 
-		glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
-			glBeginTransformFeedback(GL_TRIANGLES);
-				glDrawArrays(GL_POINTS, 0, 8);
-			glEndTransformFeedback();
-		glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
+	//	glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
+	//		glBeginTransformFeedback(GL_TRIANGLES);
+	//			glDrawArrays(GL_POINTS, 0, 8);
+	//		glEndTransformFeedback();
+	//	glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
 
-		glDisable(GL_RASTERIZER_DISCARD);
+	//	glDisable(GL_RASTERIZER_DISCARD);
 
-		glFlush();
-		
-		GLuint primitives;
-		glGetQueryObjectuiv(query, GL_QUERY_RESULT, &primitives);
+	//	glFlush();
+	//	
+	//	GLuint primitives;
+	//	glGetQueryObjectuiv(query, GL_QUERY_RESULT, &primitives);
 
-		WriteDebug(std::to_string(primitives) + " Primitives");
+	//	WriteDebug(std::to_string(primitives) + " Primitives");
 
-		glm::vec3 feedback[8];
-		glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+	//	glm::vec3 feedback[8];
+	//	glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
 
-		size_t n = sizeof(feedback) / sizeof(feedback[0]);
-		for (int i = 0; i < n; i++) 
-		{
-			WriteDebug(std::to_string(feedback[i].x) + ", " + std::to_string(feedback[i].y));
-		}
+	//	size_t n = sizeof(feedback) / sizeof(feedback[0]);
+	//	for (int i = 0; i < n; i++) 
+	//	{
+	//		WriteDebug(std::to_string(feedback[i].x) + ", " + std::to_string(feedback[i].y));
+	//	}
 
-		glDeleteQueries(1, &query);
-	}
+	//	glDeleteQueries(1, &query);
+	//}
 	
 
 private:
@@ -150,7 +150,7 @@ private:
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
 
 
-		FetchVisibleVerts();
+		//FetchVisibleVerts();
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
