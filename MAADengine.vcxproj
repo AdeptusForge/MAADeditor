@@ -39,6 +39,7 @@
     <ProjectGuid>{5B111AFC-5E5A-46A1-A2B2-A6E16B29236E}</ProjectGuid>
     <RootNamespace>MAADengine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>MAADengine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,8 +131,8 @@
     <LibraryPath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|Win32'">
-    <IncludePath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Steffen\Desktop\MAADengine\MAADengine\MAADengine\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <CustomBuildAfterTargets />

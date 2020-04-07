@@ -18,8 +18,8 @@ const enum FileType
 	LevelFile,
 	VertexShaderFile,
 	FragmentShaderFile,
-	GeometryShaderFile
-
+	GeometryShaderFile,
+	ObjFile
 };
 
 //model bits
@@ -50,10 +50,10 @@ struct ModelDataChunk
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
-	std::vector<std::pair<int, int>> faces;
+	//std::vector<std::pair<int, int>> faces;
 	ModelDataChunk(std::vector<Vertex>& verts, std::vector<unsigned int>& indices,
-		std::vector<Edge>& edges, std::vector<Texture>& textures, std::vector<std::pair<int,int>> faces): 
-	vertices(verts), indices(indices), edges(edges), textures(textures), faces(faces)
+		std::vector<Edge>& edges, std::vector<Texture>& textures/*, std::vector<std::pair<int,int>> faces*/): 
+	vertices(verts), indices(indices), edges(edges), textures(textures)/*, faces(faces)*/
 	{};
 	ModelDataChunk() {};
 };
@@ -65,7 +65,7 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&
 Mix_Chunk* LoadGameAudioFile(std::string fileName);
 //If in the future there is any issue with model data check this function first. It is highly likely that the data did not get transferred properly and the bug was missed
 // due to it working at the time. 
-ModelDataChunk Load3DModel(std::string fileName);
+ModelDataChunk Load3DModel(std::string fileName, FileType fileType);
 
 bool VerifyFileOrFolder(std::string filePath);
 std::string FetchPath(FileType fileType, std::string fileName, bool saving);

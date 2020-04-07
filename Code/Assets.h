@@ -17,19 +17,19 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
-	std::vector<std::pair<int, int>> faces;
+	//std::vector<std::pair<int, int>> faces;
 	unsigned int VAO;
 
 	#pragma region Constructor
 	Model(std::string modelName)
 	{
-		ModelDataChunk newModel = Load3DModel(modelName);
+		ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
 
 		this->vertices = newModel.vertices;
 		this->indices = newModel.indices;
 		this->edges = newModel.edges;
 		this->textures = newModel.textures;
-		this->faces = newModel.faces;
+		//this->faces = newModel.faces;
 		
 		ModelSetup();
 	}

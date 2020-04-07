@@ -165,9 +165,12 @@ GLFWwindow* RenderStartup()
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 
-	Model newModel = Model("FaceLoadTest");
+	Model newModel = Model("TestCube");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 	
+	//newModel = Model("ObjLoadTest");
+	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
+
 	return window;
 }
 
