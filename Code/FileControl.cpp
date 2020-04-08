@@ -82,12 +82,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 
 			break;
 		}
-		case ModelFile:
-		{
-			path += "Models/";
-			fileName += ".txt";
-			break;
-		}
+
 		case LevelFile:
 		{
 			path += "Levels/";
@@ -137,6 +132,11 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		{
 			path += "Models/";
 			fileName += ".obj";
+			break;
+		}
+		case ObjTextureFile:
+		{
+			path += "Models/";
 			break;
 		}
 	}
@@ -196,90 +196,9 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 	std::vector<Edge> edges;
 	std::vector<std::pair <int, int>> faces;
 
-	if (fileType == ModelFile)
+	if (fileType == ObjFile)
 	{
-#pragma region Read MAADFile
 
-		int it = 0;
-		int amt = 0;
-		for (std::string line; std::getline(modelFile, line);)
-		{
-#pragma region Load Textures
-			std::istringstream in(line);
-			std::string type;
-			in >> type;
-			int i = 0;
-			if (type == "t")
-			{
-				if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
-				else
-				{
-					i++;
-					std::string str;
-					in >> str;
-					if (str.size() > 0)
-					{
-						textures.push_back(Texture(0, str));
-					}
-				}
-			}
-#pragma endregion
-
-#pragma region  Load Indices & Generate Faces
-
-			if (type == "f")
-			{
-				if (amt > 0)
-				{
-					faces.push_back(std::make_pair(it, amt));
-					it += amt;
-					amt = 0;
-				}
-			}
-
-			if (type == "i")
-			{
-				amt++;
-				int tri1, tri2, tri3;
-				in >> tri1 >> tri2 >> tri3;
-				indices.push_back(tri1);
-				indices.push_back(tri2);
-				indices.push_back(tri3);
-			}
-#pragma endregion
-
-#pragma region Load Vertices
-			if (type == "v")
-			{
-				float x, y, z,			//position
-					x2, y2, z2,			//color
-					x3, y3;			//texCoord
-				in >> x >> y >> z >>
-					x2 >> y2 >> z2 >>
-					x3 >> y3;
-				vertices.push_back(Vertex(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec2(x3, y3)));
-
-			}
-#pragma endregion
-
-#pragma region Load Edges
-			if (type == "e")
-			{
-				float x, y, z,			//start
-					x2, y2, z2,			//end
-					x3, y3, z3;			//color
-				in >> x >> y >> z >>
-					x2 >> y2 >> z2 >>
-					x3 >> y3 >> z3;
-				edges.push_back(Edge(glm::vec3(x, y, z), glm::vec3(x2, y2, z2), glm::vec3(x3, y3, z3)));
-			}
-
-#pragma endregion
-		}
-#pragma endregion
-	}
-	else if (fileType == ObjFile)
-	{
 #pragma region Read ObjFile
 
 		std::vector<glm::vec3> vertCoords;
@@ -290,9 +209,50 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 		for (std::string line; std::getline(modelFile, line);)
 		{
 			std::istringstream in(line);
-
 			std::string type;
 			in >> type;
+
+#pragma region Load Textures
+
+			if (type == "mtllib")
+			{
+				std::string Tstr;
+				in >> Tstr;
+				std::ifstream textureFile;
+				std::string loadTstr = FetchPath(ObjTextureFile, Tstr, false);
+				textureFile.open(loadTstr);
+				if (!textureFile.is_open())
+				{
+					WriteDebug("Cannot Open File: " + loadTstr);
+				}
+				else
+					WriteDebug("Loading File..." + loadTstr);
+				for (std::string Tline; std::getline(textureFile, Tline);) 
+				{
+
+					std::istringstream texturein(Tline);
+					int i = 0;
+
+					texturein >> Tstr;
+					if (Tstr == "newmtl") 
+					{
+						if (i >= MAX_MODEL_TEXTURES) { WriteDebug("Too many textures in file" + fileName); break; }
+						else
+						{
+							if (Tstr.size() > 0)
+							{
+								std::string textureName;
+								texturein >> textureName;
+								WriteDebug(textureName);
+								i++;
+								textures.push_back(Texture(0, textureName));
+							}
+						}
+					}
+				}
+			}
+#pragma endregion
+
 #pragma region Vertex Loading
 			if (type == "v")
 			{

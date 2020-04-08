@@ -12,14 +12,14 @@ const enum FileType
 	ImageFile,
 	AudioFile,
 	AnimFile,
-	ModelFile,
 	SaveFile,
 	PrefabFile,
 	LevelFile,
 	VertexShaderFile,
 	FragmentShaderFile,
 	GeometryShaderFile,
-	ObjFile
+	ObjFile,
+	ObjTextureFile
 };
 
 //model bits

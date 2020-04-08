@@ -167,7 +167,7 @@ void EditorUpdate(GLFWwindow* window)
 		ImGui::InputText("FileName", &fileName);
 		if (ImGui::Button("Create File")) 
 		{
-			SaveActiveFile(ModelFile, fileName, "whatever");
+			SaveActiveFile(ObjTextureFile, fileName, "whatever");
 			show_creationWindow = false;
 		}
 		
