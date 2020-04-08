@@ -6,7 +6,7 @@
 #include "Shaders.h"
 #include "Vector"
 #include "iterator"
-#include "map"
+#include "Map.h"
 
 const enum FileType 
 {
@@ -50,11 +50,11 @@ struct Texture
 struct MapTile
 {
 	glm::ivec2 mapPos;
-	int northFeature = 0, eastFeature = 0, westFeature = 0, southFeature = 0;
+	TileFeature northFeature = Empty, eastFeature = Empty, westFeature = Empty, southFeature = Empty;
 	std::string tileModel;
-	int modelOrientation = 1; //1 = north, 2 east, 3 south, 4 west //REPLACE WITH DIRECTION ENUM IMMEDIATELY
+	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west //REPLACE WITH DIRECTION ENUM IMMEDIATELY
 	std::vector<std::string> functionTriggers;
-	MapTile(glm::ivec2 pos, int n, int s, int e, int w, std::string modelFile, int orient, std::vector<std::string> functionNames)
+	MapTile(glm::ivec2 pos, TileFeature n, TileFeature s, TileFeature e, TileFeature w, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
 		: mapPos(pos), northFeature(n), eastFeature(e), westFeature(w), southFeature(s),
 		tileModel(modelFile), modelOrientation(orient), functionTriggers(functionNames) {};
 	MapTile() {};

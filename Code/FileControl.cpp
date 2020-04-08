@@ -11,6 +11,7 @@
 #include <sstream>
 #include <commdlg.h>
 #include <fstream>
+#include "Map.h"
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
 #pragma region
@@ -404,11 +405,12 @@ MapDataChunk LoadMapData(std::string fileName)
 			for (int i = 0; i < functionCount; i++) 
 			{
 				std::string freshFunction;
-				WriteDebug("Looped function count");
 				in >> freshFunction;
 				functionTriggers.push_back(freshFunction);
 			}
-			tiles.push_back(MapTile(glm::ivec2(x,y), n,s,e,w, tileModel, orient, functionTriggers));
+			tiles.push_back(MapTile(glm::ivec2(x,y), 
+				(TileFeature)n, (TileFeature)s, (TileFeature)e, (TileFeature)w, 
+				tileModel, (MapDirection)orient, functionTriggers));
 		}
 	}
 
