@@ -1,0 +1,11 @@
+s 2 2
+n MAPNAME
+
+t 1 2 3 4 modelname 1
+f functionname(opt.)
+t 1 2 3 4 modelname 1
+f functionname(opt.) whut
+t 1 2 3 4 modelname 1
+f functionname(opt.)
+t 1 2 3 4 modelname 1
+f functionname(opt.)

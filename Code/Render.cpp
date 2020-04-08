@@ -167,7 +167,7 @@ GLFWwindow* RenderStartup()
 
 	Model newModel = Model("TestCube");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
-	
+	LoadMapData("MapLoadTest");
 	//newModel = Model("ObjLoadTest");
 	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 

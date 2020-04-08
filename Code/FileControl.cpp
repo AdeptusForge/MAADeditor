@@ -1,6 +1,7 @@
 #include "framework.h"
 #include <fstream>
 #include "Debug.h"
+#include "algorithm"
 #include "FileControl.h"
 #include "SDL.h"
 #include <glad/glad.h> 
@@ -86,7 +87,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		case LevelFile:
 		{
 			path += "Levels/";
-			fileName += ".png";
+			fileName += ".map";
 			break;
 		}
 		case AnimFile:
@@ -358,6 +359,63 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 	return newModel;
 
 }
+
+MapDataChunk LoadMapData(std::string fileName)
+{
+	std::ifstream mapFile;
+
+	std::string loadstr = FetchPath(LevelFile, fileName, false);
+	mapFile.open(loadstr);
+	if (!mapFile.is_open())
+	{
+		WriteDebug("Cannot Open File: " + fileName);
+	}
+	else
+		WriteDebug("Loading File..." + fileName);
+	unsigned int x, y;
+	std::vector<MapTile> tiles;
+
+	for (std::string line; std::getline(mapFile, line);)
+	{
+		std::istringstream in(line);
+		std::string type;
+		in >> type;
+
+		int n, s, e, w, orient;
+		std::string tileModel;
+		std::vector<std::string> functionTriggers;
+
+		if (type == "s") 
+		{ 
+			int testX, testY;
+			in >> testX >> testY;
+			if (testX <= 0 || testY <= 0)
+				WriteDebug("File Error: Map Size incorrect");
+			else { x = testX; y = testY; }
+		}
+		if (type == "t")
+		{
+			in >> n >> s >> e >> w >> tileModel >> orient;
+		}
+		if (type == "f")
+		{
+			std::string functionsLine = line;
+			int functionCount = std::count(functionsLine.begin(), functionsLine.end(), ' ');
+			for (int i = 0; i < functionCount; i++) 
+			{
+				std::string freshFunction;
+				WriteDebug("Looped function count");
+				in >> freshFunction;
+				functionTriggers.push_back(freshFunction);
+			}
+			tiles.push_back(MapTile(glm::ivec2(x,y), n,s,e,w, tileModel, orient, functionTriggers));
+		}
+	}
+
+	MapDataChunk freshMapData = MapDataChunk(x,y, tiles);
+	mapFile.close();
+	return freshMapData;
+};
 
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::string geometryPath)
 {
