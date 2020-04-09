@@ -1,10 +1,4 @@
-﻿  AudioControl.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(28,34): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(33,35): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(38,36): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-  Editor.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(43,51): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+﻿  Input.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
@@ -42,164 +36,13 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C424
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         [
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:             T=float
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         ]
-  FileControl.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-  Input.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\FileControl.cpp(315,18): warning C4018:  '>=': signed/unsigned mismatch
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(101,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(102,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         ]
-  MAADeditor.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         ]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(101,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(102,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         ]
-  Map.cpp
-  Physics.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         ]
-  Render.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(27,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(84,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(101,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(102,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(104,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(105,29): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(106,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(41,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(197,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
   Generating code
-  2 of 2495 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    32 functions had inline decision re-evaluated but remain unchanged
+  60 of 2504 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    78 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
-  C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Levels\MapLoadTest.map
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Models\FaceLoadTest.txt
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Models\ModelLoadTest.txt
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Models\TestCube.mtl
@@ -211,4 +54,4 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(197,20): warning C4
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Textures\SpaceShip1.png
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Textures\SpaceShip1.png~
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Textures\wallTest.png
-  12 File(s) copied
+  11 File(s) copied

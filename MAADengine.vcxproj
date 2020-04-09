@@ -342,6 +342,8 @@
     <ClInclude Include="Code\Objects.h" />
     <ClInclude Include="Code\Physics.h" />
     <ClInclude Include="Code\Render.h" />
+    <ClInclude Include="Code\RNGRoll.h" />
+    <ClInclude Include="Code\Skills.h" />
     <ClInclude Include="Code\stb_image.h" />
     <ClInclude Include="Code\imGUI\imconfig.h" />
     <ClInclude Include="Code\imGUI\imgui.h" />

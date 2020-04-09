@@ -146,6 +146,12 @@
     <ClInclude Include="Code\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\RNGRoll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Skills.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl">

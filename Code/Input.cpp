@@ -8,6 +8,7 @@
 #include "Render.h"
 #include "Camera.h"
 #include "Physics.h"
+#include "RNGRoll.h"
 
 
 ModelDataChunk TestChunk;
@@ -45,6 +46,7 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 		{
 			case (GLFW_KEY_ENTER): PlaySoundClip(SFX_SND, "soundTestGOT"); break;
 			case (GLFW_KEY_I): TestChunk = Load3DModel("ObjLoadTest", ObjFile); break;
+			case (GLFW_KEY_R): RollBool(RollParameters(1, FlatPercentRoll)); break;
 			case (GLFW_KEY_K): ResetScreenSize(window); break;
 			//case (GLFW_KEY_UP): cam->MoveCamera(glm::vec3(0.0f, 0.0f, -1.0f)); break;
 			//case (GLFW_KEY_DOWN): cam->MoveCamera(glm::vec3(0.0f, 0.0f, 1.0f)); break;
