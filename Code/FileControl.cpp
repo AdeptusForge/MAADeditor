@@ -409,7 +409,7 @@ MapDataChunk LoadMapData(std::string fileName)
 				functionTriggers.push_back(freshFunction);
 			}
 			tiles.push_back(MapTile(glm::ivec2(x,y), 
-				(TileFeature)n, (TileFeature)s, (TileFeature)e, (TileFeature)w, 
+				glm::ivec4(n,e,s,w), 
 				tileModel, (MapDirection)orient, functionTriggers));
 		}
 	}
