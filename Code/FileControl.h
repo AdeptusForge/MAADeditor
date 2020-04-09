@@ -50,12 +50,12 @@ struct Texture
 struct MapTile
 {
 	glm::ivec2 mapPos;
-	glm::ivec4 features;
+	TileFeature northFeature = Empty, eastFeature = Empty, westFeature = Empty, southFeature = Empty;
 	std::string tileModel;
 	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west //REPLACE WITH DIRECTION ENUM IMMEDIATELY
 	std::vector<std::string> functionTriggers;
-	MapTile(glm::ivec2 pos, glm::ivec4 f, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
-		: mapPos(pos), features(f), 
+	MapTile(glm::ivec2 pos, TileFeature n, TileFeature s, TileFeature e, TileFeature w, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
+		: mapPos(pos), northFeature(n), eastFeature(e), westFeature(w), southFeature(s),
 		tileModel(modelFile), modelOrientation(orient), functionTriggers(functionNames) {};
 	MapTile() {};
 };
