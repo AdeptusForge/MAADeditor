@@ -139,6 +139,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		case ObjTextureFile:
 		{
 			path += "Models/";
+			fileName += ".txt";
 			break;
 		}
 	}
