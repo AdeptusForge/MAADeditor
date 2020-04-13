@@ -16,8 +16,8 @@
 #include <algorithm>
 #include <iterator>
 
-unsigned int SCR_H = 800;
-unsigned int SCR_W = 800;
+unsigned int SCR_H = 360;
+unsigned int SCR_W = 640;
 
 Shader ourShader;
 Camera ourCamera;
@@ -95,34 +95,6 @@ void ResetScreenSize(GLFWwindow* window)
 	glfwSetWindowSize(window, 800, 800);
 }
 
-////void FetchVisibleVerts(RenderObject* obj)
-//{
-//	GLuint tbo;
-//	glGenBuffers(1, &tbo);
-//	glBindBuffer(GL_ARRAY_BUFFER, tbo);
-//	glBufferData(GL_ARRAY_BUFFER, sizeof(obj->objModel.vertices) * 3, nullptr, GL_STATIC_READ);
-//
-//
-//	// Perform feedback transform
-//	glEnable(GL_RASTERIZER_DISCARD);
-//
-//	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo);
-//
-//	glBeginTransformFeedback(GL_POINTS);
-//		glDrawArrays(GL_POINTS, 0, 1);
-//	glEndTransformFeedback();
-//
-//	glDisable(GL_RASTERIZER_DISCARD);
-//
-//	glFlush();
-//
-//	glm::vec3 feedback[1];
-//	glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
-//
-//	WriteDebug(std::to_string(feedback[0].x) + ", " + std::to_string(feedback[0].y));
-//}
-
-
 GLFWwindow* RenderStartup() 
 {
 	GLFWwindow* window;
@@ -167,7 +139,7 @@ GLFWwindow* RenderStartup()
 
 	Model newModel = Model("TestCube");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
-	LoadMapData("MapLoadTest");
+	LoadAnimData("AnimLoadTest");
 	//newModel = Model("ObjLoadTest");
 	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 
@@ -196,14 +168,13 @@ void RenderUpdate(GLFWwindow* window)
 
 	for (int i = 0; i < allModels.size(); i++)
 	{
-		allModels[i].objModel.ModelRefresh();
+		allModels[i].objModel.ModelRefresh(ourShader);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
 		float angle = 20.0f * i;
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
-		//allModels[i].objModel.FetchVisibleVerts();
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

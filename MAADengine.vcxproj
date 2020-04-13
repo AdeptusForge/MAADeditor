@@ -320,6 +320,7 @@
     <ClCompile Include="Code\Map.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
     <ClCompile Include="Code\Render.cpp" />
+    <ClCompile Include="Code\Skills.cpp" />
     <ClCompile Include="Code\src\glad.c" />
     <ClCompile Include="Code\imGUI\imgui.cpp" />
     <ClCompile Include="Code\imGUI\imgui_demo.cpp" />
@@ -329,9 +330,11 @@
   <ItemGroup>
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\AudioControl.h" />
+    <ClInclude Include="Code\Battlefield.h" />
     <ClInclude Include="Code\Components.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Editor.h" />
+    <ClInclude Include="Code\Entity.h" />
     <ClInclude Include="Code\FileControl.h" />
     <ClInclude Include="Code\framework.h" />
     <ClInclude Include="Code\imGUI\imgui_impl_glfw.h" />

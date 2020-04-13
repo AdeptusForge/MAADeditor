@@ -5,6 +5,7 @@
 #include "SDL_mixer.h"
 #include "Shaders.h"
 #include "Vector"
+#include "array"
 #include "iterator"
 #include "Map.h"
 
@@ -60,6 +61,57 @@ struct MapTile
 	MapTile() {};
 };
 
+
+struct AnimEvent 
+{
+private:
+	std::string functionName;
+	std::string variables;
+	unsigned int activationFrame;
+public:
+	AnimEvent(std::string data)
+	{
+		std::string word;
+		char c1;
+		std::istringstream buf(word);
+		if (buf >> functionName >> c1 >> variables && c1 == '(') 
+		{
+			//WriteDebug("Anim Event created for function: " + functionName);
+		}
+	};
+	AnimEvent() {};
+};
+
+struct AnimFrame 
+{
+private:
+	glm::ivec2 textureChanges = {0,0};
+
+public:
+	glm::ivec2 GetTextureChanges() { return textureChanges; }
+	void SetTextureChange(unsigned int textNum, unsigned int value) 
+	{
+		if (textNum == 1) textureChanges.x = value;
+		else if(textNum ==2) textureChanges.y = value;
+	}
+
+	AnimFrame() {};
+};
+
+struct AnimData 
+{
+private:
+	unsigned int length;
+	unsigned int totalTextures;
+	std::vector<AnimFrame> frames;
+	std::vector<Texture> textureLookup;
+	std::vector<AnimEvent> events;
+public:
+	AnimData(unsigned int l, unsigned int t, std::vector<AnimFrame> frameVec, std::vector<Texture> loadtextures, std::vector<AnimEvent> eve):
+		length(l), totalTextures(t), frames(frameVec), textureLookup(loadtextures), events(eve){};
+};
+
+
 struct ModelDataChunk 
 {
 	std::vector<Vertex> vertices;
@@ -86,6 +138,7 @@ struct MapDataChunk
 void SaveActiveFile(FileType fileType, std::string fileName, std::string data);
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 Mix_Chunk* LoadGameAudioFile(std::string fileName);
+AnimData LoadAnimData(std::string fileName);
 //If in the future there is any issue with model data check this function first. It is highly likely that the data did not get transferred properly and the bug was missed
 // due to it working at the time. 
 ModelDataChunk Load3DModel(std::string fileName, FileType fileType);

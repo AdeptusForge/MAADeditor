@@ -12,6 +12,7 @@
 #include <commdlg.h>
 #include <fstream>
 #include "Map.h"
+#include <typeinfo>
 
 //MUST be after all other #includes, and can only exist in 1 file. DO NOT MOVE
 #pragma region
@@ -32,7 +33,6 @@ std::string GetCurrentWorkingDir(void) {
 
 const unsigned int MAX_MODEL_TEXTURES = 8;
 unsigned char* imageData;
-ModelDataChunk newModel;
 
 
 //The baseline file path that leads to all saved/loaded files
@@ -94,7 +94,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 		case AnimFile:
 		{
 			path += "Animations/";
-			fileName += ".png";
+			fileName += ".anim";
 			break;
 		}
 		case PrefabFile:
@@ -149,7 +149,6 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 	return path;
 }
 
-
 void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 {
 	std::string filePath = FetchPath(fileType, fileName, true);
@@ -159,7 +158,6 @@ void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 	file << data;
 	file.close();
 }
-
 
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width, int &height, int &nrChannels)
 {
@@ -180,6 +178,116 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 
 	return sample;
 }
+
+AnimData LoadAnimData(std::string fileName) 
+{
+	std::ifstream animFile;
+	std::string loadstr = FetchPath(AnimFile, fileName, false);
+	animFile.open(loadstr);
+	if (!animFile.is_open())
+	{
+		WriteDebug("Cannot Open File: " + fileName);
+	}
+	else
+		WriteDebug("Loading File..." + fileName);
+
+	std::vector<Texture> textureLookups;
+	std::vector<AnimFrame> frames;
+	std::vector<std::vector<int>> textureDir;
+	std::vector<AnimEvent> events;
+
+	unsigned int length =0;
+	int i = 0;
+	AnimFrame freshFrame;
+
+	for (std::string line = ""; std::getline(animFile, line);)
+	{
+		std::istringstream in(line);
+		std::string type;
+		in >> type;
+		
+		if (type == "t") 
+		{
+			std::string Tword = "";
+			int lineLength =0;
+			int wordNum=0;
+
+			for (auto x : line)
+			{
+
+				lineLength++;
+				if (x != ' ')
+					Tword = Tword + x;
+				else if (x == ' ' && Tword.size() > 0)
+				{
+					if (Tword != "t") 
+					{
+						//WriteDebug(Tword);
+						textureLookups.push_back(Texture(0, Tword));
+						wordNum++;
+					}
+					Tword = "";
+				}
+				if (lineLength >= line.size() && Tword.size() > 1)
+				{
+					//WriteDebug(Tword);
+					textureLookups.push_back(Texture(0, Tword));
+					wordNum++;
+					Tword = "";
+
+				}
+			}
+		};
+		if (type == "l") { in >> length; } 
+		if (type == "f") 
+		{
+
+			i++;
+			std::string Fword = "";
+			int lineLength = 0;
+			for (auto x : line)
+			{
+				lineLength++;
+				if (x != ' ') 
+				{
+					Fword = Fword + x;
+				}
+				if (x == ' ' || lineLength >= line.size()) 
+				{
+					if (Fword.size() > 1) 
+					{
+						
+						std::istringstream buf(Fword);
+						int textureNumber, textureLookup;
+						char c1, c2, c3;
+						std::string func, var1, var2;
+						if (buf >> textureNumber >> c1 >> textureLookup && c1 == '/')
+						{
+							freshFrame.SetTextureChange(textureNumber, textureLookup);
+						}
+						//AnimEvent Creation
+
+					}
+					Fword = "";
+				}
+			}
+			frames.push_back(freshFrame);
+		}
+		if (type == "u") 
+		{
+		}
+
+
+	}
+	for (int l =i;l < length; l++)
+	{
+		frames.push_back(freshFrame);
+	}
+	AnimData freshAnim = AnimData(length, textureLookups.size(), frames, textureLookups, events);
+
+	return freshAnim;
+}
+
 
 ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 {
@@ -274,7 +382,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 				float x, y, z;
 				in >> x >> y >> z;
 				vertNorms.push_back(glm::vec3(x, y, z));
-			}
+			} 
 #pragma endregion
 
 #pragma region Indice Loading & Vertex Assignment
@@ -349,7 +457,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 	
 
 	//WriteDebug(std::to_string(faces.size()));
-	newModel = ModelDataChunk(vertices, indices, edges, textures/*, faces*/);
+	ModelDataChunk newModel = ModelDataChunk(vertices, indices, edges, textures/*, faces*/);
 
 	//for (int i=0; i < vertices.size(); i++)
 	//{
