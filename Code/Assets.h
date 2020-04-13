@@ -9,12 +9,43 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Shaders.h"
 #include "FileControl.h"
+#include "AnimEvents.h"
 
 
 class Model
 {
 	unsigned int currentFrame;
 	bool currentlyPlaying;
+	AnimData currentAnim;
+	void PrepTexture(Texture &ref) 
+	{
+		int width, height, nrChannels;
+		glGenTextures(1, &ref.ID);
+		glBindTexture(GL_TEXTURE_2D, ref.ID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		//Create TextureLookup function to frontload textures.
+		unsigned char* texData = LoadImageFile(ImageFile, ref.name, width, height, nrChannels);
+		if (texData)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+			WriteDebug("Texture failed to load:" + ref.name);
+	}
+	void BindTextures(Shader shader)
+	{
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			shader.setInt("texture" + std::to_string(i), i);
+			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
+		}
+	}
 
 public:
 	std::vector<Vertex> vertices;
@@ -23,6 +54,8 @@ public:
 	std::vector<Texture> textures;
 	//std::vector<std::pair<int, int>> faces;
 	unsigned int VAO;
+
+
 
 	#pragma region Constructor
 	Model(std::string modelName)
@@ -40,20 +73,30 @@ public:
 
 	#pragma endregion
 
-	void BindTextures(Shader shader)
+	void StartAnim(std::string data) 
 	{
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			glActiveTexture(GL_TEXTURE0 + i);
-			shader.setInt("texture" + std::to_string(i), i);
-			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
-		}
+		currentAnim = LoadAnimData(data);
+		currentlyPlaying = true;
 	}
 
-	void PlayAnim(std::string anim)
+	void PlayAnim()
 	{
-		if (currentlyPlaying) {}
+		if (currentlyPlaying) 
+		{
+			AnimFrame currFrame = currentAnim.GetCurrFrame(currentFrame);
+			glm::ivec2 textChanges = currFrame.GetTextureChanges();
+			
+			
+			//WriteDebug(std::to_string(textChanges.y));
+			if (textures[1].name != "SpaceShip5") 
+			{
+				textures[1].name = "SpaceShip5";
+				PrepTexture(textures[1]);
+			}
+
+		}
 		else {}
+		currentFrame++;
 
 	};
 
@@ -66,13 +109,13 @@ public:
 
 	void Draw(Shader shader)
 	{
+		PlayAnim();
 		//Draw
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glActiveTexture(GL_TEXTURE0);
 	};	
-
 private:
 
 	unsigned int VBO, EBO;
@@ -82,23 +125,7 @@ private:
 		#pragma region Load Textures
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			int width, height, nrChannels;
-			glGenTextures(1, &textures[i].ID);
-			glBindTexture(GL_TEXTURE_2D, textures[i].ID);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-			//Create TextureLookup function to frontload textures.
-			unsigned char* texData = LoadImageFile(ImageFile, textures[i].name, width, height, nrChannels);
-			if (texData)
-			{
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-				glGenerateMipmap(GL_TEXTURE_2D);
-			}
-			else
-				WriteDebug("Texture failed to load:" + textures[i].name);
+			PrepTexture(textures[i]);
 		}
 		#pragma endregion
 
@@ -132,4 +159,5 @@ private:
 		glBindVertexArray(1);
 
 	}
+	
 };

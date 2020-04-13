@@ -328,6 +328,7 @@
     <ClCompile Include="Code\imGUI\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\AnimEvents.h" />
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\AudioControl.h" />
     <ClInclude Include="Code\Battlefield.h" />

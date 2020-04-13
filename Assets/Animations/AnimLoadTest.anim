@@ -1,14 +1,16 @@
-t texture1-1 texture1-2 texture1-2 texture1-2 texture1-2
+t WallTest SpaceShip1 SpaceShip2 SpaceShip3 SpaceShip4 SpaceShip5
 l 11
 
-f 1/1
-f 1/1
-f 1/2 2/1
-f 1/2 1/1
-f 1/3 1/1 
-f 1/3 
-f 1/1
-f 1/1
+f 1/0 2/1
+f 1/0 2/1
+f 1/0 2/2
+f 1/0 2/2
+f 2/3
+f 2/3
+f 1/0 2/4
+f 1/0 2/4
+f 1/0 2/5
+f 1/0 2/5
 
 
-u functionname(derp,derp) 4
+u functionname derp derp 4

@@ -273,21 +273,44 @@ AnimData LoadAnimData(std::string fileName)
 			}
 			frames.push_back(freshFrame);
 		}
+#pragma region AnimEventLoading
 		if (type == "u") 
 		{
-		}
+			//std::string eventData;
+			//in >> eventData;
+			//WriteDebug(eventData);
+			//std::string functionName, var1, var2;
+			//char c1, c2, c3;
+			//int f;
 
+			//std::string Fword = "";
+			//int lineLength = 0;
+			//for (auto x : eventData) 
+			//{
+			//	lineLength++;
+			//	if (x != ' ')
+			//	{
+			//		Fword = Fword + x;
+			//	}
+			//	if (x == ' ' || lineLength >= line.size())
+			//	{
+			//		if (Fword.size() > 1)
+			//		{
+			//		}
+			//	}
+			//}
+		}
+#pragma endregion
 
 	}
 	for (int l =i;l < length; l++)
 	{
 		frames.push_back(freshFrame);
 	}
-	AnimData freshAnim = AnimData(length, textureLookups.size(), frames, textureLookups, events);
+	AnimData freshAnim = AnimData(length, frames, textureLookups, events);
 
 	return freshAnim;
 }
-
 
 ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 {

@@ -161,6 +161,9 @@
     <ClInclude Include="Code\Battlefield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\AnimEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl">
