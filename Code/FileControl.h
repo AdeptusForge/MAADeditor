@@ -107,8 +107,11 @@ private:
 	std::vector<AnimEvent> events;
 public:
 	AnimFrame GetCurrFrame(unsigned int frame) { return frames[frame]; }
+	Texture GetCurrTexture(unsigned int value) { return textureLookup[value]; }
+	unsigned int GetLength() { return length; }
 	AnimData(unsigned int l, std::vector<AnimFrame> frameVec, std::vector<Texture> loadtextures, std::vector<AnimEvent> eve):
-		length(l), frames(frameVec), textureLookup(loadtextures), events(eve){};
+		length(l), frames(frameVec), textureLookup(loadtextures), events(eve) {
+	};
 	AnimData() {};
 };
 

@@ -175,10 +175,17 @@ void RenderUpdate(GLFWwindow* window)
 		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
+
+		
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	EditorUpdate(window);
 	glfwSwapBuffers(window);
 
+	//for (int i = 0; i < allModels.size(); i++)
+	//{
+	//	allModels[i].objModel.ModelCleanup();
+
+	//}
 }

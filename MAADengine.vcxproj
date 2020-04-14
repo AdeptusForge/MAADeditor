@@ -326,6 +326,7 @@
     <ClCompile Include="Code\imGUI\imgui_demo.cpp" />
     <ClCompile Include="Code\imGUI\imgui_draw.cpp" />
     <ClCompile Include="Code\imGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Code\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\AnimEvents.h" />
@@ -355,6 +356,7 @@
     <ClInclude Include="Code\imGUI\imstb_rectpack.h" />
     <ClInclude Include="Code\imGUI\imstb_textedit.h" />
     <ClInclude Include="Code\imGUI\imstb_truetype.h" />
+    <ClInclude Include="Code\Time.h" />
     <ClInclude Include="Menus.h" />
   </ItemGroup>
   <ItemGroup>

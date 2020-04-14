@@ -20,6 +20,7 @@ void InitializeTheMAADness()
 
 	//Startup functions
 	window = RenderStartup();
+	TimeStartup();
 	FileControlStartup();
 	InputControlStartup(window);
 	EditorStartup(window);
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
 
 	while (WorkingProperly())
 	{
-		RenderUpdate(window);
+		UpdateTime(window);
 		glfwPollEvents();
 		SaveInputs();
 	}

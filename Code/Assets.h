@@ -10,13 +10,15 @@
 #include "Shaders.h"
 #include "FileControl.h"
 #include "AnimEvents.h"
+#include "memory"
 
 
 class Model
 {
-	unsigned int currentFrame;
+	unsigned int currentFrame = 0;
 	bool currentlyPlaying;
 	AnimData currentAnim;
+	
 	void PrepTexture(Texture &ref) 
 	{
 		int width, height, nrChannels;
@@ -75,28 +77,33 @@ public:
 
 	void StartAnim(std::string data) 
 	{
-		currentAnim = LoadAnimData(data);
+		this->currentAnim = LoadAnimData(data);
 		currentlyPlaying = true;
+		currentFrame = 0;
+		//AnimFrame currFrame = currentAnim.GetCurrFrame(currentFrame);
+		//WriteDebug(std::to_string(currFrame.GetTextureChanges().y));
 	}
 
 	void PlayAnim()
 	{
 		if (currentlyPlaying) 
 		{
-			AnimFrame currFrame = currentAnim.GetCurrFrame(currentFrame);
-			glm::ivec2 textChanges = currFrame.GetTextureChanges();
-			
-			
-			//WriteDebug(std::to_string(textChanges.y));
-			if (textures[1].name != "SpaceShip5") 
+			AnimFrame frame = currentAnim.GetCurrFrame(currentFrame);
+
+			std::string newTexture = currentAnim.GetCurrTexture(frame.GetTextureChanges().y).name;
+			if (textures[1].name != newTexture)
 			{
-				textures[1].name = "SpaceShip5";
+				textures[1].name = newTexture;
 				PrepTexture(textures[1]);
 			}
-
 		}
 		else {}
 		currentFrame++;
+		if (currentFrame >= currentAnim.GetLength()) 
+		{
+			currentlyPlaying = false;
+			currentFrame = 0;
+		}
 
 	};
 
@@ -106,15 +113,23 @@ public:
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 		BindTextures(shader);
 	}
+	void ModelCleanup() 
+	{
+		for(int i=0; i< textures.size(); i++)
+			glDeleteTextures(1, &textures[i].ID);
+	}
 
 	void Draw(Shader shader)
 	{
-		PlayAnim();
 		//Draw
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glActiveTexture(GL_TEXTURE0);
+		if (currentFrame < currentAnim.GetLength())
+		{
+			PlayAnim();
+		}
 	};	
 private:
 
