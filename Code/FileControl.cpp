@@ -33,7 +33,7 @@ std::string GetCurrentWorkingDir(void) {
 
 
 const unsigned int MAX_MODEL_TEXTURES = 8;
-
+unsigned char* imageData;
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -163,10 +163,16 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int &width
 {
 	stbi_set_flip_vertically_on_load(true);
 	std::string loadstr = FetchPath(ImageFile, fileName, false);
-	unsigned char* imageData = stbi_load(loadstr.c_str(), &width, &height, &nrChannels, 0);
+	imageData = stbi_load(loadstr.c_str(), &width, &height, &nrChannels, 0);
 	if(!imageData)
 		WriteDebug(stbi_failure_reason());
+	
+
 	return imageData;
+}
+void UnloadImageFile(unsigned char* image) 
+{
+	stbi_image_free(image);
 }
 
 Mix_Chunk* LoadGameAudioFile(std::string fileName)

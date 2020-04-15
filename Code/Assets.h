@@ -18,26 +18,25 @@ class Model
 	unsigned int currentFrame = 0;
 	bool currentlyPlaying;
 	AnimData currentAnim;
-	
-	void PrepTexture(Texture &ref) 
+	void PrepTexture(Texture &ref, bool startupBool) 
 	{
 		int width, height, nrChannels;
-		glGenTextures(1, &ref.ID);
+		if (startupBool) 
+		{
+			glGenTextures(1, &ref.ID);
+		}
 		glBindTexture(GL_TEXTURE_2D, ref.ID);
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		//Create TextureLookup function to frontload textures.
 		unsigned char* texData = LoadImageFile(ImageFile, ref.name, width, height, nrChannels);
-		if (texData)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else
-			WriteDebug("Texture failed to load:" + ref.name);
+		//Create TextureLookup function to frontload textures.
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		UnloadImageFile(texData);
 	}
 	void BindTextures(Shader shader)
 	{
@@ -54,7 +53,6 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
-	//std::vector<std::pair<int, int>> faces;
 	unsigned int VAO;
 
 
@@ -94,7 +92,7 @@ public:
 			if (textures[1].name != newTexture)
 			{
 				textures[1].name = newTexture;
-				PrepTexture(textures[1]);
+				PrepTexture(textures[1], false);
 			}
 		}
 		else {}
@@ -140,7 +138,7 @@ private:
 		#pragma region Load Textures
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			PrepTexture(textures[i]);
+			PrepTexture(textures[i],true);
 		}
 		#pragma endregion
 

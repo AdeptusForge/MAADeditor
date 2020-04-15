@@ -2,7 +2,7 @@
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
@@ -42,7 +42,7 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
@@ -82,7 +82,7 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C424
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
@@ -119,7 +119,7 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C424
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:             T=float
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C4244:         ]
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         with
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         [
@@ -152,7 +152,7 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(27,20): warning C4
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
@@ -193,7 +193,7 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(169,20): warning C4
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(118,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(117,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(80,1): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(81,1): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(82,19): warning C4244:  '=': conversion from 'double' to 'T', possible loss of data
@@ -231,9 +231,9 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Camera.h(108,16): warning C424
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(12,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(21,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
   Generating code
-  5 of 2500 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    31 functions had inline decision re-evaluated but remain unchanged
+  1 of 2502 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    32 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim
