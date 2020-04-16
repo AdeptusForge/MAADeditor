@@ -18,8 +18,13 @@ void MapStartup(std::string mapName)
 {
 	currMap = LoadMapData(mapName);
 	testEntity = MapEntity();
-	//WriteDebug("North Feature: " + std::to_string(GetTile(testEntity.GetCurrentPos())->getTileFeature(North)));
 }
+
+void TestMove()
+{
+	testEntity.Move(North);
+}
+
 
 MapTile* GetTile(glm::ivec2 tileLoc)
 {

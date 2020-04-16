@@ -11,6 +11,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Editor.h"
+#include "Map.h"
 
 GLFWwindow* window;
 
@@ -24,6 +25,7 @@ void InitializeTheMAADness()
 	FileControlStartup();
 	InputControlStartup(window);
 	EditorStartup(window);
+	MapStartup("MapLoadTest");
 	WriteDebug("MAADness Initialized");
 }
 int EndTheMAADness() 

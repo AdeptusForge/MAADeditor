@@ -64,6 +64,7 @@ struct MapDataChunk
 
 void MapStartup(std::string mapName);
 
+void TestMove();
 MapTile* GetTile(glm::ivec2 tileLoc);
 
 bool TileMovable(glm::ivec2 currPos, MapDirection moveDir);

@@ -63,9 +63,12 @@ public:
 	{
 		if (TileMovable(GetCurrentPos(), dir)) 
 		{
-			WriteDebug("Can Move " +std::to_string(dir) + "from tile: " 
+			WriteDebug("Can Move " + std::to_string(dir) + " from tile: " 
 				+ std::to_string(GetCurrentPos().x) +", " + std::to_string(GetCurrentPos().y));
 		}
+		else 
+			WriteDebug("Can't Move " + std::to_string(dir) + " from tile: "
+				+ std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
 		//IF PLAYER, MOVE CAMERA
 	}
 	MapEntity() 
