@@ -520,7 +520,8 @@ MapDataChunk LoadMapData(std::string fileName)
 		std::string type;
 		in >> type;
 
-		int n, s, e, w, orient;
+		int orient;
+		glm::ivec4 features;
 		std::string tileModel;
 		std::vector<std::string> functionTriggers;
 
@@ -534,21 +535,24 @@ MapDataChunk LoadMapData(std::string fileName)
 		}
 		if (type == "t")
 		{
-			in >> n >> s >> e >> w >> tileModel >> orient;
-		}
-		if (type == "f")
-		{
-			std::string functionsLine = line;
-			int functionCount = std::count(functionsLine.begin(), functionsLine.end(), ' ');
-			for (int i = 0; i < functionCount; i++) 
+			std::istringstream iss(line);
+			std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+				std::istream_iterator<std::string>());
+			features.w = std::stoi(results[1]);
+			features.x = std::stoi(results[2]);
+			features.y = std::stoi(results[3]);
+			features.z = std::stoi(results[4]);
+			tileModel = results[5];
+			orient = std::stoi(results[6]);
+			if (results.size() > 7)
 			{
-				std::string freshFunction;
-				in >> freshFunction;
-				functionTriggers.push_back(freshFunction);
+				for (int i = 7; i < results.size(); i++)
+				{
+					functionTriggers.push_back(results[i]);
+				}
 			}
-			tiles.push_back(MapTile(glm::ivec2(x,y), 
-				(TileFeature)n, (TileFeature)s, (TileFeature)e, (TileFeature)w, 
-				tileModel, (MapDirection)orient, functionTriggers));
+			tiles.push_back(MapTile(glm::ivec2(x, y),
+				features, tileModel, (MapDirection)orient, functionTriggers));
 		}
 	}
 

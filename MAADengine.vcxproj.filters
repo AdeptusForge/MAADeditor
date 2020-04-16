@@ -170,6 +170,9 @@
     <ClInclude Include="Code\Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\MapEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl">
