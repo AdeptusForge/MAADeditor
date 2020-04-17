@@ -11,6 +11,17 @@
 #define PI 3.14159265
 
 
+struct CameraCoords
+{
+	glm::vec3 cameraPos;
+	glm::vec3 cameraFront;
+	glm::vec3 cameraUp; //used to define the y+ axis for the camera
+	glm::mat4 cameraView = glm::mat4(1.0f);
+};
+struct CameraAction 
+{
+	std::vector<CameraCoords> actionFrames;
+};
 enum CameraType 
 {
 	Perspective,
@@ -33,44 +44,35 @@ public:
 
 	CameraMode mode = FreeView;
 	CameraType cameraType;
-	glm::vec3 cameraPos;
-	glm::vec3 cameraFront;
-	glm::vec3 cameraUp; //used to define the y+ axis for the camera
-	glm::mat4 cameraView = glm::mat4(1.0f);
+	CameraCoords baseCoords;
 
 	float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 	float pitch = 0.0f;
 	float lastX = 800.0f / 2.0;
 	float lastY = 600.0 / 2.0;
 	float cameraFov = 45.0f;
-	Camera() {};
 
-	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type)
+	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):
+		cameraID(ID), cameraFov(fov), cameraType(type)
 	{
-		cameraID = ID;
-
-
-		cameraPos = pos;
-		cameraFront = front;
-		cameraUp = up;
-		fov = cameraFov;
-		cameraType = type;
-
-		
+		baseCoords.cameraPos = pos,
+		baseCoords.cameraFront = front;
+		baseCoords.cameraUp = up;
 		UpdateCameraView();
 	};
+	Camera() {};
 
 	void UpdateCameraView() 
 	{
 		//WriteDebug("Front: " + std::to_string(cameraFront.x) + ", " + std::to_string(cameraFront.y) + ", " + std::to_string(cameraFront.z));
 		//WriteDebug("Pos: " + std::to_string(cameraPos.x) + ", " + std::to_string(cameraPos.y) + ", " + std::to_string(cameraPos.z));
 		if(mode == FreeView)
-			cameraView = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+			baseCoords.cameraView = glm::lookAt(baseCoords.cameraPos, baseCoords.cameraPos + baseCoords.cameraFront, baseCoords.cameraUp);
 	}
 
 	void MoveCamera(glm::vec3 moveTo)
 	{
-		cameraPos += moveTo;
+		baseCoords.cameraPos += moveTo;
 		UpdateCameraView();
 	}
 
@@ -82,14 +84,9 @@ public:
 		newFront.x = sin(currRotationAngle * PI / 180);
 		newFront.y = 0;
 		newFront.z = -cos(currRotationAngle * PI / 180);
-
-		
-
-
-		cameraFront = newFront;
+		baseCoords.cameraFront = newFront;
 		UpdateCameraView();
 	}
-
 
 	// + is right, - is left
 	void RotateAroundOrigin(bool dir)
@@ -108,8 +105,8 @@ public:
 		newFront.z = -cos(currRotationAngle * PI / 180);
 
 
-		cameraPos = newPos;
-		cameraFront = newFront;
+		baseCoords.cameraPos = newPos;
+		baseCoords.cameraFront = newFront;
 		UpdateCameraView();
 
 	}

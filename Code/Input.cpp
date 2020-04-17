@@ -10,7 +10,6 @@
 #include "Physics.h"
 #include "RNGRoll.h"
 
-
 ModelDataChunk TestChunk;
 
 std::vector<InputFrame> priorFrames;
@@ -49,11 +48,15 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			{RenderObject* model = GetRenderObject(1);
 			model->objModel.StartAnim("AnimLoadTest");
 				break; }
-			case (GLFW_KEY_K): TestMove(); break;
-			//case (GLFW_KEY_UP): cam->MoveCamera(glm::vec3(0.0f, 0.0f, -1.0f)); break;
-			//case (GLFW_KEY_DOWN): cam->MoveCamera(glm::vec3(0.0f, 0.0f, 1.0f)); break;
-			//case (GLFW_KEY_LEFT): cam->MoveCamera(glm::vec3(-1.0f, 0.0f, 0.0f)); break;
-			//case (GLFW_KEY_RIGHT): cam->MoveCamera(glm::vec3(1.0f, 0.0f, 0.0f)); break;
+			case (GLFW_KEY_W): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1)); break;
+			case (GLFW_KEY_D): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(2)); break;
+			case (GLFW_KEY_S): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(3)); break;
+			case (GLFW_KEY_A): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(4)); break;
+
+			case (GLFW_KEY_X): GetMapEntity(0)->Flip(); break;
+			case (GLFW_KEY_Q): GetMapEntity(0)->Rotate(1); break;
+			case (GLFW_KEY_E): GetMapEntity(0)->Rotate(0); break;
+
 			case (GLFW_KEY_LEFT): cam->RotateAroundOrigin(true); break;
 			case (GLFW_KEY_RIGHT): cam->RotateAroundOrigin(false); break;
 		}

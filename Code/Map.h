@@ -11,6 +11,12 @@
 #include "array"
 #include "iterator"
 
+const glm::ivec2 northVec = glm::ivec2(0,1);
+const glm::ivec2 eastVec = glm::ivec2(1, 0);
+const glm::ivec2 southVec = glm::ivec2(0, -1);
+const glm::ivec2 westVec = glm::ivec2(-1, 0);
+
+
 enum MapDirection 
 {
 	North = 1,
@@ -25,6 +31,8 @@ enum TileFeature
 	Wall = 1,
 
 };
+
+glm::ivec2 GetMoveVector(MapDirection dir);
 
 struct MapTile
 {
@@ -50,7 +58,6 @@ public:
 			return (TileFeature)tileFeatures.z;
 	}
 	std::string getTileModel() { return tileModel; }
-
 };
 
 struct MapDataChunk
@@ -62,9 +69,121 @@ struct MapDataChunk
 	MapDataChunk() {};
 };
 
+bool IsOnCurrentMap(glm::ivec2 loc);
 void MapStartup(std::string mapName);
-
-void TestMove();
 MapTile* GetTile(glm::ivec2 tileLoc);
-
 bool TileMovable(glm::ivec2 currPos, MapDirection moveDir);
+
+//ID will be used to determine fixed-location encounters and when a MapEntity is the player(ID = 0).
+class MapEntity
+{
+private:
+	glm::ivec2 currentMapPos;
+	MapDirection currentFacing;
+public:
+	glm::ivec2 GetCurrentPos() { return currentMapPos; }
+	//1 = CurrentFacing, 2 = CurrentFacing turned right once, 3 = Opposite of CurrentFacing, 4 = CurrentFacing turned left once
+	MapDirection GetCurrentFacing(unsigned int check) 
+	{
+		unsigned int checkFace = currentFacing;
+		switch (check) 
+		{
+			case(2): 
+			{
+				if (currentFacing == West)
+					checkFace = 1;
+				else
+					checkFace += 1;
+				break;
+			}
+			case(3):
+			{
+				if (checkFace >= 3) {
+					checkFace -= 4;
+				}
+				checkFace += 2;
+				break;
+			}
+			case(4):
+			{
+				if (currentFacing == North)
+					checkFace = 4;
+				else
+					checkFace -= 1;
+				break;
+			}
+		}
+		return (MapDirection)checkFace;
+	}
+	unsigned int ID;
+
+	//Left = 1, Right = 0
+	void Rotate(bool dir)
+	{
+		int newFacing = currentFacing;
+		//Turn Right
+		if (!dir)
+		{
+			WriteDebug("Rotated right" + std::to_string(ID));
+			if (currentFacing == West)
+				newFacing = 1;
+			else
+				newFacing += 1;
+			//IF PLAYER, ROTATE CAMERA
+		}
+		//Turn Left
+		else
+		{
+			WriteDebug("Rotated left" + std::to_string(ID));
+
+			if (currentFacing == North)
+				newFacing = 4;
+			else
+				newFacing -= 1;
+
+			//IF PLAYER, ROTATE CAMERA
+		}
+		ChangeFacing((MapDirection)newFacing);
+	}
+	void Flip()
+	{
+		WriteDebug("Flipped " + std::to_string(ID));
+		int currentDir = currentFacing;
+		if (currentDir >= 3) {
+			currentDir -= 4;
+		}
+		currentDir += 2;
+		//IF PLAYER, ROTATE CAMERA
+		ChangeFacing((MapDirection)currentDir);
+	}
+	void ChangeFacing(MapDirection dir)
+	{
+		currentFacing = dir;
+	}
+	void Walk(MapDirection dir)
+	{
+		MapDirection moveDir =dir;
+		if (currentFacing != moveDir) 
+		{
+			//IF PLAYER, MOVE CAMERA
+		}
+
+		if (TileMovable(GetCurrentPos(), moveDir))
+		{
+			WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: "
+				+ std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+			//IF PLAYER, MOVE CAMERA
+			currentMapPos += GetMoveVector(moveDir);
+			WriteDebug("New Position: " + std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+		}
+		else
+			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: "
+				+ std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+	}
+
+	MapEntity(glm::ivec2 startingPos, MapDirection startingFacing, unsigned int entityID) :
+		currentMapPos(startingPos), currentFacing(startingFacing), ID(entityID) {};
+};
+
+void PlayerStartup(glm::ivec2 startingPos, MapDirection dir);
+MapEntity* GetMapEntity(unsigned int entityID);

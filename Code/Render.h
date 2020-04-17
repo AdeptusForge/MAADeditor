@@ -22,8 +22,6 @@ GLFWwindow* RenderStartup();
 
 void ResetScreenSize(GLFWwindow*);
 
-
-
 struct RenderObject 
 {
 public: 

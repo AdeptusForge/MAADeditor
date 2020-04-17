@@ -1,7 +1,7 @@
 s 2 2
 n MAPNAME
 
-t 1 1 1 1 wacky1 1 functionname(opt.) functionname(opt.)
-t 0 0 0 0 wacky2 1
+t 0 0 0 0 wacky1 1 functionname(opt.) functionname(opt.)
+t 1 1 1 1 wacky2 1
 t 0 0 0 0 wacky3 1
 t 0 0 0 0 wacky4 1
