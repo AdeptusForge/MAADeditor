@@ -170,15 +170,13 @@ public:
 
 		if (TileMovable(GetCurrentPos(), moveDir))
 		{
-			WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: "
-				+ std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+			WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
 			//IF PLAYER, MOVE CAMERA
 			currentMapPos += GetMoveVector(moveDir);
-			WriteDebug("New Position: " + std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+			WriteDebug("New Position: " + vecToStr(GetCurrentPos()));
 		}
 		else
-			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: "
-				+ std::to_string(GetCurrentPos().x) + ", " + std::to_string(GetCurrentPos().y));
+			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
 	}
 
 	MapEntity(glm::ivec2 startingPos, MapDirection startingFacing, unsigned int entityID) :

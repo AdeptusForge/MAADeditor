@@ -133,7 +133,7 @@ GLFWwindow* RenderStartup()
 		45.0f, Perspective);
 	allCameras.insert(allCameras.end(), &ourCamera);
 
-	view = ourCamera.baseCoords.cameraView;
+	view = ourCamera.GetCameraView();
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 
@@ -158,9 +158,11 @@ void RenderShutdown()
 
 void RenderUpdate(GLFWwindow* window)
 {
+	
+	ourCamera.PlayCameraAction();
 	// pass them to the shaders
 	ourShader.setMat4("model", model);
-	ourShader.setMat4("view", ourCamera.baseCoords.cameraView);
+	ourShader.setMat4("view", ourCamera.GetCameraView());
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	ourShader.setMat4("projection", projection);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

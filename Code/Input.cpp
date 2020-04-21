@@ -57,6 +57,8 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			case (GLFW_KEY_Q): GetMapEntity(0)->Rotate(1); break;
 			case (GLFW_KEY_E): GetMapEntity(0)->Rotate(0); break;
 
+			case (GLFW_KEY_UP): cam->StartCameraAction(walkForward); break;
+
 			case (GLFW_KEY_LEFT): cam->RotateAroundOrigin(true); break;
 			case (GLFW_KEY_RIGHT): cam->RotateAroundOrigin(false); break;
 		}
