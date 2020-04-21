@@ -127,7 +127,7 @@ GLFWwindow* RenderStartup()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	ourCamera = Camera( 1,
-		glm::vec3(0.0f, 0.0f, 10.0f), 
+		glm::vec3(0.0f, 5.0f, 30.0f), 
 		glm::vec3(0.0f, 0.0f, -1.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		45.0f, Perspective);
@@ -138,7 +138,9 @@ GLFWwindow* RenderStartup()
 
 
 	Model newModel = Model("TestCube");
+	newModel = Model("TileFloorCube");
 	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
+
 	//LoadAnimData("AnimLoadTest");
 	//newModel = Model("ObjLoadTest");
 	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));

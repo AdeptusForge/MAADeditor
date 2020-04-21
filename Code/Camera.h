@@ -2,7 +2,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -15,7 +14,7 @@ struct CameraCoords
 {
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
-	glm::vec3 cameraUp; //used to define the y+ axis for the camera
+	glm::vec3 cameraUp; //used to define the y + axis for the camera
 	glm::mat4 cameraView = glm::mat4(1.0f);
 };
 struct CameraAction 
@@ -36,7 +35,7 @@ enum CameraMode
 class Camera 
 {
 private:
-	float rotateDistance = 10;
+	float rotateDistance = 30;
 	int currRotationAngle = 0;
 	float rotateSpeed = 3;
 public:
@@ -66,8 +65,16 @@ public:
 	{
 		//WriteDebug("Front: " + std::to_string(cameraFront.x) + ", " + std::to_string(cameraFront.y) + ", " + std::to_string(cameraFront.z));
 		//WriteDebug("Pos: " + std::to_string(cameraPos.x) + ", " + std::to_string(cameraPos.y) + ", " + std::to_string(cameraPos.z));
-		if(mode == FreeView)
-			baseCoords.cameraView = glm::lookAt(baseCoords.cameraPos, baseCoords.cameraPos + baseCoords.cameraFront, baseCoords.cameraUp);
+		//if(mode == FreeView)
+		baseCoords.cameraView = glm::lookAt(baseCoords.cameraPos, baseCoords.cameraPos + baseCoords.cameraFront, baseCoords.cameraUp);
+	}
+
+	void UpdateCameraCoords(CameraCoords newCoords) 
+	{
+		baseCoords.cameraFront = newCoords.cameraFront;
+		baseCoords.cameraPos = newCoords.cameraPos;
+		baseCoords.cameraUp = newCoords.cameraUp;
+		UpdateCameraView();
 	}
 
 	void MoveCamera(glm::vec3 moveTo)
@@ -99,6 +106,7 @@ public:
 		else currRotationAngle += rotateSpeed;
 
 		newPos.x = rotateDistance * sin(currRotationAngle * PI / 180);
+		newPos.y = 5;
 		newPos.z = rotateDistance * cos(currRotationAngle * PI / 180);
 		newFront.x = -sin(currRotationAngle * PI / 180);
 		newFront.y = 0;

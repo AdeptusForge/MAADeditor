@@ -1,0 +1,2 @@
+newmtl WallTest
+newmtl SpaceShip1
