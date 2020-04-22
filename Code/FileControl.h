@@ -101,7 +101,6 @@ public:
 	AnimData() {};
 };
 
-
 struct ModelDataChunk 
 {
 	std::vector<Vertex> vertices;
@@ -120,11 +119,11 @@ void SaveActiveFile(FileType fileType, std::string fileName, std::string data);
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 void UnloadImageFile(unsigned char* image);
 Mix_Chunk* LoadGameAudioFile(std::string fileName);
-AnimData LoadAnimData(std::string fileName);
+AnimData& LoadAnimData(std::string fileName);
 //If in the future there is any issue with model data check this function first. It is highly likely that the data did not get transferred properly and the bug was missed
 // due to it working at the time. 
-ModelDataChunk Load3DModel(std::string fileName, FileType fileType);
-MapDataChunk LoadMapData(std::string fileName);
+ModelDataChunk& Load3DModel(std::string fileName, FileType fileType);
+MapDataChunk& LoadMapData(std::string fileName);
 
 bool VerifyFileOrFolder(std::string filePath);
 std::string FetchPath(FileType fileType, std::string fileName, bool saving);

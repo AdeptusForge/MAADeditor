@@ -16,7 +16,7 @@
 class Model
 {
 	unsigned int currentFrame = 0;
-	bool currentlyPlaying;
+	bool currentlyPlaying = false;
 	AnimData currentAnim;
 	void PrepTexture(Texture &ref, bool startupBool) 
 	{

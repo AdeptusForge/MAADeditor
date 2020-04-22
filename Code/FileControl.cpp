@@ -34,6 +34,11 @@ std::string GetCurrentWorkingDir(void) {
 
 const unsigned int MAX_MODEL_TEXTURES = 8;
 unsigned char* imageData;
+ModelDataChunk modelDataPTR;
+MapDataChunk mapDataPTR;
+AnimData animDataPTR;
+
+
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -185,7 +190,7 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	return sample;
 }
 
-AnimData LoadAnimData(std::string fileName) 
+AnimData& LoadAnimData(std::string fileName) 
 {
 	std::ifstream animFile;
 	std::string loadstr = FetchPath(AnimFile, fileName, false);
@@ -313,12 +318,12 @@ AnimData LoadAnimData(std::string fileName)
 	{
 		frames.push_back(freshFrame);
 	}
-	AnimData freshAnim = AnimData(length, frames, textureLookups, events);
-
-	return freshAnim;
+	animDataPTR = AnimData(length, frames, textureLookups, events);
+	animFile.close();
+	return animDataPTR;
 }
 
-ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
+ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 {
 	std::ifstream modelFile;
 	std::string loadstr = FetchPath(fileType, fileName, false);
@@ -486,7 +491,7 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 	
 
 	//WriteDebug(std::to_string(faces.size()));
-	ModelDataChunk newModel = ModelDataChunk(vertices, indices, edges, textures/*, faces*/);
+	modelDataPTR = ModelDataChunk(vertices, indices, edges, textures/*, faces*/);
 
 	//for (int i=0; i < vertices.size(); i++)
 	//{
@@ -495,11 +500,11 @@ ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
 	//WriteDebug("Vertexes: " + std::to_string(vertices.size()));
 
 	modelFile.close();
-	return newModel;
+	return modelDataPTR;
 
 }
 
-MapDataChunk LoadMapData(std::string fileName)
+MapDataChunk& LoadMapData(std::string fileName)
 {
 	std::ifstream mapFile;
 
@@ -556,9 +561,9 @@ MapDataChunk LoadMapData(std::string fileName)
 		}
 	}
 
-	MapDataChunk freshMapData = MapDataChunk(x,y, tiles);
+	mapDataPTR = MapDataChunk(x,y, tiles);
 	mapFile.close();
-	return freshMapData;
+	return mapDataPTR;
 };
 
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::string geometryPath)
