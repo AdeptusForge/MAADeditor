@@ -7,7 +7,7 @@
 
 std::vector<MAADPhysicsObject> allPhysObjects;
 
-glm::ivec3 ConvertFloatVector(glm::vec3 floatVec) 
+glm::ivec3 ConvertFloatVec(glm::vec3 floatVec) 
 {
 	glm::ivec3 newVec;
 	newVec.x = floatVec.x * MAX_DECIMAL_PRECISION;
@@ -15,7 +15,6 @@ glm::ivec3 ConvertFloatVector(glm::vec3 floatVec)
 	newVec.z = floatVec.z * MAX_DECIMAL_PRECISION;
 	return newVec;
 }
-
 
 //void CreatePhysicsObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 velocity, glm::vec3 spin) 
 //{

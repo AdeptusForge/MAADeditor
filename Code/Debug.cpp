@@ -22,6 +22,12 @@ std::string vecToStr(glm::vec4 vec)
 	return newStr;
 }
 
+std::string quatToStr(glm::quat vec)
+{
+	std::string newStr = "(" + std::to_string(vec.w) + ", " + std::to_string(vec.x) + ", " + std::to_string(vec.y) + ", " + std::to_string(vec.z) + ")";
+	return newStr;
+}
+
 
 void WriteDebug(std::string phrase)
 {
