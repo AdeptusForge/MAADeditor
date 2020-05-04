@@ -46,6 +46,7 @@ void UpdateTime(GLFWwindow* window)
 			if (!lastFrameRender) 
 			{
 				RenderUpdate(window);
+				RunInputs();
 				lastFrameRender = true;
 			}
 			else
