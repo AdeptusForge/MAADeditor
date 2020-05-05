@@ -5,6 +5,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+const int MAX_SAVED_INPUTFRAMES = 20;
+
+
 //An individual slice of inputs during every 1/120th of a second. Collected after processing.
 class InputFrame
 {

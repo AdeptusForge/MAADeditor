@@ -34,7 +34,7 @@ void InputControlStartup(GLFWwindow* window)
 	glfwSetKeyCallback(window, CollectInputs);
 	if (glfwRawMouseMotionSupported())
 		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
-	for (int i = 1; i < 20; i++) 
+	for (int i = 1; i <= MAX_SAVED_INPUTFRAMES; i++) 
 	{
 		ptr = priorFrames.begin();
 		ptr = priorFrames.insert(ptr, InputFrame());
@@ -48,45 +48,87 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
-		switch (key) 
+		if (key == GLFW_KEY_W)
 		{
-			case(GLFW_KEY_W): 
-			{
-				dirs.w = true; 
-				break;
-			}
-			case(GLFW_KEY_D):
-			{
-				dirs.x = true;
-				break;
-			}
+			dirs.w = true;
+		}
+		if (key == GLFW_KEY_D)
+		{
+			dirs.x = true;
+		}
+		if (key == GLFW_KEY_S)
+		{
+			dirs.y = true;
+		}
+		if (key == GLFW_KEY_A)
+		{
+			dirs.z = true;
+		}
+
+
+		if (key == GLFW_KEY_U) 
+		{
+			buttons.w = true;
+		}
+		if (key == GLFW_KEY_I)
+		{
+			buttons.x = true;
+		}
+		if (key == GLFW_KEY_O)
+		{
+			buttons.y = true;
+		}
+		if (key == GLFW_KEY_P)
+		{
+			buttons.z = true;
 		}
 	}
 	if (action == GLFW_RELEASE) 
 	{
-		switch (key)
+		if (key == GLFW_KEY_W)
 		{
-			case(GLFW_KEY_W):
-			{
-				dirs.w = false;
-				break;
-			}
-			case(GLFW_KEY_D):
-			{
-				dirs.x = false;
-				break;
-			}
+			dirs.w = false;
+		}
+		if (key == GLFW_KEY_D)
+		{
+			dirs.x = false;
+		}
+		if (key == GLFW_KEY_S)
+		{
+			dirs.y = false;
+		}
+		if (key == GLFW_KEY_A)
+		{
+			dirs.z = false;
+		}
 
+		if (key == GLFW_KEY_U)
+		{
+			buttons.w = false;
+		}
+		if (key == GLFW_KEY_I)
+		{
+			buttons.x = false;
+		}
+		if (key == GLFW_KEY_O)
+		{
+			buttons.y = false;
+		}
+		if (key == GLFW_KEY_P)
+		{
+			buttons.z = false;
 		}
 	}
-
 	newFrame = InputFrame(dirs, buttons);
 }
 
 void SaveInputs()
 {
+	ptr = priorFrames.begin();
+	ptr = priorFrames.insert(ptr, currFrame);
 	currFrame = newFrame;
-	WriteDebug(std::to_string(newFrame.UP()) + " " + std::to_string(newFrame.RIGHT()));
+	priorFrames.pop_back();
+	//WriteDebug(std::to_string(newFrame.UP()) + " " + std::to_string(newFrame.RIGHT()));
 	//if (newFrame.UP()) 
 	//{
 	//	WriteDebug("W check");
@@ -100,8 +142,7 @@ void SaveInputs()
 void RunInputs() 
 {
 	Camera* cam = FindCamera(1);
-	
-	
+	WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	
 	//switch (key)
 	//{
