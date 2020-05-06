@@ -19,6 +19,9 @@ std::vector<InputFrame> priorFrames;
 std::vector<InputFrame>::iterator ptr;
 MouseMode currMouseMode;
 
+glm::bvec4 dirs;
+glm::bvec4 buttons;
+
 InputFrame newFrame;
 InputFrame currFrame;
 
@@ -43,8 +46,7 @@ void InputControlStartup(GLFWwindow* window)
 
 void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	
-	glm::bvec4 dirs = currFrame.RAW_DIRECTIONS();
-	glm::bvec4 buttons = currFrame.RAW_BUTTONS();
+
 
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
@@ -128,6 +130,8 @@ void SaveInputs()
 	ptr = priorFrames.insert(ptr, currFrame);
 	currFrame = newFrame;
 	priorFrames.pop_back();
+	dirs = currFrame.RAW_DIRECTIONS();
+	buttons = currFrame.RAW_BUTTONS();
 	//WriteDebug(std::to_string(newFrame.UP()) + " " + std::to_string(newFrame.RIGHT()));
 	//if (newFrame.UP()) 
 	//{

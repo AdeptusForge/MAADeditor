@@ -15,6 +15,11 @@ c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\editor.obj
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\debug.obj
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\audiocontrol.obj
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\glad.obj
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\rngroll.obj
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\map.obj
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\time.obj
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\mapentity.obj
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\skills.obj
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.exe
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.pdb
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.ipdb
@@ -23,6 +28,7 @@ c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\cl.comma
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\cl.read.1.tlog
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\cl.write.1.tlog
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\link.command.1.tlog
+c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\link.delete.1.tlog
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\link.read.1.tlog
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\link.write.1.tlog
 c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\maadengine.tlog\maadengine.write.1u.tlog
