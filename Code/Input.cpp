@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Physics.h"
 #include "RNGRoll.h"
+#include "map.h"
 
 ModelDataChunk TestChunk;
 
@@ -145,9 +146,21 @@ void SaveInputs()
 
 void RunInputs() 
 {
-	Camera* cam = FindCamera(1);
-	WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
+	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	
+	if (currFrame.UP()) 
+	{
+		GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
+	}
+	if (currFrame.RIGHT())
+	{
+		GetMapEntity(0)->Rotate(0);
+	}
+	if (currFrame.LEFT()) 
+	{
+		GetMapEntity(0)->Rotate(1);
+	}
+
 	//switch (key)
 	//{
 	//case (GLFW_KEY_ENTER): PlaySoundClip(SFX_SND, "soundTestGOT"); break;

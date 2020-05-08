@@ -10,12 +10,15 @@
 #include "Vector"
 #include "array"
 #include "iterator"
+#include "camera.h"
+#include "render.h"
+
+const unsigned int PLAYER_ENTITYID = 0;
 
 const glm::ivec2 northVec = glm::ivec2(0,1);
 const glm::ivec2 eastVec = glm::ivec2(1, 0);
 const glm::ivec2 southVec = glm::ivec2(0, -1);
 const glm::ivec2 westVec = glm::ivec2(-1, 0);
-
 
 enum MapDirection 
 {
@@ -24,7 +27,6 @@ enum MapDirection
 	South = 3,
 	West = 4
 };
-
 enum TileFeature 
 {
 	Empty = 0,
@@ -80,6 +82,8 @@ class MapEntity
 private:
 	glm::ivec2 currentMapPos;
 	MapDirection currentFacing;
+	unsigned int actionFrame;
+	unsigned int currMaxFrame = 0;
 public:
 	glm::ivec2 GetCurrentPos() { return currentMapPos; }
 	//1 = CurrentFacing, 2 = CurrentFacing turned right once, 3 = Opposite of CurrentFacing, 4 = CurrentFacing turned left once
@@ -117,9 +121,27 @@ public:
 	}
 	unsigned int ID;
 
+	void AdvanceEntityFrame() 
+	{
+		//WriteDebug(actionFrame);
+		actionFrame++;
+		if (actionFrame > currMaxFrame) 
+		{
+			actionFrame = 0;
+			currMaxFrame = 0;
+			//WriteDebug("End of the last Action");
+		}
+		
+	}
+
 	//Left = 1, Right = 0
 	void Rotate(bool dir)
 	{
+		if (actionFrame > 0)
+			return;
+		currMaxFrame = turnRight.actionFrames.size();
+
+		Camera* cam = FindCamera(1);
 		int newFacing = currentFacing;
 		//Turn Right
 		if (!dir)
@@ -130,6 +152,11 @@ public:
 			else
 				newFacing += 1;
 			//IF PLAYER, ROTATE CAMERA
+			if (ID == PLAYER_ENTITYID) 
+			{
+				cam->StartCameraAction(turnRight);
+			}
+
 		}
 		//Turn Left
 		else
@@ -140,13 +167,20 @@ public:
 				newFacing = 4;
 			else
 				newFacing -= 1;
-
 			//IF PLAYER, ROTATE CAMERA
+			if (ID == PLAYER_ENTITYID)
+			{
+				cam->StartCameraAction(turnLeft);
+			}
 		}
 		ChangeFacing((MapDirection)newFacing);
 	}
 	void Flip()
 	{
+		if (actionFrame > 0)
+			return;
+		currMaxFrame = walkForward.actionFrames.size();
+
 		WriteDebug("Flipped " + std::to_string(ID));
 		int currentDir = currentFacing;
 		if (currentDir >= 3) {
@@ -162,16 +196,20 @@ public:
 	}
 	void Walk(MapDirection dir)
 	{
-		MapDirection moveDir =dir;
-		if (currentFacing != moveDir) 
-		{
-			//IF PLAYER, MOVE CAMERA
-		}
-
+		if (actionFrame > 0)
+			return;
+		currMaxFrame = walkForward.actionFrames.size();
+		MapDirection moveDir = dir;
+		Camera* cam = FindCamera(1);
 		if (TileMovable(GetCurrentPos(), moveDir))
 		{
 			WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
 			//IF PLAYER, MOVE CAMERA
+			if (ID == PLAYER_ENTITYID) 
+			{
+				cam->StartCameraAction(walkForward);
+			}
+
 			currentMapPos += GetMoveVector(moveDir);
 			WriteDebug("New Position: " + vecToStr(GetCurrentPos()));
 		}
@@ -183,5 +221,8 @@ public:
 		currentMapPos(startingPos), currentFacing(startingFacing), ID(entityID) {};
 };
 
+MapDataChunk& LoadMapData(std::string fileName);
+
+void UpdateMap();
 void PlayerStartup(glm::ivec2 startingPos, MapDirection dir);
 MapEntity* GetMapEntity(unsigned int entityID);

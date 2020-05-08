@@ -11,7 +11,6 @@
 #include <sstream>
 #include <commdlg.h>
 #include <fstream>
-#include "Map.h"
 #include <typeinfo>
 #include "memory"
 
@@ -35,10 +34,7 @@ std::string GetCurrentWorkingDir(void) {
 const unsigned int MAX_MODEL_TEXTURES = 8;
 unsigned char* imageData;
 ModelDataChunk modelDataPTR;
-MapDataChunk mapDataPTR;
 AnimData animDataPTR;
-
-
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
@@ -504,67 +500,6 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 
 }
 
-MapDataChunk& LoadMapData(std::string fileName)
-{
-	std::ifstream mapFile;
-
-	std::string loadstr = FetchPath(LevelFile, fileName, false);
-	mapFile.open(loadstr);
-	if (!mapFile.is_open())
-	{
-		WriteDebug("Cannot Open File: " + fileName);
-	}
-	else
-		WriteDebug("Loading File..." + fileName);
-	unsigned int x, y;
-	std::vector<MapTile> tiles;
-
-	for (std::string line; std::getline(mapFile, line);)
-	{
-		std::istringstream in(line);
-		std::string type;
-		in >> type;
-
-		int orient;
-		glm::ivec4 features;
-		std::string tileModel;
-		std::vector<std::string> functionTriggers;
-
-		if (type == "s") 
-		{ 
-			int testX, testY;
-			in >> testX >> testY;
-			if (testX <= 0 || testY <= 0)
-				WriteDebug("File Error: Map Size incorrect");
-			else { x = testX; y = testY; }
-		}
-		if (type == "t")
-		{
-			std::istringstream iss(line);
-			std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
-				std::istream_iterator<std::string>());
-			features.w = std::stoi(results[1]);
-			features.x = std::stoi(results[2]);
-			features.y = std::stoi(results[3]);
-			features.z = std::stoi(results[4]);
-			tileModel = results[5];
-			orient = std::stoi(results[6]);
-			if (results.size() > 7)
-			{
-				for (int i = 7; i < results.size(); i++)
-				{
-					functionTriggers.push_back(results[i]);
-				}
-			}
-			tiles.push_back(MapTile(glm::ivec2(x, y),
-				features, tileModel, (MapDirection)orient, functionTriggers));
-		}
-	}
-
-	mapDataPTR = MapDataChunk(x,y, tiles);
-	mapFile.close();
-	return mapDataPTR;
-};
 
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::string geometryPath)
 {

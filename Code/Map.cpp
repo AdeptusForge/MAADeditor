@@ -8,10 +8,10 @@
 #include "Vector"
 #include "array"
 #include "iterator"
-#include "FileControl.h"
 
 MapDataChunk currMap;
 std::vector<MapEntity> allEntities;
+MapDataChunk mapDataPTR;
 
 glm::ivec2 GetMoveVector(MapDirection dir) 
 {
@@ -74,6 +74,14 @@ bool TileMovable(glm::ivec2 currPos, MapDirection moveDir)
 	else return true;
 }
 
+void UpdateMap() 
+{
+	for (int i = 0; i < allEntities.size(); i++) 
+	{
+		allEntities[i].AdvanceEntityFrame();
+	}
+}
+
 MapEntity* GetMapEntity(unsigned int entityID) 
 {
 	if (!allEntities.empty())
@@ -93,3 +101,65 @@ MapEntity* GetMapEntity(unsigned int entityID)
 	WriteDebug("No AllModels");
 	return nullptr;
 }
+
+MapDataChunk& LoadMapData(std::string fileName)
+{
+	std::ifstream mapFile;
+
+	std::string loadstr = FetchPath(LevelFile, fileName, false);
+	mapFile.open(loadstr);
+	if (!mapFile.is_open())
+	{
+		WriteDebug("Cannot Open File: " + fileName);
+	}
+	else
+		WriteDebug("Loading File..." + fileName);
+	unsigned int x, y;
+	std::vector<MapTile> tiles;
+
+	for (std::string line; std::getline(mapFile, line);)
+	{
+		std::istringstream in(line);
+		std::string type;
+		in >> type;
+
+		int orient;
+		glm::ivec4 features;
+		std::string tileModel;
+		std::vector<std::string> functionTriggers;
+
+		if (type == "s")
+		{
+			int testX, testY;
+			in >> testX >> testY;
+			if (testX <= 0 || testY <= 0)
+				WriteDebug("File Error: Map Size incorrect");
+			else { x = testX; y = testY; }
+		}
+		if (type == "t")
+		{
+			std::istringstream iss(line);
+			std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
+				std::istream_iterator<std::string>());
+			features.w = std::stoi(results[1]);
+			features.x = std::stoi(results[2]);
+			features.y = std::stoi(results[3]);
+			features.z = std::stoi(results[4]);
+			tileModel = results[5];
+			orient = std::stoi(results[6]);
+			if (results.size() > 7)
+			{
+				for (int i = 7; i < results.size(); i++)
+				{
+					functionTriggers.push_back(results[i]);
+				}
+			}
+			tiles.push_back(MapTile(glm::ivec2(x, y),
+				features, tileModel, (MapDirection)orient, functionTriggers));
+		}
+	}
+
+	mapDataPTR = MapDataChunk(x, y, tiles);
+	mapFile.close();
+	return mapDataPTR;
+};

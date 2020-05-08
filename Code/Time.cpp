@@ -4,6 +4,7 @@
 #include "Physics.h"
 #include "Render.h"
 #include "Input.h"
+#include "map.h"
 
 //Shows number of ticks since last update, useful for running time-based functions.
 Uint64 deltaTime;
@@ -47,6 +48,7 @@ void UpdateTime(GLFWwindow* window)
 			{
 				RenderUpdate(window);
 				RunInputs();
+				UpdateMap();
 				lastFrameRender = true;
 			}
 			else
