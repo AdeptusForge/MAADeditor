@@ -160,6 +160,10 @@ void RunInputs()
 	{
 		GetMapEntity(0)->Rotate(1);
 	}
+	if (currFrame.DOWN())
+	{
+		GetMapEntity(0)->Flip();
+	}
 
 	//switch (key)
 	//{

@@ -42,8 +42,6 @@ void GameToRenderConversion(GameObject obj)
 	{
 		PhysicsTransform renderTrans = obj.models[i].modelOffset + obj.transform;
 		Model renderModel = obj.models[i].viewModel;
-
-
 		allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 	}
 }
@@ -137,10 +135,18 @@ GLFWwindow* RenderStartup()
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 
 
-	Model newModel = Model("TestCube");
-	newModel = Model("TileFloorCube");
-	allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
+	Model newModel = Model("TileFloorCube");
+	Model testModel = Model("TileFloorCube");
 
+	for (int x = 0; x < 5; x++) 
+	{
+		for (int y = 0; y < 5; y++)
+		{
+			RenderObject newRO = RenderObject(PhysicsTransform(glm::vec3(x * 10 * MAX_DECIMAL_PRECISION, 0, y * 10 * MAX_DECIMAL_PRECISION), glm::vec3(0)), testModel, 1);
+			allModels.push_back(newRO);
+		}
+	}
+	WriteDebug(allModels.size());
 	//LoadAnimData("AnimLoadTest");
 	//newModel = Model("ObjLoadTest");
 	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
@@ -175,8 +181,8 @@ void RenderUpdate(GLFWwindow* window)
 		allModels[i].objModel.ModelRefresh(ourShader);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
-		float angle = 20.0f * i;
-		model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
+		//float angle = 20.0f * i;
+		//model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);
 		allModels[i].objModel.Draw(ourShader);
 	}

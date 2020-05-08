@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: ''
 # www.blender.org
-mtllib TileFloorCubeManual.mtl
+mtllib TileFloorCube.mtl
 o Cube.003
 v -5.000000 0.000002 -5.000000
 v 5.000000 -0.000002 5.000000

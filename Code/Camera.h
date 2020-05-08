@@ -53,7 +53,10 @@ const CameraAction walkForward = CameraAction(1, std::vector<CameraCoords>
 	CameraCoords(glm::vec3(0.0, 0.0, 4.0), glm::vec3(0,0,0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 5.0), glm::vec3(0,0,0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 6.0), glm::vec3(0,0,0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 7.0), glm::vec3(0,0,0))
+	CameraCoords(glm::vec3(0.0, 0.0, 7.0), glm::vec3(0,0,0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 8.0), glm::vec3(0, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 9.0), glm::vec3(0, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 10.0), glm::vec3(0, 0, 0))
 
 });
 const CameraAction turnRight = CameraAction(2, std::vector<CameraCoords>
@@ -79,11 +82,11 @@ const CameraAction turnLeft = CameraAction(3, std::vector<CameraCoords>
 const CameraAction turn180 = CameraAction(4, std::vector<CameraCoords>
 {
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 30, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 60, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 90, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 120, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 150, 0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 180, 0))
 });
 //const CameraAction walkBackward;
@@ -137,12 +140,10 @@ public:
 
 	void UpdateCameraView() 
 	{
-		//WriteDebug("Front: " + std::to_string(cameraFront.x) + ", " + std::to_string(cameraFront.y) + ", " + std::to_string(cameraFront.z));
-		//WriteDebug("Pos: " + std::to_string(cameraPos.x) + ", " + std::to_string(cameraPos.y) + ", " + std::to_string(cameraPos.z));
 		//if(mode == FreeView)
 		CameraCoords offsetAndBase = cameraCoords + offsetCoords;
-		WriteDebug("Forward:: Normal:" + vecToStr(cameraCoords.cameraFront) + ". Offset: " + vecToStr(offsetCoords.cameraFront));
-		WriteDebug("Up:: Normal:" + vecToStr(cameraCoords.cameraUp) + ". Offset: " + vecToStr(offsetCoords.cameraUp));
+		//WriteDebug("Forward:: Normal:" + vecToStr(cameraCoords.cameraFront) + ". Offset: " + vecToStr(offsetCoords.cameraFront));
+		//WriteDebug("Up:: Normal:" + vecToStr(cameraCoords.cameraUp) + ". Offset: " + vecToStr(offsetCoords.cameraUp));
 
 		cameraView = glm::lookAt(offsetAndBase.cameraPos, offsetAndBase.cameraPos + offsetAndBase.cameraFront, offsetAndBase.cameraUp);
 	}

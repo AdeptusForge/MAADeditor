@@ -141,12 +141,11 @@ public:
 			return;
 		currMaxFrame = turnRight.actionFrames.size();
 
-		Camera* cam = FindCamera(1);
 		int newFacing = currentFacing;
 		//Turn Right
 		if (!dir)
 		{
-			WriteDebug("Rotated right" + std::to_string(ID));
+			//WriteDebug("Rotated right" + std::to_string(ID));
 			if (currentFacing == West)
 				newFacing = 1;
 			else
@@ -154,6 +153,7 @@ public:
 			//IF PLAYER, ROTATE CAMERA
 			if (ID == PLAYER_ENTITYID) 
 			{
+				Camera* cam = FindCamera(1);
 				cam->StartCameraAction(turnRight);
 			}
 
@@ -161,15 +161,15 @@ public:
 		//Turn Left
 		else
 		{
-			WriteDebug("Rotated left" + std::to_string(ID));
+			//WriteDebug("Rotated left" + std::to_string(ID));
 
 			if (currentFacing == North)
 				newFacing = 4;
 			else
 				newFacing -= 1;
-			//IF PLAYER, ROTATE CAMERA
 			if (ID == PLAYER_ENTITYID)
 			{
+				Camera* cam = FindCamera(1);
 				cam->StartCameraAction(turnLeft);
 			}
 		}
@@ -187,7 +187,11 @@ public:
 			currentDir -= 4;
 		}
 		currentDir += 2;
-		//IF PLAYER, ROTATE CAMERA
+		if (ID == PLAYER_ENTITYID)
+		{
+			Camera* cam = FindCamera(1);
+			cam->StartCameraAction(turn180);
+		}
 		ChangeFacing((MapDirection)currentDir);
 	}
 	void ChangeFacing(MapDirection dir)
@@ -200,18 +204,18 @@ public:
 			return;
 		currMaxFrame = walkForward.actionFrames.size();
 		MapDirection moveDir = dir;
-		Camera* cam = FindCamera(1);
 		if (TileMovable(GetCurrentPos(), moveDir))
 		{
-			WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
+			//WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
 			//IF PLAYER, MOVE CAMERA
 			if (ID == PLAYER_ENTITYID) 
 			{
+				Camera* cam = FindCamera(1);
 				cam->StartCameraAction(walkForward);
 			}
 
 			currentMapPos += GetMoveVector(moveDir);
-			WriteDebug("New Position: " + vecToStr(GetCurrentPos()));
+			//WriteDebug("New Position: " + vecToStr(GetCurrentPos()));
 		}
 		else
 			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
