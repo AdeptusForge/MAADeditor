@@ -12,9 +12,18 @@ unsigned int sfxVolume;
 unsigned int voiceVolume;
 unsigned int musicVolume;
 
+Mix_Chunk* LoadGameAudioFile(std::string fileName)
+{
+	std::string loadstr = FetchPath(AudioFile, fileName, false);
+
+	Mix_Chunk* sample = Mix_LoadWAV(loadstr.c_str());
+	if (sample == NULL) WriteDebug("Sound not found: " + std::string(loadstr));
+
+	return sample;
+}
+
 int SpecialSoundModifier(std::string sound) 
 {
-	
 	return 100;
 }
 

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SHADER_H
-#define SHADER_H
-
 #include <glad/glad.h> // include glad to get all the required OpenGL headers
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,7 +8,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "Debug.h" 
+#include "Debug.h"
+#include "filecontrol.h"
 
 
 class Shader
@@ -195,4 +193,5 @@ private:
 	}
 };
 
-#endif
+Shader LoadCustomShader(std::string, std::string, std::string);
+

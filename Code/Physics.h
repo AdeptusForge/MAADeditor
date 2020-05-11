@@ -16,8 +16,6 @@ const unsigned int MAX_DECIMAL_PRECISION = 10000;
 
 glm::ivec3 ConvertFloatVec(glm::vec3);
 
-
-
 struct PhysicsTransform
 {
 private:
@@ -34,6 +32,7 @@ public:
 		worldPosition.x = (float)position.x / MAX_DECIMAL_PRECISION;
 		worldPosition.y = (float)position.y / MAX_DECIMAL_PRECISION;
 		worldPosition.z = (float)position.z / MAX_DECIMAL_PRECISION;
+		//WriteDebug(vecToStr(worldPosition));
 		return  worldPosition;
 	}
 

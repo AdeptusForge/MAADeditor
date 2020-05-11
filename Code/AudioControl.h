@@ -19,4 +19,5 @@ enum SoundType
 void AudioControlStartup();
 void AudioControlQuit();
 void PlaySoundClip(SoundType SDNtype, std::string sound);
+Mix_Chunk* LoadGameAudioFile(std::string fileName);
 

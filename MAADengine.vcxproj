@@ -308,6 +308,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Assets.cpp" />
     <ClCompile Include="Code\AudioControl.cpp" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor.cpp" />
@@ -320,6 +321,7 @@
     <ClCompile Include="Code\Map.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
     <ClCompile Include="Code\Render.cpp" />
+    <ClCompile Include="Code\Shaders.cpp" />
     <ClCompile Include="Code\Skills.cpp" />
     <ClCompile Include="Code\src\glad.c" />
     <ClCompile Include="Code\imGUI\imgui.cpp" />

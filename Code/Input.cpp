@@ -165,6 +165,10 @@ void RunInputs()
 		GetMapEntity(0)->Flip();
 	}
 
+	if (currFrame.BUTTON_1()) 
+	{
+		PlaySoundClip(SFX_SND, "soundTestGOT");
+	}
 	//switch (key)
 	//{
 	//case (GLFW_KEY_ENTER): PlaySoundClip(SFX_SND, "soundTestGOT"); break;
