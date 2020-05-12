@@ -12,7 +12,16 @@
 #include "AnimEvents.h"
 #include "memory"
 
-//model bits
+//Stores texture by name and ID number instead of by data
+//REFACTOR:: Store texture by data
+struct Texture
+{
+	unsigned int ID;
+	std::string name;
+	Texture(unsigned int id, std::string name) : ID(id), name(name) {};
+};
+
+#pragma region Model Structs
 struct Vertex
 {
 public:
@@ -28,19 +37,15 @@ struct Edge
 	glm::vec3 color;
 	Edge(glm::vec3 start, glm::vec3 end, glm::vec3 col) : edgeStart(start), edgeEnd(end), color(col) {};
 };
-struct Texture
-{
-	unsigned int ID;
-	std::string name;
-	Texture(unsigned int id, std::string name) : ID(id), name(name) {};
-};
+#pragma endregion
 
+#pragma region Animation Structs
 struct AnimEvent
 {
 private:
 	std::string functionName;
 	std::string variables;
-	unsigned int activationFrame;
+	unsigned int activationFrame = 0;
 public:
 	AnimEvent(std::string data)
 	{
@@ -54,7 +59,6 @@ public:
 	};
 	AnimEvent() {};
 };
-
 struct AnimFrame
 {
 private:
@@ -70,7 +74,6 @@ public:
 
 	AnimFrame() {};
 };
-
 struct AnimData
 {
 private:
@@ -87,6 +90,7 @@ public:
 	};
 	AnimData() {};
 };
+#pragma endregion
 
 AnimData& LoadAnimData(std::string fileName);
 
@@ -107,11 +111,14 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&
 void UnloadImageFile(unsigned char* image);
 ModelDataChunk& Load3DModel(std::string fileName, FileType fileType);
 
+//Main class for 3D models
+//REFACTOR:: ??? 3D animation rework
 class Model
 {
 	unsigned int currentFrame = 0;
 	bool currentlyPlaying = false;
 	AnimData currentAnim;
+	//Loads raw image data, generates mipmaps, and then unloads the texture data.
 	void PrepTexture(Texture &ref, bool startupBool) 
 	{
 		int width, height, nrChannels;
@@ -132,6 +139,8 @@ class Model
 		glGenerateMipmap(GL_TEXTURE_2D);
 		UnloadImageFile(texData);
 	}
+	
+	//Binds a texture to an active opneGL memory location.
 	void BindTextures(Shader shader)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
@@ -149,8 +158,6 @@ public:
 	std::vector<Texture> textures;
 	unsigned int VAO;
 
-
-
 	#pragma region Constructor
 	Model(std::string modelName)
 	{
@@ -166,7 +173,7 @@ public:
 	}
 
 	#pragma endregion
-
+	//Plays the animation specified by setting the current animation abd resetting the current frame to 0
 	void StartAnim(std::string data) 
 	{
 		this->currentAnim = LoadAnimData(data);
@@ -175,7 +182,8 @@ public:
 		//AnimFrame currFrame = currentAnim.GetCurrFrame(currentFrame);
 		//WriteDebug(std::to_string(currFrame.GetTextureChanges().y));
 	}
-
+	
+	//Animation update that occurs once per Draw() call.
 	void PlayAnim()
 	{
 		if (currentlyPlaying) 
@@ -198,19 +206,20 @@ public:
 		}
 
 	};
-
+	//Preps the model for the next draw frame and rebinds current textures.
 	void ModelRefresh(Shader shader)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 		BindTextures(shader);
 	}
+	//Deletes old textures to prevent memory leaks.
 	void ModelCleanup() 
 	{
 		for(int i=0; i< textures.size(); i++)
 			glDeleteTextures(1, &textures[i].ID);
 	}
-
+	//Draws the model into the OpenGL space. Called once per RenderUpdate()
 	void Draw(Shader shader)
 	{
 		//Draw
@@ -226,7 +235,7 @@ public:
 private:
 
 	unsigned int VBO, EBO;
-
+	//Initial model setup, including base textures and all pertinent buffers.
 	void ModelSetup() 
 	{
 		#pragma region Load Textures
@@ -264,7 +273,5 @@ private:
 			&indices[0], GL_STATIC_DRAW);
 
 		glBindVertexArray(1);
-
 	}
-	
 };

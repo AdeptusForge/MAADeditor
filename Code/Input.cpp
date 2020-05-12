@@ -28,11 +28,13 @@ InputFrame currFrame;
 
 bool isSelecting;
 
+//NEEDS ACTUAL CODE.
 static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
 {
 
 }
 
+//sets the key event callback to CollectInputs() and fills the inputframe list with empty data so no input errors can occur.
 void InputControlStartup(GLFWwindow* window)
 {
 	glfwSetKeyCallback(window, CollectInputs);
@@ -45,9 +47,11 @@ void InputControlStartup(GLFWwindow* window)
 	}
 }
 
+//Records inputs on a given frame and saves them as an InputFrame.
+////BE CAREFUL--
+//glfwSetKeyCallback is very quirky in how it collects inputs and shows behaviour that is strange.
+//Example: it will pull in a single input per key-press, then ignore/forget all others currently occurring.
 void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	
-
 
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
@@ -125,6 +129,7 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 	newFrame = InputFrame(dirs, buttons);
 }
 
+//Moves the inputFrame list forward to the current frame and erases the oldest one.
 void SaveInputs()
 {
 	ptr = priorFrames.begin();
@@ -133,17 +138,10 @@ void SaveInputs()
 	priorFrames.pop_back();
 	dirs = currFrame.RAW_DIRECTIONS();
 	buttons = currFrame.RAW_BUTTONS();
-	//WriteDebug(std::to_string(newFrame.UP()) + " " + std::to_string(newFrame.RIGHT()));
-	//if (newFrame.UP()) 
-	//{
-	//	WriteDebug("W check");
-	//}
-	//if (newFrame.RIGHT())
-	//{
-	//	WriteDebug("D check");
-	//}
 }
 
+//Runs inputs. Called once every frame to prevent input errors in a singleplayer environment.
+//If you wanted to handle multiplayer or an update-based framework, you'd need to change this to compensate.
 void RunInputs() 
 {
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
@@ -169,25 +167,4 @@ void RunInputs()
 	{
 		PlaySoundClip(SFX_SND, "soundTestGOT");
 	}
-	//switch (key)
-	//{
-	//case (GLFW_KEY_ENTER): PlaySoundClip(SFX_SND, "soundTestGOT"); break;
-	//case (GLFW_KEY_I):
-	//{RenderObject* model = GetRenderObject(1);
-	//model->objModel.StartAnim("AnimLoadTest");
-	//break; }
-	//case (GLFW_KEY_W): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1)); break;
-	//case (GLFW_KEY_D): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(2)); break;
-	//case (GLFW_KEY_S): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(3)); break;
-	//case (GLFW_KEY_A): GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(4)); break;
-
-	//case (GLFW_KEY_X): GetMapEntity(0)->Flip(); break;
-	//case (GLFW_KEY_Q): GetMapEntity(0)->Rotate(1); break;
-	//case (GLFW_KEY_E): GetMapEntity(0)->Rotate(0); break;
-
-	//case (GLFW_KEY_B): WriteDebug("pressed B"); break;
-	//case (GLFW_KEY_Y): WriteDebug("pressed Y"); break;
-	//case (GLFW_KEY_UP): cam->StartCameraAction(walkForward); break;
-
-	//}
 }

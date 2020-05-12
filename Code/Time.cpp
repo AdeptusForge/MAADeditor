@@ -17,11 +17,13 @@ bool lastFrameRender;
 
 int totalRenders=0;
 
+//Gets the current ticks per frame. Used mostly in timestep testing.
 int GetCurrentTick()
 {
 	return currTick / physicsFrameInTicks;
 };
 
+//Begins time startup.
 void TimeStartup() 
 {
 
@@ -31,6 +33,8 @@ void TimeStartup()
 
 };
 
+//Updates game time based on the computer's clock and the current tick. 
+//Updates Rendering, Physics, Inputs, and map interactions.
 void UpdateTime(GLFWwindow* window)
 {
 	currTick = SDL_GetPerformanceCounter();
@@ -56,4 +60,3 @@ void UpdateTime(GLFWwindow* window)
 	}
 
 }
-

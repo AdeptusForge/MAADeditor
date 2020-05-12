@@ -2,9 +2,6 @@
 
 #include "Skills.h"
 
-
-
-
 enum EntityType
 {
 	NoType = 0,

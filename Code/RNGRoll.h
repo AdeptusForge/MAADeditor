@@ -31,18 +31,18 @@ struct RollParameters
 
 };
 
-int RollInt(int size=100, int location=1)
-{
-	int rngNumber = std::rand() % size + location;
-	return rngNumber;
-};
+//Rolls and integer based on the size & location of the roll.
+//location is the lowest number possible.
+//Range: location <= RollInt <= location+size
+int RollInt(int size=100, int location=1) {return std::rand() % size + location;}
 
+//Rolls a success or failure based on the roll parameters. One roll occurs at every location RollBool is executed.
 bool RollBool(RollParameters params) 
 {
 	int rollLocation = std::get<0>(params.rollOutOf);
 	int rollSize = std::get<1>(params.rollOutOf) - rollLocation + 1;
 	float failurePercent =  (float)params.failureChance/ 100;
-	int failureNumber = (rollSize * failurePercent) +rollLocation -1;
+	int failureNumber = (rollSize * failurePercent) + rollLocation -1;
 	int rolledNumber = RollInt(rollSize, rollLocation);
 
 	//WriteDebug("Size: " + std::to_string(rollSize) + ". Location: " +

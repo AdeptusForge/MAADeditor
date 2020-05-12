@@ -6,14 +6,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-
-
-
 AnimData animDataPTR;
 ModelDataChunk modelDataPTR;
 unsigned char* imageData;
 
-
+//Loads an image. Requires image dimensions. Returns a pointer to a STBI memory location.
 unsigned char* LoadImageFile(FileType fileType, std::string fileName, int& width, int& height, int& nrChannels)
 {
 	stbi_set_flip_vertically_on_load(true);
@@ -25,14 +22,13 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int& width
 
 	return imageData;
 }
+//Frees up STBI image memory.
 void UnloadImageFile(unsigned char* image)
 {
 	stbi_image_free(image);
 }
 
-
-
-
+//Loads a 3D model from a .wav file through reading text.
 ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 {
 	std::ifstream modelFile;
@@ -214,6 +210,7 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 
 }
 
+//Loads an animation from a .txt file by reading line by line.
 AnimData& LoadAnimData(std::string fileName)
 {
 	std::ifstream animFile;

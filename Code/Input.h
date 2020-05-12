@@ -50,6 +50,7 @@ enum MouseMode
 };
 
 //Essentially designed to handle specific inputs in sequenced input frames (think QCF and DP motions)
+//REFACTOR:: Input macro detection.
 class CommandInputMacro
 {
 private:

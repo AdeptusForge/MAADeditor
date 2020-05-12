@@ -13,6 +13,7 @@ MapDataChunk currMap;
 std::vector<MapEntity> allEntities;
 MapDataChunk mapDataPTR;
 
+//Returns a movement vector based on a mapDirection.
 glm::ivec2 GetMoveVector(MapDirection dir) 
 {
 	glm::ivec2 moveVec;
@@ -36,28 +37,32 @@ private:
 	unsigned int ID;
 };
 
+//Adds a player to the pool of MapEntities to allow for movement.
 void PlayerStartup(glm::ivec2 startingPos, MapDirection dir)
 {
 	allEntities.push_back(MapEntity(startingPos, dir, 0));
 }
+//Checks to see if a given location is within map boundaries.
 bool IsOnCurrentMap(glm::ivec2 loc) 
 {
 	if (loc.x > currMap.mapSize.x -1 || loc.x < 0) return false;
 	else if (loc.y > currMap.mapSize.y - 1 || loc.y < 0) return false;
 	else return true;
 };
-
+//Loads map data and performs PlayerStartup()
 void MapStartup(std::string mapName) 
 {
 	currMap = LoadMapData(mapName);
 	PlayerStartup(glm::ivec2(0), North);
 }
 
+//returns the data of a maptile
 MapTile* GetTile(glm::ivec2 tileLoc)
 {
 	return &currMap.tileMap[tileLoc.y * currMap.mapSize.y + tileLoc.x];
 }
 
+//checks to see if a tile can be entered by an entity from its current location.
 bool TileMovable(glm::ivec2 currPos, MapDirection moveDir)
 {
 	glm::ivec2 moveVec = GetMoveVector(moveDir);
@@ -73,7 +78,8 @@ bool TileMovable(glm::ivec2 currPos, MapDirection moveDir)
 	}
 	else return true;
 }
-
+//Updates all the entities on the map by a single frame.
+//TODO:: Map editing during runtime.
 void UpdateMap() 
 {
 	for (int i = 0; i < allEntities.size(); i++) 
@@ -82,6 +88,7 @@ void UpdateMap()
 	}
 }
 
+//Returns a mapEntity from the pool of all mapentities.
 MapEntity* GetMapEntity(unsigned int entityID) 
 {
 	if (!allEntities.empty())
@@ -102,6 +109,7 @@ MapEntity* GetMapEntity(unsigned int entityID)
 	return nullptr;
 }
 
+//Loads map data from a text-based map file.
 MapDataChunk& LoadMapData(std::string fileName)
 {
 	std::ifstream mapFile;

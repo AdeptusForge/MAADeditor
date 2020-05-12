@@ -1,5 +1,6 @@
 #include "shaders.h"
 
+//Loads a shader by compiling a vertex shader, fragment shader and a geometry shader into a single Shader class.
 Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::string geometryPath)
 {
 	vertexPath = FetchPath(VertexShaderFile, vertexPath, false);

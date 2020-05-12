@@ -14,6 +14,7 @@
 #include <typeinfo>
 #include "memory"
 
+#pragma region DO NOT MOVE
 #include <stdio.h>  /* defines FILENAME_MAX */
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -28,6 +29,7 @@ std::string GetCurrentWorkingDir(void) {
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
 
+//Verifies whether the file is retrievable.
 bool VerifyFileOrFolder(std::string filePath) 
 {
 	filePath = "/" + filePath;
@@ -43,12 +45,15 @@ bool VerifyFileOrFolder(std::string filePath)
 	return false;
 }
 
+//Initializes file control.
 void FileControlStartup()
 {
 	VerifyFileOrFolder(assetPath);
 	WriteDebug("File Control Startup -- Successful");
 }
 
+//Writes the asset path for a file based on its type and name, then verifies it.
+//REFACTOR:: Folder asset paths? 
 std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 {
 	std::string path;
@@ -138,6 +143,7 @@ std::string FetchPath(FileType fileType, std::string fileName, bool saving)
 	return path;
 }
 
+//Saves the active file to its intended destination.
 void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 {
 	std::string filePath = FetchPath(fileType, fileName, true);
@@ -147,4 +153,3 @@ void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 	file << data;
 	file.close();
 }
-

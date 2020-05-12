@@ -15,7 +15,7 @@
 
 GLFWwindow* window;
 
-
+//Starts up the entirety of the application
 void InitializeTheMAADness() 
 {
 
@@ -28,6 +28,8 @@ void InitializeTheMAADness()
 	MapStartup("MapLoadTest");
 	WriteDebug("MAADness Initialized");
 }
+
+//Quits out of the application, shuts down libraries safely, and frees up memory
 int EndTheMAADness() 
 {
 	EditorShutdown();
@@ -37,6 +39,7 @@ int EndTheMAADness()
 	glfwTerminate();
 	return -1;
 }
+
 //Main while-loop exit conditions
 bool WorkingProperly() 
 {
@@ -47,7 +50,6 @@ bool WorkingProperly()
 
 int main(int argc, char **argv)
 {
-	
 	InitializeTheMAADness();
 	//Don't move this if statement; it needs to be here for some reason...
 	if (!window) return EndTheMAADness();

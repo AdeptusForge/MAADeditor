@@ -10,6 +10,8 @@
 #include "Debug.h"
 #include <Math.h>
 
+
+//REFACTOR::REWORK ALL OF THE PHYSICS SYSTEM, PREFERABLY WITH FIXED DECIMAL PRECISION.
 void PhysicsUpdate();
 
 const unsigned int MAX_DECIMAL_PRECISION = 10000;

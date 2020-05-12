@@ -36,6 +36,7 @@ private:
 	unsigned int ID;
 };
 
+//Converts a gameobject into a renderobject for use during rendering.
 void GameToRenderConversion(GameObject obj)
 {
 	for (int i = 0; i < obj.models.size(); i++)
@@ -46,6 +47,7 @@ void GameToRenderConversion(GameObject obj)
 	}
 }
 
+//Gets a camera from the list of allcameras.
 Camera* FindCamera(unsigned int camID) 
 {
 	Camera* found = nullptr;
@@ -61,6 +63,7 @@ glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity
 glm::mat4 view = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
+//readjusts the view on the screen to fit the window.
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -68,6 +71,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 };
 
+//Gets a specific renderobject from the list of allModels
 RenderObject* GetRenderObject(int ID) 
 {
 	if (!allModels.empty())
@@ -88,11 +92,13 @@ RenderObject* GetRenderObject(int ID)
 	return nullptr;
 }
 
+//Readjusts the size of the window when dragging the edges of it.
 void ResetScreenSize(GLFWwindow* window) 
 {
 	glfwSetWindowSize(window, 800, 800);
 }
 
+//Initializes an OpenGL window.
 GLFWwindow* RenderStartup() 
 {
 	GLFWwindow* window;
@@ -154,6 +160,8 @@ GLFWwindow* RenderStartup()
 	return window;
 }
 
+//Shuts down all OpenGL operations
+//REFACTOR:: Actually make this do something.
 void RenderShutdown()
 {
 	/*glDeleteVertexArrays(1, &VAO);
@@ -162,6 +170,7 @@ void RenderShutdown()
 	WriteDebug("Render Shutdown Successful");
 }
 
+//Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
 	

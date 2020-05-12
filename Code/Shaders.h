@@ -11,7 +11,8 @@
 #include "Debug.h"
 #include "filecontrol.h"
 
-
+//Custom shader class that is passed through OpenGL.
+//REFACTOR:: Geometry Shader functionality.
 class Shader
 {
 public:
@@ -110,7 +111,8 @@ public:
 	{
 		glUseProgram(ID);
 	}
-	// utility uniform functions
+#pragma region Utility Uniform Functions
+
 	void setBool(const std::string& name, bool value) const 
 	{
 		glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
@@ -164,6 +166,7 @@ public:
 	{
 		glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 	}
+#pragma endregion
 
 private:
 	// utility function for checking shader compilation/linking errors.

@@ -12,6 +12,7 @@ unsigned int sfxVolume;
 unsigned int voiceVolume;
 unsigned int musicVolume;
 
+//Loads a .wav music file into SDL Mix_Chunk
 Mix_Chunk* LoadGameAudioFile(std::string fileName)
 {
 	std::string loadstr = FetchPath(AudioFile, fileName, false);
@@ -22,11 +23,13 @@ Mix_Chunk* LoadGameAudioFile(std::string fileName)
 	return sample;
 }
 
+//A function for returning special volume modifiers depending on the situation.
 int SpecialSoundModifier(std::string sound) 
 {
 	return 100;
 }
 
+//Returns overall sound volume by factoring in all possible sound modifiers, including options.
 float SoundVolume(SoundType SNDtype, std::string sound/*include sound distance/direction identifier here*/) 
 {
 	float volumePercentage = 0;
@@ -58,6 +61,7 @@ float SoundVolume(SoundType SNDtype, std::string sound/*include sound distance/d
 	return volumePercentage;
 }
 
+//Plays a loaded soundclip.
 void PlaySoundClip(SoundType SNDtype, std::string sound) 
 {
 	switch (SNDtype) 
@@ -67,6 +71,7 @@ void PlaySoundClip(SoundType SNDtype, std::string sound)
 	}
 }
 
+//Initialization of Audio Mixer
 void AudioControlStartup()
 {
 
@@ -75,6 +80,7 @@ void AudioControlStartup()
 	WriteDebug("Audio Control Startup -- Successful");
 }
 
+//Shuts down Audio Mixer
 void AudioControlQuit() 
 {
 	Mix_Quit();

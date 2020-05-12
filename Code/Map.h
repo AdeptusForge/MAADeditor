@@ -12,13 +12,27 @@
 #include "iterator"
 #include "camera.h"
 #include "render.h"
-
+#pragma region const variables
+#ifndef PLAYER_ENTITYID
 const unsigned int PLAYER_ENTITYID = 0;
+#endif // !PLAYER_ENTITYID
 
+#ifndef northVec
 const glm::ivec2 northVec = glm::ivec2(0,1);
+#endif // !northVec
+
+#ifndef eastVec
 const glm::ivec2 eastVec = glm::ivec2(1, 0);
+#endif // !eastVec
+
+#ifndef southVec
 const glm::ivec2 southVec = glm::ivec2(0, -1);
+#endif // !southVec
+
+#ifndef westVec
 const glm::ivec2 westVec = glm::ivec2(-1, 0);
+#endif // !westVec
+#pragma endregion
 
 enum MapDirection 
 {
@@ -76,7 +90,8 @@ void MapStartup(std::string mapName);
 MapTile* GetTile(glm::ivec2 tileLoc);
 bool TileMovable(glm::ivec2 currPos, MapDirection moveDir);
 
-//ID will be used to determine fixed-location encounters and when a MapEntity is the player(ID = 0).
+//Essentially anything that moves of its own accord on a map within the game.
+//ID is used to determine fixed-location encounters and when a MapEntity is the player(ID = 0).
 class MapEntity
 {
 private:
@@ -121,6 +136,7 @@ public:
 	}
 	unsigned int ID;
 
+	//Mostly to keep the player from being able to move before he's supposed to.
 	void AdvanceEntityFrame() 
 	{
 		//WriteDebug(actionFrame);
@@ -134,6 +150,7 @@ public:
 		
 	}
 
+	//Rotates an entity's facing
 	//Left = 1, Right = 0
 	void Rotate(bool dir)
 	{
@@ -175,6 +192,8 @@ public:
 		}
 		ChangeFacing((MapDirection)newFacing);
 	}
+	
+	//Flips an entity's facing by 180 degrees.
 	void Flip()
 	{
 		if (actionFrame > 0)
@@ -194,10 +213,14 @@ public:
 		}
 		ChangeFacing((MapDirection)currentDir);
 	}
+
+	//Sets an entity's facing without rotating or editing the camera.
 	void ChangeFacing(MapDirection dir)
 	{
 		currentFacing = dir;
 	}
+
+	//Moves an entity based on the tile grid. Is independent of facing.
 	void Walk(MapDirection dir)
 	{
 		if (actionFrame > 0)

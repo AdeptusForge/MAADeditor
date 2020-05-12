@@ -4,13 +4,8 @@
 #include "imgui/imgui.h"
 #include <stdio.h>
 
-
-
 void EditorStartup(GLFWwindow*);
 void EditorUpdate(GLFWwindow*);
 void EditorShutdown();
 
 void FetchVisibleVerts();
-
-
-

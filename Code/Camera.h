@@ -13,6 +13,7 @@
 const glm::vec3 baseCameraUp = glm::vec3(0.0,1.0,0.0);
 const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 
+//REFACTOR:: Into physics-based coordinate system.
 struct CameraCoords
 {
 	glm::vec3 cameraPos;
@@ -35,6 +36,7 @@ struct CameraCoords
 	}
 };
 
+//REFACTOR:: Remake this as an animation
 struct CameraAction 
 {
 	unsigned int ID;
@@ -109,6 +111,8 @@ enum CameraMode
 	FreeView
 };
 
+//Camera Object. Multiple can be used simultaneously
+//REFACTOR:: Restructure CameraActions and
 class Camera 
 {
 private:
@@ -138,6 +142,8 @@ public:
 
 	glm::mat4 GetCameraView() { return cameraView; }
 
+	//Updates camera view based on its offset and its current position.
+	//cameraView is based on cameraFront and cameraUp, not on the rotation of the camera.
 	void UpdateCameraView() 
 	{
 		//if(mode == FreeView)
@@ -147,25 +153,33 @@ public:
 
 		cameraView = glm::lookAt(offsetAndBase.cameraPos, offsetAndBase.cameraPos + offsetAndBase.cameraFront, offsetAndBase.cameraUp);
 	}
-
+	//Teleports the camera to a new location. Does not reset the camera offset.
+	//--Overloads--
+	//CameraCoords()
+	//glm::vec3
 	void MoveCamera(CameraCoords newCoords) 
 	{
 		cameraCoords.cameraPos = newCoords.cameraPos;
 		UpdateCameraView();
 	}
-
+	//Teleports the camera to a new location. Does not reset the camera offset.
+	//--Overloads--
+	//CameraCoords()
+	//glm::vec3
 	void MoveCamera(glm::vec3 moveTo)
 	{
 		cameraCoords.cameraPos += moveTo;
 		UpdateCameraView();
 	}
-
+	//Sets the current CameraAction and sets current active frame to 0
 	void StartCameraAction(CameraAction action) 
 	{
 		currAction = action;
 		currActionFrame = 0;
 
 	}
+	
+	//Rotates camera action coordinates based upon the current rotation of the camera
 	CameraCoords RotateCoords(CameraCoords check) 
 	{
 		CameraCoords newCoords = check;
@@ -183,7 +197,7 @@ public:
 		return rotatedCoords;
 	}
 
-
+	//Updates the current frame of the camera and the camera view. Runs once every RenderUpdate().
 	void PlayCameraAction() 
 	{
 		if (currAction.ID != noAction.ID) 
