@@ -13,6 +13,7 @@
 #include "Physics.h"
 #include "RNGRoll.h"
 #include "map.h"
+#include "UIControl.h"
 
 ModelDataChunk TestChunk;
 
@@ -28,16 +29,24 @@ InputFrame currFrame;
 
 bool isSelecting;
 
-//NEEDS ACTUAL CODE.
 static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
 {
-
+	WriteDebug(vecToStr(glm::vec2(xPos, yPos)));
+}
+static void cursorClickCallback(GLFWwindow* window, int button, int action, int mods) 
+{
+	double xPos, yPos;
+	glfwGetCursorPos(window, &xPos, &yPos);
+	if(action == GLFW_PRESS)
+		WriteDebug("Clicked at location: " + vecToStr(glm::vec2(xPos, yPos)));
 }
 
 //sets the key event callback to CollectInputs() and fills the inputframe list with empty data so no input errors can occur.
 void InputControlStartup(GLFWwindow* window)
 {
 	glfwSetKeyCallback(window, CollectInputs);
+	//glfwSetCursorPosCallback(window, cursorPoitionCallback);
+	glfwSetMouseButtonCallback(window, cursorClickCallback);
 	if (glfwRawMouseMotionSupported())
 		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 	for (int i = 1; i <= MAX_SAVED_INPUTFRAMES; i++) 

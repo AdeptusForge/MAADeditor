@@ -335,6 +335,7 @@
     <ClInclude Include="Code\Assets.h" />
     <ClInclude Include="Code\AudioControl.h" />
     <ClInclude Include="Code\Battlefield.h" />
+    <ClInclude Include="Code\Bounding.h" />
     <ClInclude Include="Code\Components.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Editor.h" />
@@ -359,6 +360,7 @@
     <ClInclude Include="Code\imGUI\imstb_textedit.h" />
     <ClInclude Include="Code\imGUI\imstb_truetype.h" />
     <ClInclude Include="Code\Time.h" />
+    <ClInclude Include="Code\UIControl.h" />
     <ClInclude Include="Menus.h" />
   </ItemGroup>
   <ItemGroup>

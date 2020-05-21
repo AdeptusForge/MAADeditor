@@ -10,6 +10,9 @@ std::string vecToStr(glm::vec2 vec);
 std::string vecToStr(glm::vec3 vec);
 std::string vecToStr(glm::vec4 vec);
 std::string vecToStr(glm::bvec4 vec);
+std::string vecToStr(glm::ivec2 vec);
+std::string vecToStr(glm::ivec3 vec);
+std::string vecToStr(glm::ivec4 vec);
 
 std::string quatToStr(glm::quat vec);
 

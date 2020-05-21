@@ -5,7 +5,7 @@
 #include "Debug.h"
 #include "FileControl.h"
 
-std::vector<MAADPhysicsObject> allPhysObjects;
+std::vector<MAAD_PhysicsObject> allPhysObjects;
 
 glm::ivec3 ConvertFloatVec(glm::vec3 floatVec) 
 {

@@ -1,10 +1,5 @@
-#include <string>
-#include <fstream>
-#include "Time.h"
-#include <iostream>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "debug.h"
+#include "iostream"
 
 #pragma region glm vector to string
 //Converts glm vectors into strings specifically for debugging purposes.
@@ -36,6 +31,21 @@ std::string vecToStr(glm::bvec2 vec)
 	return newStr;
 }
 std::string vecToStr(glm::bvec4 vec)
+{
+	std::string newStr = "(" + std::to_string(vec.w) + ", " + std::to_string(vec.x) + ", " + std::to_string(vec.y) + ", " + std::to_string(vec.z) + ")";
+	return newStr;
+}
+std::string vecToStr(glm::ivec2 vec)
+{
+	std::string newStr = "(" + std::to_string(vec.x) + ", " + std::to_string(vec.y) + ")";
+	return newStr;
+}
+std::string vecToStr(glm::ivec3 vec)
+{
+	std::string newStr = "(" + std::to_string(vec.x) + ", " + std::to_string(vec.y) + ", " + std::to_string(vec.z) + ")";
+	return newStr;
+}
+std::string vecToStr(glm::ivec4 vec)
 {
 	std::string newStr = "(" + std::to_string(vec.w) + ", " + std::to_string(vec.x) + ", " + std::to_string(vec.y) + ", " + std::to_string(vec.z) + ")";
 	return newStr;

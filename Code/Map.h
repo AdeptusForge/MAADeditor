@@ -229,8 +229,6 @@ public:
 		MapDirection moveDir = dir;
 		if (TileMovable(GetCurrentPos(), moveDir))
 		{
-			//WriteDebug("Can Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
-			//IF PLAYER, MOVE CAMERA
 			if (ID == PLAYER_ENTITYID) 
 			{
 				Camera* cam = FindCamera(1);
@@ -238,7 +236,6 @@ public:
 			}
 
 			currentMapPos += GetMoveVector(moveDir);
-			//WriteDebug("New Position: " + vecToStr(GetCurrentPos()));
 		}
 		else
 			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));

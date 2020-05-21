@@ -1,5 +1,4 @@
 #include "time.h"
-#include "Debug.h"
 #include "SDL_timer.h"
 #include "Physics.h"
 #include "Render.h"
@@ -22,6 +21,13 @@ int GetCurrentTick()
 {
 	return currTick / physicsFrameInTicks;
 };
+
+unsigned int SecondsToFrames(float seconds) {
+	WriteDebug(seconds);
+	WriteDebug((unsigned int)(seconds * 60));
+	return (unsigned int)(seconds * 60);
+}
+
 
 //Begins time startup.
 void TimeStartup() 

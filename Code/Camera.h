@@ -214,7 +214,7 @@ public:
 				{
 					cameraCoords = cameraCoords + offsetCoords;
 					currRotationAngle += currAction.actionFrames[currAction.actionFrames.size() - 1].rotation;
-					WriteDebug(vecToStr(cameraCoords.cameraFront));
+					//WriteDebug(vecToStr(cameraCoords.cameraFront));
 					offsetCoords = CameraCoords();
 					currAction = noAction;
 				}

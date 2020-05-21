@@ -9,6 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Debug.h"
 #include <Math.h>
+#include "bounding.h"
 
 
 //REFACTOR::REWORK ALL OF THE PHYSICS SYSTEM, PREFERABLY WITH FIXED DECIMAL PRECISION.
@@ -31,6 +32,7 @@ public:
 	glm::vec3 GetWorldPosition() 
 	{
 		glm::vec3 worldPosition;
+		//WriteDebug(vecToStr(position));
 		worldPosition.x = (float)position.x / MAX_DECIMAL_PRECISION;
 		worldPosition.y = (float)position.y / MAX_DECIMAL_PRECISION;
 		worldPosition.z = (float)position.z / MAX_DECIMAL_PRECISION;
@@ -47,17 +49,17 @@ public:
 	}
 };
 
-class MAADPhysicsObject
+class MAAD_PhysicsObject
 {
 public:
 	unsigned int ID = 0;
 	
-	MAADPhysicsObject(PhysicsTransform transform, glm::vec3 vel, glm::vec3 spin)
+	MAAD_PhysicsObject(PhysicsTransform transform, glm::vec3 vel, glm::vec3 spin)
 	{
 		intVelocity = ConvertFloatVec(vel);
 		intSpin = ConvertFloatVec(spin);
 	};
-	MAADPhysicsObject() {};
+	MAAD_PhysicsObject() {};
 	
 	void UpdateObject() 
 	{

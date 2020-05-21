@@ -13,11 +13,14 @@
 #include "Assets.h"
 #include "Physics.h"
 #include "editor.h"
+#include "UIControl.h"
 #include <algorithm>
 #include <iterator>
 
-unsigned int SCR_H = 360;
-unsigned int SCR_W = 640;
+const unsigned int SCR_H = 360;
+const unsigned int SCR_W = 640;
+
+glm::vec2 screenDimensions;
 
 Shader ourShader;
 Camera ourCamera;
@@ -68,7 +71,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)width / (float)height), 0.1f, 100.0f);
-
+	screenDimensions = glm::vec2(width,height);
 };
 
 //Gets a specific renderobject from the list of allModels
@@ -102,7 +105,6 @@ void ResetScreenSize(GLFWwindow* window)
 GLFWwindow* RenderStartup() 
 {
 	GLFWwindow* window;
-
 	/* Initialize the libraries */
 	if (!glfwInit())
 		std::cerr << "OpenGL failed to initialize\n";
@@ -148,14 +150,11 @@ GLFWwindow* RenderStartup()
 	{
 		for (int y = 0; y < 5; y++)
 		{
-			RenderObject newRO = RenderObject(PhysicsTransform(glm::vec3(x * 10 * MAX_DECIMAL_PRECISION, 0, y * 10 * MAX_DECIMAL_PRECISION), glm::vec3(0)), testModel, 1);
+			glm::ivec3 newVec = glm::ivec3(((x * 10) - 40) * MAX_DECIMAL_PRECISION, 0, ((y * 10)) * MAX_DECIMAL_PRECISION);
+			RenderObject newRO = RenderObject(PhysicsTransform(newVec, glm::vec3(0)), testModel, 1);
 			allModels.push_back(newRO);
 		}
 	}
-	WriteDebug(allModels.size());
-	//LoadAnimData("AnimLoadTest");
-	//newModel = Model("ObjLoadTest");
-	//allModels.push_back(RenderObject(PhysicsTransform(glm::vec3(0), glm::vec3(0)), newModel, 1));
 
 	return window;
 }

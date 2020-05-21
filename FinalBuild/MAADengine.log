@@ -1,30 +1,10 @@
-﻿  Assets.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(164,18): warning C4018:  '>=': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(263,20): warning C4018:  '>=': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(287,32): warning C4018:  '>=': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(338,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(294,20): warning C4101:  'c3': unreferenced local variable
-  AudioControl.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.cpp(294,16): warning C4101:  'c2': unreferenced local variable
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(40,34): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(45,35): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(50,36): warning C4244:  '=': conversion from 'unsigned int' to 'float', possible loss of data
-  Debug.cpp
-  Editor.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\AudioControl.cpp(55,51): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+﻿  Editor.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
-  FileControl.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4018:  '<': signed/unsigned mismatch
   Input.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
@@ -39,61 +19,26 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C401
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(85,20): warning C4018:  '<': signed/unsigned mismatch
-  Physics.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(160,23): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(13,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(14,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         and
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:             T=int
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(15,24): warning C4244:         ]
   Render.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Physics.cpp(26,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(160,23): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(42,20): warning C4018:  '<': signed/unsigned mismatch
-  Shaders.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(188,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-  Skills.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(45,20): warning C4018:  '<': signed/unsigned mismatch
   Time.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(187,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(219,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(13,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(23,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(12,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(22,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(26,13): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  152 of 2950 functions ( 5.2%) were compiled, the rest were copied from previous compilation.
+  15 of 2953 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    94 functions had inline decision re-evaluated but remain unchanged
+    36 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim
