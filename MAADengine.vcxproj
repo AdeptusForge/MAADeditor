@@ -346,6 +346,7 @@
     <ClInclude Include="Code\imGUI\imgui_impl_opengl3.h" />
     <ClInclude Include="Code\imGUI\imgui_stdlib.h" />
     <ClInclude Include="Code\Input.h" />
+    <ClInclude Include="Code\Inventory.h" />
     <ClInclude Include="Code\Map.h" />
     <ClInclude Include="Code\Objects.h" />
     <ClInclude Include="Code\Physics.h" />

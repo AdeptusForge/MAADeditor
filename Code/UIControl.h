@@ -6,7 +6,7 @@
 #include "vector"
 #include "camera.h"
 
-class UISelector : MAAD_BoundingBox 
+class UISelectable : MAAD_BoundingBox 
 {
 private:
 	typedef void (*BB_UIActivateCallbackFunc)();
@@ -36,16 +36,12 @@ class MAAD_UIElement
 {
 private:
 	const unsigned int elementID;
-	
-		
 public:
 	bool active;
-	std::vector<UISelector> selectionBoxes;
+	std::vector<UISelectable> selectionBoxes;
 	std::vector<MAAD_UIElement> children;
 
 	void ActivationFunction() {};
-
-
 };
 
 class MAAD_UIContext 
@@ -53,4 +49,6 @@ class MAAD_UIContext
 	std::vector<MAAD_UIElement> elements;
 	Camera* targetCamera;
 	void UpdateUI() {};
+	void UIMouseSelect(glm::vec2 position) {};
 };
+

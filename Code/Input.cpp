@@ -13,7 +13,8 @@
 #include "Physics.h"
 #include "RNGRoll.h"
 #include "map.h"
-#include "UIControl.h"
+#include "UIcontrol.h"
+#include "Inventory.h"
 
 ModelDataChunk TestChunk;
 
@@ -29,6 +30,12 @@ InputFrame currFrame;
 
 bool isSelecting;
 
+//Defines when the player can input.
+bool canInput;
+void BlockInputs() { canInput = false; };
+void UnblockInputs() { canInput = true; };
+
+
 static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
 {
 	WriteDebug(vecToStr(glm::vec2(xPos, yPos)));
@@ -37,8 +44,11 @@ static void cursorClickCallback(GLFWwindow* window, int button, int action, int 
 {
 	double xPos, yPos;
 	glfwGetCursorPos(window, &xPos, &yPos);
-	if(action == GLFW_PRESS)
+	if (action == GLFW_PRESS) 
+	{
 		WriteDebug("Clicked at location: " + vecToStr(glm::vec2(xPos, yPos)));
+		//UIMouseSelect(glm::vec2(xPos, yPos));
+	}
 }
 
 //sets the key event callback to CollectInputs() and fills the inputframe list with empty data so no input errors can occur.
@@ -54,6 +64,7 @@ void InputControlStartup(GLFWwindow* window)
 		ptr = priorFrames.begin();
 		ptr = priorFrames.insert(ptr, InputFrame());
 	}
+	UnblockInputs();
 }
 
 //Records inputs on a given frame and saves them as an InputFrame.
@@ -61,81 +72,83 @@ void InputControlStartup(GLFWwindow* window)
 //glfwSetKeyCallback is very quirky in how it collects inputs and shows behaviour that is strange.
 //Example: it will pull in a single input per key-press, then ignore/forget all others currently occurring.
 void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mods) {
-
-	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
+	if (canInput) 
 	{
-		if (key == GLFW_KEY_W)
+		if (action == GLFW_PRESS || action == GLFW_REPEAT)
 		{
-			dirs.w = true;
-		}
-		if (key == GLFW_KEY_D)
-		{
-			dirs.x = true;
-		}
-		if (key == GLFW_KEY_S)
-		{
-			dirs.y = true;
-		}
-		if (key == GLFW_KEY_A)
-		{
-			dirs.z = true;
-		}
+			if (key == GLFW_KEY_W)
+			{
+				dirs.w = true;
+			}
+			if (key == GLFW_KEY_D)
+			{
+				dirs.x = true;
+			}
+			if (key == GLFW_KEY_S)
+			{
+				dirs.y = true;
+			}
+			if (key == GLFW_KEY_A)
+			{
+				dirs.z = true;
+			}
 
 
-		if (key == GLFW_KEY_U) 
-		{
-			buttons.w = true;
+			if (key == GLFW_KEY_U)
+			{
+				buttons.w = true;
+			}
+			if (key == GLFW_KEY_I)
+			{
+				buttons.x = true;
+			}
+			if (key == GLFW_KEY_O)
+			{
+				buttons.y = true;
+			}
+			if (key == GLFW_KEY_P)
+			{
+				buttons.z = true;
+			}
 		}
-		if (key == GLFW_KEY_I)
+		if (action == GLFW_RELEASE)
 		{
-			buttons.x = true;
+			if (key == GLFW_KEY_W)
+			{
+				dirs.w = false;
+			}
+			if (key == GLFW_KEY_D)
+			{
+				dirs.x = false;
+			}
+			if (key == GLFW_KEY_S)
+			{
+				dirs.y = false;
+			}
+			if (key == GLFW_KEY_A)
+			{
+				dirs.z = false;
+			}
+
+			if (key == GLFW_KEY_U)
+			{
+				buttons.w = false;
+			}
+			if (key == GLFW_KEY_I)
+			{
+				buttons.x = false;
+			}
+			if (key == GLFW_KEY_O)
+			{
+				buttons.y = false;
+			}
+			if (key == GLFW_KEY_P)
+			{
+				buttons.z = false;
+			}
 		}
-		if (key == GLFW_KEY_O)
-		{
-			buttons.y = true;
-		}
-		if (key == GLFW_KEY_P)
-		{
-			buttons.z = true;
-		}
+		newFrame = InputFrame(dirs, buttons);
 	}
-	if (action == GLFW_RELEASE) 
-	{
-		if (key == GLFW_KEY_W)
-		{
-			dirs.w = false;
-		}
-		if (key == GLFW_KEY_D)
-		{
-			dirs.x = false;
-		}
-		if (key == GLFW_KEY_S)
-		{
-			dirs.y = false;
-		}
-		if (key == GLFW_KEY_A)
-		{
-			dirs.z = false;
-		}
-
-		if (key == GLFW_KEY_U)
-		{
-			buttons.w = false;
-		}
-		if (key == GLFW_KEY_I)
-		{
-			buttons.x = false;
-		}
-		if (key == GLFW_KEY_O)
-		{
-			buttons.y = false;
-		}
-		if (key == GLFW_KEY_P)
-		{
-			buttons.z = false;
-		}
-	}
-	newFrame = InputFrame(dirs, buttons);
 }
 
 //Moves the inputFrame list forward to the current frame and erases the oldest one.
@@ -174,6 +187,5 @@ void RunInputs()
 
 	if (currFrame.BUTTON_1()) 
 	{
-		PlaySoundClip(SFX_SND, "soundTestGOT");
 	}
 }

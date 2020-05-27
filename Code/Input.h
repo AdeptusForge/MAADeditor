@@ -7,7 +7,6 @@
 
 const int MAX_SAVED_INPUTFRAMES = 20;
 
-
 //An individual slice of inputs during every 1/120th of a second. Collected after processing.
 class InputFrame
 {
@@ -60,11 +59,9 @@ public:
 };
 
 void InputControlStartup(GLFWwindow* window);
-
 void CollectInputs(GLFWwindow*, int, int, int, int);
-
 void SaveInputs();
-
 void RunInputs();
-
 void ChangeMappedInput();
+void BlockInputs();
+void UnblockInputs();
