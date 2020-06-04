@@ -22,14 +22,19 @@ GLFWwindow* RenderStartup();
 
 void ResetScreenSize(GLFWwindow*);
 
+#define UNIVERSAL_RENDERSCALE glm::vec3(1)
+
 struct RenderObject 
 {
 public: 
 	unsigned int ID;
 	PhysicsTransform objLoc;
 	Model objModel;
+	glm::vec3 objScale;
 
-	RenderObject(PhysicsTransform pL, Model mod, unsigned int ID) : objLoc(pL), objModel(mod), ID(ID) {};
+
+	RenderObject(PhysicsTransform pL, Model mod, unsigned int ID, glm::vec3 scale = UNIVERSAL_RENDERSCALE) 
+		: objLoc(pL), objModel(mod), ID(ID), objScale(scale) {};
 	RenderObject();
 };
 

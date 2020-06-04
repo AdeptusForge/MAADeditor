@@ -20,7 +20,7 @@
 const unsigned int SCR_H = 360;
 const unsigned int SCR_W = 640;
 
-glm::vec2 screenDimensions;
+glm::ivec2 screenDimensions;
 
 Shader ourShader;
 Camera ourCamera;
@@ -28,6 +28,8 @@ Camera ourCamera;
 std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
+
+MAAD_UIContext mainUI;
 
 struct IDFinder {
 
@@ -48,6 +50,14 @@ void GameToRenderConversion(GameObject obj)
 		Model renderModel = obj.models[i].viewModel;
 		allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 	}
+}
+
+//Converts a MAAD_UIElement into a renderobject for use during rendering.
+void UIElementToRenderConversion(MAAD_UIElement* element) 
+{
+	
+
+	//allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 }
 
 //Gets a camera from the list of allcameras.
@@ -156,6 +166,13 @@ GLFWwindow* RenderStartup()
 		}
 	}
 
+	std::vector<MAAD_UIElement*> UIelements = mainUI.GetElements();
+	for (int i = 0; i < UIelements.size(); i++)
+	{
+
+		UIElementToRenderConversion(UIelements[i]);
+	}
+
 	return window;
 }
 
@@ -184,11 +201,14 @@ void RenderUpdate(GLFWwindow* window)
 
 	ourShader.use();
 
+
+
 	for (int i = 0; i < allModels.size(); i++)
 	{
 		allModels[i].objModel.ModelRefresh(ourShader);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
+		model = glm::scale(model, allModels[i].objScale);
 		//float angle = 20.0f * i;
 		//model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		ourShader.setMat4("model", model);

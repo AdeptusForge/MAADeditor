@@ -187,5 +187,7 @@ void RunInputs()
 
 	if (currFrame.BUTTON_1()) 
 	{
+		//InventorySpace newInventory = InventorySpace(glm::vec2(7,6));
+
 	}
 }
