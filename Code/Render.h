@@ -38,6 +38,4 @@ public:
 	RenderObject();
 };
 
-void GameToRenderConversion(GameObject);
-
 RenderObject* GetRenderObject(int ID);

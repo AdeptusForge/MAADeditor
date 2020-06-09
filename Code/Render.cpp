@@ -29,8 +29,10 @@ std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
 
-MAAD_UIContext mainUI;
 
+TestUIElement newTest = TestUIElement(14);
+MAAD_UIContext mainUI;
+std::vector<MAAD_UIElement*> UIelements;
 struct IDFinder {
 
 	IDFinder(unsigned int const& id) : ID(id) { }
@@ -55,10 +57,24 @@ void GameToRenderConversion(GameObject obj)
 //Converts a MAAD_UIElement into a renderobject for use during rendering.
 void UIElementToRenderConversion(MAAD_UIElement* element) 
 {
-	
+	PhysicsTransform renderTrans;
+	//allModels.push_back(RenderObject(renderTrans, *element->GetModel(), 15));
 
 	//allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 }
+
+void UpdateContext(MAAD_UIContext ui, Shader shader)
+{
+	UIelements = ui.GetAllElements();
+	for (int i = 0; i < ui.GetAllElements().size(); i++)
+	{
+		if (ui.GetAllElements()[i]->Active() == true)
+		{
+			//WriteDebug("element updated");
+			ui.GetAllElements()[i]->UpdateElement(shader);
+		}
+	}
+};
 
 //Gets a camera from the list of allcameras.
 Camera* FindCamera(unsigned int camID) 
@@ -165,14 +181,12 @@ GLFWwindow* RenderStartup()
 			allModels.push_back(newRO);
 		}
 	}
-
-	std::vector<MAAD_UIElement*> UIelements = mainUI.GetElements();
+	mainUI.AddElement(&newTest);
+	UIelements = mainUI.GetAllElements();
 	for (int i = 0; i < UIelements.size(); i++)
 	{
-
 		UIElementToRenderConversion(UIelements[i]);
 	}
-
 	return window;
 }
 
@@ -201,7 +215,7 @@ void RenderUpdate(GLFWwindow* window)
 
 	ourShader.use();
 
-
+	UpdateContext(mainUI, ourShader);
 
 	for (int i = 0; i < allModels.size(); i++)
 	{

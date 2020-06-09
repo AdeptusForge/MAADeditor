@@ -81,7 +81,7 @@ class InventorySpace
 {
 private:
 	glm::ivec2 size;
-	std::vector<std::vector<InventoryNode>> nodes;
+	std::vector<std::vector<InventoryNode*>> nodes;
 	std::vector<InventoryItem> allItems;
 
 public:

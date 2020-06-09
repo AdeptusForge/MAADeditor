@@ -312,6 +312,7 @@
     <ClCompile Include="Code\AudioControl.cpp" />
     <ClCompile Include="Code\Debug.cpp" />
     <ClCompile Include="Code\Editor.cpp" />
+    <ClCompile Include="Code\Event.cpp" />
     <ClCompile Include="Code\FileControl.cpp" />
     <ClCompile Include="Code\imGUI\imgui_impl_glfw.cpp" />
     <ClCompile Include="Code\imGUI\imgui_impl_opengl3.cpp" />
@@ -340,6 +341,7 @@
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Editor.h" />
     <ClInclude Include="Code\Entity.h" />
+    <ClInclude Include="Code\EventControl.h" />
     <ClInclude Include="Code\FileControl.h" />
     <ClInclude Include="Code\framework.h" />
     <ClInclude Include="Code\imGUI\imgui_impl_glfw.h" />

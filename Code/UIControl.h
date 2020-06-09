@@ -39,17 +39,14 @@ public:
 class MAAD_UIElement
 {
 protected:
-	const unsigned int elementID;
-	Model model;
+	unsigned int elementID;
+	//Model model;
 	glm::ivec2 pixelSize;
 	//Element scale. Either in pixels, or in 0 to 1 percentages.
 	glm::vec2 scale;
 	glm::vec2 screenlocation;
 	bool active;
-	void UpdateElement()
-	{
 
-	};
 public:
 	//Scales the object based on percentage sizes of the screen.
 	glm::vec3 UIScaleAbsolute(glm::ivec2 windowSize) 
@@ -89,21 +86,45 @@ public:
 	glm::vec3 UILocationAbsolute(glm::vec2 windowSize)
 	{
 		glm::vec3 newLoc;
-
 		return newLoc;
 	};
+
+	//Model* GetModel() { return &model; };
 
 	bool Active() { return active; };
 	//Activates/Deactivates given UIElement.
 	void SetState(bool state) {
 		active = state; 
 	};
-	//Public Access to the protected function UpdateElement();
-	void RunUpdate()
+
+	virtual void UpdateElement(Shader shader)
 	{
-		UpdateElement();
+		WriteDebug("Updated element: " + std::to_string(elementID));
+		//model.ModelRefresh(shader);
+	};
+	MAAD_UIElement() :/* model(Model("TestCube")),*/ active(true) {};
+	MAAD_UIElement(unsigned int id) : elementID(id), /*model(Model("TestCube")),*/ active(true) {};
+};
+
+class TestUIElement : public MAAD_UIElement 
+{
+protected:
+
+
+public:
+	TestUIElement(unsigned int id)
+	{
+		elementID = id;
+		active = true;
+	}
+	void UpdateElement(Shader shader)
+	{
+		MAAD_UIElement::UpdateElement(shader);
+		WriteDebug("TestUIElement Update");
 	}
 };
+
+
 
 class MAAD_UIContext 
 {
@@ -112,18 +133,21 @@ private:
 	std::vector<MAAD_UIElement*> elements;
 	Camera* targetCamera;
 public:
-	
-	std::vector<MAAD_UIElement*> GetElements() { return elements; };
-	void UpdateUI() 
+	MAAD_UIContext() {};
+
+
+	std::vector<MAAD_UIElement*> GetAllElements() 
 	{
-		for (int i = 0; i < elements.size(); i++) 
-		{
-			if (elements[i]->Active() == true) 
-			{
-				elements[i]->RunUpdate();
-			}
-		}
+		return elements;
 	};
+	MAAD_UIElement* GetElementByID(const unsigned int id) 
+	{
+
+	}
+
 	void UIMouseSelect(glm::vec2 position) {};
-	void UpdateSize() {};
+	void AddElement(MAAD_UIElement* newElement)
+	{
+		elements.push_back(newElement);
+	}
 };
