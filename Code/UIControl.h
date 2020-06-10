@@ -40,7 +40,7 @@ class MAAD_UIElement
 {
 protected:
 	unsigned int elementID;
-	//Model model;
+	Model* modelPTR;
 	glm::ivec2 pixelSize;
 	//Element scale. Either in pixels, or in 0 to 1 percentages.
 	glm::vec2 scale;
@@ -89,7 +89,11 @@ public:
 		return newLoc;
 	};
 
-	//Model* GetModel() { return &model; };
+	void bindModel(Model* newModel) 
+	{
+		modelPTR = newModel;
+	};
+	unsigned int GetID() { return elementID; };
 
 	bool Active() { return active; };
 	//Activates/Deactivates given UIElement.
@@ -99,11 +103,15 @@ public:
 
 	virtual void UpdateElement(Shader shader)
 	{
-		WriteDebug("Updated element: " + std::to_string(elementID));
-		//model.ModelRefresh(shader);
+		//WriteDebug("Updated element: " + std::to_string(elementID));
+		if (modelPTR != nullptr) 
+		{
+			WriteDebug("RefreshedModel");
+			modelPTR->ModelRefresh(shader);
+		}
 	};
-	MAAD_UIElement() :/* model(Model("TestCube")),*/ active(true) {};
-	MAAD_UIElement(unsigned int id) : elementID(id), /*model(Model("TestCube")),*/ active(true) {};
+	MAAD_UIElement() : active(true) {};
+	MAAD_UIElement(unsigned int id) : elementID(id), active(true) {};
 };
 
 class TestUIElement : public MAAD_UIElement 
@@ -116,11 +124,12 @@ public:
 	{
 		elementID = id;
 		active = true;
+		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader)
 	{
 		MAAD_UIElement::UpdateElement(shader);
-		WriteDebug("TestUIElement Update");
+		//WriteDebug("TestUIElement Update");
 	}
 };
 
@@ -129,25 +138,26 @@ public:
 class MAAD_UIContext 
 {
 private:
-
-	std::vector<MAAD_UIElement*> elements;
+	std::vector<Model> uiModels;
 	Camera* targetCamera;
 public:
 	MAAD_UIContext() {};
+	std::vector<MAAD_UIElement*> elementPTRs;
+	TestUIElement newTest = TestUIElement(14);
 
-
-	std::vector<MAAD_UIElement*> GetAllElements() 
+	void UIStartup() 
 	{
-		return elements;
-	};
+		AddElement(&newTest);
+	}
+
+
 	MAAD_UIElement* GetElementByID(const unsigned int id) 
 	{
 
 	}
-
 	void UIMouseSelect(glm::vec2 position) {};
 	void AddElement(MAAD_UIElement* newElement)
 	{
-		elements.push_back(newElement);
+		elementPTRs.push_back(newElement);
 	}
 };

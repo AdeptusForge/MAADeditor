@@ -18,11 +18,11 @@ GLFWwindow* window;
 //Starts up the entirety of the application
 void InitializeTheMAADness() 
 {
+	FileControlStartup();
 
 	//Startup functions
 	window = RenderStartup();
 	TimeStartup();
-	FileControlStartup();
 	InputControlStartup(window);
 	EditorStartup(window);
 	MapStartup("MapLoadTest");

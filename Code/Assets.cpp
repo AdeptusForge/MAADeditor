@@ -94,7 +94,7 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 							{
 								std::string textureName;
 								texturein >> textureName;
-								WriteDebug(textureName);
+								//WriteDebug(textureName);
 								i++;
 								textures.push_back(Texture(0, textureName));
 							}

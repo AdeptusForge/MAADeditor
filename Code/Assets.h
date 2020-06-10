@@ -161,15 +161,19 @@ public:
 	#pragma region Constructor
 	Model(std::string modelName)
 	{
-		ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
+		WriteDebug("Constructing Model: " + modelName);
+		if (modelName != "UI") 
+		{
+			ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
 
-		this->vertices = newModel.vertices;
-		this->indices = newModel.indices;
-		this->edges = newModel.edges;
-		this->textures = newModel.textures;
-		//this->faces = newModel.faces;
-		
-		ModelSetup();
+			this->vertices = newModel.vertices;
+			this->indices = newModel.indices;
+			this->edges = newModel.edges;
+			this->textures = newModel.textures;
+			//this->faces = newModel.faces;
+
+			ModelSetup();
+		}
 	}
 
 	#pragma endregion

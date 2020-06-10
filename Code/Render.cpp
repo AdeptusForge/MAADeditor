@@ -30,7 +30,7 @@ std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
 
 
-TestUIElement newTest = TestUIElement(14);
+
 MAAD_UIContext mainUI;
 std::vector<MAAD_UIElement*> UIelements;
 struct IDFinder {
@@ -63,15 +63,14 @@ void UIElementToRenderConversion(MAAD_UIElement* element)
 	//allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 }
 
-void UpdateContext(MAAD_UIContext ui, Shader shader)
+void UpdateContext(MAAD_UIContext* ui, Shader shader)
 {
-	UIelements = ui.GetAllElements();
-	for (int i = 0; i < ui.GetAllElements().size(); i++)
+	UIelements = ui->elementPTRs;
+	for (int i = 0; i < ui->elementPTRs.size(); i++)
 	{
-		if (ui.GetAllElements()[i]->Active() == true)
+		if (ui->elementPTRs[i]->Active() == true)
 		{
-			//WriteDebug("element updated");
-			ui.GetAllElements()[i]->UpdateElement(shader);
+			ui->elementPTRs[i]->UpdateElement(shader);
 		}
 	}
 };
@@ -167,9 +166,9 @@ GLFWwindow* RenderStartup()
 
 	view = ourCamera.GetCameraView();
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
+	
+	mainUI.UIStartup();
 
-
-	Model newModel = Model("TileFloorCube");
 	Model testModel = Model("TileFloorCube");
 
 	for (int x = 0; x < 5; x++) 
@@ -181,8 +180,7 @@ GLFWwindow* RenderStartup()
 			allModels.push_back(newRO);
 		}
 	}
-	mainUI.AddElement(&newTest);
-	UIelements = mainUI.GetAllElements();
+
 	for (int i = 0; i < UIelements.size(); i++)
 	{
 		UIElementToRenderConversion(UIelements[i]);
@@ -215,7 +213,7 @@ void RenderUpdate(GLFWwindow* window)
 
 	ourShader.use();
 
-	UpdateContext(mainUI, ourShader);
+	UpdateContext(&mainUI, ourShader);
 
 	for (int i = 0; i < allModels.size(); i++)
 	{
