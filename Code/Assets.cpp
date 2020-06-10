@@ -36,7 +36,7 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 	modelFile.open(loadstr);
 	if (!modelFile.is_open())
 	{
-		WriteDebug("Cannot Open File: " + fileName);
+		WriteDebug("ERROR -- Cannot Open File: " + fileName);
 	}
 	else
 		WriteDebug("Loading File..." + fileName);

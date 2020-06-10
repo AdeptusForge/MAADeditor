@@ -6,6 +6,7 @@
 #include "vector"
 #include "camera.h"
 #include "assets.h"
+#include "map"
 
 #define DEFAULT_2D_UIELEMENT 
 
@@ -89,10 +90,16 @@ public:
 		return newLoc;
 	};
 
-	void bindModel(Model* newModel) 
+	void BindModel(Model* newModel) 
 	{
+		WriteDebug("BoundModel to UI element");
 		modelPTR = newModel;
 	};
+	Model GetModel() 
+	{
+		return *modelPTR;
+	}
+
 	unsigned int GetID() { return elementID; };
 
 	bool Active() { return active; };
@@ -106,7 +113,7 @@ public:
 		//WriteDebug("Updated element: " + std::to_string(elementID));
 		if (modelPTR != nullptr) 
 		{
-			WriteDebug("RefreshedModel");
+			//WriteDebug("RefreshedModel: " + modelPTR->modelStringName);
 			modelPTR->ModelRefresh(shader);
 		}
 	};
@@ -138,7 +145,9 @@ public:
 class MAAD_UIContext 
 {
 private:
-	std::vector<Model> uiModels;
+	std::map<unsigned int, Model> uiModels;
+	std::map<unsigned int, Model>::iterator uiModelIter;
+
 	Camera* targetCamera;
 public:
 	MAAD_UIContext() {};
@@ -147,7 +156,7 @@ public:
 
 	void UIStartup() 
 	{
-		AddElement(&newTest);
+		AddElement(&newTest, Model("TestCube"));
 	}
 
 
@@ -155,9 +164,16 @@ public:
 	{
 
 	}
-	void UIMouseSelect(glm::vec2 position) {};
-	void AddElement(MAAD_UIElement* newElement)
+	Model* GetUIModel() 
 	{
+
+	}
+	void UIMouseSelect(glm::vec2 position) {};
+	void AddElement(MAAD_UIElement* newElement, Model elementModel)
+	{
+		uiModelIter = uiModels.begin();
+		uiModels.insert({ newElement->GetID(), elementModel });
+		newElement->BindModel(&uiModels.find(newElement->GetID())->second);
 		elementPTRs.push_back(newElement);
 	}
 };

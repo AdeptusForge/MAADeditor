@@ -57,9 +57,8 @@ void GameToRenderConversion(GameObject obj)
 //Converts a MAAD_UIElement into a renderobject for use during rendering.
 void UIElementToRenderConversion(MAAD_UIElement* element) 
 {
-	PhysicsTransform renderTrans;
-	//allModels.push_back(RenderObject(renderTrans, *element->GetModel(), 15));
-
+	PhysicsTransform renderTrans = PhysicsTransform(glm::ivec3(10 * MAX_DECIMAL_PRECISION), glm::ivec3(0));
+	allModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
 	//allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 }
 
@@ -67,12 +66,8 @@ void UpdateContext(MAAD_UIContext* ui, Shader shader)
 {
 	UIelements = ui->elementPTRs;
 	for (int i = 0; i < ui->elementPTRs.size(); i++)
-	{
 		if (ui->elementPTRs[i]->Active() == true)
-		{
 			ui->elementPTRs[i]->UpdateElement(shader);
-		}
-	}
 };
 
 //Gets a camera from the list of allcameras.
@@ -180,11 +175,12 @@ GLFWwindow* RenderStartup()
 			allModels.push_back(newRO);
 		}
 	}
-
+	UIelements = mainUI.elementPTRs;
 	for (int i = 0; i < UIelements.size(); i++)
 	{
 		UIElementToRenderConversion(UIelements[i]);
 	}
+
 	return window;
 }
 
@@ -201,7 +197,7 @@ void RenderShutdown()
 //Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
-	
+
 	ourCamera.PlayCameraAction();
 	// pass them to the shaders
 	ourShader.setMat4("model", model);

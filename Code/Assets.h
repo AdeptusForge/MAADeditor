@@ -152,6 +152,7 @@ class Model
 	}
 
 public:
+	std::string modelStringName;
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Edge> edges;
@@ -162,6 +163,7 @@ public:
 	Model(std::string modelName)
 	{
 		WriteDebug("Constructing Model: " + modelName);
+		modelStringName = modelName;
 		if (modelName != "UI") 
 		{
 			ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
@@ -175,7 +177,6 @@ public:
 			ModelSetup();
 		}
 	}
-
 	#pragma endregion
 	//Plays the animation specified by setting the current animation abd resetting the current frame to 0
 	void StartAnim(std::string data) 
@@ -236,18 +237,20 @@ public:
 			PlayAnim();
 		}
 	};	
+
+
 private:
 
 	unsigned int VBO, EBO;
 	//Initial model setup, including base textures and all pertinent buffers.
-	void ModelSetup() 
+	void ModelSetup()
 	{
-		#pragma region Load Textures
+#pragma region Load Textures
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			PrepTexture(textures[i],true);
+			PrepTexture(textures[i], true);
 		}
-		#pragma endregion
+#pragma endregion
 
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
