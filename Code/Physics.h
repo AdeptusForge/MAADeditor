@@ -26,7 +26,22 @@ private:
 	glm::ivec3 rotation;
 public:
 
-	PhysicsTransform(glm::ivec3 pos, glm::ivec3 rot) : position(pos), rotation(rot) {};
+	//PhysicsTransform(glm::ivec3 pos, glm::ivec3 rot) : position(pos), rotation(rot) {};
+	PhysicsTransform(glm::vec3 pos, glm::vec3 rot, bool isFloat) 
+	{
+		if (!isFloat) 
+		{
+			position = pos;
+			rotation = rot;
+		}
+		else 
+		{
+			position = ConvertFloatVec(pos);
+			rotation = ConvertFloatVec(rot);
+		}
+
+
+	}
 	PhysicsTransform() {};
 
 	glm::vec3 GetWorldPosition() 
@@ -38,6 +53,16 @@ public:
 		worldPosition.z = (float)position.z / MAX_DECIMAL_PRECISION;
 		//WriteDebug(vecToStr(worldPosition));
 		return  worldPosition;
+	}
+	glm::vec3 GetWorldRotation()
+	{
+		glm::vec3 worldRotation;
+		//WriteDebug(vecToStr(position));
+		worldRotation.x = (float)rotation.x / MAX_DECIMAL_PRECISION;
+		worldRotation.y = (float)rotation.y / MAX_DECIMAL_PRECISION;
+		worldRotation.z = (float)rotation.z / MAX_DECIMAL_PRECISION;
+		//WriteDebug(vecToStr(worldPosition));
+		return  worldRotation;
 	}
 
 

@@ -107,16 +107,22 @@ public:
 	void SetState(bool state) {
 		active = state; 
 	};
-
-	virtual void UpdateElement(Shader shader)
+	virtual glm::vec3 CalculateElementOffset(Camera* target)
+	{
+		
+		return target->GetCameraCoords().cameraPos + glm::vec3(0, 0, 2.5);
+	};
+	virtual void UpdateElement(Shader shader, Camera* target)
 	{
 		//WriteDebug("Updated element: " + std::to_string(elementID));
 		if (modelPTR != nullptr) 
 		{
-			//WriteDebug("RefreshedModel: " + modelPTR->modelStringName);
-			modelPTR->ModelRefresh(shader);
+			WriteDebug("Camera Position: " + vecToStr(CalculateElementOffset(target)));
+			shader.setMat4("model", 
+				modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE, glm::vec3(0)));
 		}
 	};
+
 	MAAD_UIElement() : active(true) {};
 	MAAD_UIElement(unsigned int id) : elementID(id), active(true) {};
 };
@@ -133,9 +139,9 @@ public:
 		active = true;
 		//model = Model("UI");
 	}
-	void UpdateElement(Shader shader)
+	void UpdateElement(Shader shader, Camera* target)
 	{
-		MAAD_UIElement::UpdateElement(shader);
+		MAAD_UIElement::UpdateElement(shader, target);
 		//WriteDebug("TestUIElement Update");
 	}
 };
@@ -156,10 +162,11 @@ public:
 
 	void UIStartup() 
 	{
+		targetCamera = FindCamera(1);
 		AddElement(&newTest, Model("TestCube"));
 	}
 
-
+	Camera* GetTargetCamera() { return targetCamera; }
 	MAAD_UIElement* GetElementByID(const unsigned int id) 
 	{
 

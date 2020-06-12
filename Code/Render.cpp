@@ -29,8 +29,6 @@ std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
 
-
-
 MAAD_UIContext mainUI;
 std::vector<MAAD_UIElement*> UIelements;
 struct IDFinder {
@@ -55,19 +53,22 @@ void GameToRenderConversion(GameObject obj)
 }
 
 //Converts a MAAD_UIElement into a renderobject for use during rendering.
-void UIElementToRenderConversion(MAAD_UIElement* element) 
+void UIElementToRenderConversion(MAAD_UIElement* element, Camera* target) 
 {
-	PhysicsTransform renderTrans = PhysicsTransform(glm::ivec3(10 * MAX_DECIMAL_PRECISION), glm::ivec3(0));
+	//WriteDebug(vecToStr(target->GetCameraCoords().cameraPos));
+	
+	PhysicsTransform renderTrans = PhysicsTransform(element->CalculateElementOffset(target), glm::vec3(0), true);
 	allModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
-	//allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 }
 
 void UpdateContext(MAAD_UIContext* ui, Shader shader)
 {
 	UIelements = ui->elementPTRs;
 	for (int i = 0; i < ui->elementPTRs.size(); i++)
-		if (ui->elementPTRs[i]->Active() == true)
-			ui->elementPTRs[i]->UpdateElement(shader);
+		if (ui->elementPTRs[i]->Active() == true) 
+		{
+			ui->elementPTRs[i]->UpdateElement(shader, ui->GetTargetCamera());
+		}
 };
 
 //Gets a camera from the list of allcameras.
@@ -171,14 +172,14 @@ GLFWwindow* RenderStartup()
 		for (int y = 0; y < 5; y++)
 		{
 			glm::ivec3 newVec = glm::ivec3(((x * 10) - 40) * MAX_DECIMAL_PRECISION, 0, ((y * 10)) * MAX_DECIMAL_PRECISION);
-			RenderObject newRO = RenderObject(PhysicsTransform(newVec, glm::vec3(0)), testModel, 1);
+			RenderObject newRO = RenderObject(PhysicsTransform(newVec, glm::ivec3(0), false), testModel, 1);
 			allModels.push_back(newRO);
 		}
 	}
 	UIelements = mainUI.elementPTRs;
 	for (int i = 0; i < UIelements.size(); i++)
 	{
-		UIElementToRenderConversion(UIelements[i]);
+		UIElementToRenderConversion(UIelements[i], mainUI.GetTargetCamera());
 	}
 
 	return window;
@@ -197,10 +198,8 @@ void RenderShutdown()
 //Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
-
 	ourCamera.PlayCameraAction();
 	// pass them to the shaders
-	ourShader.setMat4("model", model);
 	ourShader.setMat4("view", ourCamera.GetCameraView());
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	ourShader.setMat4("projection", projection);
@@ -213,13 +212,10 @@ void RenderUpdate(GLFWwindow* window)
 
 	for (int i = 0; i < allModels.size(); i++)
 	{
-		allModels[i].objModel.ModelRefresh(ourShader);
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, allModels[i].objLoc.GetWorldPosition());
-		model = glm::scale(model, allModels[i].objScale);
 		//float angle = 20.0f * i;
 		//model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
-		ourShader.setMat4("model", model);
+		ourShader.setMat4("model", allModels[i].objModel.ModelRefresh(
+			ourShader, allModels[i].objLoc.GetWorldPosition(), allModels[i].objScale, allModels[i].objLoc.GetWorldRotation()));
 		allModels[i].objModel.Draw(ourShader);
 	}
 

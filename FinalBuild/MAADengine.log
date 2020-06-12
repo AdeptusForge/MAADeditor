@@ -1,16 +1,46 @@
-﻿  Render.cpp
+﻿  Editor.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(224,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(49,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(68,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(179,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(214,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+  Input.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+  MAADeditor.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+  Map.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(85,20): warning C4018:  '<': signed/unsigned mismatch
+  Render.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(160,23): warning C4018:  '<': signed/unsigned mismatch
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(47,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(67,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(180,20): warning C4018:  '<': signed/unsigned mismatch
+  Time.cpp
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(213,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(230,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(12,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(22,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(26,13): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  2 of 3115 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  161 of 3127 functions ( 5.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    31 functions had inline decision re-evaluated but remain unchanged
+    33 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim

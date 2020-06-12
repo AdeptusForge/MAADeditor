@@ -140,7 +140,7 @@ void SelectionWindow()
 	ImGui::Checkbox("Edit Colors", &color_edit);
 	ImGui::Checkbox("Edit Texture Coordinates", &tex_edit);
 
-	for (int i = 0; i <  currentModel->objModel.vertices.size(); i++) 
+	for (int i = 0; i < currentModel->objModel.vertices.size(); i++) 
 	{
 		DisplayVertexUI(i, &(currentModel->objModel.vertices[i]));
 	}

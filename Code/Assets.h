@@ -212,11 +212,17 @@ public:
 
 	};
 	//Preps the model for the next draw frame and rebinds current textures.
-	void ModelRefresh(Shader shader)
+	glm::mat4 ModelRefresh(Shader shader, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 		BindTextures(shader);
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, position);
+		model = glm::scale(model, scale);
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		return model;
 	}
 	//Deletes old textures to prevent memory leaks.
 	void ModelCleanup() 

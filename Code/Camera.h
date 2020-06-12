@@ -118,6 +118,7 @@ class Camera
 private:
 	glm::vec3 currRotationAngle = glm::vec3(0, 0, 0);
 	CameraCoords cameraCoords;
+	CameraCoords offsetCoords = CameraCoords(glm::vec3(0), glm::vec3(0));
 	glm::mat4 cameraView = glm::mat4(1.0f);
 	unsigned int currActionFrame;
 	CameraAction currAction = noAction;
@@ -126,8 +127,9 @@ public:
 	unsigned int cameraID;
 	CameraMode mode = FreeView;
 	CameraType cameraType;
-	CameraCoords offsetCoords = CameraCoords(glm::vec3(0), glm::vec3(0));
 	CameraCoords GetCameraCoords() { return cameraCoords; }
+	CameraCoords GetOffsetCoords() { return offsetCoords; }
+	CameraCoords GetCompositeCoords() { return cameraCoords + offsetCoords; };
 	float cameraFov = 45.0f;
 
 	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):
