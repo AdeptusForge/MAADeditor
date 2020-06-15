@@ -1,28 +1,28 @@
 s 5 5
 n MAPNAME
 
-t 0 0 0 0 wacky1 1 functionname(opt.) functionname(opt.)
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
-t 0 0 0 0 wacky2 1
-t 0 0 0 0 wacky3 1
-t 0 0 0 0 wacky4 1
+t 0 0 0 0 0 3 wacky1 1 functionname(opt.) functionname(opt.)
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1
+t 0 0 0 0 0 3 wacky2 1
+t 0 0 0 0 0 3 wacky3 1
+t 0 0 0 0 0 3 wacky4 1

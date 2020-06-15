@@ -28,6 +28,7 @@ glm::bvec4 buttons;
 InputFrame newFrame;
 InputFrame currFrame;
 
+
 bool isSelecting;
 
 //Defines when the player can input.
@@ -188,6 +189,7 @@ void RunInputs()
 	if (currFrame.BUTTON_1()) 
 	{
 		//InventorySpace newInventory = InventorySpace(glm::vec2(7,6));
-
+		Camera* camera = FindCamera(1);
+		camera->PlayCameraAction(LookUp);
 	}
 }

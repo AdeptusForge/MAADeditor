@@ -10,7 +10,7 @@
 #include "Physics.h"
 #define PI 3.14159265
 
-const glm::vec3 baseCameraUp = glm::vec3(0.0,1.0,0.0);
+const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0,0.0);
 const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 
 //REFACTOR:: Into physics-based coordinate system.
@@ -91,6 +91,49 @@ const CameraAction turn180 = CameraAction(4, std::vector<CameraCoords>
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 150, 0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 180, 0))
 });
+
+const CameraAction LookUp = CameraAction(5, std::vector<CameraCoords>
+{
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-15, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-30, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-45, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-60, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-75, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-90, 0, 0))
+});
+const CameraAction LookMiddleFromUp = CameraAction(6, std::vector<CameraCoords>
+{
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(90, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(75, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(60, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(45, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(30, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(15, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0))
+});
+const CameraAction LookMiddleFromDown = CameraAction(7, std::vector<CameraCoords>
+{
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-90, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-75, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-60, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-45, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-30, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-15, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0))
+});
+const CameraAction LookDown = CameraAction(8, std::vector<CameraCoords>
+{
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-15, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-30, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-45, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-60, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-75, 0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-90, 0, 0))
+});
+
+
 //const CameraAction walkBackward;
 //const CameraAction walkRight;
 //const CameraAction walkLeft;
@@ -174,8 +217,9 @@ public:
 		UpdateCameraView();
 	}
 	//Sets the current CameraAction and sets current active frame to 0
-	void StartCameraAction(CameraAction action) 
+	void PlayCameraAction(CameraAction action) 
 	{
+
 		currAction = action;
 		currActionFrame = 0;
 
@@ -200,7 +244,7 @@ public:
 	}
 
 	//Updates the current frame of the camera and the camera view. Runs once every RenderUpdate().
-	void PlayCameraAction() 
+	void UpdateCamera() 
 	{
 		if (currAction.ID != noAction.ID) 
 		{

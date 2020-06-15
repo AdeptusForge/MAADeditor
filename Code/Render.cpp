@@ -198,7 +198,7 @@ void RenderShutdown()
 //Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
-	ourCamera.PlayCameraAction();
+	ourCamera.UpdateCamera();
 	// pass them to the shaders
 	ourShader.setMat4("view", ourCamera.GetCameraView());
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.

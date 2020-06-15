@@ -117,7 +117,7 @@ public:
 		//WriteDebug("Updated element: " + std::to_string(elementID));
 		if (modelPTR != nullptr) 
 		{
-			WriteDebug("Camera Position: " + vecToStr(CalculateElementOffset(target)));
+			//WriteDebug("Camera Position: " + vecToStr(CalculateElementOffset(target)));
 			shader.setMat4("model", 
 				modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE, glm::vec3(0)));
 		}

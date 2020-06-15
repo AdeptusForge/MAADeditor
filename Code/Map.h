@@ -18,20 +18,28 @@ const unsigned int PLAYER_ENTITYID = 0;
 #endif // !PLAYER_ENTITYID
 
 #ifndef northVec
-const glm::ivec2 northVec = glm::ivec2(0,1);
+const glm::ivec3 northVec = glm::ivec3(0, 1, 0);
 #endif // !northVec
 
 #ifndef eastVec
-const glm::ivec2 eastVec = glm::ivec2(1, 0);
+const glm::ivec3 eastVec = glm::ivec3(1, 0, 0);
 #endif // !eastVec
 
 #ifndef southVec
-const glm::ivec2 southVec = glm::ivec2(0, -1);
+const glm::ivec3 southVec = glm::ivec3(0, -1, 0);
 #endif // !southVec
 
 #ifndef westVec
-const glm::ivec2 westVec = glm::ivec2(-1, 0);
+const glm::ivec3 westVec = glm::ivec3(-1, 0, 0);
 #endif // !westVec
+
+#ifndef upVec
+const glm::ivec3 upVec = glm::ivec3(0, 0, 1);
+#endif // !upVec
+
+#ifndef downVec
+const glm::ivec3 downVec = glm::ivec3(0, 0, -1);
+#endif // !downVec
 #pragma endregion
 
 enum MapDirection 
@@ -39,68 +47,86 @@ enum MapDirection
 	North = 1,
 	East = 2,
 	South = 3,
-	West = 4
+	West = 4,
+	Up = 5,
+	Down = 6
 };
 enum TileFeature 
 {
 	Empty = 0,
 	Wall = 1,
+	Ceiling = 2,
+	Floor = 3,
 
 };
 
-glm::ivec2 GetMoveVector(MapDirection dir);
+struct TileFeatures 
+{
+	TileFeature north;
+	TileFeature east;
+	TileFeature south;
+	TileFeature west;
+	TileFeature upward;
+	TileFeature downward;
+};
+
+glm::ivec3 GetMoveVector(MapDirection dir);
 
 struct MapTile
 {
 private:
-	glm::ivec2 mapPos;
-	glm::ivec4 tileFeatures;
+	glm::ivec3 mapPos;
+	TileFeatures features;
 	std::string tileModel;
 	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west //REPLACE WITH DIRECTION ENUM IMMEDIATELY
 	std::vector<std::string> functionTriggers;
 public:
-	MapTile(glm::ivec2 pos, glm::ivec4 f, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
-		: mapPos(pos), tileFeatures(f), tileModel(modelFile), modelOrientation(orient), functionTriggers(functionNames) {};
+	MapTile(glm::ivec3 pos, TileFeatures f, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
+		: mapPos(pos), features(f), tileModel(modelFile), modelOrientation(orient), functionTriggers(functionNames) {};
 	MapTile() {};
 	TileFeature getTileFeature(MapDirection dir)
 	{
-		if(dir == North)
-			return (TileFeature)tileFeatures.w;
-		else if(dir == East)
-			return (TileFeature)tileFeatures.x;
+		if (dir == North)
+			return features.north;
+		else if (dir == East)
+			return features.east;
 		else if (dir == South)
-			return (TileFeature)tileFeatures.y;
+			return features.south;
 		else if (dir == West)
-			return (TileFeature)tileFeatures.z;
+			return features.west;
+		else if (dir == Up)
+			return features.upward;
+		else if (dir == Down)
+			return features.downward;
 	}
 	std::string getTileModel() { return tileModel; }
 };
 
 struct MapDataChunk
 {
-	glm::ivec2 mapSize;
+	glm::ivec3 mapSize;
 	std::vector<MapTile> tileMap;
-	MapDataChunk(unsigned int& xSize, unsigned int& ySize, std::vector<MapTile>& tiles)
-		: mapSize(glm::ivec2(xSize, ySize)), tileMap(tiles) {};
+	MapDataChunk(unsigned int& xSize, unsigned int& ySize, unsigned int& zSize, std::vector<MapTile>& tiles)
+		: mapSize(glm::ivec3(xSize, ySize, zSize)), tileMap(tiles) {};
 	MapDataChunk() {};
 };
 
-bool IsOnCurrentMap(glm::ivec2 loc);
+bool IsOnCurrentMap(glm::ivec3 loc);
 void MapStartup(std::string mapName);
-MapTile* GetTile(glm::ivec2 tileLoc);
-bool TileMovable(glm::ivec2 currPos, MapDirection moveDir);
+MapTile* GetTile(glm::ivec3 tileLoc);
+bool TileMovable(glm::ivec3 currPos, MapDirection moveDir);
 
 //Essentially anything that moves of its own accord on a map within the game.
 //ID is used to determine fixed-location encounters and when a MapEntity is the player(ID = 0).
 class MapEntity
 {
 private:
-	glm::ivec2 currentMapPos;
+	glm::ivec3 currentMapPos;
 	MapDirection currentFacing;
 	unsigned int actionFrame;
 	unsigned int currMaxFrame = 0;
 public:
-	glm::ivec2 GetCurrentPos() { return currentMapPos; }
+	glm::ivec3 GetCurrentPos() { return currentMapPos; }
 	//1 = CurrentFacing, 2 = CurrentFacing turned right once, 3 = Opposite of CurrentFacing, 4 = CurrentFacing turned left once
 	MapDirection GetCurrentFacing(unsigned int check) 
 	{
@@ -171,7 +197,7 @@ public:
 			if (ID == PLAYER_ENTITYID) 
 			{
 				Camera* cam = FindCamera(1);
-				cam->StartCameraAction(turnRight);
+				cam->PlayCameraAction(turnRight);
 			}
 
 		}
@@ -187,7 +213,7 @@ public:
 			if (ID == PLAYER_ENTITYID)
 			{
 				Camera* cam = FindCamera(1);
-				cam->StartCameraAction(turnLeft);
+				cam->PlayCameraAction(turnLeft);
 			}
 		}
 		ChangeFacing((MapDirection)newFacing);
@@ -209,7 +235,7 @@ public:
 		if (ID == PLAYER_ENTITYID)
 		{
 			Camera* cam = FindCamera(1);
-			cam->StartCameraAction(turn180);
+			cam->PlayCameraAction(turn180);
 		}
 		ChangeFacing((MapDirection)currentDir);
 	}
@@ -232,7 +258,7 @@ public:
 			if (ID == PLAYER_ENTITYID) 
 			{
 				Camera* cam = FindCamera(1);
-				cam->StartCameraAction(walkForward);
+				cam->PlayCameraAction(walkForward);
 			}
 
 			currentMapPos += GetMoveVector(moveDir);
@@ -241,12 +267,12 @@ public:
 			WriteDebug("Can't Move " + std::to_string(moveDir) + " from tile: " + vecToStr(GetCurrentPos()));
 	}
 
-	MapEntity(glm::ivec2 startingPos, MapDirection startingFacing, unsigned int entityID) :
+	MapEntity(glm::ivec3 startingPos, MapDirection startingFacing, unsigned int entityID) :
 		currentMapPos(startingPos), currentFacing(startingFacing), ID(entityID) {};
 };
 
 MapDataChunk& LoadMapData(std::string fileName);
 
 void UpdateMap();
-void PlayerStartup(glm::ivec2 startingPos, MapDirection dir);
+void PlayerStartup(glm::ivec3 startingPos, MapDirection dir);
 MapEntity* GetMapEntity(unsigned int entityID);
