@@ -203,5 +203,6 @@
       <Filter>Shaders\Fragment</Filter>
     </None>
     <None Include="Assets\Shaders\Geometry\PracticeGeometryShader.glsl" />
+    <None Include="Assets\Shaders\Vertex\UIVertShader.glsl" />
   </ItemGroup>
 </Project>

@@ -8,24 +8,6 @@
 #include "Physics.h"
 
 
-class ViewModel 
-{
-public:
-	PhysicsTransform modelOffset;
-	Model viewModel;
-};
 
-class Collider2D 
-{
 
-};
 
-class Collider3D
-{
-
-};
-
-class AIController
-{
-
-};

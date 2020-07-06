@@ -188,8 +188,6 @@ void RunInputs()
 
 	if (currFrame.BUTTON_1()) 
 	{
-		//InventorySpace newInventory = InventorySpace(glm::vec2(7,6));
-		Camera* camera = FindCamera(1);
-		camera->PlayCameraAction(LookUp);
+		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
 }

@@ -63,7 +63,7 @@ const CameraAction walkForward = CameraAction(1, std::vector<CameraCoords>
 });
 const CameraAction turnRight = CameraAction(2, std::vector<CameraCoords>
 {
-	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0.0, 0)),
+	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, 0, 0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, -15, 0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, -30, 0)),
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0, -45, 0)),
@@ -133,7 +133,6 @@ const CameraAction LookDown = CameraAction(8, std::vector<CameraCoords>
 	CameraCoords(glm::vec3(0.0, 0.0, 0.0), glm::vec3(-90, 0, 0))
 });
 
-
 //const CameraAction walkBackward;
 //const CameraAction walkRight;
 //const CameraAction walkLeft;
@@ -173,6 +172,7 @@ public:
 	CameraCoords GetCameraCoords() { return cameraCoords; }
 	CameraCoords GetOffsetCoords() { return offsetCoords; }
 	CameraCoords GetCompositeCoords() { return cameraCoords + offsetCoords; };
+	glm::vec3 GetCurrentRotation() { return currRotationAngle; };
 	float cameraFov = 45.0f;
 
 	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):

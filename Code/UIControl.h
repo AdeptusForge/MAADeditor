@@ -109,8 +109,8 @@ public:
 	};
 	virtual glm::vec3 CalculateElementOffset(Camera* target)
 	{
-		
-		return target->GetCameraCoords().cameraPos + glm::vec3(0, 0, 2.5);
+
+		return glm::vec3(0,0,2.5);
 	};
 	virtual void UpdateElement(Shader shader, Camera* target)
 	{

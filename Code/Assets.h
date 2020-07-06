@@ -178,7 +178,7 @@ public:
 		}
 	}
 	#pragma endregion
-	//Plays the animation specified by setting the current animation abd resetting the current frame to 0
+	//Plays the animation specified by setting the current animation and resetting the current frame to 0
 	void StartAnim(std::string data) 
 	{
 		this->currentAnim = LoadAnimData(data);

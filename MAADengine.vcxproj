@@ -373,6 +373,7 @@
       </SubType>
     </None>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl" />
+    <None Include="Assets\Shaders\Vertex\UIVertShader.glsl" />
     <None Include="PixelShader.glsl">
       <SubType>
       </SubType>

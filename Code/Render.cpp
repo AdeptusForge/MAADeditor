@@ -22,12 +22,14 @@ const unsigned int SCR_W = 640;
 
 glm::ivec2 screenDimensions;
 
-Shader ourShader;
+Shader mainShader;
+Shader uiShader;
 Camera ourCamera;
 
 std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
+std::vector<RenderObject> allUIModels;
 
 MAAD_UIContext mainUI;
 std::vector<MAAD_UIElement*> UIelements;
@@ -58,7 +60,7 @@ void UIElementToRenderConversion(MAAD_UIElement* element, Camera* target)
 	//WriteDebug(vecToStr(target->GetCameraCoords().cameraPos));
 	
 	PhysicsTransform renderTrans = PhysicsTransform(element->CalculateElementOffset(target), glm::vec3(0), true);
-	allModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
+	allUIModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
 }
 
 void UpdateContext(MAAD_UIContext* ui, Shader shader)
@@ -120,6 +122,7 @@ RenderObject* GetRenderObject(int ID)
 void ResetScreenSize(GLFWwindow* window) 
 {
 	glfwSetWindowSize(window, 800, 800);
+	screenDimensions = glm::vec2(800, 800);
 }
 
 //Initializes an OpenGL window.
@@ -139,6 +142,7 @@ GLFWwindow* RenderStartup()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(SCR_W, SCR_H, "MAADeditor", NULL, NULL);
+	screenDimensions = glm::vec2(SCR_W, SCR_H);
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -146,9 +150,14 @@ GLFWwindow* RenderStartup()
 		std::cerr << "GLAD failed to initialize\n";
 	std::cout << "GLAD initialized successfully.\n";
 
-	ourShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator", "PracticeGeometryShader");
-	ourShader.use();
-	
+	mainShader = LoadCustomShader("PracticeVertexShader", "ColorTextureApplicator", "PracticeGeometryShader");
+	mainShader.use();
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	uiShader = LoadCustomShader("UIVertShader", "ColorTextureApplicator", "PracticeGeometryShader");
+	uiShader.use();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -198,28 +207,40 @@ void RenderShutdown()
 //Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
+	mainShader.use();
 	ourCamera.UpdateCamera();
 	// pass them to the shaders
-	ourShader.setMat4("view", ourCamera.GetCameraView());
+	mainShader.setMat4("view", ourCamera.GetCameraView());
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	ourShader.setMat4("projection", projection);
+	mainShader.setMat4("projection", projection);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	ourShader.use();
-
-	UpdateContext(&mainUI, ourShader);
-
+	//Scene Rendering
 	for (int i = 0; i < allModels.size(); i++)
 	{
 		//float angle = 20.0f * i;
 		//model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
-		ourShader.setMat4("model", allModels[i].objModel.ModelRefresh(
-			ourShader, allModels[i].objLoc.GetWorldPosition(), allModels[i].objScale, allModels[i].objLoc.GetWorldRotation()));
-		allModels[i].objModel.Draw(ourShader);
+		mainShader.setMat4("model", allModels[i].objModel.ModelRefresh(
+			mainShader, allModels[i].objLoc.GetWorldPosition(), allModels[i].objScale, allModels[i].objLoc.GetWorldRotation()));
+		allModels[i].objModel.Draw(mainShader);
+	}
+	uiShader.use();
+	uiShader.setVec3("cameraPos", ourCamera.GetCameraCoords().cameraPos);
+	uiShader.setMat4("view", ourCamera.GetCameraView());
+	glm::mat4 ortho = glm::ortho(0.0f, static_cast<float>(screenDimensions.x), 0.0f, static_cast<float>(screenDimensions.y), -1.0f, 1.0f);
+	uiShader.setMat4("projection", projection);
+	UpdateContext(&mainUI, mainShader);
+	//UI Rendering
+	for (int i = 0; i < allUIModels.size(); i++)
+	{
+		uiShader.setMat4("model", allUIModels[i].objModel.ModelRefresh(
+			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objScale, allUIModels[i].objLoc.GetWorldRotation()));
+		allUIModels[i].objModel.Draw(mainShader);
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	EditorUpdate(window);
+	//EditorUpdate(window);
 	glfwSwapBuffers(window);
+	glFlush();
 }
