@@ -30,11 +30,10 @@ public:
 	unsigned int ID;
 	PhysicsTransform objLoc;
 	Model objModel;
-	glm::vec3 objScale;
 
 
 	RenderObject(PhysicsTransform pL, Model mod, unsigned int ID, glm::vec3 scale = UNIVERSAL_RENDERSCALE) 
-		: objLoc(pL), objModel(mod), ID(ID), objScale(scale) {};
+		: objLoc(pL), objModel(mod), ID(ID) {};
 	RenderObject();
 };
 

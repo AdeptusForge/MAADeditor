@@ -3,6 +3,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "Windows.h"
+#include "IDControl.h"
 #include "Debug.h"
 #include "FileControl.h"
 #include "Time.h"
@@ -13,11 +14,13 @@
 #include "Editor.h"
 #include "Map.h"
 
+
 GLFWwindow* window;
 
 //Starts up the entirety of the application
 void InitializeTheMAADness() 
 {
+	IDStartup();
 	FileControlStartup();
 
 	//Startup functions

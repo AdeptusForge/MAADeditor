@@ -207,35 +207,31 @@ void RenderShutdown()
 //Updates the window's render. Called ones per render frame(1/60th of a second.)
 void RenderUpdate(GLFWwindow* window)
 {
+	//Scene Rendering
 	mainShader.use();
 	ourCamera.UpdateCamera();
-	// pass them to the shaders
 	mainShader.setMat4("view", ourCamera.GetCameraView());
-	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	mainShader.setMat4("projection", projection);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//Scene Rendering
 	for (int i = 0; i < allModels.size(); i++)
 	{
-		//float angle = 20.0f * i;
-		//model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 		mainShader.setMat4("model", allModels[i].objModel.ModelRefresh(
-			mainShader, allModels[i].objLoc.GetWorldPosition(), allModels[i].objScale, allModels[i].objLoc.GetWorldRotation()));
+			mainShader, allModels[i].objLoc.GetWorldPosition(), allModels[i].objModel.Scale(), allModels[i].objLoc.GetWorldRotation()));
 		allModels[i].objModel.Draw(mainShader);
 	}
+
+	//UI Rendering
 	uiShader.use();
 	uiShader.setVec3("cameraPos", ourCamera.GetCameraCoords().cameraPos);
 	uiShader.setMat4("view", ourCamera.GetCameraView());
 	glm::mat4 ortho = glm::ortho(0.0f, static_cast<float>(screenDimensions.x), 0.0f, static_cast<float>(screenDimensions.y), -1.0f, 1.0f);
 	uiShader.setMat4("projection", projection);
 	UpdateContext(&mainUI, mainShader);
-	//UI Rendering
 	for (int i = 0; i < allUIModels.size(); i++)
 	{
 		uiShader.setMat4("model", allUIModels[i].objModel.ModelRefresh(
-			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objScale, allUIModels[i].objLoc.GetWorldRotation()));
+			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objModel.Scale(), allUIModels[i].objLoc.GetWorldRotation()));
 		allUIModels[i].objModel.Draw(mainShader);
 	}
 

@@ -11,9 +11,10 @@
 class ViewModel
 {
 public:
+	unsigned int ID;
 	PhysicsTransform modelOffset;
 	Model viewModel;
-
+private:
 
 };
 

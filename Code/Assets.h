@@ -115,6 +115,8 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType);
 //REFACTOR:: ??? 3D animation rework
 class Model
 {
+private:
+	glm::vec3 scale;
 	unsigned int currentFrame = 0;
 	bool currentlyPlaying = false;
 	AnimData currentAnim;
@@ -158,16 +160,17 @@ public:
 	std::vector<Edge> edges;
 	std::vector<Texture> textures;
 	unsigned int VAO;
+	glm::vec3 Scale() { return scale; }
 
 	#pragma region Constructor
-	Model(std::string modelName)
+	Model(std::string modelName, glm::vec3 newScale = glm::vec3(1))
 	{
 		WriteDebug("Constructing Model: " + modelName);
 		modelStringName = modelName;
 		if (modelName != "UI") 
 		{
 			ModelDataChunk newModel = Load3DModel(modelName, ObjFile);
-
+			this->scale = newScale;
 			this->vertices = newModel.vertices;
 			this->indices = newModel.indices;
 			this->edges = newModel.edges;
