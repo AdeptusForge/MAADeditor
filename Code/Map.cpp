@@ -25,7 +25,6 @@ glm::ivec3 GetMoveVector(MapDirection dir)
 	case(West):moveVec = westVec; break;
 	case(Up): moveVec = upVec; break;
 	case(Down): moveVec = downVec; break;
-
 	}
 	return moveVec;
 }
@@ -100,7 +99,6 @@ bool TileMovable(glm::ivec3 currPos, MapDirection moveDir)
 		}
 		return true;
 	}
-
 }
 //Updates all the entities on the map by a single frame.
 //TODO:: Map editing during runtime.
