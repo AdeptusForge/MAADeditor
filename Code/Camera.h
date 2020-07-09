@@ -8,6 +8,7 @@
 #include <iostream>
 #include <math.h>
 #include "Physics.h"
+#include "IDControl.h"
 #define PI 3.14159265
 
 const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0,0.0);
@@ -175,15 +176,15 @@ public:
 	glm::vec3 GetCurrentRotation() { return currRotationAngle; };
 	float cameraFov = 45.0f;
 
-	Camera(unsigned int ID, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):
-		cameraID(ID), cameraFov(fov), cameraType(type)
+	Camera(unsigned int id, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):
+		cameraID(id), cameraFov(fov), cameraType(type)
 	{
 		cameraCoords.cameraPos = pos,
 		cameraCoords.cameraFront = baseCameraFront;
 		cameraCoords.cameraUp = baseCameraUp;
 		UpdateCameraView();
 	};
-	Camera() {};
+	Camera():cameraID(0){};
 
 	glm::mat4 GetCameraView() { return cameraView; }
 

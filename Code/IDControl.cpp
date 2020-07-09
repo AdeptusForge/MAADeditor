@@ -7,120 +7,22 @@
 #include "debug.h"
 #include <vector>
 #include "IDControl.h"
-#include <algorithm>
 
-unsigned int renderIDCheck;
-std::vector <unsigned int> recycledRenderIDs;
-//DO NOT EDIT DURING RUNTIME
-unsigned int TOTAL_RENDERIDS_AVAILABLE = 16384;
-unsigned int inventoryIDCheck;
-std::vector <unsigned int> recycledInventoryIDs;
-//DO NOT EDIT DURING RUNTIME
-unsigned int TOTAL_INVENTORYIDS_AVAIALBLE = 512;
-unsigned int cameraIDCheck;
-std::vector <unsigned int> recycledCameraIDs;
-//DO NOT EDIT DURING RUNTIME
-unsigned int TOTAL_CAMERAIDS_AVAIALBLE = 32;
+IDController controllerTest1 = IDController(RENDER_ID);
+IDController controllerTest2 = IDController(INVENTORY_ID);
 
-void RecycleID(MAAD_ID idCheck)
-{
-	switch (idCheck.Type())
-	{
-		case(RENDER_ID):
-		{
-			if (!std::none_of(recycledRenderIDs.begin(), recycledRenderIDs.end(), [&](unsigned int i) {return i == idCheck.ID();}))
-			{
-				WriteDebug("ERROR -- Recycling already recycled ID for type: Render");
-				break;
-			}
-			recycledRenderIDs.push_back(idCheck.ID());
-			break;
-		}
-		case(INVENTORY_ID):
-		{
-			if (!std::none_of(recycledInventoryIDs.begin(), recycledInventoryIDs.end(), [&](unsigned int i) {return i == idCheck.ID(); }))
-			{
-				WriteDebug("ERROR -- Recycling already recycled ID for type: Inventory");
-				break;
-			}
-			recycledInventoryIDs.push_back(idCheck.ID());
-			break;
-		}
-		case(CAMERA_ID):
-		{
-			if (!std::none_of(recycledCameraIDs.begin(), recycledCameraIDs.end(), [&](unsigned int i) {return i == idCheck.ID(); }))
-			{
-				WriteDebug("ERROR -- Recycling already recycled ID for type: Inventory");
-				break;
-			}
-			recycledCameraIDs.push_back(idCheck.ID());
-			break;
-		}
-		default:
-		{
-			WriteDebug("ERROR -- No IDTYPE determined during recycling.");
-			break;
-		}
-	}
-}
-
-unsigned int GetFirstAvailableID(IDTYPE idtype) 
-{
-	unsigned int* idCheck_PTR = nullptr;
-	std::vector<unsigned int>* recycledIDs = nullptr;
-	unsigned int maxIDs;
-	switch (idtype) 
-	{
-		case(RENDER_ID): 
-		{
-			idCheck_PTR = &renderIDCheck;
-			recycledIDs = &recycledRenderIDs;
-			maxIDs = TOTAL_RENDERIDS_AVAILABLE;
-			break;
-		}
-		case(INVENTORY_ID):
-		{
-			idCheck_PTR = &inventoryIDCheck;
-			recycledIDs = &recycledInventoryIDs;
-			maxIDs = TOTAL_INVENTORYIDS_AVAIALBLE;
-			break;
-		}
-		case(CAMERA_ID):
-		{
-			idCheck_PTR = &cameraIDCheck;
-			recycledIDs = &recycledCameraIDs;
-			maxIDs = TOTAL_CAMERAIDS_AVAIALBLE;
-			break;
-		}
-		default:
-		{
-			WriteDebug("ERROR -- No IDTYPE determined during checking availabiity.");
-			break;
-		}
-	}
-	unsigned int result = *idCheck_PTR;
-	*idCheck_PTR += 1;
-	//result = *idCheck_PTR;
-	if (*idCheck_PTR >= maxIDs) 
-	{
-		WriteDebug("ERROR -- TOO MANY IDS");
-	}
-	if (recycledIDs->size() >= 1)
-	{
-		WriteDebug("using recycled id");
-		result = *std::min_element(recycledIDs->begin(), recycledIDs->end());
-		recycledIDs->erase(std::min_element(recycledIDs->begin(), recycledIDs->end()));
-	}
-	//WriteDebug("result " + std::to_string(result));
-	//WriteDebug("render " + std::to_string(renderIDCheck));
-	//WriteDebug("inventory " + std::to_string(inventoryIDCheck));
-
-	return result;
-}
 
 void IDStartup()
 {
-	renderIDCheck, inventoryIDCheck = 0;
-	WriteDebug("ID Control Startup -- Successful");
+	IDController::MAAD_ID* testID1 = controllerTest1.CreateNewID();
+	WriteDebug(testID1->ID());
+	IDController::MAAD_ID* testID2 = controllerTest1.CreateNewID();
+	WriteDebug(testID2->ID());
+	IDController::MAAD_ID* testID3 = controllerTest1.CreateNewID();
+	WriteDebug(testID3->ID());
+	controllerTest1.RecycleID(testID3);
+	IDController::MAAD_ID* testID4 = controllerTest1.CreateNewID();
+	WriteDebug(testID4->ID());
 
+	WriteDebug("ID Control Startup -- Successful");
 }
