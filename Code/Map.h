@@ -196,7 +196,7 @@ public:
 			//IF PLAYER, ROTATE CAMERA
 			if (ID == PLAYER_ENTITYID) 
 			{
-				Camera* cam = FindCamera(1);
+				Camera* cam = FindCamera(17);
 				cam->PlayCameraAction(turnRight);
 			}
 
@@ -212,7 +212,7 @@ public:
 				newFacing -= 1;
 			if (ID == PLAYER_ENTITYID)
 			{
-				Camera* cam = FindCamera(1);
+				Camera* cam = FindCamera(17);
 				cam->PlayCameraAction(turnLeft);
 			}
 		}
@@ -234,7 +234,7 @@ public:
 		currentDir += 2;
 		if (ID == PLAYER_ENTITYID)
 		{
-			Camera* cam = FindCamera(1);
+			Camera* cam = FindCamera(17);
 			cam->PlayCameraAction(turn180);
 		}
 		ChangeFacing((MapDirection)currentDir);
@@ -257,7 +257,7 @@ public:
 		{
 			if (ID == PLAYER_ENTITYID) 
 			{
-				Camera* cam = FindCamera(1);
+				Camera* cam = FindCamera(17);
 				cam->PlayCameraAction(walkForward);
 			}
 

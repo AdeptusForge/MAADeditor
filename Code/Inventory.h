@@ -94,7 +94,7 @@ public:
 	private:
 		std::string ID;
 	};
-	InventoryItem* GetItem(std::string ID) 
+	InventoryItem* GetItem(std::string ID)
 	{
 		if (!allItems.empty())
 		{

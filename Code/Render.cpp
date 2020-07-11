@@ -79,9 +79,11 @@ Camera* FindCamera(unsigned int camID)
 	Camera* found = nullptr;
 	for (int i = 0; i != allCameras.size(); i++) 
 	{
-		if (allCameras.at(i)->cameraID == camID)
+		if (allCameras.at(i)->cameraID->ID() == camID)
 			found = allCameras.at(i);
 	}
+	if (found == nullptr)
+		WriteDebug("ERROR -- NO CAMERA FOUND");
 	return found;
 }
 
@@ -162,11 +164,11 @@ GLFWwindow* RenderStartup()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	ourCamera = Camera(1,
+	ourCamera = Camera(
 		glm::vec3(0.0f, 5.0f, 0.0f), 
 		glm::vec3(0.0f, 0.0f, 1.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
-		45.0f, Perspective);
+		45.0f, Perspective, 17);
 	allCameras.insert(allCameras.end(), &ourCamera);
 
 	view = ourCamera.GetCameraView();

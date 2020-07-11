@@ -18,11 +18,11 @@ enum IDTYPE
 	MAPENTITY_ID = 32,
 };
 
-class IDController
+class MAAD_IDController
 {
 private:
 
-	IDTYPE IDPurpose;
+	std::string IDPurpose;
 	unsigned int IDCheck;
 	std::vector <unsigned int> recycledIDs;
 	//DO NOT EDIT DURING RUNTIME
@@ -44,23 +44,24 @@ private:
 	};
 public:
 	unsigned int GetTotalAvailable() { return totalIDsAvailable; }
-	IDTYPE CheckPurpose() { return IDPurpose; }
+	std::string CheckPurpose() { return IDPurpose; }
 	std::vector<unsigned int>* GetRecycledIDs() { return &recycledIDs; }
-	IDController(IDTYPE purpose) :
-		IDPurpose(purpose), IDCheck(0), totalIDsAvailable((unsigned int)purpose) {};
+
+	MAAD_IDController(std::string purpose, unsigned int maxIDs) :
+		IDPurpose(purpose), IDCheck(0), totalIDsAvailable(maxIDs) {};
 
 
 	class MAAD_ID
 	{
 	private:
-		IDTYPE type;
+		std::string type;
 		unsigned int id;
 
 	public:
 		const unsigned int ID() { return id; }
-		IDTYPE Type() { return type; }
+		std::string Type() { return type; }
 		//DO NOT USE. USE CreateNewID() UNDER AN IDController INSTEAD.
-		MAAD_ID(IDTYPE newtype, unsigned int ID) : type(newtype), id(ID) {};
+		MAAD_ID(std::string newtype, unsigned int ID) : type(newtype), id(ID) {};
 
 	};
 private:
@@ -73,16 +74,47 @@ private:
 		unsigned int ID;
 	};
 public:
-	MAAD_ID* CreateNewID()
+	std::vector<MAAD_ID>* GetAllIDs() { return &allIDs; }
+	//Creates a pointer to a new ID. Use a positive number to create an ID with a specific number. 
+	//Negative numbers are used for standard generation
+	MAAD_ID* CreateNewID(int setID = -1)
 	{
 		if (allIDs.size() >= totalIDsAvailable)
 		{
 			WriteDebug("ERROR -- TOO MANY IDS CREATED");
 			return nullptr;
 		}
-		allIDs.push_back(MAAD_ID(CheckPurpose(), GetFirstAvailableID()));
+
+		if (setID < 0) 
+		{
+			allIDs.push_back(MAAD_ID(CheckPurpose(), GetFirstAvailableID()));
+		}
+		else 
+		{
+			if (std::none_of(allIDs.begin(), allIDs.end(), [=](MAAD_ID elem) {return setID == elem.ID(); })) 
+			{
+				allIDs.push_back(MAAD_ID(CheckPurpose(), setID));
+			}
+			else 
+			{
+				WriteDebug("Cannot Create Identical ID");
+			}
+		}
 		return &allIDs.back();
+
 	};
+
+	void DeleteID(MAAD_ID* idCheck) 
+	{
+		std::vector<MAAD_ID>::iterator eraser = std::find_if(allIDs.begin(), allIDs.end(), [&](MAAD_ID i) {return i.ID() == idCheck->ID(); });
+		allIDs.erase(eraser);
+	}
+	void DeleteID(unsigned int idCheck)
+	{
+		std::vector<MAAD_ID>::iterator eraser = std::find_if(allIDs.begin(), allIDs.end(), [&](MAAD_ID i) {return i.ID() == idCheck; });
+		allIDs.erase(eraser);
+	}
+
 	void RecycleID(MAAD_ID* idCheck)
 	{
 		if (idCheck->Type() != IDPurpose) { WriteDebug("ERROR -- Cannot Recycle ID for different controller."); }
@@ -91,10 +123,21 @@ public:
 			WriteDebug("ERROR -- Cannot recycle already recycled ID.");
 		else
 		{
+			DeleteID(idCheck);
 			recycledIDs.push_back(idCheck->ID());
+		}
+	}
+	void RecycleID(unsigned int idCheck)
+	{
+		if (!std::none_of(recycledIDs.begin(), recycledIDs.end(), [&](unsigned int i) {return i == idCheck; }))
+			WriteDebug("ERROR -- Cannot recycle already recycled ID.");
+		else
+		{
+			DeleteID(idCheck);
+			recycledIDs.push_back(idCheck);
 		}
 	}
 };
 
 void IDStartup();
-
+MAAD_IDController* GetIDController(std::string purpose);

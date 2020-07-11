@@ -11,6 +11,7 @@
 #include "IDControl.h"
 #define PI 3.14159265
 
+
 const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0,0.0);
 const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 
@@ -167,7 +168,7 @@ private:
 	CameraAction currAction = noAction;
 
 public:
-	unsigned int cameraID;
+	MAAD_IDController::MAAD_ID* cameraID;
 	CameraMode mode = FreeView;
 	CameraType cameraType;
 	CameraCoords GetCameraCoords() { return cameraCoords; }
@@ -176,15 +177,15 @@ public:
 	glm::vec3 GetCurrentRotation() { return currRotationAngle; };
 	float cameraFov = 45.0f;
 
-	Camera(unsigned int id, glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type):
-		cameraID(id), cameraFov(fov), cameraType(type)
+	Camera( glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type, int ID = -1):
+		cameraID(GetIDController("Cameras")->CreateNewID(ID)), cameraFov(fov), cameraType(type)
 	{
 		cameraCoords.cameraPos = pos,
 		cameraCoords.cameraFront = baseCameraFront;
 		cameraCoords.cameraUp = baseCameraUp;
 		UpdateCameraView();
 	};
-	Camera():cameraID(0){};
+	Camera() {};
 
 	glm::mat4 GetCameraView() { return cameraView; }
 
