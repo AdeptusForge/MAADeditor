@@ -1,6 +1,5 @@
 #include "time.h"
 #include "SDL_timer.h"
-#include "Physics.h"
 #include "Render.h"
 #include "Input.h"
 #include "map.h"
@@ -51,7 +50,7 @@ void UpdateTime(GLFWwindow* window)
 	{
 		priorTick = currTick;
 		
-		PhysicsUpdate();
+		//PhysicsUpdate();
 		SaveInputs();
 
 			if (!lastFrameRender) 

@@ -11,7 +11,7 @@
 #include "Shaders.h"
 #include "Camera.h"
 #include "Assets.h"
-#include "Physics.h"
+#include "Objects.h"
 #include "editor.h"
 #include "UIControl.h"
 #include <algorithm>
@@ -44,12 +44,12 @@ private:
 };
 
 //Converts a gameobject into a renderobject for use during rendering.
-void GameToRenderConversion(GameObject obj)
+void GameToRenderConversion(MAAD_GameObject obj)
 {
-	for (int i = 0; i < obj.models.size(); i++)
+	for (int i = 0; i < obj.GetModels().size(); i++)
 	{
-		PhysicsTransform renderTrans = obj.models[i].modelOffset + obj.transform;
-		Model renderModel = obj.models[i].viewModel;
+		PhysicsTransform renderTrans = obj.GetModels()[i].modelOffset + obj.GetTransform();
+		Model renderModel = obj.GetModels()[i].viewModel;
 		allModels.push_back(RenderObject(renderTrans, renderModel, 15));
 	}
 }
@@ -225,7 +225,7 @@ void RenderUpdate(GLFWwindow* window)
 
 	//UI Rendering
 	uiShader.use();
-	uiShader.setVec3("cameraPos", ourCamera.GetCameraCoords().cameraPos);
+	uiShader.setVec3("cameraPos", ourCamera.GetPos());
 	uiShader.setMat4("view", ourCamera.GetCameraView());
 	glm::mat4 ortho = glm::ortho(0.0f, static_cast<float>(screenDimensions.x), 0.0f, static_cast<float>(screenDimensions.y), -1.0f, 1.0f);
 	uiShader.setMat4("projection", projection);

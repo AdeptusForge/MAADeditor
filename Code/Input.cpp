@@ -10,7 +10,7 @@
 #include "AudioControl.h"
 #include "Render.h"
 #include "Camera.h"
-#include "Physics.h"
+#include "Objects.h"
 #include "RNGRoll.h"
 #include "map.h"
 #include "UIcontrol.h"
@@ -27,14 +27,14 @@ glm::bvec4 buttons;
 
 InputFrame newFrame;
 InputFrame currFrame;
-
+MAAD_GameObject testGameObject;
 
 bool isSelecting;
 
 //Defines when the player can input.
 bool canInput;
-void BlockInputs() { canInput = false; };
-void UnblockInputs() { canInput = true; };
+void BlockAllInputs() { canInput = false; };
+void UnblockAllInputs() { canInput = true; };
 
 
 static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
@@ -65,7 +65,9 @@ void InputControlStartup(GLFWwindow* window)
 		ptr = priorFrames.begin();
 		ptr = priorFrames.insert(ptr, InputFrame());
 	}
-	UnblockInputs();
+
+	
+	UnblockAllInputs();
 }
 
 //Records inputs on a given frame and saves them as an InputFrame.
@@ -168,26 +170,47 @@ void SaveInputs()
 void RunInputs() 
 {
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
-	
 	if (currFrame.UP()) 
 	{
-		GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
+
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(0, 5, 0));
+		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
+		testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
+		WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 	}
 	if (currFrame.RIGHT())
 	{
-		GetMapEntity(0)->Rotate(0);
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(-5, 0, 0));
+		//GetMapEntity(0)->Rotate(0);
 	}
 	if (currFrame.LEFT()) 
 	{
-		GetMapEntity(0)->Rotate(1);
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(5, 0, 0));
+		//GetMapEntity(0)->Rotate(1);
 	}
 	if (currFrame.DOWN())
 	{
-		GetMapEntity(0)->Flip();
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(0, -5, 0));
+		//testGameObject.MoveObjectRelative(glm::vec3(-5));
+		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
+		//GetMapEntity(0)->Flip();
 	}
 
 	if (currFrame.BUTTON_1()) 
 	{
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(0, 0, -5));
+		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
+	}
+	if (currFrame.BUTTON_2())
+	{
+		Camera* cam = FindCamera(17);
+		cam->RotateCamera(glm::vec3(0, 0, 5));
+		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
 }

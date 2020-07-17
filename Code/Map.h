@@ -40,6 +40,20 @@ const glm::ivec3 upVec = glm::ivec3(0, 0, 1);
 #ifndef downVec
 const glm::ivec3 downVec = glm::ivec3(0, 0, -1);
 #endif // !downVec
+
+#ifndef northQuat
+const glm::quat northQuat = glm::radians(glm::vec3(0, 0, 0) * 0.5f);
+#endif // !northQuat
+#ifndef eastQuat
+const glm::quat eastQuat = glm::radians(glm::vec3(0, -90, 0) * 0.5f);
+#endif // !eastQuat
+#ifndef southQuat
+const glm::quat southQuat = glm::radians(glm::vec3(0, 180, 0) * 0.5f);
+#endif // !southQuat
+#ifndef westQuat
+const glm::quat westQuat = glm::radians(glm::vec3(0, 90, 0) * 0.5f);
+#endif // !westQuat
+
 #pragma endregion
 
 enum MapDirection 
@@ -173,7 +187,6 @@ public:
 			currMaxFrame = 0;
 			//WriteDebug("End of the last Action");
 		}
-		
 	}
 
 	//Rotates an entity's facing
@@ -182,7 +195,8 @@ public:
 	{
 		if (actionFrame > 0)
 			return;
-		currMaxFrame = turnRight.actionFrames.size();
+		currMaxFrame = 10;
+		//currMaxFrame = turnRight.actionFrames.size();
 
 		int newFacing = currentFacing;
 		//Turn Right
@@ -197,9 +211,8 @@ public:
 			if (ID == PLAYER_ENTITYID) 
 			{
 				Camera* cam = FindCamera(17);
-				cam->PlayCameraAction(turnRight);
+				//cam->PlayCameraAction(turnRight);
 			}
-
 		}
 		//Turn Left
 		else
@@ -213,7 +226,7 @@ public:
 			if (ID == PLAYER_ENTITYID)
 			{
 				Camera* cam = FindCamera(17);
-				cam->PlayCameraAction(turnLeft);
+				//cam->PlayCameraAction(turnLeft);
 			}
 		}
 		ChangeFacing((MapDirection)newFacing);
@@ -224,7 +237,8 @@ public:
 	{
 		if (actionFrame > 0)
 			return;
-		currMaxFrame = walkForward.actionFrames.size();
+		currMaxFrame = 10;
+		//currMaxFrame = walkForward.actionFrames.size();
 
 		WriteDebug("Flipped " + std::to_string(ID));
 		int currentDir = currentFacing;
@@ -235,7 +249,7 @@ public:
 		if (ID == PLAYER_ENTITYID)
 		{
 			Camera* cam = FindCamera(17);
-			cam->PlayCameraAction(turn180);
+			//cam->PlayCameraAction(turn180);
 		}
 		ChangeFacing((MapDirection)currentDir);
 	}
@@ -251,14 +265,16 @@ public:
 	{
 		if (actionFrame > 0)
 			return;
-		currMaxFrame = walkForward.actionFrames.size();
+		currMaxFrame = 10;
+		//currMaxFrame = walkForward.actionFrames.size();
+
 		MapDirection moveDir = dir;
 		if (TileMovable(GetCurrentPos(), moveDir))
 		{
 			if (ID == PLAYER_ENTITYID) 
 			{
 				Camera* cam = FindCamera(17);
-				cam->PlayCameraAction(walkForward);
+				//cam->PlayCameraAction(walkForward);
 			}
 
 			currentMapPos += GetMoveVector(moveDir);

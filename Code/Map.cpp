@@ -9,6 +9,7 @@
 #include "array"
 #include "iterator"
 
+
 MapDataChunk currMap;
 std::vector<MapEntity> allEntities;
 MapDataChunk mapDataPTR;

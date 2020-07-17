@@ -11,7 +11,6 @@
 #include "FileControl.h"
 #include "Shaders.h"
 #include "Camera.h"
-#include "physics.h"
 #include "Components.h"
 #include "Objects.h"
 

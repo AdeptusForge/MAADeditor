@@ -63,5 +63,5 @@ void CollectInputs(GLFWwindow*, int, int, int, int);
 void SaveInputs();
 void RunInputs();
 void ChangeMappedInput();
-void BlockInputs();
-void UnblockInputs();
+void BlockAllInputs();
+void UnblockAllInputs();

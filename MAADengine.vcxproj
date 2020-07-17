@@ -321,6 +321,7 @@
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\MAADeditor.cpp" />
     <ClCompile Include="Code\Map.cpp" />
+    <ClCompile Include="Code\Objects.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
     <ClCompile Include="Code\Render.cpp" />
     <ClCompile Include="Code\Shaders.cpp" />

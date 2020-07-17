@@ -10,7 +10,6 @@
 
 #define DEFAULT_2D_UIELEMENT 
 
-
 class UISelectable : MAAD_BoundingBox 
 {
 private:
@@ -24,7 +23,6 @@ public:
 	//Sets size based on screen size percentage. Does not edit the Z dimension.
 	void SetScreenDimensions(glm::vec2 screenDims) 
 	{
-
 	};
 	
 	//Function that is rarely if ever used. Kept just in case.
@@ -109,8 +107,7 @@ public:
 	};
 	virtual glm::vec3 CalculateElementOffset(Camera* target)
 	{
-
-		return glm::vec3(0,0,2.5);
+		return glm::vec3(0,0,10);
 	};
 	virtual void UpdateElement(Shader shader, Camera* target)
 	{
@@ -146,8 +143,6 @@ public:
 	}
 };
 
-
-
 class MAAD_UIContext 
 {
 private:
@@ -162,7 +157,7 @@ public:
 
 	void UIStartup() 
 	{
-		targetCamera = FindCamera(1);
+		targetCamera = FindCamera(17);
 		AddElement(&newTest, Model("TestCube"));
 	}
 

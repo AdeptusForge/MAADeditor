@@ -220,7 +220,7 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 		BindTextures(shader);
-
+		//glEnable(GL_SIGNED_NORMALIZED);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, position);
 		model = glm::scale(model, scale);

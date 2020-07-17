@@ -37,6 +37,8 @@ MAAD_IDController* GetIDController(std::string purpose)
 
 void IDStartup()
 {
+	allIDControllers.push_back(MAAD_IDController("GameObjects", 262144));
+
 	allIDControllers.push_back(MAAD_IDController("RenderObjects", 16384));
 	allIDControllers.push_back(MAAD_IDController("InventoryItems", 128));
 	allIDControllers.push_back(MAAD_IDController("Cameras", 32));

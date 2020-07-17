@@ -7,7 +7,6 @@
 #include "Debug.h"
 #include "FileControl.h"
 #include "Time.h"
-#include "Physics.h"
 #include "AudioControl.h"
 #include "Input.h"
 #include "Render.h"
@@ -22,7 +21,6 @@ void InitializeTheMAADness()
 {
 	IDStartup();
 	FileControlStartup();
-
 	//Startup functions
 	window = RenderStartup();
 	TimeStartup();
