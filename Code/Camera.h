@@ -7,12 +7,9 @@
 #include <sstream>
 #include <iostream>
 #include <math.h>
-#include "Physics.h"
+#include "Objects.h"
 #include "IDControl.h"
-#define PI 3.14159265
 
-const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0,0.0);
-const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 
 //#pragma region Hardcoded CameraActions
 //const CameraAction noAction = CameraAction(0, std::vector<CameraCoords>{});
@@ -123,12 +120,11 @@ enum CameraMode
 };
 
 //Camera Object. Multiple can be used simultaneously
-//REFACTOR:: Restructure CameraActions and
 class Camera 
 {
 private:
 	glm::vec3 cameraPos;
-	//RotationVector rotationVec = RotationVector(glm::ivec3(0), false);
+	RotationVector rotVec = RotationVector(glm::ivec3(0), false);
 	glm::vec3 rotation = glm::vec3(0, 0, 0);
 	glm::mat4 cameraView = glm::mat4(1.0f);
 	unsigned int currActionFrame;
@@ -155,14 +151,14 @@ public:
 
 	void RotateCamera(glm::vec3 newRot) 
 	{
-		rotation += newRot;
+		rotVec = rotVec+ newRot;
 		UpdateCameraView();
 	}
 
 	glm::vec3 CalculateCamFront() 
 	{
 		glm::vec3 finalFront = baseCameraFront;
-		
+		glm::vec3 rotation = rotVec.GetEulerRotation();
 		//X Axis Operation
 		finalFront.x = glm::sin(glm::radians(rotation.x));
 		finalFront.z = glm::cos(glm::radians(rotation.x));
@@ -185,6 +181,8 @@ public:
 	{
 		glm::vec3 camFront = CalculateCamFront();
 		glm::vec3 finalUp = baseCameraUp;
+		glm::vec3 rotation = rotVec.GetEulerRotation();
+
 		//Y Axis Operation
 		//finalUp.x *= glm::cos(glm::radians(rotation.y +90));
 		finalUp.z = glm::cos(glm::radians(rotation.y + 90));
@@ -213,20 +211,20 @@ public:
 	//--Overloads--
 	//CameraCoords()
 	//glm::vec3
-	void MoveCamera() 
+	void MoveCamera(glm::vec3 newPos) 
 	{
-		//cameraCoords.cameraPos = newCoords.cameraPos;
+		cameraPos = newPos;
 		UpdateCameraView();
 	}
 	//Teleports the camera to a new location. Does not reset the camera offset.
 	//--Overloads--
 	//CameraCoords()
 	//glm::vec3
-	void MoveCamera(glm::vec3 moveTo)
-	{
-		//cameraCoords.cameraPos += moveTo;
-		UpdateCameraView();
-	}
+	//void MoveCamera(glm::vec3 moveTo)
+	//{
+	//	//cameraCoords.cameraPos += moveTo;
+	//	UpdateCameraView();
+	//}
 
 
 
@@ -240,22 +238,6 @@ public:
 	//}
 	
 	//Rotates camera action coordinates based upon the current rotation of the camera
-	//CameraCoords RotateCoords(CameraCoords check) 
-	//{
-	//	CameraCoords newCoords = check;
-	//	//WriteDebug("CurrRotation: " + vecToStr(currRotationAngle) + " Frame Rotation: " + vecToStr(newCoords.rotation));
-	//	glm::quat checkQuat = glm::radians((currRotationAngle + newCoords.rotation) * 0.5f);
-	//	//WriteDebug("Quat: " + quatToStr(checkQuat));
-	//	//WriteDebug("Inverse: " + quatToStr(glm::inverse(checkQuat)));
-	//	glm::vec3 rotatedPoint = checkQuat * newCoords.cameraPos * glm::inverse(checkQuat);
-	//	glm::vec3 rotatedFront = checkQuat * newCoords.cameraFront * glm::inverse(checkQuat);
-	//	glm::vec3 rotatedUp = checkQuat * newCoords.cameraUp * glm::inverse(checkQuat);
-
-	//	//WriteDebug("Rotated: " + vecToStr(rotatedFront));
-	//	CameraCoords rotatedCoords = CameraCoords(rotatedPoint, newCoords.rotation, rotatedFront, rotatedUp);
-
-	//	return rotatedCoords;
-	//}
 
 	//Updates the current frame of the camera and the camera view. Runs once every RenderUpdate().
 	void UpdateCamera() 

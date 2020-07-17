@@ -12,6 +12,7 @@
 #include "iterator"
 #include "camera.h"
 #include "render.h"
+
 #pragma region const variables
 #ifndef PLAYER_ENTITYID
 const unsigned int PLAYER_ENTITYID = 0;
@@ -53,7 +54,6 @@ const glm::quat southQuat = glm::radians(glm::vec3(0, 180, 0) * 0.5f);
 #ifndef westQuat
 const glm::quat westQuat = glm::radians(glm::vec3(0, 90, 0) * 0.5f);
 #endif // !westQuat
-
 #pragma endregion
 
 enum MapDirection 
@@ -71,7 +71,6 @@ enum TileFeature
 	Wall = 1,
 	Ceiling = 2,
 	Floor = 3,
-
 };
 
 struct TileFeatures 
@@ -84,6 +83,23 @@ struct TileFeatures
 	TileFeature downward;
 };
 
+const std::vector<glm::vec3> walkForward = 
+{
+	glm::vec3(0.0, 0.0, 1.0), 
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 1.0),
+};
+
+
+
+
 glm::ivec3 GetMoveVector(MapDirection dir);
 
 struct MapTile
@@ -92,7 +108,7 @@ private:
 	glm::ivec3 mapPos;
 	TileFeatures features;
 	std::string tileModel;
-	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west //REPLACE WITH DIRECTION ENUM IMMEDIATELY
+	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west
 	std::vector<std::string> functionTriggers;
 public:
 	MapTile(glm::ivec3 pos, TileFeatures f, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
@@ -139,6 +155,9 @@ private:
 	MapDirection currentFacing;
 	unsigned int actionFrame;
 	unsigned int currMaxFrame = 0;
+
+
+
 public:
 	glm::ivec3 GetCurrentPos() { return currentMapPos; }
 	//1 = CurrentFacing, 2 = CurrentFacing turned right once, 3 = Opposite of CurrentFacing, 4 = CurrentFacing turned left once
@@ -175,6 +194,28 @@ public:
 		return (MapDirection)checkFace;
 	}
 	unsigned int ID;
+
+	glm::vec3 RotateCoords(glm::vec3 check)
+	{
+		glm::quat checkQuat;
+
+		switch (currentFacing)
+		{
+		case North: {checkQuat = northQuat; break; }
+		case East: {checkQuat = eastQuat; break; }
+		case South: {checkQuat = southQuat; break; }
+		case West: {checkQuat = westQuat; break; }
+		}
+
+		glm::vec3 rotatedPoint = checkQuat * check * glm::inverse(checkQuat);
+
+		WriteDebug("Rotated: " + vecToStr(rotatedPoint) + std::to_string(currentFacing));
+
+		rotatedPoint = check;
+
+		return rotatedPoint;
+	}
+
 
 	//Mostly to keep the player from being able to move before he's supposed to.
 	void AdvanceEntityFrame() 

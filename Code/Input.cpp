@@ -169,48 +169,70 @@ void SaveInputs()
 //If you wanted to handle multiplayer or an update-based framework, you'd need to change this to compensate.
 void RunInputs() 
 {
+	Camera* cam = FindCamera(17);
+
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	if (currFrame.UP()) 
 	{
-
-		Camera* cam = FindCamera(17);
-		cam->RotateCamera(glm::vec3(0, 5, 0));
+		//cam->RotateCamera(glm::vec3(0, 5, 0));
+		
+		
+		
 		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
-		testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
-		WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
+		for (int i = 0; i < walkForward.size(); i++)
+			GetMapEntity(0)->RotateCoords(walkForward[i]);
+
+
+
+		//testGameObject.MoveObjectRelative(glm::vec3(0,0,1));
+		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 	}
 	if (currFrame.RIGHT())
 	{
-		Camera* cam = FindCamera(17);
-		cam->RotateCamera(glm::vec3(-5, 0, 0));
+		//cam->RotateCamera(glm::vec3(-5, 0, 0));
+		
+		
 		//GetMapEntity(0)->Rotate(0);
+
+		
+		//testGameObject.MoveObjectRelative(glm::vec3(-1, 0, 0));
+
 	}
 	if (currFrame.LEFT()) 
 	{
-		Camera* cam = FindCamera(17);
-		cam->RotateCamera(glm::vec3(5, 0, 0));
-		//GetMapEntity(0)->Rotate(1);
+		//cam->RotateCamera(glm::vec3(5, 0, 0));
+		
+		
+		GetMapEntity(0)->Rotate(1);
+		
+		//testGameObject.MoveObjectRelative(glm::vec3(1, 0, 0));
 	}
 	if (currFrame.DOWN())
 	{
-		Camera* cam = FindCamera(17);
 		cam->RotateCamera(glm::vec3(0, -5, 0));
-		//testGameObject.MoveObjectRelative(glm::vec3(-5));
+		//testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
 		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 		//GetMapEntity(0)->Flip();
+
+
+		//testGameObject.MoveObjectRelative(glm::vec3(0, 0, -1));
 	}
 
 	if (currFrame.BUTTON_1()) 
 	{
-		Camera* cam = FindCamera(17);
-		cam->RotateCamera(glm::vec3(0, 0, -5));
+		testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
+
+		//cam->RotateCamera(glm::vec3(0, 0, -5));
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
 	if (currFrame.BUTTON_2())
 	{
-		Camera* cam = FindCamera(17);
-		cam->RotateCamera(glm::vec3(0, 0, 5));
+		testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
+
+		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
+	//cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
+
 }
