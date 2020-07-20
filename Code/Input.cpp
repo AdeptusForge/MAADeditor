@@ -180,16 +180,16 @@ void RunInputs()
 		
 		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
 		for (int i = 0; i < walkForward.size(); i++)
-			GetMapEntity(0)->RotateCoords(walkForward[i]);
+			testGameObject.MoveObjectRelative(GetMapEntity(0)->RotateCoords(walkForward[i]));
+		WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 
 
 
 		//testGameObject.MoveObjectRelative(glm::vec3(0,0,1));
-		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 	}
 	if (currFrame.RIGHT())
 	{
-		//cam->RotateCamera(glm::vec3(-5, 0, 0));
+		cam->RotateCamera(glm::vec3(-5, 0, 0));
 		
 		
 		//GetMapEntity(0)->Rotate(0);
@@ -200,16 +200,16 @@ void RunInputs()
 	}
 	if (currFrame.LEFT()) 
 	{
-		//cam->RotateCamera(glm::vec3(5, 0, 0));
+		cam->RotateCamera(glm::vec3(5, 0, 0));
 		
 		
-		GetMapEntity(0)->Rotate(1);
+		//GetMapEntity(0)->Rotate(1);
 		
 		//testGameObject.MoveObjectRelative(glm::vec3(1, 0, 0));
 	}
 	if (currFrame.DOWN())
 	{
-		cam->RotateCamera(glm::vec3(0, -5, 0));
+		//cam->RotateCamera(glm::vec3(0, -5, 0));
 		//testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
 		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 		//GetMapEntity(0)->Flip();
@@ -233,6 +233,6 @@ void RunInputs()
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
-	//cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
+	cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
 
 }

@@ -11,7 +11,6 @@
 #include "FileControl.h"
 #include "Shaders.h"
 #include "Camera.h"
-#include "Components.h"
 #include "Objects.h"
 
 Camera* FindCamera(unsigned int);

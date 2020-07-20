@@ -5,20 +5,22 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "assets.h"
-#include "Components.h"
 #include "IDControl.h"
+#include <string>
+#include <queue>
+#include <map>
 
-#define PI 3.14159265
-
-const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0, 0.0);
-const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
-
-
+#pragma region Fixed Point Arith Reqs
 const unsigned int MAX_DECIMAL_PRECISION = 10000;
 const int INT360 = 3600000;
 glm::ivec3 ConvertFloatVec(glm::vec3 floatVec);
+#pragma endregion
 
-struct RotationVector 
+#pragma region Phyics and Transform Reqs
+#define PI 3.14159265
+
+
+struct RotationVector
 {
 private:
 	glm::ivec3 eulerRotation;
@@ -60,7 +62,7 @@ public:
 		//WriteDebug(vecToStr(worldPosition));
 		return  rot;
 	}
-	RotationVector operator + (RotationVector & obj) {
+	RotationVector operator + (RotationVector& obj) {
 		RotationVector res;
 		glm::ivec3 newVec = eulerRotation + obj.GetTrueRotation();
 		if (newVec.x > INT360) { newVec.x - INT360; }
@@ -74,7 +76,7 @@ public:
 	}
 	RotationVector operator + (glm::vec3& obj) {
 		RotationVector res;
-		glm::ivec3 newVec = 
+		glm::ivec3 newVec =
 			eulerRotation + glm::ivec3(obj.x * MAX_DECIMAL_PRECISION, obj.y * MAX_DECIMAL_PRECISION, obj.z * MAX_DECIMAL_PRECISION);
 		if (newVec.x > INT360) { newVec.x - INT360; }
 		if (newVec.x < -INT360) { newVec.x + INT360; }
@@ -147,7 +149,7 @@ public:
 		return  worldRotation;
 	}
 
-	void ModifyTransformPos(glm::vec3 newPos) 
+	void ModifyTransformPos(glm::vec3 newPos)
 	{
 		position = ConvertFloatVec(newPos);
 	}
@@ -163,6 +165,25 @@ public:
 		return res;
 	}
 };
+#pragma endregion
+
+const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0, 0.0);
+const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
+
+
+#pragma region Event Reqs
+enum EventType
+{
+};
+
+class EventListener
+{
+	EventType criterion;
+
+
+};
+#pragma endregion
+
 
 class ViewModel
 {
@@ -174,7 +195,7 @@ private:
 
 };
 
-class MAAD_GameObject
+class MAAD_GameObject : public EventListener
 {
 private:
 	PhysicsTransform transform;
@@ -200,13 +221,14 @@ public:
 	class ObjectComponent
 	{
 	private:
-		MAAD_GameObject* parent;
 	protected:
+		MAAD_GameObject* parent;
 		virtual void ComponentUpdate()
 		{
 		}
 	public:
 		ObjectComponent() {};
+		glm::vec3 GetParentPosition() { return parent->GetTransform().GetWorldPosition(); }
 
 	};
 	class AnimatorComponent : public ObjectComponent
@@ -291,169 +313,164 @@ public:
 			LockedOnView,
 			FreeView
 		};
+	private:
+		glm::vec3 cameraOffset;
+		RotationVector rotVec = RotationVector(glm::ivec3(0), false);
+		glm::vec3 rotation = glm::vec3(0, 0, 0);
+		glm::mat4 cameraView = glm::mat4(1.0f);
+		unsigned int currActionFrame;
+		//CameraAction currAction = noAction;
+	public:
 
-		//Camera Object. Multiple can be used simultaneously
-		class Camera
+		MAAD_IDController::MAAD_ID* cameraID;
+		CameraMode mode = FreeView;
+		CameraType cameraType;
+		glm::vec3 GetOffset() { return cameraOffset; }
+		glm::vec3 GetTruePosition() { return GetParentPosition() + cameraOffset; }
+		glm::vec3 GetCurrentRotation() { return rotation; };
+		float cameraFov = 45.0f;
+
+		CameraComponent(glm::vec3 offset = glm::vec3(), glm::vec3 rotation = glm::vec3(), float fov = 90, CameraType type = Perspective, int ID = -1) :
+			cameraID(GetIDController("Cameras")->CreateNewID(ID)), cameraFov(fov), cameraType(type)
 		{
-		private:
-			glm::vec3 cameraPos;
-			RotationVector rotVec = RotationVector(glm::ivec3(0), false);
-			glm::vec3 rotation = glm::vec3(0, 0, 0);
-			glm::mat4 cameraView = glm::mat4(1.0f);
-			unsigned int currActionFrame;
-			//CameraAction currAction = noAction;
-
-		public:
-
-			MAAD_IDController::MAAD_ID* cameraID;
-			CameraMode mode = FreeView;
-			CameraType cameraType;
-			glm::vec3 GetPos() { return cameraPos; }
-			glm::vec3 GetCurrentRotation() { return rotation; };
-			float cameraFov = 45.0f;
-
-			Camera(glm::vec3 pos, glm::vec3 front, glm::vec3 up, float fov, CameraType type, int ID = -1) :
-				cameraID(GetIDController("Cameras")->CreateNewID(ID)), cameraFov(fov), cameraType(type)
-			{
-				cameraPos = pos,
-					UpdateCameraView();
-			};
-			Camera() {};
-
-			glm::mat4 GetCameraView() { return cameraView; }
-
-			void RotateCamera(glm::vec3 newRot)
-			{
-				rotVec = rotVec + newRot;
-				UpdateCameraView();
-			}
-
-			glm::vec3 CalculateCamFront()
-			{
-				glm::vec3 finalFront = baseCameraFront;
-				glm::vec3 rotation = rotVec.GetEulerRotation();
-				//X Axis Operation
-				finalFront.x = glm::sin(glm::radians(rotation.x));
-				finalFront.z = glm::cos(glm::radians(rotation.x));
-
-				if (rotation.y != 0)
-				{
-					//Y Axis Operation
-					finalFront.x *= glm::cos(glm::radians(rotation.y));
-					finalFront.z *= glm::cos(glm::radians(rotation.y));
-					finalFront.y = glm::sin(glm::radians(rotation.y));
-				}
-
-				//WriteDebug("CameraFront: " + vecToStr(finalFront) + ". Rotation: " + vecToStr(rotation));
-				//finalFront = baseCameraFront;
-				//WriteDebug("BaseFront: " + vecToStr(finalFront));
-
-				return finalFront;
-			};
-			glm::vec3 CalculateCamUp()
-			{
-				glm::vec3 camFront = CalculateCamFront();
-				glm::vec3 finalUp = baseCameraUp;
-				glm::vec3 rotation = rotVec.GetEulerRotation();
-
-				//Y Axis Operation
-				//finalUp.x *= glm::cos(glm::radians(rotation.y +90));
-				finalUp.z = glm::cos(glm::radians(rotation.y + 90));
-				finalUp.y = glm::sin(glm::radians(rotation.y + 90));
-
-				//finalUp.x = ;
-				//finalUp.z = ;
-
-				//finalUp.y = glm::sin(glm::radians(rotation.y + 90));
-
-
-				//WriteDebug("CameraUp: " + vecToStr(finalUp) + ". Rotation: " + vecToStr(rotation));
-				finalUp = baseCameraUp;
-				return finalUp;
-
-			};
-
-
-			//Updates camera view based on its offset and its current position.
-			//cameraView is based on cameraFront and cameraUp, not on the rotation of the camera.
-			void UpdateCameraView()
-			{
-				cameraView = glm::lookAt(cameraPos, cameraPos + CalculateCamFront(), CalculateCamUp());;
-			}
-			//Teleports the camera to a new location. Does not reset the camera offset.
-			//--Overloads--
-			//CameraCoords()
-			//glm::vec3
-			void MoveCamera(glm::vec3 newPos)
-			{
-				cameraPos = newPos;
-				UpdateCameraView();
-			}
-			//Teleports the camera to a new location. Does not reset the camera offset.
-			//--Overloads--
-			//CameraCoords()
-			//glm::vec3
-			//void MoveCamera(glm::vec3 moveTo)
-			//{
-			//	//cameraCoords.cameraPos += moveTo;
-			//	UpdateCameraView();
-			//}
-
-
-
-			//Sets the current CameraAction and sets current active frame to 0
-			//void PlayCameraAction(CameraAction action) 
-			//{
-
-			//	currAction = action;
-			//	currActionFrame = 0;
-
-			//}
-
-			//Rotates camera action coordinates based upon the current rotation of the camera
-			//CameraCoords RotateCoords(CameraCoords check) 
-			//{
-			//	CameraCoords newCoords = check;
-			//	//WriteDebug("CurrRotation: " + vecToStr(currRotationAngle) + " Frame Rotation: " + vecToStr(newCoords.rotation));
-			//	glm::quat checkQuat = glm::radians((currRotationAngle + newCoords.rotation) * 0.5f);
-			//	//WriteDebug("Quat: " + quatToStr(checkQuat));
-			//	//WriteDebug("Inverse: " + quatToStr(glm::inverse(checkQuat)));
-			//	glm::vec3 rotatedPoint = checkQuat * newCoords.cameraPos * glm::inverse(checkQuat);
-			//	glm::vec3 rotatedFront = checkQuat * newCoords.cameraFront * glm::inverse(checkQuat);
-			//	glm::vec3 rotatedUp = checkQuat * newCoords.cameraUp * glm::inverse(checkQuat);
-
-			//	//WriteDebug("Rotated: " + vecToStr(rotatedFront));
-			//	CameraCoords rotatedCoords = CameraCoords(rotatedPoint, newCoords.rotation, rotatedFront, rotatedUp);
-
-			//	return rotatedCoords;
-			//}
-
-			//Updates the current frame of the camera and the camera view. Runs once every RenderUpdate().
-			void UpdateCamera()
-			{
-				UpdateCameraView();
-
-				//if (currAction.ID != noAction.ID) 
-				//{
-				//	if (currActionFrame < currAction.actionFrames.size())
-				//	{
-				//		offsetCoords = RotateCoords(currAction.actionFrames[currActionFrame]);
-				//		currActionFrame++;
-				//	}
-				//	else 
-				//	{
-				//		if (currAction.ID != noAction.ID) 
-				//		{
-				//			cameraCoords = cameraCoords + offsetCoords;
-				//			currRotationAngle += currAction.actionFrames[currAction.actionFrames.size() - 1].rotation;
-				//			//WriteDebug(vecToStr(cameraCoords.cameraFront));
-				//			offsetCoords = CameraCoords();
-				//			currAction = noAction;
-				//		}
-				//	}
-				//}
-			}
+			cameraOffset = offset;
+			UpdateCameraView();
 		};
+		CameraComponent() {};
+
+		glm::mat4 GetCameraView() { return cameraView; }
+
+		void RotateCamera(glm::vec3 newRot)
+		{
+			rotVec = rotVec + newRot;
+			UpdateCameraView();
+		}
+
+		glm::vec3 CalculateCamFront()
+		{
+			glm::vec3 finalFront = baseCameraFront;
+			glm::vec3 rotation = rotVec.GetEulerRotation();
+			//X Axis Operation
+			finalFront.x = glm::sin(glm::radians(rotation.x));
+			finalFront.z = glm::cos(glm::radians(rotation.x));
+
+			if (rotation.y != 0)
+			{
+				//Y Axis Operation
+				finalFront.x *= glm::cos(glm::radians(rotation.y));
+				finalFront.z *= glm::cos(glm::radians(rotation.y));
+				finalFront.y = glm::sin(glm::radians(rotation.y));
+			}
+
+			//WriteDebug("CameraFront: " + vecToStr(finalFront) + ". Rotation: " + vecToStr(rotation));
+			//finalFront = baseCameraFront;
+			//WriteDebug("BaseFront: " + vecToStr(finalFront));
+
+			return finalFront;
+		};
+		glm::vec3 CalculateCamUp()
+		{
+			glm::vec3 camFront = CalculateCamFront();
+			glm::vec3 finalUp = baseCameraUp;
+			glm::vec3 rotation = rotVec.GetEulerRotation();
+
+			//Y Axis Operation
+			//finalUp.x *= glm::cos(glm::radians(rotation.y +90));
+			finalUp.z = glm::cos(glm::radians(rotation.y + 90));
+			finalUp.y = glm::sin(glm::radians(rotation.y + 90));
+
+			//finalUp.x = ;
+			//finalUp.z = ;
+
+			//finalUp.y = glm::sin(glm::radians(rotation.y + 90));
+
+
+			//WriteDebug("CameraUp: " + vecToStr(finalUp) + ". Rotation: " + vecToStr(rotation));
+			finalUp = baseCameraUp;
+			return finalUp;
+
+		};
+
+
+		//Updates camera view based on its offset and its current position.
+		//cameraView is based on cameraFront and cameraUp, not on the rotation of the camera.
+		void UpdateCameraView()
+		{
+			cameraView = glm::lookAt(GetTruePosition(), GetTruePosition() + CalculateCamFront(), CalculateCamUp());;
+		}
+		//Teleports the camera to a new location by changing the camera's offset from its base object.
+		//--Overloads--
+		//CameraCoords()
+		//glm::vec3
+		void MoveCamera(glm::vec3 newOffset)
+		{
+			cameraOffset = newOffset;
+			UpdateCameraView();
+		}
+		//Teleports the camera to a new location. Does not reset the camera offset.
+		//--Overloads--
+		//CameraCoords()
+		//glm::vec3
+		//void MoveCamera(glm::vec3 moveTo)
+		//{
+		//	//cameraCoords.cameraPos += moveTo;
+		//	UpdateCameraView();
+		//}
+
+
+
+		//Sets the current CameraAction and sets current active frame to 0
+		//void PlayCameraAction(CameraAction action) 
+		//{
+
+		//	currAction = action;
+		//	currActionFrame = 0;
+
+		//}
+
+		//Rotates camera action coordinates based upon the current rotation of the camera
+		//CameraCoords RotateCoords(CameraCoords check) 
+		//{
+		//	CameraCoords newCoords = check;
+		//	//WriteDebug("CurrRotation: " + vecToStr(currRotationAngle) + " Frame Rotation: " + vecToStr(newCoords.rotation));
+		//	glm::quat checkQuat = glm::radians((currRotationAngle + newCoords.rotation) * 0.5f);
+		//	//WriteDebug("Quat: " + quatToStr(checkQuat));
+		//	//WriteDebug("Inverse: " + quatToStr(glm::inverse(checkQuat)));
+		//	glm::vec3 rotatedPoint = checkQuat * newCoords.cameraPos * glm::inverse(checkQuat);
+		//	glm::vec3 rotatedFront = checkQuat * newCoords.cameraFront * glm::inverse(checkQuat);
+		//	glm::vec3 rotatedUp = checkQuat * newCoords.cameraUp * glm::inverse(checkQuat);
+
+		//	//WriteDebug("Rotated: " + vecToStr(rotatedFront));
+		//	CameraCoords rotatedCoords = CameraCoords(rotatedPoint, newCoords.rotation, rotatedFront, rotatedUp);
+
+		//	return rotatedCoords;
+		//}
+
+		//Updates the current frame of the camera and the camera view. Runs once every RenderUpdate().
+		void UpdateCamera()
+		{
+			UpdateCameraView();
+
+			//if (currAction.ID != noAction.ID) 
+			//{
+			//	if (currActionFrame < currAction.actionFrames.size())
+			//	{
+			//		offsetCoords = RotateCoords(currAction.actionFrames[currActionFrame]);
+			//		currActionFrame++;
+			//	}
+			//	else 
+			//	{
+			//		if (currAction.ID != noAction.ID) 
+			//		{
+			//			cameraCoords = cameraCoords + offsetCoords;
+			//			currRotationAngle += currAction.actionFrames[currAction.actionFrames.size() - 1].rotation;
+			//			//WriteDebug(vecToStr(cameraCoords.cameraFront));
+			//			offsetCoords = CameraCoords();
+			//			currAction = noAction;
+			//		}
+			//	}
+			//}
+		}
 
 	};
 
@@ -468,5 +485,85 @@ public:
 		
 	}
 };
+
+#pragma region EventHandling
+class EventData
+{
+private:
+	std::map<std::string, int > intData;
+	std::map<std::string, int >::iterator intIter;
+	std::map<std::string, std::string > stringData;
+	std::map<std::string, std::string >::iterator stringIter;
+	std::map<std::string, float > floatData;
+	std::map<std::string, float >::iterator floatIter;
+	std::map<std::string, MAAD_GameObject> objectData;
+	std::map<std::string, MAAD_GameObject>::iterator objectIter;
+	std::map<std::string,  MAAD_GameObject*> objectPTRData;
+	std::map<std::string, MAAD_GameObject*>::iterator objectPTRIter;
+
+
+public:
+#pragma region Setters
+	void SetInt(std::string tag, int value)
+	{
+		intIter = intData.begin();
+		intData.insert({ tag, value });
+	}
+
+	void SetString(std::string tag, std::string value)
+	{
+		stringIter = stringData.begin();
+		stringData.insert({ tag, value });
+	}
+
+	void SetFloat(std::string tag, float value)
+	{
+		floatIter = floatData.begin();
+		floatData.insert({ tag, value });
+	}
+	void SetObject(std::string tag, MAAD_GameObject value)
+	{
+		objectIter = objectData.begin();
+		objectData.insert({ tag, value });
+	}
+	void SetObjectPTR(std::string tag, MAAD_GameObject* value)
+	{
+		objectPTRIter = objectPTRData.begin();
+		objectPTRData.insert({ tag, value });
+	}
+#pragma endregion
+
+#pragma region Getters
+	const int GetInt(std::string tag) { return intData.find(tag)->second; }
+	const std::string GetString(std::string tag) { return stringData.find(tag)->second; }
+	const float Getfloat(std::string tag) { return floatData.find(tag)->second; }
+	const MAAD_GameObject* GetObjPTR(std::string tag) { return objectPTRData.find(tag)->second; }
+	const MAAD_GameObject GetObjData(std::string tag) { return objectData.find(tag)->second; }
+
+	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
+	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
+#pragma endregion
+
+};
+
+class Event
+{
+public:
+
+	virtual~Event();
+	const EventType type;
+	EventData data;
+};
+
+class EventSender
+{
+	std::vector<EventListener*> listeners;
+	void SendEvent()
+	{
+
+	}
+	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
+};
+#pragma endregion
 
 void ObjectUpdate();

@@ -12,6 +12,7 @@
 #include "iterator"
 #include "camera.h"
 #include "render.h"
+#include "Objects.h"
 
 #pragma region const variables
 #ifndef PLAYER_ENTITYID
@@ -209,7 +210,7 @@ public:
 
 		glm::vec3 rotatedPoint = checkQuat * check * glm::inverse(checkQuat);
 
-		WriteDebug("Rotated: " + vecToStr(rotatedPoint) + std::to_string(currentFacing));
+		//WriteDebug("Rotated: " + vecToStr(rotatedPoint) + std::to_string(currentFacing));
 
 		rotatedPoint = check;
 
