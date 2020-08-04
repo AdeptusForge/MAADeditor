@@ -15,6 +15,8 @@
 
 
 GLFWwindow* window;
+EventSender eventManager;
+
 
 //Starts up the entirety of the application
 void InitializeTheMAADness() 

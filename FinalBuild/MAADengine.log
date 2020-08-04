@@ -3,117 +3,122 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(1
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
   Input.cpp
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Editor.cpp(143,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
   MAADeditor.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Input.cpp(182,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Input.cpp(193,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
   Map.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(108,20): warning C4018:  '<': signed/unsigned mismatch
   Objects.cpp
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Map.cpp(186,23): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(8,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(8,24): warning C4244:         with
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(8,24): warning C4244:         [
@@ -144,47 +149,49 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         ]
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
   Render.cpp
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(49,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(69,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(191,20): warning C4018:  '<': signed/unsigned mismatch
@@ -195,31 +202,32 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(1
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(277,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(11,27): warning C4244:  'initializing': conversion from 'Uint64' to 'float', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(21,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(25,13): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  0 of 2294 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  139 of 2650 functions ( 5.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    109 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim

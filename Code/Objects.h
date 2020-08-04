@@ -9,6 +9,7 @@
 #include <string>
 #include <queue>
 #include <map>
+#include <algorithm>
 
 #pragma region Fixed Point Arith Reqs
 const unsigned int MAX_DECIMAL_PRECISION = 10000;
@@ -174,16 +175,114 @@ const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 #pragma region Event Reqs
 enum EventType
 {
+	TestEvent2,
+	InputEvent,
+	InventoryEvent,
+	SoundEvent,
+	MapEvent,
+	NarrativeEvent,
+
+};
+
+
+class EventData
+{
+private:
+	std::map<std::string, int > intData;
+	std::map<std::string, int >::iterator intIter;
+	std::map<std::string, std::string > stringData;
+	std::map<std::string, std::string >::iterator stringIter;
+	std::map<std::string, float > floatData;
+	std::map<std::string, float >::iterator floatIter;
+	//std::map<std::string, MAAD_GameObject> objectData;
+	//std::map<std::string, MAAD_GameObject>::iterator objectIter;
+	//std::map<std::string, MAAD_GameObject*> objectPTRData;
+	//std::map<std::string, MAAD_GameObject*>::iterator objectPTRIter;
+
+
+public:
+#pragma region Setters
+	void SetInt(std::string tag, int value)
+	{
+		intIter = intData.begin();
+		intData.insert({ tag, value });
+	}
+
+	void SetString(std::string tag, std::string value)
+	{
+		stringIter = stringData.begin();
+		stringData.insert({ tag, value });
+	}
+
+	void SetFloat(std::string tag, float value)
+	{
+		floatIter = floatData.begin();
+		floatData.insert({ tag, value });
+	}
+	//void SetObject(std::string tag, MAAD_GameObject value)
+	//{
+	//	objectIter = objectData.begin();
+	//	objectData.insert({ tag, value });
+	//}
+	//void SetObjectPTR(std::string tag, MAAD_GameObject* value)
+	//{
+	//	objectPTRIter = objectPTRData.begin();
+	//	objectPTRData.insert({ tag, value });
+	//}
+#pragma endregion
+
+#pragma region Getters
+	const int GetInt(std::string tag) { return intData.find(tag)->second; }
+	const std::string GetString(std::string tag) { return stringData.find(tag)->second; }
+	const float Getfloat(std::string tag) { return floatData.find(tag)->second; }
+	//const MAAD_GameObject* GetObjPTR(std::string tag) { return objectPTRData.find(tag)->second; }
+	//const MAAD_GameObject GetObjData(std::string tag) { return objectData.find(tag)->second; }
+
+	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
+	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
+#pragma endregion
+
+};
+
+class MAAD_EVENT
+{
+public:
+
+	const EventType Etype;
+	EventData data;
+	MAAD_EVENT(EventType etype, EventData edata) : Etype(etype), data(edata) {};
 };
 
 class EventListener
 {
-	EventType criterion;
+public:
+	std::vector <EventType> typeCriterion;
+	virtual void EventResponse(MAAD_EVENT eventNotice)
+	{
+		//WriteDebug("Recieved Event:" + eventNotice.data.GetString("TestEvent"));
+	};
+	EventListener(std::vector<EventType> crit) : typeCriterion(crit) {};
+	EventListener() {};
+};
 
+class EventSender
+{
+	std::vector<EventListener*> listeners;
 
+public:
+	EventSender() {};
+	void SendEvent(MAAD_EVENT eventNotice)
+	{
+		//WriteDebug("Sent Event");
+		for (int i = 0; i < listeners.size(); i++)
+			if (!none_of(listeners[i]->typeCriterion.begin(), listeners[i]->typeCriterion.end(), [=](EventType eT) {return eT == eventNotice.Etype; }))
+			{
+				listeners[i]->EventResponse(eventNotice);
+			}
+	}
+	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
 };
 #pragma endregion
-
 
 class ViewModel
 {
@@ -486,84 +585,8 @@ public:
 	}
 };
 
-#pragma region EventHandling
-class EventData
-{
-private:
-	std::map<std::string, int > intData;
-	std::map<std::string, int >::iterator intIter;
-	std::map<std::string, std::string > stringData;
-	std::map<std::string, std::string >::iterator stringIter;
-	std::map<std::string, float > floatData;
-	std::map<std::string, float >::iterator floatIter;
-	std::map<std::string, MAAD_GameObject> objectData;
-	std::map<std::string, MAAD_GameObject>::iterator objectIter;
-	std::map<std::string,  MAAD_GameObject*> objectPTRData;
-	std::map<std::string, MAAD_GameObject*>::iterator objectPTRIter;
 
 
-public:
-#pragma region Setters
-	void SetInt(std::string tag, int value)
-	{
-		intIter = intData.begin();
-		intData.insert({ tag, value });
-	}
-
-	void SetString(std::string tag, std::string value)
-	{
-		stringIter = stringData.begin();
-		stringData.insert({ tag, value });
-	}
-
-	void SetFloat(std::string tag, float value)
-	{
-		floatIter = floatData.begin();
-		floatData.insert({ tag, value });
-	}
-	void SetObject(std::string tag, MAAD_GameObject value)
-	{
-		objectIter = objectData.begin();
-		objectData.insert({ tag, value });
-	}
-	void SetObjectPTR(std::string tag, MAAD_GameObject* value)
-	{
-		objectPTRIter = objectPTRData.begin();
-		objectPTRData.insert({ tag, value });
-	}
-#pragma endregion
-
-#pragma region Getters
-	const int GetInt(std::string tag) { return intData.find(tag)->second; }
-	const std::string GetString(std::string tag) { return stringData.find(tag)->second; }
-	const float Getfloat(std::string tag) { return floatData.find(tag)->second; }
-	const MAAD_GameObject* GetObjPTR(std::string tag) { return objectPTRData.find(tag)->second; }
-	const MAAD_GameObject GetObjData(std::string tag) { return objectData.find(tag)->second; }
-
-	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
-	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
-#pragma endregion
-
-};
-
-class Event
-{
-public:
-
-	virtual~Event();
-	const EventType type;
-	EventData data;
-};
-
-class EventSender
-{
-	std::vector<EventListener*> listeners;
-	void SendEvent()
-	{
-
-	}
-	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
-};
-#pragma endregion
+//void EventListener::AttachToSender(EventSender* sender) { sender->AddListener(this); }
 
 void ObjectUpdate();
