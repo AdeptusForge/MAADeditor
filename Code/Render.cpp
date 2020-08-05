@@ -57,8 +57,6 @@ void GameToRenderConversion(MAAD_GameObject obj)
 //Converts a MAAD_UIElement into a renderobject for use during rendering.
 void UIElementToRenderConversion(MAAD_UIElement* element, Camera* target) 
 {
-	//WriteDebug(vecToStr(target->GetCameraCoords().cameraPos));
-	
 	PhysicsTransform renderTrans = PhysicsTransform(element->CalculateElementOffset(target), glm::vec3(0), true);
 	allUIModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
 }
@@ -212,6 +210,9 @@ void RenderUpdate(GLFWwindow* window)
 	//Scene Rendering
 	mainShader.use();
 	ourCamera.UpdateCamera();
+	mainShader.setInt("pColumns", 640);
+	mainShader.setInt("pRows", 360);
+
 	mainShader.setMat4("view", ourCamera.GetCameraView());
 	mainShader.setMat4("projection", projection);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -226,12 +227,11 @@ void RenderUpdate(GLFWwindow* window)
 	//UI Rendering
 	uiShader.use();
 	uiShader.setMat4("view", ourCamera.GetCameraView());
-	glm::mat4 ortho = glm::ortho(0.0f, static_cast<float>(screenDimensions.x), 0.0f, static_cast<float>(screenDimensions.y), -1.0f, 1.0f);
-	uiShader.setMat4("projection", projection);
+	glm::mat4 ortho = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 10.0f);
+	uiShader.setMat4("projection", ortho);
 	UpdateContext(&mainUI, mainShader);
 	for (int i = 0; i < allUIModels.size(); i++)
 	{
-		WriteDebug("pos: " +vecToStr(allUIModels[i].objLoc.GetWorldPosition()));
 		uiShader.setMat4("model", allUIModels[i].objModel.ModelRefresh(
 			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objModel.Scale(), allUIModels[i].objLoc.GetWorldRotation()));
 		allUIModels[i].objModel.Draw(mainShader);

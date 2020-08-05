@@ -11,17 +11,16 @@ out vec3 gColor;
 
 uniform mat4 transform;
 
-
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 //uniform vec3 cameraPos;
-//uniform vec3 cameraFront;
+uniform vec3 cameraFront;
+vec3 newFront = cameraFront;
 
 void main()
 {
 	gVerts = aPos;
-	vec3 newFront = cameraFront;
     gl_Position =  projection * view * model * vec4(aPos + vec3(0,0,-5), 1.0);
 	gColor = color;
 	gTexCoord = aTexCoord;
