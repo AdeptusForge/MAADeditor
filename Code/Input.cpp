@@ -28,7 +28,6 @@ glm::bvec4 buttons;
 InputFrame newFrame;
 InputFrame currFrame;
 MAAD_GameObject testGameObject;
-
 bool isSelecting;
 
 //Defines when the player can input.
@@ -40,11 +39,12 @@ void EventStartup()
 {
 	EventSender eventManager;
 	EventData testData = EventData();
+	TestGameObject doubleTest = TestGameObject();
 	testData.SetString("TestEvent", "What Whut");
 	eventManager = EventSender();
-	testGameObject.typeCriterion.push_back(TestEvent2);
-	eventManager.AddListener(&(EventListener)testGameObject);
-	eventManager.SendEvent(MAAD_EVENT(TestEvent2, testData));
+	doubleTest.typeCriterion.push_back(EngineEvent);
+	eventManager.AddListener(&doubleTest);
+	eventManager.SendEvent(MAAD_EVENT(EngineEvent, testData));
 }
 
 
@@ -185,17 +185,10 @@ void RunInputs()
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	if (currFrame.UP()) 
 	{
-		//cam->RotateCamera(glm::vec3(0, 5, 0));
-		
-		
-		
 		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
 		for (int i = 0; i < walkForward.size(); i++)
 			testGameObject.MoveObjectRelative(GetMapEntity(0)->RotateCoords(walkForward[i]));
 		WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
-
-
-
 		//testGameObject.MoveObjectRelative(glm::vec3(0,0,1));
 	}
 	if (currFrame.RIGHT())
@@ -220,7 +213,7 @@ void RunInputs()
 	}
 	if (currFrame.DOWN())
 	{
-		//cam->RotateCamera(glm::vec3(0, -5, 0));
+		cam->RotateCamera(glm::vec3(0, -5, 0));
 		//testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
 		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
 		//GetMapEntity(0)->Flip();
@@ -231,14 +224,16 @@ void RunInputs()
 
 	if (currFrame.BUTTON_1()) 
 	{
-		testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
+		//testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
+		cam->RotateCamera(glm::vec3(0, 5, 0));
 
 		//cam->RotateCamera(glm::vec3(0, 0, -5));
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 	}
 	if (currFrame.BUTTON_2())
 	{
-		testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
+		//testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
+		cam->RotateCamera(glm::vec3(0, -5, 0));
 
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
@@ -251,6 +246,12 @@ void RunInputs()
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
+
+		TestItem testItem(glm::vec2(2), "whatever");
+		InventoryItem* testItemPTR = &testItem;
+
+		testItemPTR->BASEHeldAction();
+
 	}
 	cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
 

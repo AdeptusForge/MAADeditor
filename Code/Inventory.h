@@ -45,7 +45,7 @@ public:
 	void BASECombine() { Combine(); }
 };
 
-class TestItem : InventoryItem
+class TestItem : public InventoryItem
 {
 private:
 

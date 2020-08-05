@@ -171,19 +171,17 @@ public:
 const glm::vec3 baseCameraUp = glm::vec3(0.0, 1.0, 0.0);
 const glm::vec3 baseCameraFront = glm::vec3(0.0, 0.0, 1.0);
 
-
 #pragma region Event Reqs
 enum EventType
 {
-	TestEvent2,
+	EngineEvent,
 	InputEvent,
 	InventoryEvent,
 	SoundEvent,
 	MapEvent,
 	NarrativeEvent,
-
+	
 };
-
 
 class EventData
 {
@@ -257,10 +255,15 @@ class EventListener
 {
 public:
 	std::vector <EventType> typeCriterion;
+protected:
 	virtual void EventResponse(MAAD_EVENT eventNotice)
 	{
 		//WriteDebug("Recieved Event:" + eventNotice.data.GetString("TestEvent"));
 	};
+
+public:
+	void BASEEventResponse(MAAD_EVENT e) { EventResponse(e); }
+
 	EventListener(std::vector<EventType> crit) : typeCriterion(crit) {};
 	EventListener() {};
 };
@@ -273,11 +276,11 @@ public:
 	EventSender() {};
 	void SendEvent(MAAD_EVENT eventNotice)
 	{
-		//WriteDebug("Sent Event");
 		for (int i = 0; i < listeners.size(); i++)
 			if (!none_of(listeners[i]->typeCriterion.begin(), listeners[i]->typeCriterion.end(), [=](EventType eT) {return eT == eventNotice.Etype; }))
 			{
-				listeners[i]->EventResponse(eventNotice);
+				EventListener* p = &(*listeners[i]);
+				p->BASEEventResponse(eventNotice);
 			}
 	}
 	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
@@ -302,6 +305,10 @@ private:
 	MAAD_IDController::MAAD_ID* objectID;
 	std::vector<ViewModel> models;
 public:
+	void EventResponse(MAAD_EVENT e) 
+	{
+		EventListener:EventResponse(e);
+	}
 	MAAD_GameObject(std::string newName, int newID = -1, PhysicsTransform trans = PhysicsTransform()) :
 		name(newName), transform(trans), objectID(GetIDController("GameObjects")->CreateNewID(newID)) {};
 	MAAD_GameObject() {};
@@ -585,7 +592,15 @@ public:
 	}
 };
 
-
+class TestGameObject : public MAAD_GameObject 
+{
+public:
+	void EventResponse(MAAD_EVENT e) 
+	{
+		WriteDebug("Will this work? " + e.data.GetString("TestEvent")); 
+	};
+	TestGameObject() { MAAD_GameObject(); };
+};
 
 //void EventListener::AttachToSender(EventSender* sender) { sender->AddListener(this); }
 

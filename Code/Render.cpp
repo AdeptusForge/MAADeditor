@@ -225,13 +225,13 @@ void RenderUpdate(GLFWwindow* window)
 
 	//UI Rendering
 	uiShader.use();
-	uiShader.setVec3("cameraPos", ourCamera.GetPos());
 	uiShader.setMat4("view", ourCamera.GetCameraView());
 	glm::mat4 ortho = glm::ortho(0.0f, static_cast<float>(screenDimensions.x), 0.0f, static_cast<float>(screenDimensions.y), -1.0f, 1.0f);
 	uiShader.setMat4("projection", projection);
 	UpdateContext(&mainUI, mainShader);
 	for (int i = 0; i < allUIModels.size(); i++)
 	{
+		WriteDebug("pos: " +vecToStr(allUIModels[i].objLoc.GetWorldPosition()));
 		uiShader.setMat4("model", allUIModels[i].objModel.ModelRefresh(
 			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objModel.Scale(), allUIModels[i].objLoc.GetWorldRotation()));
 		allUIModels[i].objModel.Draw(mainShader);

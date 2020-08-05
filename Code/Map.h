@@ -86,20 +86,17 @@ struct TileFeatures
 
 const std::vector<glm::vec3> walkForward = 
 {
-	glm::vec3(0.0, 0.0, 1.0), 
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
-	glm::vec3(0.0, 0.0, 1.0),
+	glm::vec3(0.0, 0.0, 0.1), 
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
+	glm::vec3(0.0, 0.0, 0.1),
 };
-
-
-
 
 glm::ivec3 GetMoveVector(MapDirection dir);
 
@@ -156,8 +153,6 @@ private:
 	MapDirection currentFacing;
 	unsigned int actionFrame;
 	unsigned int currMaxFrame = 0;
-
-
 
 public:
 	glm::ivec3 GetCurrentPos() { return currentMapPos; }

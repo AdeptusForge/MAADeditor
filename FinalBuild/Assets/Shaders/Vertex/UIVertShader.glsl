@@ -15,12 +15,14 @@ uniform mat4 transform;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-uniform vec3 cameraPos;
+//uniform vec3 cameraPos;
+//uniform vec3 cameraFront;
 
 void main()
 {
 	gVerts = aPos;
-    gl_Position =  projection * view * model * vec4(aPos+cameraPos, 1.0);
+	vec3 newFront = cameraFront;
+    gl_Position =  projection * view * model * vec4(aPos + vec3(0,0,-5), 1.0);
 	gColor = color;
 	gTexCoord = aTexCoord;
 }
