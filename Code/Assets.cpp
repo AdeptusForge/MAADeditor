@@ -185,7 +185,7 @@ ModelDataChunk& Load3DModel(std::string fileName, FileType fileType)
 							//WriteDebug("End of Line");
 						}
 					}
-					else { WriteDebug("Cannot Load3dModel -- Too Many Face Vertexes"); break; }
+					else { WriteDebug("Cannot Load3dModel -- Too Many Face Vertexes. Triangulate Faces in Model Editor."); break; }
 				}
 			}
 #pragma endregion

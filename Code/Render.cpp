@@ -17,8 +17,6 @@
 #include <algorithm>
 #include <iterator>
 
-const unsigned int SCR_H = 360;
-const unsigned int SCR_W = 640;
 
 glm::ivec2 screenDimensions;
 
@@ -118,16 +116,16 @@ RenderObject* GetRenderObject(int ID)
 	return nullptr;
 }
 
-//Readjusts the size of the window when dragging the edges of it.
-void ResetScreenSize(GLFWwindow* window) 
+void ResizeWindow(GLFWwindow* window, glm::vec2 newSize) 
 {
-	glfwSetWindowSize(window, 800, 800);
-	screenDimensions = glm::vec2(800, 800);
+	glfwSetWindowSize(window, newSize.x, newSize.y);
+	screenDimensions = newSize;
 }
 
 //Initializes an OpenGL window.
 GLFWwindow* RenderStartup() 
 {
+
 	GLFWwindow* window;
 	/* Initialize the libraries */
 	if (!glfwInit())
@@ -136,7 +134,8 @@ GLFWwindow* RenderStartup()
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		std::cerr << "SDL failed to initialize\n";
 	std::cout << "SDL initialized successfully.\n";
-
+	
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -210,9 +209,7 @@ void RenderUpdate(GLFWwindow* window)
 	//Scene Rendering
 	mainShader.use();
 	ourCamera.UpdateCamera();
-	mainShader.setInt("pColumns", 640);
-	mainShader.setInt("pRows", 360);
-
+	mainShader.setFloat("pixelScale", 1);
 	mainShader.setMat4("view", ourCamera.GetCameraView());
 	mainShader.setMat4("projection", projection);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

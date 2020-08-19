@@ -4,6 +4,7 @@
 in vec2 fTexCoord;
 in vec3 fColor;
 
+uniform float pixelScale;
 uniform sampler2D texture0;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
@@ -33,5 +34,6 @@ void main()
 
 	//newTexture for Top-Down
 	//finalTexture for Bottom-Up
+
 	fragOutColor = finalTexture;
 }

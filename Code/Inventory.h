@@ -19,7 +19,7 @@ protected:
 	glm::ivec2 shape;
 	bool horizontal;
 	std::string itemID;
-	//Location is based upon the top-right corner of the object.
+	//Location is based upon the top-right corner of the object within a given inventory grid.
 	glm::ivec2 location;
 
 	virtual void HeldAction() 
@@ -120,7 +120,7 @@ public:
 	{
 		return glm::ivec2(0);
 	}
-
+	
 	void TransferItemTo(InventoryItem* transfer, InventorySpace* to, glm::vec2 newLocation) 
 	{
 		if (to != this)

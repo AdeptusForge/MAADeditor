@@ -18,7 +18,7 @@ void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
 GLFWwindow* RenderStartup();
 
-void ResetScreenSize(GLFWwindow*);
+void ResizeWindow(GLFWwindow*, glm::vec2);
 
 #define UNIVERSAL_RENDERSCALE glm::vec3(1)
 

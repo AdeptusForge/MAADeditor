@@ -11,6 +11,9 @@
 
 #define DEFAULT_2D_UIELEMENT 
 
+const unsigned int SCR_H = 360;
+const unsigned int SCR_W = 640;
+
 class MAAD_UIElement : public MAAD_GameObject
 {
 protected:
@@ -18,6 +21,7 @@ protected:
 	Model* modelPTR;
 	glm::ivec2 pixelSize;
 	//Element scale. Either in pixels, or in 0 to 1 percentages.
+	//Until further notice, set scale as the size of the image you want to use in your UI for best results
 	glm::vec2 scale;
 	glm::vec2 screenlocation;
 	bool active;
@@ -35,7 +39,7 @@ public:
 			WriteDebug("Y Percentage is larger than 100% of the screen");
 		else
 			newScale.y = scale.y * pixelSize.y * windowSize.y;
-		WriteDebug(vecToStr(newScale));
+		//WriteDebug("scale?:" +vecToStr(newScale));
 
 		return newScale;
 	};
@@ -47,12 +51,12 @@ public:
 		if (scale.x > windowSize.x)
 			WriteDebug("X Pixel size is larger than the screen");
 		else
-			newScale.x = scale.x * pixelSize.x / windowSize.x;
+			newScale.x = scale.x * (pixelSize.x * 10) / windowSize.x;
 		if (scale.y > windowSize.y)
 			WriteDebug("Y Pixel size is larger than the screen");
 		else
-			newScale.y = scale.y * pixelSize.y / windowSize.y;
-		WriteDebug(vecToStr(newScale));
+			newScale.y = scale.y * (pixelSize.y*10) / windowSize.y;
+		//WriteDebug(vecToStr(newScale));
 
 		return newScale;
 	};
@@ -83,16 +87,22 @@ public:
 	};
 	virtual glm::vec3 CalculateElementOffset(Camera* target)
 	{
-		return glm::vec3(0,0,0);
+		screenlocation.x = 0;
+		screenlocation.y = 0;
+
+		return glm::vec3(screenlocation,0);
 	};
 	virtual void UpdateElement(Shader shader, Camera* target)
 	{
 		//WriteDebug("Updated element: " + std::to_string(elementID));
 		if (modelPTR != nullptr) 
 		{
-			//WriteDebug("Camera Position: " + vecToStr(CalculateElementOffset(target)));
+			scale = UNIVERSAL_RENDERSCALE;
+			pixelSize = glm::vec2(16,16);
+			scale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
+			//WriteDebug("Scale" + vecToStr(scale));
 			shader.setMat4("model", 
-				modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE, glm::vec3(0)));
+				modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
 		}
 	};
 
@@ -100,13 +110,15 @@ public:
 	MAAD_UIElement(unsigned int id) : elementID(id), active(true) {};
 };
 
-class TestUIElement : public MAAD_UIElement 
+class InventoryGrid : public MAAD_UIElement 
 {
+private: 
+	//InventorySpace inventory;
 protected:
 
 
 public:
-	TestUIElement(unsigned int id)
+	InventoryGrid(unsigned int id)
 	{
 		elementID = id;
 		active = true;
@@ -115,7 +127,6 @@ public:
 	void UpdateElement(Shader shader, Camera* target)
 	{
 		MAAD_UIElement::UpdateElement(shader, target);
-		//WriteDebug("TestUIElement Update");
 	}
 };
 
@@ -129,14 +140,14 @@ private:
 public:
 	MAAD_UIContext() {};
 	std::vector<MAAD_UIElement*> elementPTRs;
-	TestUIElement newTest = TestUIElement(14);
+	InventoryGrid newTest = InventoryGrid(14);
 
 	void UIStartup() 
 	{
 		targetCamera = FindCamera(17);
-		AddElement(&newTest, Model("TestCube"));
+		AddElement(&newTest, Model("UIPlaneTest"));
 	}
-
+	
 	Camera* GetTargetCamera() { return targetCamera; }
 	MAAD_UIElement* GetElementByID(const unsigned int id) 
 	{

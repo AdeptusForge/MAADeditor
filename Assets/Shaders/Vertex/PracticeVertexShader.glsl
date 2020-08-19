@@ -9,9 +9,6 @@ out vec2 gTexCoord;
 out vec3 gVerts;
 out vec3 gColor;
 
-
-uniform int pColumns;
-uniform int pRows;
 uniform sampler2D sceneTex;
 
 uniform mat4 transform;
@@ -24,14 +21,5 @@ void main()
 	gVerts = aPos;
     gl_Position =  projection * view * model * vec4(aPos, 1.0);
 	gColor = color;
-
-	float pX = aUV.x;
-	float pY = aUV.y;
-
-
-
-
-
-	vec2 pixelatedUV = vec2(pX,pY);
-	gTexCoord = pixelatedUV; 
+	gTexCoord = aUV; 
 }

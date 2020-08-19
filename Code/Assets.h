@@ -233,7 +233,7 @@ public:
 		for(int i=0; i< textures.size(); i++)
 			glDeleteTextures(1, &textures[i].ID);
 	}
-	//Draws the model into the OpenGL space. Called once per RenderUpdate()
+	//Draws the model into the OpenGL space. Called once per RenderUpdate() per object.
 	void Draw(Shader shader)
 	{
 		//Draw

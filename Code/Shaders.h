@@ -197,4 +197,3 @@ private:
 };
 
 Shader LoadCustomShader(std::string, std::string, std::string);
-
