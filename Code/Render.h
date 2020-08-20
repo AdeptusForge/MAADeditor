@@ -17,6 +17,7 @@ Camera* FindCamera(unsigned int);
 void RenderShutdown();
 void RenderUpdate(GLFWwindow*);
 GLFWwindow* RenderStartup();
+GLFWwindow* GetWindow();
 
 void ResizeWindow(GLFWwindow*, glm::vec2);
 

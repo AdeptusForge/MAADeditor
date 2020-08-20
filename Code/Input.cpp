@@ -241,16 +241,19 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_4())
 	{
-		EventStartup();
+		//EventStartup();
 
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 
-		TestItem testItem(glm::vec2(2), "whatever");
-		InventoryItem* testItemPTR = &testItem;
+		//TestItem testItem(glm::vec2(2), "whatever");
+		//InventoryItem* testItemPTR = &testItem;
 
-		testItemPTR->BASEHeldAction();
+		//testItemPTR->BASEHeldAction();
+
+		ResizeWindow(GetWindow(), glm::vec2(1280, 720));
+
 
 	}
 	cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());

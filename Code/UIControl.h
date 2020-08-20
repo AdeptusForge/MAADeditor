@@ -14,7 +14,7 @@
 const unsigned int SCR_H = 360;
 const unsigned int SCR_W = 640;
 
-class MAAD_UIElement : public MAAD_GameObject
+class MAAD_UIElement 
 {
 protected:
 	unsigned int elementID;
@@ -23,8 +23,10 @@ protected:
 	//Element scale. Either in pixels, or in 0 to 1 percentages.
 	//Until further notice, set scale as the size of the image you want to use in your UI for best results
 	glm::vec2 scale;
-	glm::vec2 screenlocation;
-	bool active;
+	//always defined in pixels, but processed into pixel coordinates or absolute coordinates before rendering
+	glm::vec2 screenLocation;
+	bool active = true;
+	bool is2D = true;
 
 public:
 	//Scales the object based on percentage sizes of the screen.
@@ -62,9 +64,13 @@ public:
 	};
 	//Places the object based on percentage sizes of the screen. Rounds to the nearest pixel to prevent half-pixels.
 	//Returns center of the UIElement in OpenGL screen coordinates.
-	glm::vec3 UILocationAbsolute(glm::vec2 windowSize)
+	glm::vec3 UILocationAbsolute(glm::vec2 screenDims)
 	{
 		glm::vec3 newLoc;
+		float measureX = screenLocation.x / screenDims.x;
+		float measureY = screenLocation.y / screenDims.y;
+		newLoc.x = (measureX * 20) - 10;
+		newLoc.y = (measureY * 20) - 10;
 		return newLoc;
 	};
 
@@ -85,12 +91,10 @@ public:
 	void SetState(bool state) {
 		active = state; 
 	};
+	//Used for 3D objects
 	virtual glm::vec3 CalculateElementOffset(Camera* target)
 	{
-		screenlocation.x = 0;
-		screenlocation.y = 0;
-
-		return glm::vec3(screenlocation,0);
+		return glm::vec3(0);
 	};
 	virtual void UpdateElement(Shader shader, Camera* target)
 	{
@@ -101,8 +105,17 @@ public:
 			pixelSize = glm::vec2(16,16);
 			scale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
 			//WriteDebug("Scale" + vecToStr(scale));
-			shader.setMat4("model", 
-				modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
+			if (is2D) 
+			{
+				shader.setMat4("model",
+					modelPTR->ModelRefresh(shader, UILocationAbsolute(glm::vec2(SCR_W,SCR_H)), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
+
+			}
+			else 
+			{
+				shader.setMat4("model",
+					modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
+			}
 		}
 	};
 
@@ -122,6 +135,8 @@ public:
 	{
 		elementID = id;
 		active = true;
+		is2D = true;
+		screenLocation = glm::vec2(400, 200);
 		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader, Camera* target)
@@ -130,7 +145,7 @@ public:
 	}
 };
 
-class MAAD_UIContext 
+class MAAD_UIContext : public MAAD_GameObject
 {
 private:
 	std::map<unsigned int, Model> uiModels;

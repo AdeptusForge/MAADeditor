@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <iterator>
 
+GLFWwindow* rWindow;
 
 glm::ivec2 screenDimensions;
 
@@ -122,11 +123,15 @@ void ResizeWindow(GLFWwindow* window, glm::vec2 newSize)
 	screenDimensions = newSize;
 }
 
+GLFWwindow* GetWindow() 
+{
+	return rWindow;
+}
+
+
 //Initializes an OpenGL window.
 GLFWwindow* RenderStartup() 
 {
-
-	GLFWwindow* window;
 	/* Initialize the libraries */
 	if (!glfwInit())
 		std::cerr << "OpenGL failed to initialize\n";
@@ -140,10 +145,10 @@ GLFWwindow* RenderStartup()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(SCR_W, SCR_H, "MAADeditor", NULL, NULL);
+	rWindow = glfwCreateWindow(SCR_W, SCR_H, "MAADeditor", NULL, NULL);
 	screenDimensions = glm::vec2(SCR_W, SCR_H);
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwMakeContextCurrent(rWindow);
+	glfwSetFramebufferSizeCallback(rWindow, framebuffer_size_callback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		std::cerr << "GLAD failed to initialize\n";
@@ -190,7 +195,7 @@ GLFWwindow* RenderStartup()
 		UIElementToRenderConversion(UIelements[i], mainUI.GetTargetCamera());
 	}
 
-	return window;
+	return rWindow;
 }
 
 //Shuts down all OpenGL operations
