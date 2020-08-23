@@ -57,15 +57,7 @@ const glm::quat westQuat = glm::radians(glm::vec3(0, 90, 0) * 0.5f);
 #endif // !westQuat
 #pragma endregion
 
-enum MapDirection 
-{
-	North = 1,
-	East = 2,
-	South = 3,
-	West = 4,
-	Up = 5,
-	Down = 6
-};
+
 enum TileFeature 
 {
 	Empty = 0,

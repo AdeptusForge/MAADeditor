@@ -12,3 +12,13 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+enum MapDirection
+{
+	North = 1,
+	East = 2,
+	South = 3,
+	West = 4,
+	Up = 5,
+	Down = 6
+};
