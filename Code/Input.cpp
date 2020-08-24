@@ -247,6 +247,8 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_2())
 	{
+		testSelector.InteractWithItem();
+
 		//testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
 		//cam->RotateCamera(glm::vec3(0, -5, 0));
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360));
@@ -254,6 +256,9 @@ void RunInputs()
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
+	}
+	if (currFrame.BUTTON_3()) 
+	{
 	}
 	if (currFrame.BUTTON_4())
 	{
@@ -263,10 +268,8 @@ void RunInputs()
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 
-		TestItem testItem(glm::vec2(2), "whatever");
-		//InventoryItem* testItemPTR = &testItem;
+		InventoryItem testItem(glm::vec2(2), "whatever", TestItem);
 		testInventory.AddItem(testItem, glm::vec2(0));
-		//testItemPTR->BASEHeldAction();
 
 		//ResizeWindow(GetWindow(), glm::vec2(1280, 720));
 	}

@@ -10,55 +10,52 @@
 #include <vector>
 #include "UIControl.h"
 
+enum ItemType 
+{
+	TestItem,
+
+};
+
 class InventoryItem
 {
 private:
-protected: 
 	glm::ivec2 shape;
 	bool horizontal;
 	std::string itemID;
 	//Location is based upon the bottom-left corner of the object within a given inventory grid.
 	glm::ivec2 location;
+	ItemType iType;
 
-	virtual void HeldAction() 
-	{
-		WriteDebug("BaseItem: " + itemID + vecToStr(shape));
-	}
-	virtual void Interact() {}
-	virtual void Combine() {}
 
 public:
 	InventoryItem() {}
-	InventoryItem(glm::ivec2 size, std::string ID)
-	{
-		shape = size;
-		itemID = ID;
-	};
+	InventoryItem(glm::ivec2 size, std::string ID, ItemType newType) : shape(size), itemID(ID), iType(newType) {};
 
 	std::string GetItemID() { return itemID; };
 	glm::ivec2 GetShape() { return shape; };
-
-	void BASEHeldAction() { HeldAction(); }
-	void BASEInteract() { Interact(); }
-	void BASECombine() { Combine(); }
-};
-
-class TestItem : public InventoryItem
-{
-private:
-	
-public:
+	ItemType GetType() { return iType; };
 	void HeldAction()
 	{
-		InventoryItem::HeldAction();
-		WriteDebug("TestItem");
+		switch(iType) 
+		{
+			case TestItem: 
+			{
+				WriteDebug("Held Action of TestItem");
+				break;
+			}
+			Default:
+			{
+				WriteDebug("No Item Type on this item.");
+				break;
+			}
+		}
 	}
-	TestItem(glm::ivec2 size, std::string ID)
-	{
-		shape = size;
-		itemID = ID;
-	};
+	void Interact() {}
+	void Combine() {}
+
+
 };
+
 
 class InventoryNode 
 {
@@ -133,10 +130,6 @@ public:
 	std::vector<InventoryItem> *GetAllItems() { return &allItems; }
 	glm::ivec2 GetNodeSize() { return size; };
 	InventoryNode* GetNode(glm::ivec2 location) { return &nodes[1][1]; }
-	glm::ivec2 VecToNodeLoc(glm::vec2 location) 
-	{
-		return glm::ivec2(0);
-	}
 	
 	void TransferItemTo(InventoryItem* transfer, InventorySpace* to, glm::vec2 newLocation) 
 	{
@@ -252,13 +245,17 @@ public:
 	}
 	void InteractWithItem() 
 	{
+		if (selectedItem != nullptr) 
+		{
+			selectedItem->HeldAction(); 
+		}
 	}
 
 	void SelectNode() 
 	{
 		if (inventoryCurrentlyIn == nullptr) 
 		{
-			WriteDebug("cannot use selector if it can't be inside an inventory.");
+			WriteDebug("cannot use selector if it isn't be inside an inventory.");
 		}
 		else
 		{
@@ -269,7 +266,7 @@ public:
 				{
 					InventoryItem* iPtr = inventoryCurrentlyIn->GetNode(selectorLocation)->GetItem();
 					selectedItem = (iPtr != nullptr) ? iPtr : nullptr;
-					WriteDebug("Item ID:" + iPtr->GetItemID());
+					WriteDebug("ItemSelected");
 				}
 				else
 					WriteDebug(vecToStr(selectorLocation) + "empty");
