@@ -338,6 +338,7 @@
     <ClInclude Include="Code\AudioControl.h" />
     <ClInclude Include="Code\Battlefield.h" />
     <ClInclude Include="Code\Bounding.h" />
+    <ClInclude Include="Code\Combat.h" />
     <ClInclude Include="Code\Debug.h" />
     <ClInclude Include="Code\Editor.h" />
     <ClInclude Include="Code\Entity.h" />

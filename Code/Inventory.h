@@ -10,9 +10,34 @@
 #include <vector>
 #include "UIControl.h"
 
-enum ItemType 
+enum ItemType
 {
-	TestItem,
+	EmptyItemType,
+	GlassBottle,
+	GlassShard,
+	MetalPipe,
+	CleanBandages,
+	DirtyBandages,
+	AntisepticBandages,
+	LargeSplint,
+	SmallSplint,
+	MorphineTablet,
+	Revolver,
+	RustyLeverGun,
+	RustyLeverGun2,
+	SaveItem,
+	RevolverAmmunition,
+	RepeaterAmmunition,
+};
+enum LiquidType
+{
+	EmptyLiquidType,
+	Water,
+	Alchohol,
+	Acid,
+	Honey,
+	HemostaticPowder,
+	Gunpowder,
 
 };
 
@@ -25,6 +50,33 @@ private:
 	//Location is based upon the bottom-left corner of the object within a given inventory grid.
 	glm::ivec2 location;
 	ItemType iType;
+	unsigned int durability;
+
+	LiquidType bottleFillLiquid;
+	ItemType bottleAmmoStorage[10] = { EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType,
+	 EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType };
+	ItemType RevolverCylinder[4] = {EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType};
+	//The Repeater can hold up to 5 shots, but will break after only 3. Any excess ammunition is (dropped?destroyed?)
+	ItemType RepeaterMagazine[5] = { EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType };
+	//Loads a gun with the given ammo.  Also used when filling Glass Bottles with liquid or other objects.
+	void LoadObject() 
+	{
+		if (iType == Revolver)
+		{
+
+		}
+		if (iType == RustyLeverGun)
+		{
+
+		}
+		if (iType == GlassBottle) 
+		{
+		}
+	};
+	void UnloadAmmo()
+	{
+
+	};
 
 
 public:
@@ -34,11 +86,14 @@ public:
 	std::string GetItemID() { return itemID; };
 	glm::ivec2 GetShape() { return shape; };
 	ItemType GetType() { return iType; };
+	void DestroyItem() { };
+	void AlterItem() {};
+
 	void HeldAction()
 	{
 		switch(iType) 
 		{
-			case TestItem: 
+			case EmptyItemType: 
 			{
 				WriteDebug("Held Action of TestItem");
 				break;

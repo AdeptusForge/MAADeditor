@@ -194,6 +194,9 @@
     <ClInclude Include="Code\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Combat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Vertex\PracticeVertexShader.glsl">

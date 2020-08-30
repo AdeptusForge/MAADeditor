@@ -15,6 +15,9 @@ bool lastFrameRender;
 
 int totalRenders=0;
 
+std::vector<MAAD_Timer> allTimers;
+
+
 //Gets the current ticks per frame. Used mostly in timestep testing.
 int GetCurrentTick()
 {

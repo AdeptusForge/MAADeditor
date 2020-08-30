@@ -246,9 +246,10 @@ class MAAD_EVENT
 {
 public:
 
-	const EventType Etype;
+	EventType Etype;
 	EventData data;
 	MAAD_EVENT(EventType etype, EventData edata) : Etype(etype), data(edata) {};
+	MAAD_EVENT() {};
 };
 
 class EventListener

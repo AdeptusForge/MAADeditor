@@ -268,7 +268,7 @@ void RunInputs()
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 
-		InventoryItem testItem(glm::vec2(2), "whatever", TestItem);
+		InventoryItem testItem(glm::vec2(2), "whatever", EmptyItemType);
 		testInventory.AddItem(testItem, glm::vec2(0));
 
 		//ResizeWindow(GetWindow(), glm::vec2(1280, 720));
