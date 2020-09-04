@@ -13,11 +13,7 @@
 #include "Editor.h"
 #include "Map.h"
 
-
 GLFWwindow* window;
-EventSender eventManager;
-
-
 //Starts up the entirety of the application
 void InitializeTheMAADness() 
 {
@@ -28,6 +24,7 @@ void InitializeTheMAADness()
 	TimeStartup();
 	InputControlStartup(window);
 	EditorStartup(window);
+	EventStartup();
 	MapStartup("MapLoadTest");
 	WriteDebug("MAADness Initialized");
 }

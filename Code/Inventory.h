@@ -60,6 +60,7 @@ private:
 	ItemType RepeaterMagazine[5] = { EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType };
 	//Loads a gun with the given ammo.  Also used when filling Glass Bottles with liquid or other objects.
 	void LoadObject() 
+
 	{
 		if (iType == Revolver)
 		{

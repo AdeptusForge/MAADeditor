@@ -12,7 +12,6 @@ float physicsFrameInTicks = (SDL_GetPerformanceFrequency() / 120);
 Uint64 currTick;
 Uint64 priorTick;
 bool lastFrameRender;
-
 int totalRenders=0;
 
 std::vector<MAAD_Timer> allTimers;
@@ -29,7 +28,6 @@ unsigned int SecondsToFrames(float seconds) {
 	WriteDebug((unsigned int)(seconds * 60));
 	return (unsigned int)(seconds * 60);
 }
-
 
 //Begins time startup.
 void TimeStartup() 

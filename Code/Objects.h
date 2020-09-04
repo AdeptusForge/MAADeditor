@@ -20,7 +20,6 @@ glm::ivec3 ConvertFloatVec(glm::vec3 floatVec);
 #pragma region Phyics and Transform Reqs
 #define PI 3.14159265
 
-
 struct RotationVector
 {
 private:
@@ -272,16 +271,35 @@ public:
 class EventSender
 {
 	std::vector<EventListener*> listeners;
+	std::vector<MAAD_EVENT> eventQueue;
+	MAAD_EVENT currEvent;
 
 public:
 	EventSender() {};
-	void SendEvent(MAAD_EVENT eventNotice)
+	void QueueEvent(MAAD_EVENT e)
 	{
+		eventQueue.push_back(e);
+	};
+	void SendEventFromQueue() 
+	{
+		if (eventQueue.size() > 0) 
+		{
+			SendEventImmediately(*eventQueue.begin());
+			eventQueue.erase(eventQueue.begin());
+		}
+		else 
+		{
+			WriteDebug("No Events to send.");
+		}
+	}
+	void SendEventImmediately(MAAD_EVENT eventNotice)
+	{
+		currEvent = eventNotice;
 		for (int i = 0; i < listeners.size(); i++)
 			if (!none_of(listeners[i]->typeCriterion.begin(), listeners[i]->typeCriterion.end(), [=](EventType eT) {return eT == eventNotice.Etype; }))
 			{
 				EventListener* p = &(*listeners[i]);
-				p->BASEEventResponse(eventNotice);
+				p->BASEEventResponse(currEvent);
 			}
 	}
 	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
@@ -602,7 +620,7 @@ public:
 	};
 	TestGameObject() { MAAD_GameObject(); };
 };
+void EventStartup();
+void QueueEvent(MAAD_EVENT);
 
-//void EventListener::AttachToSender(EventSender* sender) { sender->AddListener(this); }
-
-void ObjectUpdate();
+void EventManagerUpdate();

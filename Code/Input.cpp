@@ -39,18 +39,6 @@ bool canInput;
 void BlockAllInputs() { canInput = false; };
 void UnblockAllInputs() { canInput = true; };
 
-void EventStartup()
-{
-	EventSender eventManager;
-	EventData testData = EventData();
-	TestGameObject doubleTest = TestGameObject();
-	testData.SetString("TestEvent", "What Whut");
-	eventManager = EventSender();
-	doubleTest.typeCriterion.push_back(EngineEvent);
-	eventManager.AddListener(&doubleTest);
-	eventManager.SendEvent(MAAD_EVENT(EngineEvent, testData));
-}
-
 
 static void cursorPoitionCallback(GLFWwindow* window, double xPos, double yPos) 
 {
@@ -262,7 +250,6 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_4())
 	{
-		//EventStartup();
 
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);

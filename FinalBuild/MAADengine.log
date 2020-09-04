@@ -1,35 +1,57 @@
-﻿  Input.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+﻿  Objects.cpp
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(233,17): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(74,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(87,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(280,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(311,1): warning C4102:  'EventListener': unreferenced label
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(101,1): warning C4102:  'Default': unreferenced label
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(242,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(68,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(72,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(73,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(81,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(82,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(83,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(84,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(85,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(86,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(95,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(96,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(97,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,37): warning C4552:  '-': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,38): warning C4552:  '+': result of expression not used
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(298,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(329,1): warning C4102:  'EventListener': unreferenced label
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(10,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(11,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:  '=': conversion from 'T' to 'T', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         with
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:             T=float
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         ]
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         and
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         [
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:             T=int
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.cpp(12,24): warning C4244:         ]
   Generating code
-  35 of 2706 functions ( 1.3%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+  3 of 2995 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    10 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim

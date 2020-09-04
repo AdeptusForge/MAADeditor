@@ -15,8 +15,6 @@ unsigned int SecondsToFrames(float seconds);
 //Widely used frame-locked timer. Timer starts counting from 1 instead of 0, like all clocks.
 class MAAD_Timer
 {
-private:
-	MAAD_EVENT timerSendEvent;
 public:
 	MAAD_Timer() {};
 	MAAD_Timer(unsigned int duration, std::string ID) : timerDuration(duration), timerID(ID) {};
