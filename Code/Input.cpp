@@ -15,6 +15,7 @@
 #include "map.h"
 #include "UIcontrol.h"
 #include "Inventory.h"
+#include "Player.h"
 
 ModelDataChunk TestChunk;
 
@@ -33,6 +34,8 @@ bool isSelecting;
 InventorySpace testInventory = InventorySpace(glm::vec2(7,7));
 InventorySelector testSelector = InventorySelector(&testInventory);
 
+
+PlayerStatus testStatus = PlayerStatus();
 
 //Defines when the player can input.
 bool canInput;
@@ -247,6 +250,7 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
+		testStatus.PlayerStatusStartup();
 	}
 	if (currFrame.BUTTON_4())
 	{
@@ -255,10 +259,9 @@ void RunInputs()
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 
-		InventoryItem testItem(glm::vec2(2), "whatever", EmptyItemType);
-		testInventory.AddItem(testItem, glm::vec2(0));
+		//InventoryItem testItem(glm::vec2(2), "whatever", EmptyItemType);
+		//testInventory.AddItem(testItem, glm::vec2(0));
 
-		//ResizeWindow(GetWindow(), glm::vec2(1280, 720));
 	}
 	cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
 
