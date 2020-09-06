@@ -270,11 +270,12 @@ public:
 
 class EventSender
 {
+
 	std::vector<EventListener*> listeners;
 	std::vector<MAAD_EVENT> eventQueue;
 	MAAD_EVENT currEvent;
-
 public:
+
 	EventSender() {};
 	void QueueEvent(MAAD_EVENT e)
 	{
@@ -302,7 +303,12 @@ public:
 				p->BASEEventResponse(currEvent);
 			}
 	}
-	void AddListener(EventListener* newLis) { listeners.push_back(newLis); }
+	void AddListener(EventListener* newLis) 
+	{
+		if (none_of(listeners.begin(), listeners.end(), [=](EventListener* e) {return e == newLis;}))
+			listeners.push_back(newLis); 
+		else { WriteDebug("Already contains that listener."); }
+	}
 };
 #pragma endregion
 
@@ -624,3 +630,4 @@ void EventStartup();
 void QueueEvent(MAAD_EVENT);
 
 void EventManagerUpdate();
+void AddEventListener(EventListener* newListener, EventType criterion);

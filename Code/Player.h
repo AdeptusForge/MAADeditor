@@ -227,6 +227,8 @@ private:
 	Arm leftArm;
 	Torso torso;
 	Head head;
+	std::vector<Affliction> afflictions;
+
 
 public:
 	PlayerStatus() {};
@@ -237,8 +239,24 @@ public:
 	{
 		WriteDebug(hands.GetHandsStatus());
 	}
+	void EventResponse(MAAD_EVENT e)
+	{
+		WriteDebug("PlayerStatus Recieving events " + e.data.GetString("TestEvent"));
+	};
 
-	void PlayerStatusStartup() { GetHandsStatus(); };
+	void PlayerStatusStartup() { 
+		GetHandsStatus(); 
+		AddEventListener(this, EngineEvent);
+		for (int i = 0; i < afflictions.size(); i++) 
+		{
+			AddEventListener(&afflictions[i], EngineEvent);
+		}
+
+	};
+	void ApplyAffliction(Affliction newAfflic) 
+	{
+
+	}
 };
 
 void LoadPlayerStatus();

@@ -251,6 +251,8 @@ void RunInputs()
 	if (currFrame.BUTTON_3()) 
 	{
 		testStatus.PlayerStatusStartup();
+		EventManagerUpdate();
+
 	}
 	if (currFrame.BUTTON_4())
 	{
