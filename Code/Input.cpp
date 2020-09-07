@@ -253,6 +253,7 @@ void RunInputs()
 		testStatus.PlayerStatusStartup();
 		EventManagerUpdate();
 
+		testStatus.TestRemoval();
 	}
 	if (currFrame.BUTTON_4())
 	{

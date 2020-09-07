@@ -10,6 +10,7 @@
 #include <queue>
 #include <map>
 #include <algorithm>
+class EventListener;
 
 #pragma region Fixed Point Arith Reqs
 const unsigned int MAX_DECIMAL_PRECISION = 10000;
@@ -251,6 +252,12 @@ public:
 	MAAD_EVENT() {};
 };
 
+
+
+void EventManagerUpdate();
+void AddEventListener(EventListener* newListener, EventType criterion);
+void RemoveEventListener(EventListener* removee);
+
 class EventListener
 {
 public:
@@ -266,6 +273,7 @@ public:
 
 	EventListener(std::vector<EventType> crit) : typeCriterion(crit) {};
 	EventListener() {};
+	virtual ~EventListener() { RemoveEventListener(this); }
 };
 
 class EventSender
@@ -281,17 +289,18 @@ public:
 	{
 		eventQueue.push_back(e);
 	};
-	void SendEventFromQueue() 
+	void SendQueuedEvents() 
 	{
 		if (eventQueue.size() > 0) 
 		{
-			SendEventImmediately(*eventQueue.begin());
-			eventQueue.erase(eventQueue.begin());
+			while (eventQueue.size() > 0)
+			{
+				SendEventImmediately(*eventQueue.begin());
+				eventQueue.erase(eventQueue.begin());
+			}
 		}
-		else 
-		{
+		else
 			WriteDebug("No Events to send.");
-		}
 	}
 	void SendEventImmediately(MAAD_EVENT eventNotice)
 	{
@@ -305,9 +314,23 @@ public:
 	}
 	void AddListener(EventListener* newLis) 
 	{
+		//WriteDebug("Adding listener " + std::to_string(listeners.size()));
 		if (none_of(listeners.begin(), listeners.end(), [=](EventListener* e) {return e == newLis;}))
 			listeners.push_back(newLis); 
 		else { WriteDebug("Already contains that listener."); }
+	}
+	void RemoveListener(EventListener* removee) 
+	{
+		//WriteDebug("Removing listener " + std::to_string(listeners.size()));
+
+		for (int i = 0; i < listeners.size(); i++)
+		{
+			if (listeners[i] == removee)
+			{
+				listeners.erase(listeners.begin() + i);
+				//WriteDebug("Removed listener " + std::to_string(listeners.size()));
+			}
+		}
 	}
 };
 #pragma endregion
@@ -628,6 +651,3 @@ public:
 };
 void EventStartup();
 void QueueEvent(MAAD_EVENT);
-
-void EventManagerUpdate();
-void AddEventListener(EventListener* newListener, EventType criterion);

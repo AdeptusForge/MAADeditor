@@ -29,6 +29,18 @@ enum ItemType
 	RevolverAmmunition,
 	RepeaterAmmunition,
 };
+enum ItemRequirementType 
+{
+	Regardless,
+	RequiresFinger,
+	RequiresThumb,
+	RequiresMajorFinger,
+	RequiresMinorFinger,
+	RequiresTwoFingers,
+	RequiresThumbAndMajorFinger,
+	RequiresThumbAndAnyFinger,
+	RequiresIndexFinger,
+};
 enum LiquidType
 {
 	EmptyLiquidType,
@@ -38,6 +50,8 @@ enum LiquidType
 	Honey,
 	HemostaticPowder,
 	Gunpowder,
+	RevolverAmmo,
+	RepeaterAmmo,
 
 };
 
@@ -52,16 +66,15 @@ private:
 	ItemType iType;
 	unsigned int durability;
 
-	LiquidType bottleFillLiquid;
-	ItemType bottleAmmoStorage[10] = { EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType,
-	 EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType };
-	ItemType RevolverCylinder[4] = {EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType};
-	//The Repeater can hold up to 5 shots, but will break after only 3. Any excess ammunition is (dropped?destroyed?)
-	ItemType RepeaterMagazine[5] = { EmptyItemType,EmptyItemType, EmptyItemType, EmptyItemType, EmptyItemType };
+	ItemRequirementType	equipability;
+	ItemRequirementType useability;
+	
+	std::vector<LiquidType> objectFill;
+	
 	//Loads a gun with the given ammo.  Also used when filling Glass Bottles with liquid or other objects.
-	void LoadObject() 
-
+	void LoadObject(LiquidType fillType) 
 	{
+
 		if (iType == Revolver)
 		{
 
@@ -72,6 +85,7 @@ private:
 		}
 		if (iType == GlassBottle) 
 		{
+
 		}
 	};
 	void UnloadAmmo()
@@ -108,6 +122,8 @@ public:
 	}
 	void Interact() {}
 	void Combine() {}
+	ItemRequirementType GetItemUseability() { return useability; }
+	ItemRequirementType GetItemEquipability() { return equipability; }
 
 
 };

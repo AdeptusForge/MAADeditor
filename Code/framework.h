@@ -22,3 +22,10 @@ enum MapDirection
 	Up = 5,
 	Down = 6
 };
+enum DamageType 
+{
+	Untyped,
+	Edged,
+	Blunt,
+	Malphorm
+};

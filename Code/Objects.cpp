@@ -17,9 +17,9 @@ void EventManagerUpdate()
 {
 	EventData testData = EventData();
 	testData.SetString("TestEvent", "What Whut");
-	globalEventManager.SendEventImmediately(MAAD_EVENT(EngineEvent, testData));
+	globalEventManager.QueueEvent(MAAD_EVENT(EngineEvent, testData));
+	globalEventManager.SendQueuedEvents();
 };
-
 
 void QueueEvent(MAAD_EVENT e)
 {
@@ -34,15 +34,13 @@ void AddEventListener(EventListener* newListener, EventType criterion)
 	globalEventManager.AddListener(newListener);
 	newListener->typeCriterion.push_back(criterion);
 }
+void RemoveEventListener(EventListener* removee)
+{
+	globalEventManager.RemoveListener(removee);
 
+}
 void EventStartup()
 {
-	EventData testData = EventData();
-	TestGameObject doubleTest = TestGameObject();
-	testData.SetString("TestEvent", "What Whut");
 	globalEventManager = EventSender();
-	doubleTest.typeCriterion.push_back(EngineEvent);
-	globalEventManager.AddListener(&doubleTest);
-	globalEventManager.QueueEvent(MAAD_EVENT(EngineEvent, testData));
 	EventManagerUpdate();
 }

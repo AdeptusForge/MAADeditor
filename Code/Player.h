@@ -18,12 +18,27 @@ const unsigned int maxHandHealth = 15;
 const unsigned int maxTorsoHealth = 15;
 const unsigned int bandageTempHealth = 5;
 
-enum FingerStatus
+class FingerStatus
 {
-	NormalFinger,
-	BrokenFinger,
-	RemovedFinger,
-	UnusableFinger
+public:
+	enum GeneralStatus {
+		NormalFinger,
+		BrokenFinger,
+		RemovedFinger,
+		UnusableFinger
+	};
+private:
+	GeneralStatus status;
+public:
+	bool Useable() 
+	{
+		if (status == NormalFinger)
+			return true;
+		else return false;
+	};
+	void ChangeStatus(GeneralStatus newFingerStatus) { status = newFingerStatus; }
+	FingerStatus(GeneralStatus fresh) :status(fresh) {};
+	FingerStatus() {};
 };
 
 const unsigned int totalBreakPatterns = 25;
@@ -91,14 +106,57 @@ public:
 			private:
 				FingerStatus fStatus;
 			public:
-				Finger(FingerStatus status) : fStatus(status) {};
+				Finger(FingerStatus::GeneralStatus status) : fStatus(FingerStatus(status)) {};
 				FingerStatus GetStatus() { return fStatus; }
 				void ChangeFingerStatus(FingerStatus status) { fStatus = status; };
 			};
 			//0 = Thumb, 1 = Index, 2 = Middle, 3 = Ring, 4 = Pinky
-			Finger fingers[5] = { Finger(NormalFinger),Finger(NormalFinger) ,Finger(NormalFinger) ,Finger(NormalFinger) ,Finger(NormalFinger) };
+			Finger fingers[5] = { 
+				Finger(FingerStatus::NormalFinger),
+				Finger(FingerStatus::NormalFinger),
+				Finger(FingerStatus::NormalFinger),
+				Finger(FingerStatus::NormalFinger),
+				Finger(FingerStatus::NormalFinger)};
 			Hand() {};
 			Hand(InventoryItem held, unsigned int health, unsigned int tempHealth, FingerBreakPattern bP) {};
+			bool CheckItemRequirements(ItemRequirementType req)
+			{
+				if (req == Regardless)
+					return true;
+				bool thumb = false;
+				bool majorFinger = false;
+				bool minorFinger = false;
+				bool anyFinger = false;
+				bool indexFinger = false;
+				bool twoFingers = false;
+				if (fingers[0].GetStatus().Useable()) 
+				{
+					thumb = true;
+					anyFinger = true;
+				}
+				if (fingers[0].GetStatus().Useable())
+				{
+					majorFinger = true;
+					indexFinger = true;
+					anyFinger = true;
+				}
+				if (fingers[0].GetStatus().Useable())
+				{
+					majorFinger = true;
+					anyFinger = true;
+				}
+				if (fingers[0].GetStatus().Useable())
+				{
+					minorFinger = true;
+					anyFinger = true;
+				}
+				if (fingers[0].GetStatus().Useable())
+				{
+					minorFinger = true;
+					anyFinger = true;
+				}
+
+			};
 			bool CanHoldItem(InventoryItem newItem)
 			{
 
@@ -108,9 +166,7 @@ public:
 			};
 			void ChangeHeldItem(InventoryItem newItem)
 			{
-				if (CanHoldItem(newItem))
-				{
-				}
+
 			}
 			//Positive numbers deal damage, negative numbers restore health.
 			void AdjustHealth(int amount)
@@ -137,12 +193,12 @@ public:
 				else if (health > maxHandHealth) { health = maxHandHealth; }
 			}
 			void GiveTempHealth(unsigned int amount) { tempHealth += amount; };
-			void ChangeFinger(FingerStatus newStatus, int finger)
+			void ChangeFinger(FingerStatus::GeneralStatus newStatus, int finger)
 			{
-				if (newStatus == NormalFinger) { breakPattern.ResetBreakPattern(); }
+				if (newStatus == FingerStatus::NormalFinger) { breakPattern.ResetBreakPattern(); }
 				fingers[finger].ChangeFingerStatus(newStatus);
 			};
-			int GetFingerStatus(int finger) { return (int)fingers[finger].GetStatus(); }
+			int GetFingerStatus(int finger) { return (int)fingers[finger].GetStatus().Useable(); }
 			int GetHealth() { return health; }
 			int GetTempHealth() { return tempHealth; }
 			int GetArmor() { return armor; }
@@ -232,9 +288,11 @@ private:
 
 public:
 	PlayerStatus() {};
-	void DamagePlayer() 
+	void DamagePlayer(int amount, DamageType type) 
 	{
+
 	}
+
 	void GetHandsStatus() 
 	{
 		WriteDebug(hands.GetHandsStatus());
@@ -256,6 +314,10 @@ public:
 	void ApplyAffliction(Affliction newAfflic) 
 	{
 
+	}
+	void TestRemoval() 
+	{
+		RemoveEventListener(this);
 	}
 };
 
