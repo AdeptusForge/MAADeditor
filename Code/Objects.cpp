@@ -21,7 +21,7 @@ void EventManagerUpdate()
 void QueueEvent(MAAD_EVENT e)
 {
 	globalEventManager.QueueEvent(e);
-	WriteDebug(std::to_string(globalEventManager.GetTotalListeners()));
+	//WriteDebug(std::to_string(globalEventManager.GetTotalListeners()));
 }
 void SendEventImmediately(MAAD_EVENT e)
 {
@@ -31,11 +31,16 @@ void AddEventListener(EventListener* newListener, EventType criterion)
 {
 	globalEventManager.AddListener(newListener);
 	newListener->typeCriterion.push_back(criterion);
+	WriteDebug(std::to_string(globalEventManager.GetTotalListeners()));
+}
+void AddEventListener(EventListener* newListener)
+{
+	globalEventManager.AddListener(newListener);
+	WriteDebug(std::to_string(globalEventManager.GetTotalListeners()));
 }
 void RemoveEventListener(EventListener* removee)
 {
 	globalEventManager.RemoveListener(removee);
-
 }
 void EventStartup()
 {

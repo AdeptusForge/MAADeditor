@@ -120,8 +120,20 @@ public:
 		}
 	};
 
-	MAAD_UIElement() : active(true) {};
-	MAAD_UIElement(unsigned int id) : elementID(id), active(true) { typeCriterion.push_back(UIEvent); };
+	protected:
+	MAAD_UIElement() : active(true) 
+	{
+		typeCriterion.push_back(UIEvent);
+		typeCriterion.push_back(EngineEvent);
+		AddEventListener(this);
+	};
+	public:
+	MAAD_UIElement(unsigned int id) : elementID(id), active(true) 
+	{ 
+		typeCriterion.push_back(UIEvent); 
+		typeCriterion.push_back(EngineEvent);
+		AddEventListener(this);
+	};
 };
 
 class InventoryGrid : public MAAD_UIElement 

@@ -249,7 +249,9 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_2())
 	{
-		testSelector.InteractWithItem();
+		//testSelector.InteractWithItem();
+
+		testStatus.PlayerStatusStartup();
 
 		//testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
 		//cam->RotateCamera(glm::vec3(0, -5, 0));
@@ -261,15 +263,14 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		testStatus.PlayerStatusStartup();
 		//testStatus.TestRemoval();
 
-		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
+		ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
 	}
 	if (currFrame.BUTTON_4())
 	{
-		//ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
+		ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
 
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);

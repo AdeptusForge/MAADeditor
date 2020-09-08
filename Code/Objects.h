@@ -276,6 +276,7 @@ public:
 
 void EventManagerUpdate();
 void AddEventListener(EventListener* newListener, EventType criterion);
+void AddEventListener(EventListener* newListener);
 void RemoveEventListener(EventListener* removee);
 
 class EventListener
