@@ -1,4 +1,4 @@
-s 5 5
+s 5 5 1
 n MAPNAME
 
 t 0 0 0 0 0 3 wacky1 1 functionname(opt.) functionname(opt.)

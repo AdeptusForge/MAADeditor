@@ -36,6 +36,8 @@ InventorySelector testSelector = InventorySelector(&testInventory);
 
 
 PlayerStatus testStatus = PlayerStatus();
+MAAD_EVENT inputEvent;
+
 
 //Defines when the player can input.
 bool canInput;
@@ -51,9 +53,18 @@ static void cursorClickCallback(GLFWwindow* window, int button, int action, int 
 {
 	double xPos, yPos;
 	glfwGetCursorPos(window, &xPos, &yPos);
+
 	if (action == GLFW_PRESS) 
 	{
 		WriteDebug("Clicked at location: " + vecToStr(glm::vec2(xPos, yPos)));
+		inputEvent = MAAD_EVENT(EngineEvent);
+		inputEvent.data.SetVector2("MousePos", glm::vec2(xPos, yPos));
+		if(button == GLFW_MOUSE_BUTTON_LEFT)
+			inputEvent.data.SetInt("LeftClick", 1);
+		else if(button == GLFW_MOUSE_BUTTON_RIGHT)
+			inputEvent.data.SetInt("LeftClick", 0);
+
+		QueueEvent(inputEvent);
 		//UIMouseSelect(glm::vec2(xPos, yPos));
 	}
 }
@@ -120,6 +131,7 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 				buttons.z = true;
 			}
 		}
+
 		if (action == GLFW_RELEASE)
 		{
 			if (key == GLFW_KEY_W)
@@ -176,7 +188,6 @@ void SaveInputs()
 void RunInputs() 
 {
 	Camera* cam = FindCamera(17);
-
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	if (currFrame.UP()) 
 	{
@@ -250,16 +261,16 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		//testStatus.PlayerStatusStartup();
-		//EventManagerUpdate();
+		testStatus.PlayerStatusStartup();
 		//testStatus.TestRemoval();
 
-		ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
+		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
 	}
 	if (currFrame.BUTTON_4())
 	{
-		ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
+		//ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
+
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		

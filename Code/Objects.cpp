@@ -15,15 +15,13 @@ glm::ivec3 ConvertFloatVec(glm::vec3 floatVec)
 
 void EventManagerUpdate()
 {
-	EventData testData = EventData();
-	testData.SetString("TestEvent", "What Whut");
-	globalEventManager.QueueEvent(MAAD_EVENT(EngineEvent, testData));
 	globalEventManager.SendQueuedEvents();
 };
 
 void QueueEvent(MAAD_EVENT e)
 {
 	globalEventManager.QueueEvent(e);
+	WriteDebug(std::to_string(globalEventManager.GetTotalListeners()));
 }
 void SendEventImmediately(MAAD_EVENT e)
 {

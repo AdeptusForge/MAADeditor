@@ -299,7 +299,11 @@ public:
 	}
 	void EventResponse(MAAD_EVENT e)
 	{
-		WriteDebug("PlayerStatus Recieving events " + e.data.GetString("TestEvent"));
+		if(e.data.GetInt("LeftClick") == 1)
+			WriteDebug("Player Left Clicked:" + vecToStr(e.data.GetVec2("MousePos")));
+		else if(e.data.GetInt("LeftClick") == 0)
+			WriteDebug("Player Right Clicked:" + vecToStr(e.data.GetVec2("MousePos")));
+
 	};
 
 	void PlayerStatusStartup() { 

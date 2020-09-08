@@ -53,7 +53,7 @@ void UpdateTime(GLFWwindow* window)
 		
 		//PhysicsUpdate();
 		SaveInputs();
-
+		EventManagerUpdate();
 			if (!lastFrameRender) 
 			{
 				RenderUpdate(window);

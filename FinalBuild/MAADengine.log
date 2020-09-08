@@ -1,4 +1,4 @@
-﻿  Render.cpp
+﻿  Input.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Shaders.h(126,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
@@ -21,48 +21,17 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(98,37): warning C455
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(99,38): warning C4552:  '+': result of expression not used
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(100,37): warning C4552:  '-': result of expression not used
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C4552:  '+': result of expression not used
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(308,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(326,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(358,1): warning C4102:  'EventListener': unreferenced label
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(48,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(66,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,46): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,46): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,46): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,46): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,46): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,35): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,35): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,35): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,35): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(122,35): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,81): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,81): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,81): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,81): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,81): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,70): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,70): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,70): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,70): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(126,70): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,66): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,66): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,66): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,66): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,66): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,55): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,55): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,55): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,55): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(129,55): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(199,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(228,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(241,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(330,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(348,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(381,1): warning C4102:  'EventListener': unreferenced label
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(116,1): warning C4102:  'Default': unreferenced label
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(258,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Player.h(312,21): warning C4018:  '<': signed/unsigned mismatch
   Generating code
-  4 of 2921 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+  155 of 3203 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
+    7 functions were new in current compilation
+    125 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim

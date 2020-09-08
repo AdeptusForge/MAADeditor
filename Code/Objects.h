@@ -192,6 +192,10 @@ private:
 	std::map<std::string, std::string >::iterator stringIter;
 	std::map<std::string, float > floatData;
 	std::map<std::string, float >::iterator floatIter;
+	std::map<std::string, glm::vec2 > vec2Data;
+	std::map<std::string, glm::vec2 >::iterator vec2Iter;
+	std::map<std::string, glm::vec3 > vec3Data;
+	std::map<std::string, glm::vec3 >::iterator vec3Iter;
 	//std::map<std::string, MAAD_GameObject> objectData;
 	//std::map<std::string, MAAD_GameObject>::iterator objectIter;
 	//std::map<std::string, MAAD_GameObject*> objectPTRData;
@@ -217,6 +221,17 @@ public:
 		floatIter = floatData.begin();
 		floatData.insert({ tag, value });
 	}
+
+	void SetVector2(std::string tag, glm::vec2 value) 
+	{
+		vec2Iter = vec2Data.begin();
+		vec2Data.insert({ tag, value });
+	}
+	void SetVector3(std::string tag, glm::vec3 value)
+	{
+		vec3Iter = vec3Data.begin();
+		vec3Data.insert({ tag, value });
+	}
 	//void SetObject(std::string tag, MAAD_GameObject value)
 	//{
 	//	objectIter = objectData.begin();
@@ -232,23 +247,28 @@ public:
 #pragma region Getters
 	const int GetInt(std::string tag) { return intData.find(tag)->second; }
 	const std::string GetString(std::string tag) { return stringData.find(tag)->second; }
-	const float Getfloat(std::string tag) { return floatData.find(tag)->second; }
+	const float GetFloat(std::string tag) { return floatData.find(tag)->second; }
+	const glm::vec2 GetVec2(std::string tag) { if (&vec2Data.find(tag) != nullptr) return vec2Data.find(tag)->second; }
+	const glm::vec3 GetVec3(std::string tag) { if(&vec3Data.find(tag) != nullptr) return vec3Data.find(tag)->second; }
+
+
 	//const MAAD_GameObject* GetObjPTR(std::string tag) { return objectPTRData.find(tag)->second; }
 	//const MAAD_GameObject GetObjData(std::string tag) { return objectData.find(tag)->second; }
 
 	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
 	//const int GetInt(std::string tag) { return intData.find(tag)->second; }
 #pragma endregion
-
+public:
+	EventData() {};
 };
 
 class MAAD_EVENT
 {
 public:
-
 	EventType Etype;
-	EventData data;
+	EventData data = EventData();
 	MAAD_EVENT(EventType etype, EventData edata) : Etype(etype), data(edata) {};
+	MAAD_EVENT(EventType etype) : Etype(etype) { data = EventData(); };
 	MAAD_EVENT() {};
 };
 
@@ -299,8 +319,10 @@ public:
 				eventQueue.erase(eventQueue.begin());
 			}
 		}
-		else
-			WriteDebug("No Events to send.");
+		else 
+		{
+			//WriteDebug("No Events to send.");
+		}
 	}
 	void SendEventImmediately(MAAD_EVENT eventNotice)
 	{
@@ -332,6 +354,7 @@ public:
 			}
 		}
 	}
+	int GetTotalListeners() { return listeners.size(); };
 };
 #pragma endregion
 
@@ -651,3 +674,5 @@ public:
 };
 void EventStartup();
 void QueueEvent(MAAD_EVENT);
+void SendEventImmediately(MAAD_EVENT);
+
