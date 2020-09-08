@@ -180,7 +180,7 @@ enum EventType
 	SoundEvent,
 	MapEvent,
 	NarrativeEvent,
-	
+	UIEvent,
 };
 
 class EventData

@@ -8,13 +8,14 @@
 #include "assets.h"
 #include "map"
 #include "Debug.h"
+#include "Objects.h"
 
 #define DEFAULT_2D_UIELEMENT 
 
 const unsigned int SCR_H = 360;
 const unsigned int SCR_W = 640;
 
-class MAAD_UIElement 
+class MAAD_UIElement : public EventListener
 {
 protected:
 	unsigned int elementID;
@@ -102,7 +103,7 @@ public:
 		if (modelPTR != nullptr) 
 		{
 			scale = UNIVERSAL_RENDERSCALE;
-			pixelSize = glm::vec2(16,16);
+			pixelSize = glm::vec2(8,8);
 			scale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
 			//WriteDebug("Scale" + vecToStr(scale));
 			if (is2D) 
@@ -120,13 +121,13 @@ public:
 	};
 
 	MAAD_UIElement() : active(true) {};
-	MAAD_UIElement(unsigned int id) : elementID(id), active(true) {};
+	MAAD_UIElement(unsigned int id) : elementID(id), active(true) { typeCriterion.push_back(UIEvent); };
 };
 
 class InventoryGrid : public MAAD_UIElement 
 {
 private: 
-	//InventorySpace inventory;
+	//InventorySpace* inventory;
 protected:
 
 

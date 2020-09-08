@@ -19,7 +19,7 @@ void RenderUpdate(GLFWwindow*);
 GLFWwindow* RenderStartup();
 GLFWwindow* GetWindow();
 
-void ResizeWindow(GLFWwindow*, glm::vec2);
+void ResizeWindow(GLFWwindow*, glm::vec2, bool);
 
 #define UNIVERSAL_RENDERSCALE glm::vec3(1)
 

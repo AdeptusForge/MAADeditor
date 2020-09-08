@@ -180,7 +180,7 @@ void RunInputs()
 	//WriteDebug(vecToStr(currFrame.RAW_DIRECTIONS()) + " " + vecToStr(currFrame.RAW_BUTTONS()));
 	if (currFrame.UP()) 
 	{
-		testSelector.MoveSelector(North);
+		//testSelector.MoveSelector(North);
 
 
 		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
@@ -191,9 +191,9 @@ void RunInputs()
 	}
 	if (currFrame.RIGHT())
 	{
-		testSelector.MoveSelector(East);
+		//testSelector.MoveSelector(East);
 
-		//cam->RotateCamera(glm::vec3(-5, 0, 0));
+		cam->RotateCamera(glm::vec3(-5, 0, 0));
 		
 		
 		//GetMapEntity(0)->Rotate(0);
@@ -204,9 +204,9 @@ void RunInputs()
 	}
 	if (currFrame.LEFT()) 
 	{
-		testSelector.MoveSelector(West);
+		//testSelector.MoveSelector(West);
 
-		//cam->RotateCamera(glm::vec3(5, 0, 0));
+		cam->RotateCamera(glm::vec3(5, 0, 0));
 		
 		
 		//GetMapEntity(0)->Rotate(1);
@@ -215,7 +215,7 @@ void RunInputs()
 	}
 	if (currFrame.DOWN())
 	{
-		testSelector.MoveSelector(South);
+		//testSelector.MoveSelector(South);
 
 		//cam->RotateCamera(glm::vec3(0, -5, 0));
 		//testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
@@ -228,7 +228,7 @@ void RunInputs()
 
 	if (currFrame.BUTTON_1()) 
 	{
-		testSelector.SelectNode();
+		//testSelector.SelectNode();
 
 		//testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
 		//cam->RotateCamera(glm::vec3(0, 5, 0));
@@ -250,16 +250,19 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		testStatus.PlayerStatusStartup();
-		EventManagerUpdate();
+		//testStatus.PlayerStatusStartup();
+		//EventManagerUpdate();
+		//testStatus.TestRemoval();
 
-		testStatus.TestRemoval();
+		ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
+
 	}
 	if (currFrame.BUTTON_4())
 	{
-
+		ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
+		
 		//GetRenderObject(1)->objModel.StartAnim("AnimLoadTest");
 
 		//InventoryItem testItem(glm::vec2(2), "whatever", EmptyItemType);

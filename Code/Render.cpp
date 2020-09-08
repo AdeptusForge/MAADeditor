@@ -117,10 +117,16 @@ RenderObject* GetRenderObject(int ID)
 	return nullptr;
 }
 
-void ResizeWindow(GLFWwindow* window, glm::vec2 newSize) 
+void ResizeWindow(GLFWwindow* window, glm::vec2 newSize, bool fullscreen) 
 {
 	glfwSetWindowSize(window, newSize.x, newSize.y);
 	screenDimensions = newSize;
+	if (fullscreen)
+	{
+		glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, newSize.x, newSize.y, GLFW_DONT_CARE);
+	}
+	else
+		glfwSetWindowMonitor(window, NULL, 100, 100, newSize.x, newSize.y, GLFW_DONT_CARE);
 }
 
 GLFWwindow* GetWindow() 
