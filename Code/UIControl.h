@@ -67,11 +67,11 @@ public:
 	//Returns center of the UIElement in OpenGL screen coordinates.
 	glm::vec3 UILocationAbsolute(glm::vec2 screenDims)
 	{
-		glm::vec3 newLoc;
-		float measureX = screenLocation.x / screenDims.x;
-		float measureY = screenLocation.y / screenDims.y;
-		newLoc.x = (measureX * 20) - 10;
-		newLoc.y = (measureY * 20) - 10;
+		glm::vec3 newLoc = glm::vec3(screenLocation, 0);
+		//float measureX = screenLocation.x / screenDims.x;
+		//float measureY = screenLocation.y / screenDims.y;
+		//newLoc.x = (measureX * 20) - 10;
+		//newLoc.y = (measureY * 20) - 10;
 		return newLoc;
 	};
 
@@ -80,9 +80,9 @@ public:
 		WriteDebug("BoundModel to UI element");
 		modelPTR = newModel;
 	};
-	Model GetModel() 
+	Model* GetModelPTR() 
 	{
-		return *modelPTR;
+		return modelPTR;
 	}
 
 	unsigned int GetID() { return elementID; };
@@ -144,12 +144,12 @@ protected:
 
 
 public:
-	InventoryGrid(unsigned int id)
+	InventoryGrid(unsigned int id, glm::vec2 scrLoc = glm::vec2(0), glm::vec2 pixSize = glm::vec2(8))
 	{
 		elementID = id;
 		active = true;
 		is2D = true;
-		screenLocation = glm::vec2(400, 200);
+		screenLocation = scrLoc;
 		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader, Camera* target)
@@ -168,12 +168,20 @@ private:
 public:
 	MAAD_UIContext() {};
 	std::vector<MAAD_UIElement*> elementPTRs;
-	InventoryGrid newTest = InventoryGrid(14);
+	InventoryGrid newTest1 = InventoryGrid(14);
+	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,5));
+	InventoryGrid newTest3 = InventoryGrid(16, glm::vec2(5, 0));
+
+
 
 	void UIStartup() 
 	{
 		targetCamera = FindCamera(17);
-		AddElement(&newTest, Model("UIPlaneTest"));
+		AddElement(&newTest1, Model("UIPlaneTest"));
+		AddElement(&newTest2, Model("UIPlaneTest"));
+		//AddElement(&newTest3, Model("UIPlaneTest"));
+
+
 	}
 	
 	Camera* GetTargetCamera() { return targetCamera; }

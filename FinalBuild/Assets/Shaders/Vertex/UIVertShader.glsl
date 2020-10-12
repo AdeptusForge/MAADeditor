@@ -21,7 +21,7 @@ vec3 newFront = cameraFront;
 void main()
 {
 	gVerts = aPos;
-    gl_Position =  projection * view * model * vec4(aPos + vec3(0,0,-5), 1.0);
+    gl_Position =  projection * view * model * vec4(aPos, 1.0);
 	gColor = color;
 	gTexCoord = aTexCoord;
 }

@@ -53,13 +53,6 @@ void GameToRenderConversion(MAAD_GameObject obj)
 	}
 }
 
-//Converts a MAAD_UIElement into a renderobject for use during rendering.
-void UIElementToRenderConversion(MAAD_UIElement* element, Camera* target) 
-{
-	PhysicsTransform renderTrans = PhysicsTransform(element->CalculateElementOffset(target), glm::vec3(0), true);
-	allUIModels.push_back(RenderObject(renderTrans, element->GetModel(), 15));
-}
-
 void UpdateContext(MAAD_UIContext* ui, Shader shader)
 {
 	UIelements = ui->elementPTRs;
@@ -196,10 +189,7 @@ GLFWwindow* RenderStartup()
 		}
 	}
 	UIelements = mainUI.elementPTRs;
-	for (int i = 0; i < UIelements.size(); i++)
-	{
-		UIElementToRenderConversion(UIelements[i], mainUI.GetTargetCamera());
-	}
+
 
 	return rWindow;
 }
@@ -238,11 +228,12 @@ void RenderUpdate(GLFWwindow* window)
 	glm::mat4 ortho = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 10.0f);
 	uiShader.setMat4("projection", ortho);
 	UpdateContext(&mainUI, mainShader);
-	for (int i = 0; i < allUIModels.size(); i++)
+	for (int i = 0; i < UIelements.size(); i++)
 	{
-		uiShader.setMat4("model", allUIModels[i].objModel.ModelRefresh(
-			uiShader, allUIModels[i].objLoc.GetWorldPosition(), allUIModels[i].objModel.Scale(), allUIModels[i].objLoc.GetWorldRotation()));
-		allUIModels[i].objModel.Draw(mainShader);
+		WriteDebug(vecToStr(UIelements[i]->UILocationAbsolute(glm::vec2(SCR_W, SCR_H))) + "" + std::to_string(UIelements[i]->GetID()));
+		uiShader.setMat4("model", UIelements[i]->GetModelPTR()->ModelRefresh(
+			uiShader, UIelements[i]->UILocationAbsolute(glm::vec2(SCR_W, SCR_H)), UNIVERSAL_RENDERSCALE, allModels[i].objLoc.GetWorldRotation()));
+		UIelements[i]->GetModelPTR()->Draw(uiShader);
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
