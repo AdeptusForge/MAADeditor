@@ -120,6 +120,7 @@ private:
 	unsigned int currentFrame = 0;
 	bool currentlyPlaying = false;
 	AnimData currentAnim;
+
 	//Loads raw image data, generates mipmaps, and then unloads the texture data.
 	void PrepTexture(Texture &ref, bool startupBool) 
 	{

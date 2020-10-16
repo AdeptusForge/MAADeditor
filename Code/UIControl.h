@@ -23,7 +23,8 @@ protected:
 	glm::ivec2 pixelSize;
 	//Element scale. Either in pixels, or in 0 to 1 percentages.
 	//Until further notice, set scale as the size of the image you want to use in your UI for best results
-	glm::vec2 scale;
+	glm::vec2 uiScale = glm::vec2(1, 1);
+	glm::vec2 scaleMod = glm::vec2(1, 1);
 	//always defined in pixels, but processed into pixel coordinates or absolute coordinates before rendering
 	glm::vec2 screenLocation;
 	bool active = true;
@@ -34,14 +35,14 @@ public:
 	glm::vec3 UIScaleAbsolute(glm::ivec2 windowSize) 
 	{
 		glm::vec3 newScale;
-		if (scale.x > 1)
+		if (uiScale.x > 1)
 			WriteDebug("X Percentage is larger than 100% of the screen");
 		else
-			newScale.x = scale.x * pixelSize.x * windowSize.x;
-		if (scale.y > 1)
+			newScale.x = uiScale.x * pixelSize.x * windowSize.x;
+		if (uiScale.y > 1)
 			WriteDebug("Y Percentage is larger than 100% of the screen");
 		else
-			newScale.y = scale.y * pixelSize.y * windowSize.y;
+			newScale.y = uiScale.y * pixelSize.y * windowSize.y;
 		//WriteDebug("scale?:" +vecToStr(newScale));
 
 		return newScale;
@@ -50,15 +51,16 @@ public:
 	//Essentially this means that things will scale to preserve the size of the pixels of the element rather than the state of the UI.
 	glm::vec3 UIScalePixels(glm::ivec2 windowSize) 
 	{
+		
 		glm::vec3 newScale;
-		if (scale.x > windowSize.x)
+		if (pixelSize.x > windowSize.x)
 			WriteDebug("X Pixel size is larger than the screen");
-		else
-			newScale.x = scale.x * (pixelSize.x * 10) / windowSize.x;
-		if (scale.y > windowSize.y)
+		else if (uiScale.x != (pixelSize.x / windowSize.x))
+			newScale.x = scaleMod.x * (pixelSize.x * 10) / windowSize.x;
+		if (pixelSize.y > windowSize.y)
 			WriteDebug("Y Pixel size is larger than the screen");
-		else
-			newScale.y = scale.y * (pixelSize.y*10) / windowSize.y;
+		else if (uiScale.y != (pixelSize.y/ windowSize.y))
+			newScale.y = scaleMod.y * (pixelSize.y*10) / windowSize.y;
 		//WriteDebug(vecToStr(newScale));
 
 		return newScale;
@@ -99,23 +101,20 @@ public:
 	};
 	virtual void UpdateElement(Shader shader, Camera* target)
 	{
-		//WriteDebug("Updated element: " + std::to_string(elementID));
 		if (modelPTR != nullptr) 
 		{
-			scale = UNIVERSAL_RENDERSCALE;
-			pixelSize = glm::vec2(8,8);
-			scale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
-			//WriteDebug("Scale" + vecToStr(scale));
+			uiScale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
 			if (is2D) 
 			{
+				//WriteDebug("location: " + vecToStr(screenLocation) + std::to_string(elementID));
 				shader.setMat4("model",
-					modelPTR->ModelRefresh(shader, UILocationAbsolute(glm::vec2(SCR_W,SCR_H)), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
+					modelPTR->ModelRefresh(shader, UILocationAbsolute(glm::vec2(SCR_W,SCR_H)), UNIVERSAL_RENDERSCALE * glm::vec3(uiScale, 1), glm::vec3(0)));
 
 			}
 			else 
 			{
 				shader.setMat4("model",
-					modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(scale, 1), glm::vec3(0)));
+					modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(uiScale, 1), glm::vec3(0)));
 			}
 		}
 	};
@@ -150,6 +149,8 @@ public:
 		active = true;
 		is2D = true;
 		screenLocation = scrLoc;
+		pixelSize = pixSize;
+		uiScale = glm::vec2(1, 1);
 		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader, Camera* target)
@@ -179,9 +180,7 @@ public:
 		targetCamera = FindCamera(17);
 		AddElement(&newTest1, Model("UIPlaneTest"));
 		AddElement(&newTest2, Model("UIPlaneTest"));
-		//AddElement(&newTest3, Model("UIPlaneTest"));
-
-
+		AddElement(&newTest3, Model("UIPlaneTest"));
 	}
 	
 	Camera* GetTargetCamera() { return targetCamera; }

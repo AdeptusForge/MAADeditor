@@ -25,6 +25,7 @@ MouseMode currMouseMode;
 
 glm::bvec4 dirs;
 glm::bvec4 buttons;
+glm::bvec4 buttons2;
 
 InputFrame newFrame;
 InputFrame currFrame;
@@ -130,6 +131,10 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			{
 				buttons.z = true;
 			}
+			if (key == GLFW_KEY_ESCAPE)
+			{
+				buttons2.x = true;
+			}
 		}
 
 		if (action == GLFW_RELEASE)
@@ -167,8 +172,12 @@ void CollectInputs(GLFWwindow* window, int key, int scancode, int action, int mo
 			{
 				buttons.z = false;
 			}
+			if (key == GLFW_KEY_ESCAPE)
+			{
+				buttons2.x = false;
+			}
 		}
-		newFrame = InputFrame(dirs, buttons);
+		newFrame = InputFrame(dirs, buttons, buttons2);
 	}
 }
 
@@ -181,6 +190,7 @@ void SaveInputs()
 	priorFrames.pop_back();
 	dirs = currFrame.RAW_DIRECTIONS();
 	buttons = currFrame.RAW_BUTTONS();
+	buttons2 = currFrame.RAW_BUTTONS2();
 }
 
 //Runs inputs. Called once every frame to prevent input errors in a singleplayer environment.
@@ -283,4 +293,8 @@ void RunInputs()
 	}
 	cam->MoveCamera(testGameObject.GetTransform().GetWorldPosition());
 
+	if (currFrame.ESCAPE()) 
+	{
+		ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
+	}
 }

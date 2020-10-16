@@ -17,11 +17,16 @@ private:
 	//Buttons correspond to alphabetical order. For example, W = Button 1 and Y = Button 3
 	glm::bvec4 buttons;
 
+	glm::bvec4 buttons2;
+
+
 public:
-	InputFrame(glm::bvec4 dirsB = glm::bvec4(false), glm::bvec4 buttonB = glm::bvec4(false)) :
-		cardinalDirections(dirsB), buttons(buttonB) {};
+	InputFrame(glm::bvec4 dirsB = glm::bvec4(false), glm::bvec4 buttonB = glm::bvec4(false), glm::bvec4(button2B) = glm::bvec4(false)) :
+		cardinalDirections(dirsB), buttons(buttonB), buttons2(button2B) {};
 	glm::bvec4 RAW_DIRECTIONS() { return cardinalDirections; }
 	glm::bvec4 RAW_BUTTONS() { return buttons; }
+	glm::bvec4 RAW_BUTTONS2() { return buttons2; }
+
 
 
 	bool BUTTON_1() { return buttons.w; }
@@ -38,7 +43,7 @@ public:
 	bool DIAG_UPLEFT() { if (UP() && LEFT()) return true; else return false; }
 	bool DIAG_DOWNRIGHT() { if (DOWN() && RIGHT()) return true; else return false; }
 	bool DIAG_DOWNLEFT() { if (DOWN() && LEFT()) return true; else return false; }
-
+	bool ESCAPE() { return buttons2.x; }
 };
 
 enum MouseMode
