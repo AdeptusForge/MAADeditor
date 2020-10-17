@@ -31,6 +31,7 @@ protected:
 	bool is2D = true;
 
 public:
+	glm::vec2 GetUIScale() { return uiScale; }
 	//Scales the object based on percentage sizes of the screen.
 	glm::vec3 UIScaleAbsolute(glm::ivec2 windowSize) 
 	{
@@ -51,7 +52,6 @@ public:
 	//Essentially this means that things will scale to preserve the size of the pixels of the element rather than the state of the UI.
 	glm::vec3 UIScalePixels(glm::ivec2 windowSize) 
 	{
-		
 		glm::vec3 newScale;
 		if (pixelSize.x > windowSize.x)
 			WriteDebug("X Pixel size is larger than the screen");
@@ -104,18 +104,18 @@ public:
 		if (modelPTR != nullptr) 
 		{
 			uiScale = UIScalePixels(glm::vec2(SCR_W,SCR_H));
-			if (is2D) 
-			{
-				//WriteDebug("location: " + vecToStr(screenLocation) + std::to_string(elementID));
-				shader.setMat4("model",
-					modelPTR->ModelRefresh(shader, UILocationAbsolute(glm::vec2(SCR_W,SCR_H)), UNIVERSAL_RENDERSCALE * glm::vec3(uiScale, 1), glm::vec3(0)));
+			//if (is2D) 
+			//{
+			//	//WriteDebug("location: " + vecToStr(screenLocation) + std::to_string(elementID));
+			//	shader.setMat4("model",
+			//		modelPTR->ModelRefresh(shader, UILocationAbsolute(glm::vec2(SCR_W,SCR_H)), UNIVERSAL_RENDERSCALE, glm::vec3(0)));
 
-			}
-			else 
-			{
-				shader.setMat4("model",
-					modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(uiScale, 1), glm::vec3(0)));
-			}
+			//}
+			//else 
+			//{
+			//	shader.setMat4("model",
+			//		modelPTR->ModelRefresh(shader, CalculateElementOffset(target), UNIVERSAL_RENDERSCALE * glm::vec3(uiScale, 1), glm::vec3(0)));
+			//}
 		}
 	};
 
@@ -150,7 +150,6 @@ public:
 		is2D = true;
 		screenLocation = scrLoc;
 		pixelSize = pixSize;
-		uiScale = glm::vec2(1, 1);
 		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader, Camera* target)
@@ -169,9 +168,9 @@ private:
 public:
 	MAAD_UIContext() {};
 	std::vector<MAAD_UIElement*> elementPTRs;
-	InventoryGrid newTest1 = InventoryGrid(14);
-	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,5));
-	InventoryGrid newTest3 = InventoryGrid(16, glm::vec2(5, 0));
+	InventoryGrid newTest1 = InventoryGrid(14, glm::vec2(0,0));
+	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,10));
+	InventoryGrid newTest3 = InventoryGrid(16, glm::vec2(10,0));
 
 
 

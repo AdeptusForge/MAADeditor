@@ -225,14 +225,13 @@ void RenderUpdate(GLFWwindow* window)
 	//UI Rendering
 	uiShader.use();
 	uiShader.setMat4("view", ourCamera.GetCameraView());
-	glm::mat4 ortho = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 10.0f);
+	glm::mat4 ortho = glm::ortho(10.0f, -10.0f, -10.0f, 10.0f, 0.0f, 10.0f);
 	uiShader.setMat4("projection", ortho);
 	UpdateContext(&mainUI, mainShader);
 	for (int i = 0; i < UIelements.size(); i++)
 	{
-		WriteDebug(vecToStr(UIelements[i]->UILocationAbsolute(glm::vec2(SCR_W, SCR_H))) + "" + std::to_string(UIelements[i]->GetID()));
 		uiShader.setMat4("model", UIelements[i]->GetModelPTR()->ModelRefresh(
-			uiShader, UIelements[i]->UILocationAbsolute(glm::vec2(SCR_W, SCR_H)), UNIVERSAL_RENDERSCALE, allModels[i].objLoc.GetWorldRotation()));
+			uiShader, UIelements[i]->UILocationAbsolute(glm::vec2(SCR_W, SCR_H)), glm::vec3(UIelements[i]->GetUIScale(), 1), glm::vec3(0)));
 		UIelements[i]->GetModelPTR()->Draw(uiShader);
 	}
 

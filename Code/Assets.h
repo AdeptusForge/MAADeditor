@@ -223,9 +223,12 @@ public:
 		BindTextures(shader);
 		//glEnable(GL_SIGNED_NORMALIZED);
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, position);
+
+		//SCALE then TRANSLATE then ROTATE. DON'T CHANGE THE ORDER
 		model = glm::scale(model, scale);
+		model = glm::translate(model, position);
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
 		return model;
 	}
 	//Deletes old textures to prevent memory leaks.
