@@ -32,6 +32,11 @@ protected:
 
 public:
 	glm::vec2 GetUIScale() { return uiScale; }
+	void ModifyScale(glm::vec2 newMod, Shader shader, Camera* target)
+	{
+		scaleMod = newMod;
+		uiScale = UIScalePixels(glm::vec2(SCR_W, SCR_H));
+	}
 	//Scales the object based on percentage sizes of the screen.
 	glm::vec3 UIScaleAbsolute(glm::ivec2 windowSize) 
 	{
@@ -52,17 +57,9 @@ public:
 	//Essentially this means that things will scale to preserve the size of the pixels of the element rather than the state of the UI.
 	glm::vec3 UIScalePixels(glm::ivec2 windowSize) 
 	{
-		glm::vec3 newScale;
-		if (pixelSize.x > windowSize.x)
-			WriteDebug("X Pixel size is larger than the screen");
-		else if (uiScale.x != (pixelSize.x / windowSize.x))
-			newScale.x = scaleMod.x * (pixelSize.x * 10) / windowSize.x;
-		if (pixelSize.y > windowSize.y)
-			WriteDebug("Y Pixel size is larger than the screen");
-		else if (uiScale.y != (pixelSize.y/ windowSize.y))
-			newScale.y = scaleMod.y * (pixelSize.y*10) / windowSize.y;
-		//WriteDebug(vecToStr(newScale));
-
+		glm::vec3 newScale = glm::vec3(1);
+		newScale.x = scaleMod.x * pixelSize.x / 2;
+		newScale.y = scaleMod.y * pixelSize.y / 2;
 		return newScale;
 	};
 	//Places the object based on percentage sizes of the screen. Rounds to the nearest pixel to prevent half-pixels.
@@ -143,13 +140,14 @@ protected:
 
 
 public:
-	InventoryGrid(unsigned int id, glm::vec2 scrLoc = glm::vec2(0), glm::vec2 pixSize = glm::vec2(8))
+	InventoryGrid(unsigned int id, glm::vec2 scrLoc = glm::vec2(0), glm::vec2 pixSize = glm::vec2(8), glm::vec2 sM = glm::vec2(1))
 	{
 		elementID = id;
 		active = true;
 		is2D = true;
 		screenLocation = scrLoc;
 		pixelSize = pixSize;
+		scaleMod = sM;
 		//model = Model("UI");
 	}
 	void UpdateElement(Shader shader, Camera* target)
@@ -168,8 +166,8 @@ private:
 public:
 	MAAD_UIContext() {};
 	std::vector<MAAD_UIElement*> elementPTRs;
-	InventoryGrid newTest1 = InventoryGrid(14, glm::vec2(0,0));
-	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,10));
+	InventoryGrid newTest1 = InventoryGrid(14, glm::vec2(0,0), glm::vec2(8), glm::vec2(1,1));
+	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,10),glm::vec2(8), glm::vec2(1,1));
 	InventoryGrid newTest3 = InventoryGrid(16, glm::vec2(10,0));
 
 
