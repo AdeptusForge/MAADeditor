@@ -203,6 +203,8 @@ void RunInputs()
 	{
 		//testSelector.MoveSelector(North);
 
+		cam->RotateCamera(glm::vec3(0, 5, 0));
+
 
 		//GetMapEntity(0)->Walk(GetMapEntity(0)->GetCurrentFacing(1));
 		//for (int i = 0; i < walkForward.size(); i++)
@@ -238,6 +240,9 @@ void RunInputs()
 	{
 		//testSelector.MoveSelector(South);
 
+		cam->RotateCamera(glm::vec3(0, -5, 0));
+
+
 		//cam->RotateCamera(glm::vec3(0, -5, 0));
 		//testGameObject.MoveObjectRelative(glm::vec3(1,0,0));
 		//WriteDebug(vecToStr(testGameObject.GetTransform().GetWorldPosition()));
@@ -251,7 +256,7 @@ void RunInputs()
 	{
 		//testSelector.SelectNode();
 
-		//testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
+		testGameObject.MoveObjectRelative(glm::vec3(0, 1, 0));
 		//cam->RotateCamera(glm::vec3(0, 5, 0));
 
 		//cam->RotateCamera(glm::vec3(0, 0, -5));
@@ -261,9 +266,9 @@ void RunInputs()
 	{
 		//testSelector.InteractWithItem();
 
-		testStatus.PlayerStatusStartup();
+		//testStatus.PlayerStatusStartup();
 
-		//testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
+		testGameObject.MoveObjectRelative(glm::vec3(0, -1, 0));
 		//cam->RotateCamera(glm::vec3(0, -5, 0));
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360));
 

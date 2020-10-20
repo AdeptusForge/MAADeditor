@@ -25,6 +25,8 @@ Shader mainShader;
 Shader uiShader;
 Camera ourCamera;
 
+glm::mat4 ortho = glm::ortho((SCR_W / 2.0f), -(SCR_W / 2.0f), -(SCR_H / 2.0f), (SCR_H / 2.0f), 0.0f, 40.0f);
+
 std::vector<Camera*> allCameras;
 std::vector<int>::iterator camIT;
 std::vector<RenderObject> allModels;
@@ -78,7 +80,6 @@ Camera* FindCamera(unsigned int camID)
 }
 
 glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-glm::mat4 view = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
 //readjusts the view on the screen to fit the window.
@@ -165,6 +166,7 @@ GLFWwindow* RenderStartup()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+
 	ourCamera = Camera(
 		glm::vec3(0.0f, 5.0f, 0.0f), 
 		glm::vec3(0.0f, 0.0f, 1.0f), 
@@ -172,7 +174,8 @@ GLFWwindow* RenderStartup()
 		45.0f, Perspective, 17);
 	allCameras.insert(allCameras.end(), &ourCamera);
 
-	view = ourCamera.GetCameraView();
+	uiShader.setMat4("view", ourCamera.GetCameraView());
+
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 	
 	mainUI.UIStartup();
@@ -222,12 +225,12 @@ void RenderUpdate(GLFWwindow* window)
 		allModels[i].objModel.Draw(mainShader);
 	}
 
+
 	//UI Rendering
 	uiShader.use();
-	uiShader.setMat4("view", ourCamera.GetCameraView());
-	glm::mat4 ortho = glm::ortho((SCR_W / 2.0f), -(SCR_W / 2.0f), -(SCR_H / 2.0f), (SCR_H / 2.0f), 0.0f, 10.0f);
+	//uiShader.setMat4("view", ourCamera.GetCameraView());
 	uiShader.setMat4("projection", ortho);
-	UpdateContext(&mainUI, mainShader);
+	UpdateContext(&mainUI, uiShader);
 	for (int i = 0; i < UIelements.size(); i++)
 	{
 		uiShader.setMat4("model", UIelements[i]->GetModelPTR()->ModelRefresh(

@@ -224,13 +224,13 @@ AnimData& LoadAnimData(std::string fileName)
 		WriteDebug("Loading File..." + fileName);
 
 	std::vector<Texture> textureLookups;
-	std::vector<AnimFrame> frames;
+	std::vector<TextureAnimFrame> frames;
 	std::vector<std::vector<int>> textureDir;
 	std::vector<AnimEvent> events;
 
 	unsigned int length = 0;
 	int i = 0;
-	AnimFrame freshFrame;
+	TextureAnimFrame freshFrame;
 
 	for (std::string line = ""; std::getline(animFile, line);)
 	{

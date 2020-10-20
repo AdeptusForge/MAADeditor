@@ -10,8 +10,6 @@
 #include "Debug.h"
 #include "Objects.h"
 
-#define DEFAULT_2D_UIELEMENT 
-
 const unsigned int SCR_H = 360;
 const unsigned int SCR_W = 640;
 
@@ -66,12 +64,8 @@ public:
 	//Returns center of the UIElement in OpenGL screen coordinates.
 	glm::vec3 UILocationAbsolute(glm::vec2 screenDims)
 	{
-		glm::vec3 newLoc = glm::vec3((screenLocation / scaleMod), 0);
-		//float measureX = screenLocation.x / screenDims.x;
-		//float measureY = screenLocation.y / screenDims.y;
-		//newLoc.x = (measureX * 20) - 10;
-		//newLoc.y = (measureY * 20) - 10;
-		return newLoc / glm::vec3(4);
+		glm::vec3 newLoc = glm::vec3((screenLocation / scaleMod), 0) / glm::vec3(4);
+		return newLoc ;
 	};
 
 	void BindModel(Model* newModel) 
@@ -83,7 +77,6 @@ public:
 	{
 		return modelPTR;
 	}
-
 	unsigned int GetID() { return elementID; };
 
 	bool Active() { return active; };
@@ -167,7 +160,7 @@ public:
 	MAAD_UIContext() {};
 	std::vector<MAAD_UIElement*> elementPTRs;
 	InventoryGrid newTest1 = InventoryGrid(14, glm::vec2(0,0), glm::vec2(8), glm::vec2(1,1));
-	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,16),glm::vec2(8), glm::vec2(1,1));
+	InventoryGrid newTest2 = InventoryGrid(15, glm::vec2(0,80),glm::vec2(8), glm::vec2(1,1));
 	InventoryGrid newTest3 = InventoryGrid(16, glm::vec2(16,0));
 
 

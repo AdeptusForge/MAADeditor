@@ -59,7 +59,7 @@ public:
 	};
 	AnimEvent() {};
 };
-struct AnimFrame
+struct TextureAnimFrame
 {
 private:
 	glm::ivec2 textureChanges = { 0,0 };
@@ -72,20 +72,20 @@ public:
 		else if (textNum == 2) textureChanges.y = value;
 	}
 
-	AnimFrame() {};
+	TextureAnimFrame() {};
 };
 struct AnimData
 {
 private:
 	unsigned int length;
-	std::vector<AnimFrame> frames;
+	std::vector<TextureAnimFrame> frames;
 	std::vector<Texture> textureLookup;
 	std::vector<AnimEvent> events;
 public:
-	AnimFrame GetCurrFrame(unsigned int frame) { return frames[frame]; }
+	TextureAnimFrame GetCurrFrame(unsigned int frame) { return frames[frame]; }
 	Texture GetCurrTexture(unsigned int value) { return textureLookup[value]; }
 	unsigned int GetLength() { return length; }
-	AnimData(unsigned int l, std::vector<AnimFrame> frameVec, std::vector<Texture> loadtextures, std::vector<AnimEvent> eve) :
+	AnimData(unsigned int l, std::vector<TextureAnimFrame> frameVec, std::vector<Texture> loadtextures, std::vector<AnimEvent> eve) :
 		length(l), frames(frameVec), textureLookup(loadtextures), events(eve) {
 	};
 	AnimData() {};
@@ -197,7 +197,7 @@ public:
 	{
 		if (currentlyPlaying) 
 		{
-			AnimFrame frame = currentAnim.GetCurrFrame(currentFrame);
+			TextureAnimFrame frame = currentAnim.GetCurrFrame(currentFrame);
 
 			std::string newTexture = currentAnim.GetCurrTexture(frame.GetTextureChanges().y).name;
 			if (textures[1].name != newTexture)
