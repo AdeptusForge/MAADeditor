@@ -12,6 +12,8 @@
 #include "Shaders.h"
 #include "Camera.h"
 #include "Objects.h"
+#include "UIControl.h"
+
 
 Camera* FindCamera(unsigned int);
 void RenderShutdown();
@@ -20,7 +22,7 @@ GLFWwindow* RenderStartup();
 GLFWwindow* GetWindow();
 
 void ResizeWindow(GLFWwindow*, glm::vec2, bool);
-
+void AddUIElement(MAAD_UIElement*, Model);
 #define UNIVERSAL_RENDERSCALE glm::vec3(1)
 
 struct RenderObject 

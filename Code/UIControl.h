@@ -167,13 +167,15 @@ public:
 
 	void UIStartup() 
 	{
-		targetCamera = FindCamera(17);
 		AddElement(&newTest1, Model("UIPlaneTest"));
 		AddElement(&newTest2, Model("UIPlaneTest"));
 		AddElement(&newTest3, Model("UIPlaneTest"));
+
+
 	}
 	
 	Camera* GetTargetCamera() { return targetCamera; }
+	void SetTargetCamera(Camera* newCam) { targetCamera = newCam; }
 	MAAD_UIElement* GetElementByID(const unsigned int id) 
 	{
 

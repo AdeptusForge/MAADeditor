@@ -13,7 +13,6 @@
 #include "Assets.h"
 #include "Objects.h"
 #include "editor.h"
-#include "UIControl.h"
 #include <algorithm>
 #include <iterator>
 
@@ -55,6 +54,11 @@ void GameToRenderConversion(MAAD_GameObject obj)
 	}
 }
 
+void AddUIElement(MAAD_UIElement* newElement, Model elementModel)
+{
+	WriteDebug("what the fuck");
+	mainUI.AddElement(newElement, elementModel);
+}
 void UpdateContext(MAAD_UIContext* ui, Shader shader)
 {
 	UIelements = ui->elementPTRs;
@@ -178,6 +182,7 @@ GLFWwindow* RenderStartup()
 
 	projection = glm::perspective(glm::radians(ourCamera.cameraFov), ((float)SCR_W / (float)SCR_H), 0.1f, 100.0f);
 	
+	mainUI.SetTargetCamera(FindCamera(17));
 	mainUI.UIStartup();
 
 	Model testModel = Model("TileFloorCube");

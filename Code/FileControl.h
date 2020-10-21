@@ -7,6 +7,8 @@
 #include "Vector"
 #include "array"
 #include "iterator"
+#include "IDcontrol.h"
+
 
 #ifndef MAX_MODEL_TEXTURES
 const unsigned int MAX_MODEL_TEXTURES = 8;

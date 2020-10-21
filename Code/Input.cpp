@@ -39,6 +39,8 @@ InventorySelector testSelector = InventorySelector(&testInventory);
 PlayerStatus testStatus = PlayerStatus();
 MAAD_EVENT inputEvent;
 
+InventoryGrid newTest = InventoryGrid(16, glm::vec2(50, 0));
+
 
 //Defines when the player can input.
 bool canInput;
@@ -280,13 +282,13 @@ void RunInputs()
 	{
 		//testStatus.TestRemoval();
 
-		ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
+		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
 	}
 	if (currFrame.BUTTON_4())
 	{
-		ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
-
+		AddUIElement(&newTest, Model("UIPlaneTest"));
+		//ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
 		
