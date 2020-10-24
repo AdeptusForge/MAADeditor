@@ -323,7 +323,6 @@
     <ClCompile Include="Code\Objects.cpp" />
     <ClCompile Include="Code\Physics.cpp" />
     <ClCompile Include="Code\Render.cpp" />
-    <ClCompile Include="Code\Shaders.cpp" />
     <ClCompile Include="Code\Skills.cpp" />
     <ClCompile Include="Code\src\glad.c" />
     <ClCompile Include="Code\imGUI\imgui.cpp" />

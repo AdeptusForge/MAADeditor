@@ -196,36 +196,6 @@ void SaveInputs()
 	buttons2 = currFrame.RAW_BUTTONS2();
 }
 
-
-
-std::string TestLoadImage()
-{
-	std::string loadStr = FetchPath(ImageFile, "EmptyInventoryTile", false);
-	std::ifstream file;
-	file.open(loadStr);
-
-	file.seekg(0, file.end);
-	int length = file.tellg();
-	file.seekg(0, file.beg);
-
-	int* imgData = new int[length];
-
-	char* buffer = new char[length];
-
-	file.read(buffer, length);
-	for (int i = 0; i < length; i++)
-	{
-		imgData[i] = buffer[i];
-	}
-	std::string test;
-	for (int i = 0; i < length; i++)
-	{
-		WriteDebug(imgData[i]);
-	}
-	return test;
-}
-
-
 //Runs inputs. Called once every frame to prevent input errors in a singleplayer environment.
 //If you wanted to handle multiplayer or an update-based framework, you'd need to change this to compensate.
 void RunInputs() 
@@ -311,9 +281,7 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		WriteDebug(TestLoadImage());
 		//testStatus.TestRemoval();
-
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
 	}

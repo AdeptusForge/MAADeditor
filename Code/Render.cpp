@@ -6,9 +6,7 @@
 #include "Render.h"
 #include "SDL.h"
 #include "Assets.h"
-#include "FileControl.h"
 #include <iostream>
-#include "Shaders.h"
 #include "Camera.h"
 #include "Objects.h"
 #include "editor.h"
