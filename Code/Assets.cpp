@@ -19,7 +19,6 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int& width
 	if (!imageData)
 		WriteDebug(stbi_failure_reason());
 
-
 	return imageData;
 }
 //Frees up STBI image memory.

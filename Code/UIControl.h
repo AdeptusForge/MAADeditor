@@ -2,7 +2,6 @@
 
 #include "filecontrol.h"
 #include "bounding.h"
-#include "assets.h"
 #include "vector"
 #include "camera.h"
 #include "assets.h"
@@ -170,8 +169,6 @@ public:
 		AddElement(&newTest1, Model("UIPlaneTest"));
 		AddElement(&newTest2, Model("UIPlaneTest"));
 		AddElement(&newTest3, Model("UIPlaneTest"));
-
-
 	}
 	
 	Camera* GetTargetCamera() { return targetCamera; }

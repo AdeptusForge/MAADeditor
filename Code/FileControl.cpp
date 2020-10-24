@@ -15,7 +15,6 @@
 #include "memory"
 #include "IDcontrol.h"
 
-
 #pragma region DO NOT MOVE
 #include <stdio.h>  /* defines FILENAME_MAX */
 #include <direct.h>
@@ -155,4 +154,3 @@ void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 	file << data;
 	file.close();
 }
-

@@ -10,7 +10,6 @@
 #include <iostream>
 #include "Shaders.h"
 #include "Camera.h"
-#include "Assets.h"
 #include "Objects.h"
 #include "editor.h"
 #include <algorithm>
@@ -56,7 +55,6 @@ void GameToRenderConversion(MAAD_GameObject obj)
 
 void AddUIElement(MAAD_UIElement* newElement, Model elementModel)
 {
-	WriteDebug("what the fuck");
 	mainUI.AddElement(newElement, elementModel);
 }
 void UpdateContext(MAAD_UIContext* ui, Shader shader)

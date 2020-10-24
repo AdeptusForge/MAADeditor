@@ -12,13 +12,32 @@
 #include "AnimEvents.h"
 #include "memory"
 
-//Stores texture by name and ID number instead of by data
-//REFACTOR:: Store texture by data
-struct Texture
+unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
+
+//Stores texture data via STBI data pointer
+class Texture
 {
-	unsigned int ID;
+private:
+	int width, height, nrChannels;
+
 	std::string name;
-	Texture(unsigned int id, std::string name) : ID(id), name(name) {};
+	unsigned char* data;
+
+public:
+	unsigned int ID;
+
+	std::string Name() { return name; }
+	unsigned char* Data() { return data; }
+	int Width() { return width; }
+	int Height() { return height; }
+	int NRChannels() { return nrChannels; }
+
+
+
+	Texture(unsigned int id, std::string name) : ID(id), name(name) 
+	{
+		data = LoadImageFile(ImageFile, name, width, height, nrChannels);
+	};
 };
 
 #pragma region Model Structs
@@ -74,6 +93,7 @@ public:
 
 	TextureAnimFrame() {};
 };
+
 struct AnimData
 {
 private:
@@ -107,7 +127,6 @@ struct ModelDataChunk
 	ModelDataChunk() {};
 };
 
-unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 void UnloadImageFile(unsigned char* image);
 ModelDataChunk& Load3DModel(std::string fileName, FileType fileType);
 
@@ -124,7 +143,6 @@ private:
 	//Loads raw image data, generates mipmaps, and then unloads the texture data.
 	void PrepTexture(Texture &ref, bool startupBool) 
 	{
-		int width, height, nrChannels;
 		if (startupBool) 
 		{
 			glGenTextures(1, &ref.ID);
@@ -136,9 +154,9 @@ private:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		unsigned char* texData = LoadImageFile(ImageFile, ref.name, width, height, nrChannels);
+		unsigned char* texData = ref.Data();
 		//Create TextureLookup function to frontload textures.
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ref.Width(), ref.Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		UnloadImageFile(texData);
 	}
@@ -199,10 +217,10 @@ public:
 		{
 			TextureAnimFrame frame = currentAnim.GetCurrFrame(currentFrame);
 
-			std::string newTexture = currentAnim.GetCurrTexture(frame.GetTextureChanges().y).name;
-			if (textures[1].name != newTexture)
+			std::string newTexture = currentAnim.GetCurrTexture(frame.GetTextureChanges().y).Name();
+			if (textures[1].Name() != newTexture)
 			{
-				textures[1].name = newTexture;
+				textures[1].Name() = newTexture;
 				PrepTexture(textures[1], false);
 			}
 		}
