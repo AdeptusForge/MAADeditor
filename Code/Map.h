@@ -58,23 +58,6 @@ const glm::quat westQuat = glm::radians(glm::vec3(0, 90, 0) * 0.5f);
 #pragma endregion
 
 
-enum TileFeature 
-{
-	Empty = 0,
-	Wall = 1,
-	Ceiling = 2,
-	Floor = 3,
-};
-
-struct TileFeatures 
-{
-	TileFeature north;
-	TileFeature east;
-	TileFeature south;
-	TileFeature west;
-	TileFeature upward;
-	TileFeature downward;
-};
 
 const std::vector<glm::vec3> walkForward = 
 {
@@ -91,45 +74,6 @@ const std::vector<glm::vec3> walkForward =
 };
 
 glm::ivec3 GetMoveVector(MapDirection dir);
-
-struct MapTile
-{
-private:
-	glm::ivec3 mapPos;
-	TileFeatures features;
-	std::string tileModel;
-	MapDirection modelOrientation = North; //1 = north, 2 east, 3 south, 4 west
-	std::vector<std::string> functionTriggers;
-public:
-	MapTile(glm::ivec3 pos, TileFeatures f, std::string modelFile, MapDirection orient, std::vector<std::string> functionNames)
-		: mapPos(pos), features(f), tileModel(modelFile), modelOrientation(orient), functionTriggers(functionNames) {};
-	MapTile() {};
-	TileFeature getTileFeature(MapDirection dir)
-	{
-		if (dir == North)
-			return features.north;
-		else if (dir == East)
-			return features.east;
-		else if (dir == South)
-			return features.south;
-		else if (dir == West)
-			return features.west;
-		else if (dir == Up)
-			return features.upward;
-		else if (dir == Down)
-			return features.downward;
-	}
-	std::string getTileModel() { return tileModel; }
-};
-
-struct MapDataChunk
-{
-	glm::ivec3 mapSize;
-	std::vector<MapTile> tileMap;
-	MapDataChunk(unsigned int& xSize, unsigned int& ySize, unsigned int& zSize, std::vector<MapTile>& tiles)
-		: mapSize(glm::ivec3(xSize, ySize, zSize)), tileMap(tiles) {};
-	MapDataChunk() {};
-};
 
 bool IsOnCurrentMap(glm::ivec3 loc);
 void MapStartup(std::string mapName);

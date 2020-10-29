@@ -4,7 +4,6 @@
 #include "bounding.h"
 #include "vector"
 #include "camera.h"
-#include "assets.h"
 #include "map"
 #include "Debug.h"
 #include "Objects.h"

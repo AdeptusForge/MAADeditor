@@ -17,6 +17,7 @@
 #include "Inventory.h"
 #include "Player.h"
 #include <fstream>
+#include "filecontrol.h"
 
 ModelDataChunk TestChunk;
 
@@ -281,6 +282,8 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
+		GetLoadController()->RequestData(ImageFile, "nononnonon", 0);
+		
 		//testStatus.TestRemoval();
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 

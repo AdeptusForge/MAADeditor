@@ -6,14 +6,12 @@
 #include "SDL.h"
 #include "SDL_mixer.h"
 
-
 enum SoundType
 {
 	SFX_SND,
 	VOICE_SND,
 	MUSIC_SND,
 	OTHER_SND,
-
 };
 
 void AudioControlStartup();

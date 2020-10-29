@@ -18,6 +18,8 @@ enum IDTYPE
 	MAPENTITY_ID = 32,
 };
 
+class MAAD_ID;
+
 class MAAD_IDController
 {
 private:

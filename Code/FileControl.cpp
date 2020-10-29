@@ -28,7 +28,8 @@ std::string GetCurrentWorkingDir(void) {
 
 //The baseline file path that leads to all saved/loaded files
 const std::string assetPath = GetCurrentWorkingDir();
-
+LoadRequestController loadController;
+LoadRequestController* GetLoadController() { return &loadController; }
 //Verifies whether the file is retrievable.
 bool VerifyFileOrFolder(std::string filePath) 
 {
@@ -153,3 +154,5 @@ void SaveActiveFile(FileType fileType, std::string fileName, std::string data)
 	file << data;
 	file.close();
 }
+
+

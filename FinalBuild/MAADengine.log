@@ -1,9 +1,8 @@
-﻿  FileControl.cpp
-  Render.cpp
+﻿  Input.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(127,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(440,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\FileControl.h(152,55): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Assets.h(139,17): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(69,37): warning C4552:  '-': result of expression not used
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(70,38): warning C4552:  '+': result of expression not used
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(71,37): warning C4552:  '-': result of expression not used
@@ -25,63 +24,25 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(101,38): warning C45
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(331,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(349,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Objects.h(382,1): warning C4102:  'EventListener': unreferenced label
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(46,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(61,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,46): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,46): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,46): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,46): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,46): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,35): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,35): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,35): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,35): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(116,35): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,81): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,81): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,81): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,81): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,81): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,70): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,70): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,70): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,70): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(120,70): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,66): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,66): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,66): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,66): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,66): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,55): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,55): warning C4244:         with
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,55): warning C4244:         [
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,55): warning C4244:             T=float
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(123,55): warning C4244:         ]
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(222,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Render.cpp(235,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\RNGRoll.h(45,20): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(116,1): warning C4102:  'Default': unreferenced label
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Inventory.h(258,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Player.h(312,21): warning C4018:  '<': signed/unsigned mismatch
   Generating code
-  155 of 3206 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
+  1 of 3428 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    108 functions had inline decision re-evaluated but remain unchanged
+    10 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 Debug.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
-IDControl.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_impl_glfw.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_impl_opengl3.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_stdlib.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
-Input.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
-MAADeditor.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
-Map.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
-Objects.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
-Physics.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
-Render.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
 Skills.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 glad.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_demo.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_draw.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_widgets.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
-Time.obj : warning LNK4020: a type record in 'c:\users\adept\desktop\maadeditor\maadeditor\finalbuild\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
   MAADengine.vcxproj -> C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\MAADengine.exe
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Animations\AnimLoadTest.anim
   C:\Users\adept\Desktop\MAADeditor\MAADeditor\Assets\Levels\MapLoadTest.map
