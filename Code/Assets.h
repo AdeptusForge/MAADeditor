@@ -10,10 +10,7 @@
 #include "memory"
 
 
-unsigned char* LoadImageFile(FileType fileType, std::string fileName, int&, int&, int&);
 
-void UnloadImageFile(unsigned char* image);
-ModelDataChunk& Load3DModel(std::string fileName, FileType fileType);
 
 //Main class for 3D models
 //REFACTOR:: ??? 3D animation rework

@@ -19,7 +19,7 @@
 const unsigned int MAX_MODEL_TEXTURES = 8;
 #endif // !MAX_MODEL_TEXTURES
 
-enum FileType 
+enum FileType
 {
 	None,
 	ImageFile,
@@ -35,7 +35,19 @@ enum FileType
 	ObjTextureFile
 };
 
+void SaveActiveFile(FileType fileType, std::string fileName, std::string data);
+
+bool VerifyFileOrFolder(std::string filePath);
+std::string FetchPath(FileType fileType, std::string fileName, bool saving);
+void FileControlStartup();
+
+
+
+
+
 unsigned char* LoadImageFile(FileType, std::string, int&, int&, int&);
+void UnloadImageFile(unsigned char* image);
+
 
 //Custom shader class that is passed through OpenGL.
 //REFACTOR:: Geometry Shader functionality.
@@ -393,6 +405,9 @@ public:
 #pragma endregion
 
 AnimData& LoadAnimData(std::string fileName);
+ModelDataChunk Load3DModel(std::string fileName, FileType fileType);
+
+
 
 class LoadRequestController 
 {
@@ -486,11 +501,19 @@ public:
 	}
 
 private:
+	//
+	void RetrieveData(FileType fType, std::string fileName) 
+	{
+
+	}
+	//Loads data from data files based on the filetype and name of the file. Places the data inside LoadController Storage for later usage.
 	void LoadData(FileType fType, std::string fileName) 
 	{
 		switch (fType)
 		{
 			case ImageFile: {
+
+
 				break;
 			}
 			//case AudioFile: {
@@ -513,9 +536,3 @@ private:
 	}
 };
 LoadRequestController* GetLoadController();
-
-void SaveActiveFile(FileType fileType, std::string fileName, std::string data);
-
-bool VerifyFileOrFolder(std::string filePath);
-std::string FetchPath(FileType fileType, std::string fileName, bool saving);
-void FileControlStartup();

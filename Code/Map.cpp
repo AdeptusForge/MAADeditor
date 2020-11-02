@@ -12,7 +12,6 @@
 
 MapDataChunk currMap;
 std::vector<MapEntity> allEntities;
-MapDataChunk mapDataPTR;
 
 //Returns a movement vector based on a mapDirection.
 glm::ivec3 GetMoveVector(MapDirection dir) 
@@ -131,69 +130,3 @@ MapEntity* GetMapEntity(unsigned int entityID)
 	WriteDebug("No AllModels");
 	return nullptr;
 }
-
-//Loads map data from a text-based map file.
-MapDataChunk& LoadMapData(std::string fileName)
-{
-	std::ifstream mapFile;
-
-	std::string loadstr = FetchPath(LevelFile, fileName, false);
-	mapFile.open(loadstr);
-	if (!mapFile.is_open())
-	{
-		WriteDebug("Cannot Open File: " + fileName);
-	}
-	else
-		WriteDebug("Loading File..." + fileName);
-	unsigned int x, y, z;
-	std::vector<MapTile> tiles;
-
-	for (std::string line; std::getline(mapFile, line);)
-	{
-		std::istringstream in(line);
-		std::string type;
-		in >> type;
-
-		int orient;
-		TileFeatures features;
-		std::string tileModel;
-		std::vector<std::string> functionTriggers;
-
-		if (type == "s")
-		{
-			int testX, testY, testZ;
-			in >> testX >> testY >> testZ;
-			if (testX <= 0 || testY <= 0 || testZ <=0)
-				WriteDebug("File Error: Map Size incorrect");
-			else { x = testX; y = testY; z = testZ; }
-		}
-		if (type == "t")
-		{
-			std::istringstream iss(line);
-			std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
-				std::istream_iterator<std::string>());
-			features.north = (TileFeature)std::stoi(results[1]);
-			features.east = (TileFeature)std::stoi(results[2]);
-			features.south = (TileFeature)std::stoi(results[3]);
-			features.west = (TileFeature)std::stoi(results[4]);
-			features.upward = (TileFeature)std::stoi(results[5]);
-			features.downward = (TileFeature)std::stoi(results[6]);
-
-			tileModel = results[7];
-			orient = std::stoi(results[8]);
-			if (results.size() > 9)
-			{
-				for (int i = 9; i < results.size(); i++)
-				{
-					functionTriggers.push_back(results[i]);
-				}
-			}
-			tiles.push_back(MapTile(glm::ivec3(x, y, z),
-				features, tileModel, (MapDirection)orient, functionTriggers));
-		}
-	}
-
-	mapDataPTR = MapDataChunk(x, y, z, tiles);
-	mapFile.close();
-	return mapDataPTR;
-};

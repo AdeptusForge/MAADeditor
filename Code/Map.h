@@ -57,7 +57,7 @@ const glm::quat westQuat = glm::radians(glm::vec3(0, 90, 0) * 0.5f);
 #endif // !westQuat
 #pragma endregion
 
-
+MapDataChunk& LoadMapData(std::string fileName);
 
 const std::vector<glm::vec3> walkForward = 
 {
@@ -260,7 +260,7 @@ public:
 		currentMapPos(startingPos), currentFacing(startingFacing), ID(entityID) {};
 };
 
-MapDataChunk& LoadMapData(std::string fileName);
+
 
 void UpdateMap();
 void PlayerStartup(glm::ivec3 startingPos, MapDirection dir);
