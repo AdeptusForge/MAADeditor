@@ -405,8 +405,8 @@ public:
 #pragma endregion
 
 AnimData& LoadAnimData(std::string fileName);
-ModelDataChunk Load3DModel(std::string fileName, FileType fileType);
-
+ModelDataChunk Load3DModel(FileType fileType, std::string fileName);
+MapDataChunk& LoadMapData(std::string);
 
 
 class LoadRequestController 
@@ -450,15 +450,10 @@ public:
 	};
 	std::deque<LoadRequest> requestQueue;
 
-	void* RequestData(FileType fType, std::string fileName, int prio) 
+	void* RetrieveData(FileType fType, std::string fileName, int prio) 
 	{
 		LoadRequest req = LoadRequest(fType, fileName, prio);
 		LoadRequest::RequestData* reqData = req.GetRequestData();
-		if (reqData->priority == 1) 
-		{
-			WriteDebug("ERROR -- UNUSUAL LOAD REQUEST, DATA NOT SENT.");
-			return nullptr;
-		}
 		switch (reqData->loadType) 
 		{
 			case ImageFile: { 
@@ -470,7 +465,6 @@ public:
 				else 
 				{
 					WriteDebug("no data found");
-					if (reqData->priority < 2) {}
 				}
 				break; 
 			}
@@ -480,17 +474,29 @@ public:
 			//	break;
 			//}
 			case LevelFile: {
-				if (mapDataMap.find(reqData->fileName) != mapDataMap.end())
+				if (mapDataMap.find(reqData->fileName) != mapDataMap.end()) 
+				{
 					WriteDebug("found some data");
-				else
+					return &mapDataMap.find(reqData->fileName)->second;
+				}
+				else 
+				{
 					WriteDebug("no data found");
+					LoadData(fType, reqData->fileName);
+					return &mapDataMap.find(reqData->fileName)->second;
+				}
 				break;
 			}
 			case ObjFile: {
-				if (modelDataMap.find(reqData->fileName) != modelDataMap.end())
+				if (modelDataMap.find(reqData->fileName) != modelDataMap.end()) 
+				{
 					WriteDebug("found some data");
-				else
+				}
+				else 
+				{
 					WriteDebug("no data found");
+
+				}
 				break;
 			}
 
@@ -501,11 +507,6 @@ public:
 	}
 
 private:
-	//
-	void RetrieveData(FileType fType, std::string fileName) 
-	{
-
-	}
 	//Loads data from data files based on the filetype and name of the file. Places the data inside LoadController Storage for later usage.
 	void LoadData(FileType fType, std::string fileName) 
 	{
@@ -520,6 +521,8 @@ private:
 			//	break;
 			//}
 			case LevelFile: {
+				MapDataChunk newMap = LoadMapData(fileName);
+				mapDataMap.insert(std::pair<std::string, MapDataChunk>(fileName, newMap));
 				break;
 			}
 			case ObjFile: {

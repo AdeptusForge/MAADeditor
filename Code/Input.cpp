@@ -282,8 +282,8 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		GetLoadController()->RequestData(ImageFile, "nononnonon", 0);
-		
+		MapDataChunk newMap = *(MapDataChunk*)GetLoadController()->RetrieveData(LevelFile, "MapLoadTest", 0);
+		WriteDebug(vecToStr(newMap.mapSize));
 		//testStatus.TestRemoval();
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 

@@ -268,7 +268,7 @@ Shader LoadCustomShader(std::string vertexPath, std::string fragmentPath, std::s
 
 
 //Loads a 3D model from a .wav file through reading text.
-ModelDataChunk Load3DModel(std::string fileName, FileType fileType)
+ModelDataChunk Load3DModel(FileType fileType,std::string fileName)
 {
 	std::ifstream modelFile;
 	std::string loadstr = FetchPath(fileType, fileName, false);

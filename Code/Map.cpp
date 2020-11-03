@@ -55,7 +55,7 @@ bool IsOnCurrentMap(glm::ivec3 loc)
 //Loads map data and performs PlayerStartup()
 void MapStartup(std::string mapName) 
 {
-	currMap = LoadMapData(mapName);
+	currMap = *(MapDataChunk*)GetLoadController()->RetrieveData(LevelFile, mapName, 0);
 	PlayerStartup(glm::ivec3(0), North);
 }
 
