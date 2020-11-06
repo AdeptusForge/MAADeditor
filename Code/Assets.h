@@ -72,7 +72,7 @@ public:
 		modelStringName = modelName;
 		if (modelName != "UI") 
 		{
-			ModelDataChunk newModel = Load3DModel(ObjFile, modelName);
+			ModelDataChunk newModel = *(ModelDataChunk*)GetLoadController()->RetrieveData(ObjFile, modelName, 0);
 			this->scale = newScale;
 			this->vertices = newModel.vertices;
 			this->indices = newModel.indices;

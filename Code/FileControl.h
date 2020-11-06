@@ -471,7 +471,7 @@ public:
 			case ImageFile: { 
 				if (textureDataMap.find(reqData->fileName) != textureDataMap.end()) 
 				{
-					WriteDebug("found some data: " + reqData->fileName);
+					//WriteDebug("found some data: " + reqData->fileName);
 					return &textureDataMap.find(reqData->fileName)->second;
 				}
 				else 
@@ -490,7 +490,7 @@ public:
 			case LevelFile: {
 				if (mapDataMap.find(reqData->fileName) != mapDataMap.end()) 
 				{
-					WriteDebug("found some data: " + reqData->fileName);
+					//WriteDebug("found some data: " + reqData->fileName);
 					return &mapDataMap.find(reqData->fileName)->second;
 				}
 				else 
@@ -504,11 +504,14 @@ public:
 			case ObjFile: {
 				if (modelDataMap.find(reqData->fileName) != modelDataMap.end()) 
 				{
-					WriteDebug("found some data");
+					WriteDebug("found some data -- " + fileName);
+					return &modelDataMap.find(reqData->fileName)->second;
 				}
 				else 
 				{
-					//WriteDebug("no data found -- loading " + fileName);
+					WriteDebug("no data found -- loading " + fileName);
+					LoadData(fType, reqData->fileName);
+					return &modelDataMap.find(reqData->fileName)->second;
 				}
 				break;
 			}
@@ -518,7 +521,6 @@ public:
 
 		//requestQueue.push_back(LoadRequest(fType, data));
 	}
-	unsigned char* imageData;
 private:
 
 	//Loads data from data files based on the filetype and name of the file. Places the data inside LoadController Storage for later usage.
@@ -527,8 +529,6 @@ private:
 		switch (fType)
 		{
 			case ImageFile: {
-				WriteDebug("Loading Image File ");
-
 				int w, h, n;
 				Texture newText = Texture(5, fileName, LoadImageFile(fType, fileName, w, h, n), w,h,n);
 				textureDataMap.insert(std::pair<std::string, Texture>(fileName, newText));
@@ -543,6 +543,9 @@ private:
 				break;
 			}
 			case ObjFile: {
+
+				ModelDataChunk newModel = Load3DModel(fType, fileName);
+				modelDataMap.insert(std::pair<std::string, ModelDataChunk>(fileName, newModel));
 				break;
 			}
 

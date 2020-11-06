@@ -238,9 +238,9 @@ C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(11,27): warning C4244
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(23,18): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
 C:\Users\adept\Desktop\MAADeditor\MAADeditor\Code\Time.cpp(27,13): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  1 of 3504 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  5 of 3543 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    17 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 Debug.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
 imgui_impl_glfw.obj : warning LNK4204: 'C:\Users\adept\Desktop\MAADeditor\MAADeditor\FinalBuild\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
