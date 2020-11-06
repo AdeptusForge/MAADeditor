@@ -13,6 +13,7 @@
 #include <typeinfo>
 #include "memory"
 #include "IDcontrol.h"
+#include "iostream"
 
 #pragma region DO NOT MOVE
 #include <stdio.h>  /* defines FILENAME_MAX */
@@ -170,7 +171,6 @@ unsigned char* LoadImageFile(FileType fileType, std::string fileName, int& width
 	imageData = stbi_load(loadstr.c_str(), &width, &height, &nrChannels, 0);
 	if (!imageData)
 		WriteDebug(stbi_failure_reason());
-
 	return imageData;
 }
 
@@ -335,7 +335,7 @@ ModelDataChunk Load3DModel(FileType fileType,std::string fileName)
 								texturein >> textureName;
 								//WriteDebug(textureName);
 								i++;
-								textures.push_back(Texture(0, textureName));
+								textures.push_back(*(Texture*)GetLoadController()->RetrieveData(ImageFile, textureName, 0));
 							}
 						}
 					}
@@ -493,8 +493,9 @@ AnimData& LoadAnimData(std::string fileName)
 				{
 					if (Tword != "t")
 					{
+						WriteDebug("The anim started it");
 						//WriteDebug(Tword);
-						textureLookups.push_back(Texture(0, Tword));
+						textureLookups.push_back(*(Texture*)GetLoadController()->RetrieveData(ImageFile, Tword, 0));
 						wordNum++;
 					}
 					Tword = "";
@@ -502,7 +503,7 @@ AnimData& LoadAnimData(std::string fileName)
 				if (lineLength >= line.size() && Tword.size() > 1)
 				{
 					//WriteDebug(Tword);
-					textureLookups.push_back(Texture(0, Tword));
+					textureLookups.push_back(*(Texture*)GetLoadController()->RetrieveData(ImageFile, Tword, 0));
 					wordNum++;
 					Tword = "";
 

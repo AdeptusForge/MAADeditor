@@ -259,7 +259,7 @@ public:
 		{
 			nodesToEdit[i]->OccupyNode(item);
 		}
-		WriteDebug("Got here");
+		//WriteDebug("Got here");
 
 	}
 

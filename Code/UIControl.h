@@ -181,6 +181,7 @@ public:
 
 	}
 	void UIMouseSelect(glm::vec2 position) {};
+	//TODO: FIX POSSIBLE MEMORY LEAK (MAY NOT EXIST)
 	void AddElement(MAAD_UIElement* newElement, Model elementModel)
 	{
 		uiModelIter = uiModels.begin();

@@ -250,15 +250,27 @@ public:
 	unsigned int ID;
 
 	std::string Name() { return name; }
-	unsigned char* Data() { return data; }
+	unsigned char* Data() { if(data) return data; }
 	int Width() { return width; }
 	int Height() { return height; }
 	int NRChannels() { return nrChannels; }
-
-	Texture(unsigned int id, std::string name) : ID(id), name(name)
+	
+	void SetData(unsigned char* datum) 
 	{
-		data = LoadImageFile(ImageFile, name, width, height, nrChannels);
+		if (datum == nullptr || !datum)
+		{
+			WriteDebug("recieved no data");
+		}
+		else
+			data = datum;
+	}
+	Texture(unsigned int id, std::string name, unsigned char* datum) : ID(id), name(name) 
+	{
+		SetData(datum);
 	};
+	Texture(unsigned int id, std::string name, int w, int h, int n) : ID(id), name(name), width(w), height(h), nrChannels(n) {};
+	Texture(unsigned int id, std::string name,unsigned char* datum , int w, int h, int n) : ID(id), name(name), data(datum), width(w), height(h), nrChannels(n) {};
+
 };
 
 enum TileFeature
@@ -459,12 +471,14 @@ public:
 			case ImageFile: { 
 				if (textureDataMap.find(reqData->fileName) != textureDataMap.end()) 
 				{
-					WriteDebug("found some data");
+					WriteDebug("found some data: " + reqData->fileName);
 					return &textureDataMap.find(reqData->fileName)->second;
 				}
 				else 
 				{
-					WriteDebug("no data found");
+					//WriteDebug("no data found -- loading " + fileName);
+					LoadData(fType, reqData->fileName);
+					return &textureDataMap.find(reqData->fileName)->second;
 				}
 				break; 
 			}
@@ -476,12 +490,12 @@ public:
 			case LevelFile: {
 				if (mapDataMap.find(reqData->fileName) != mapDataMap.end()) 
 				{
-					WriteDebug("found some data");
+					WriteDebug("found some data: " + reqData->fileName);
 					return &mapDataMap.find(reqData->fileName)->second;
 				}
 				else 
 				{
-					WriteDebug("no data found");
+					//WriteDebug("no data found -- loading " + fileName);
 					LoadData(fType, reqData->fileName);
 					return &mapDataMap.find(reqData->fileName)->second;
 				}
@@ -494,8 +508,7 @@ public:
 				}
 				else 
 				{
-					WriteDebug("no data found");
-
+					//WriteDebug("no data found -- loading " + fileName);
 				}
 				break;
 			}
@@ -505,16 +518,20 @@ public:
 
 		//requestQueue.push_back(LoadRequest(fType, data));
 	}
-
+	unsigned char* imageData;
 private:
+
 	//Loads data from data files based on the filetype and name of the file. Places the data inside LoadController Storage for later usage.
 	void LoadData(FileType fType, std::string fileName) 
 	{
 		switch (fType)
 		{
 			case ImageFile: {
+				WriteDebug("Loading Image File ");
 
-
+				int w, h, n;
+				Texture newText = Texture(5, fileName, LoadImageFile(fType, fileName, w, h, n), w,h,n);
+				textureDataMap.insert(std::pair<std::string, Texture>(fileName, newText));
 				break;
 			}
 			//case AudioFile: {
@@ -530,8 +547,6 @@ private:
 			}
 
 		}
-
-
 
 	};
 	void UnloadData() 

@@ -39,7 +39,10 @@ private:
 		//Create TextureLookup function to frontload textures.
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ref.Width(), ref.Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, ref.Data());
 		glGenerateMipmap(GL_TEXTURE_2D);
-		UnloadImageFile(ref.Data());
+
+		//BREAKS HERE.
+
+		//UnloadImageFile(ref.Data());
 	}
 	
 	//Binds a texture to an active opneGL memory location.

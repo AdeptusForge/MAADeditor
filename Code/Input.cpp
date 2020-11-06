@@ -283,14 +283,18 @@ void RunInputs()
 	if (currFrame.BUTTON_3()) 
 	{
 		MapDataChunk newMap = *(MapDataChunk*)GetLoadController()->RetrieveData(LevelFile, "MapLoadTest", 0);
-		WriteDebug(vecToStr(newMap.mapSize));
+		
+		
 		//testStatus.TestRemoval();
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
 	}
 	if (currFrame.BUTTON_4())
 	{
+		
 		AddUIElement(&newTest, Model("UIPlaneTest"));
+		
+		
 		//ResizeWindow(GetWindow(), glm::vec2(1920,1080), true);
 		//cam->RotateCamera(glm::vec3(0, 0, 5));
 		//cam->PlayCameraAction(LookMiddleFromUp);
