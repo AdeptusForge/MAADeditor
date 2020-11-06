@@ -416,7 +416,7 @@ public:
 };
 #pragma endregion
 
-AnimData& LoadAnimData(std::string fileName);
+AnimData& LoadAnimData(FileType fType, std::string fileName);
 ModelDataChunk Load3DModel(FileType fileType, std::string fileName);
 MapDataChunk& LoadMapData(std::string);
 
@@ -515,7 +515,21 @@ public:
 				}
 				break;
 			}
-
+			case AnimFile: 
+			{ 				
+				if (animDataMap.find(reqData->fileName) != animDataMap.end())
+				{
+					WriteDebug("found some data -- " + fileName);
+					return &animDataMap.find(reqData->fileName)->second;
+				}
+				else
+				{
+					WriteDebug("no data found -- loading " + fileName);
+					LoadData(fType, reqData->fileName);
+					return &animDataMap.find(reqData->fileName)->second;
+				}
+				break; 
+			}
 		}
 		return nullptr;
 
@@ -548,7 +562,12 @@ private:
 				modelDataMap.insert(std::pair<std::string, ModelDataChunk>(fileName, newModel));
 				break;
 			}
-
+			case AnimFile: 
+			{
+				AnimData newAnim = LoadAnimData(fType, fileName);
+				animDataMap.insert(std::pair<std::string, AnimData>(fileName, newAnim));
+				break;
+			}
 		}
 
 	};

@@ -450,7 +450,7 @@ ModelDataChunk Load3DModel(FileType fileType,std::string fileName)
 }
 
 //Loads an animation from a .txt file by reading line by line.
-AnimData& LoadAnimData(std::string fileName)
+AnimData& LoadAnimData(FileType fType, std::string fileName)
 {
 	std::ifstream animFile;
 	std::string loadstr = FetchPath(AnimFile, fileName, false);
@@ -493,7 +493,7 @@ AnimData& LoadAnimData(std::string fileName)
 				{
 					if (Tword != "t")
 					{
-						WriteDebug("The anim started it");
+						//WriteDebug("The anim started it");
 						//WriteDebug(Tword);
 						textureLookups.push_back(*(Texture*)GetLoadController()->RetrieveData(ImageFile, Tword, 0));
 						wordNum++;

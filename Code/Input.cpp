@@ -282,9 +282,8 @@ void RunInputs()
 	}
 	if (currFrame.BUTTON_3()) 
 	{
-		MapDataChunk newMap = *(MapDataChunk*)GetLoadController()->RetrieveData(LevelFile, "MapLoadTest", 0);
-		
-		
+		AnimData newMap = *(AnimData*)GetLoadController()->RetrieveData(AnimFile, "AnimLoadTest", 0);
+		WriteDebug(newMap.GetLength());
 		//testStatus.TestRemoval();
 		//ResizeWindow(GetWindow(), glm::vec2(640, 360), false);
 
